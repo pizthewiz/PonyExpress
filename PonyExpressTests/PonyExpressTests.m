@@ -27,21 +27,23 @@
 #pragma mark - MESSAGE
 
 - (void)testMessageClassMethodCreation {
-    PEMessage* message = [PEMessage messageWithAddress:@"/fake" dataDictionary:[NSDictionary dictionary]];    
+    PEMessage* message = [PEMessage messageWithAddress:@"/fake" typeTags:[NSArray array] arguments:[NSArray array]];    
     STAssertNotNil(message, @"should provide a non-nil message");
 }
 
 - (void)testMessageInstanceMethodCreation {
-    PEMessage* message = [[PEMessage alloc] initWithAddress:@"/fake" dataDictionary:[NSDictionary dictionary]];
+    PEMessage* message = [[PEMessage alloc] initWithAddress:@"/fake" typeTags:[NSArray array] arguments:[NSArray array]];
     STAssertNotNil(message, @"should provide a non-nil message");
 }
 
 - (void)testMessageCreationArguments {
     NSString* address = @"/rather/fake";
-    NSDictionary* dict = [NSDictionary dictionary];
-    PEMessage* message = [[PEMessage alloc] initWithAddress:address dataDictionary:dict];
+    NSArray* typeTags = [NSArray array];
+    NSArray* arguments = [NSArray array];
+    PEMessage* message = [[PEMessage alloc] initWithAddress:address typeTags:[NSArray array] arguments:[NSArray array]];
     STAssertEqualObjects(message.address, address, @"should store proper address");
-    STAssertEqualObjects(message.dataDictionary, dict, @"should store proper data dictioanry");
+    STAssertEqualObjects(message.typeTags, typeTags, @"should store proper type tags");
+    STAssertEqualObjects(message.arguments, arguments, @"should store proper arguments");
 }
 
 #pragma mark - SENDER

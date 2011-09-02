@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* const PEMessageTypeTag;
+extern NSString* const PEMessageArgument;
+
 @interface PEMessage : NSObject
-+ (id)messageWithAddress:(NSString*)address dataDictionary:(NSDictionary*)dictionary;
-- (id)initWithAddress:(NSString*)address dataDictionary:(NSDictionary*)dictionary;
++ (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
+- (id)initWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
 
 @property (nonatomic, retain) NSString* address;
-@property (nonatomic, retain) NSDictionary* dataDictionary;
+@property (nonatomic, retain) NSArray* typeTags;
+@property (nonatomic, retain) NSArray* arguments;
 @end
