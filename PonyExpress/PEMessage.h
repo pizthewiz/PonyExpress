@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface PEMessage : NSObject
++ (id)messageWithAddress:(NSString*)address dataDictionary:(NSDictionary*)dictionary;
+- (id)initWithAddress:(NSString*)address dataDictionary:(NSDictionary*)dictionary;
 
+@property (nonatomic, retain) NSString* address;
+@property (nonatomic, retain) NSDictionary* dataDictionary;
 @end

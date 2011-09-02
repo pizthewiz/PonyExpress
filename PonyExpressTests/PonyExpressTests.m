@@ -7,6 +7,7 @@
 //
 
 #import "PonyExpressTests.h"
+#import "PEMessage.h"
 #import "PESender.h"
 
 @implementation PonyExpressTests
@@ -23,9 +24,29 @@
     [super tearDown];
 }
 
-#pragma mark -
+#pragma mark - MESSAGE
 
-- (void)testClassMethodCreation {
+- (void)testMessageClassMethodCreation {
+    PEMessage* message = [PEMessage messageWithAddress:@"/fake" dataDictionary:[NSDictionary dictionary]];    
+    STAssertNotNil(message, @"should provide a non-nil message");
+}
+
+- (void)testMessageInstanceMethodCreation {
+    PEMessage* message = [[PEMessage alloc] initWithAddress:@"/fake" dataDictionary:[NSDictionary dictionary]];
+    STAssertNotNil(message, @"should provide a non-nil message");
+}
+
+- (void)testMessageCreationArguments {
+    NSString* address = @"/rather/fake";
+    NSDictionary* dict = [NSDictionary dictionary];
+    PEMessage* message = [[PEMessage alloc] initWithAddress:address dataDictionary:dict];
+    STAssertEqualObjects(message.address, address, @"should store proper address");
+    STAssertEqualObjects(message.dataDictionary, dict, @"should store proper data dictioanry");
+}
+
+#pragma mark - SENDER
+
+- (void)testSenderClassMethodCreation {
     NSString* host = @"apple.com";
     NSUInteger port = 80;
     PESender* sender = [PESender senderWithHost:host port:port];
@@ -36,7 +57,7 @@
     STAssertEquals(port, sender.port, @"+senderWithHost:port: should store proper port");
 }
 
-- (void)testInstanceMethodCreation {
+- (void)testSenderInstanceMethodCreation {
     NSString* host = @"apple.com";
     NSUInteger port = 80;
     PESender* sender = [[PESender alloc] initWithHost:host port:port];
