@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D83E1B601411528100CB1258 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5F1411528100CB1258 /* Cocoa.framework */; };
 		D83E1B6A1411528100CB1258 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D83E1B681411528100CB1258 /* InfoPlist.strings */; };
 		D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B751411528100CB1258 /* SenTestingKit.framework */; };
 		D83E1B771411528100CB1258 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5F1411528100CB1258 /* Cocoa.framework */; };
@@ -18,10 +17,10 @@
 		D83E1B99141190B000CB1258 /* PESender.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B97141190B000CB1258 /* PESender.m */; };
 		D83E1B9A141190B000CB1258 /* PESender.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B97141190B000CB1258 /* PESender.m */; };
 		D83E1B9C141190E200CB1258 /* PonyExpress.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B6C1411528100CB1258 /* PonyExpress.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D83E1B9E1411954300CB1258 /* PETypes.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B9D1411954300CB1258 /* PETypes.h */; };
-		D83E1BA114119A2C00CB1258 /* PEMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B9F14119A2C00CB1258 /* PEMessage.h */; };
+		D83E1BA114119A2C00CB1258 /* PEMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B9F14119A2C00CB1258 /* PEMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D83E1BA214119A2C00CB1258 /* PEMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BA014119A2C00CB1258 /* PEMessage.m */; };
 		D83E1BA314119A2C00CB1258 /* PEMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BA014119A2C00CB1258 /* PEMessage.m */; };
+		D83E1BAD1411A36600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +37,6 @@
 		D83E1B5C1411528100CB1258 /* PonyExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PonyExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D83E1B5F1411528100CB1258 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D83E1B621411528100CB1258 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		D83E1B631411528100CB1258 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D83E1B641411528100CB1258 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D83E1B671411528100CB1258 /* PonyExpress-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpress-Info.plist"; sourceTree = "<group>"; };
 		D83E1B691411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -56,7 +54,6 @@
 		D83E1B8F1411737B00CB1258 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = SOURCE_ROOT; };
 		D83E1B96141190B000CB1258 /* PESender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESender.h; sourceTree = "<group>"; };
 		D83E1B97141190B000CB1258 /* PESender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESender.m; sourceTree = "<group>"; };
-		D83E1B9D1411954300CB1258 /* PETypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PETypes.h; sourceTree = "<group>"; };
 		D83E1B9F14119A2C00CB1258 /* PEMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEMessage.h; sourceTree = "<group>"; };
 		D83E1BA014119A2C00CB1258 /* PEMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEMessage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D83E1B601411528100CB1258 /* Cocoa.framework in Frameworks */,
+				D83E1BAD1411A36600CB1258 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +102,7 @@
 		D83E1B5E1411528100CB1258 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D83E1B5F1411528100CB1258 /* Cocoa.framework */,
+				D83E1B641411528100CB1258 /* Foundation.framework */,
 				D83E1B751411528100CB1258 /* SenTestingKit.framework */,
 				D83E1B611411528100CB1258 /* Other Frameworks */,
 			);
@@ -115,9 +112,8 @@
 		D83E1B611411528100CB1258 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D83E1B5F1411528100CB1258 /* Cocoa.framework */,
 				D83E1B621411528100CB1258 /* AppKit.framework */,
-				D83E1B631411528100CB1258 /* CoreData.framework */,
-				D83E1B641411528100CB1258 /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -126,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				D83E1B6C1411528100CB1258 /* PonyExpress.h */,
-				D83E1B9D1411954300CB1258 /* PETypes.h */,
 				D83E1B9F14119A2C00CB1258 /* PEMessage.h */,
 				D83E1BA014119A2C00CB1258 /* PEMessage.m */,
 				D83E1B96141190B000CB1258 /* PESender.h */,
@@ -177,9 +172,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D83E1B9C141190E200CB1258 /* PonyExpress.h in Headers */,
-				D83E1B98141190B000CB1258 /* PESender.h in Headers */,
-				D83E1B9E1411954300CB1258 /* PETypes.h in Headers */,
 				D83E1BA114119A2C00CB1258 /* PEMessage.h in Headers */,
+				D83E1B98141190B000CB1258 /* PESender.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
