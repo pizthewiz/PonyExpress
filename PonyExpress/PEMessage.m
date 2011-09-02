@@ -8,8 +8,15 @@
 
 #import "PEMessage.h"
 
-NSString* const PEMessageTypeTag = @"PEMessageTypeTag";
-NSString* const PEMessageArgument = @"PEMessageArgument";
+NSString* const PEMessageTypeTagInteger = @"PEMessageTypeTagInteger";
+NSString* const PEMessageTypeTagFloat = @"PEMessageTypeTagFloat";
+NSString* const PEMessageTypeTagString = @"PEMessageTypeTagString";
+NSString* const PEMessageTypeTagBlob = @"PEMessageTypeTagBlob";
+NSString* const PEMessageTypeTagTrue = @"PEMessageTypeTagTrue";
+NSString* const PEMessageTypeTagFalse = @"PEMessageTypeTagFalse";
+NSString* const PEMessageTypeTagNull = @"PEMessageTypeTagNull";
+NSString* const PEMessageTypeTagImpulse = @"PEMessageTypeTagImpulse";
+NSString* const PEMessageTypeTagTimetag = @"PEMessageTypeTagTimetag";
 
 @implementation PEMessage
 

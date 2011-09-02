@@ -8,8 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString* const PEMessageTypeTag;
-extern NSString* const PEMessageArgument;
+// OSC 1.1 required types:
+//  i  Integer: two's compliment int32
+//  f  Float: IEEE float32
+//  s  NULL-terminated ASCII string
+//  b  Blob: byte array
+//  T  True: data-less
+//  F  False: data-less
+//  N  Null: data-less
+//  I  Impluse: bang, data-less
+//  t  Timetag: OSC Timetag in NTP format
+
+extern NSString* const PEMessageTypeTagInteger;
+extern NSString* const PEMessageTypeTagFloat;
+extern NSString* const PEMessageTypeTagString;
+extern NSString* const PEMessageTypeTagBlob;
+extern NSString* const PEMessageTypeTagTrue;
+extern NSString* const PEMessageTypeTagFalse;
+extern NSString* const PEMessageTypeTagNull;
+extern NSString* const PEMessageTypeTagImpulse;
+extern NSString* const PEMessageTypeTagTimetag;
 
 @interface PEMessage : NSObject
 + (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
