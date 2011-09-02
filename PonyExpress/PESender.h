@@ -9,4 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface PESender : NSObject
++ (id)senderWithHost:(NSString*)host port:(NSUInteger)port;
+- (id)initWithHost:(NSString*)host port:(NSUInteger)port;
+
+@property (nonatomic, retain) NSString* host;
+@property (nonatomic) NSUInteger port;
 @end
