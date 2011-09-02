@@ -42,6 +42,10 @@
 		D83E1B7F1411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D83E1B811411528100CB1258 /* PonyExpressTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressTests.h; sourceTree = "<group>"; };
 		D83E1B821411528100CB1258 /* PonyExpressTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PonyExpressTests.m; sourceTree = "<group>"; };
+		D83E1B8C1411737B00CB1258 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
+		D83E1B8D1411737B00CB1258 /* NOTES */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES; sourceTree = SOURCE_ROOT; };
+		D83E1B8E1411737B00CB1258 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
+		D83E1B8F1411737B00CB1258 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,10 @@
 			children = (
 				D83E1B6C1411528100CB1258 /* PonyExpress.h */,
 				D83E1B661411528100CB1258 /* Supporting Files */,
+				D83E1B8E1411737B00CB1258 /* README.markdown */,
+				D83E1B8C1411737B00CB1258 /* CHANGELOG */,
+				D83E1B8D1411737B00CB1258 /* NOTES */,
+				D83E1B8F1411737B00CB1258 /* TODO */,
 			);
 			path = PonyExpress;
 			sourceTree = "<group>";

@@ -1,0 +1,8 @@
+
+SENDER
+- use CFNetwork and a CFRunLoop
+- ifsbTFNI types
+- allow multiple tags/parameters, specify via NSArray of NSDictionaries?
+- advertise via mDNS
+
+RECEIVER
