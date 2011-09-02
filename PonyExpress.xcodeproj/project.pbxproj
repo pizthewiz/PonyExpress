@@ -14,6 +14,10 @@
 		D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5C1411528100CB1258 /* PonyExpress.framework */; };
 		D83E1B801411528100CB1258 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D83E1B7E1411528100CB1258 /* InfoPlist.strings */; };
 		D83E1B831411528100CB1258 /* PonyExpressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B821411528100CB1258 /* PonyExpressTests.m */; };
+		D83E1B98141190B000CB1258 /* PESender.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B96141190B000CB1258 /* PESender.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D83E1B99141190B000CB1258 /* PESender.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B97141190B000CB1258 /* PESender.m */; };
+		D83E1B9A141190B000CB1258 /* PESender.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B97141190B000CB1258 /* PESender.m */; };
+		D83E1B9C141190E200CB1258 /* PonyExpress.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B6C1411528100CB1258 /* PonyExpress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,8 @@
 		D83E1B8D1411737B00CB1258 /* NOTES */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES; sourceTree = SOURCE_ROOT; };
 		D83E1B8E1411737B00CB1258 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
 		D83E1B8F1411737B00CB1258 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = SOURCE_ROOT; };
+		D83E1B96141190B000CB1258 /* PESender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESender.h; sourceTree = "<group>"; };
+		D83E1B97141190B000CB1258 /* PESender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESender.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				D83E1B6C1411528100CB1258 /* PonyExpress.h */,
+				D83E1B96141190B000CB1258 /* PESender.h */,
+				D83E1B97141190B000CB1258 /* PESender.m */,
 				D83E1B661411528100CB1258 /* Supporting Files */,
 				D83E1B8E1411737B00CB1258 /* README.markdown */,
 				D83E1B8C1411737B00CB1258 /* CHANGELOG */,
@@ -158,6 +166,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D83E1B9C141190E200CB1258 /* PonyExpress.h in Headers */,
+				D83E1B98141190B000CB1258 /* PESender.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D83E1B99141190B000CB1258 /* PESender.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D83E1B831411528100CB1258 /* PonyExpressTests.m in Sources */,
+				D83E1B9A141190B000CB1258 /* PESender.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +445,7 @@
 				D83E1B881411528100CB1258 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D83E1B891411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpressTests" */ = {
 			isa = XCConfigurationList;
@@ -441,6 +454,7 @@
 				D83E1B8B1411528100CB1258 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
