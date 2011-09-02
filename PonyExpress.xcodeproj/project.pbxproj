@@ -1,0 +1,440 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D83E1B601411528100CB1258 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5F1411528100CB1258 /* Cocoa.framework */; };
+		D83E1B6A1411528100CB1258 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D83E1B681411528100CB1258 /* InfoPlist.strings */; };
+		D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B751411528100CB1258 /* SenTestingKit.framework */; };
+		D83E1B771411528100CB1258 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5F1411528100CB1258 /* Cocoa.framework */; };
+		D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5C1411528100CB1258 /* PonyExpress.framework */; };
+		D83E1B801411528100CB1258 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D83E1B7E1411528100CB1258 /* InfoPlist.strings */; };
+		D83E1B831411528100CB1258 /* PonyExpressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B821411528100CB1258 /* PonyExpressTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D83E1B781411528100CB1258 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D83E1B521411528000CB1258 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D83E1B5B1411528100CB1258;
+			remoteInfo = PonyExpress;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D83E1B5C1411528100CB1258 /* PonyExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PonyExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D83E1B5F1411528100CB1258 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		D83E1B621411528100CB1258 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		D83E1B631411528100CB1258 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D83E1B641411528100CB1258 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D83E1B671411528100CB1258 /* PonyExpress-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpress-Info.plist"; sourceTree = "<group>"; };
+		D83E1B691411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D83E1B6B1411528100CB1258 /* PonyExpress-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Prefix.pch"; sourceTree = "<group>"; };
+		D83E1B6C1411528100CB1258 /* PonyExpress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpress.h; sourceTree = "<group>"; };
+		D83E1B741411528100CB1258 /* PonyExpressTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PonyExpressTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D83E1B751411528100CB1258 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		D83E1B7D1411528100CB1258 /* PonyExpressTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpressTests-Info.plist"; sourceTree = "<group>"; };
+		D83E1B7F1411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D83E1B811411528100CB1258 /* PonyExpressTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressTests.h; sourceTree = "<group>"; };
+		D83E1B821411528100CB1258 /* PonyExpressTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PonyExpressTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D83E1B581411528100CB1258 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D83E1B601411528100CB1258 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D83E1B701411528100CB1258 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */,
+				D83E1B771411528100CB1258 /* Cocoa.framework in Frameworks */,
+				D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D83E1B501411528000CB1258 = {
+			isa = PBXGroup;
+			children = (
+				D83E1B651411528100CB1258 /* PonyExpress */,
+				D83E1B7B1411528100CB1258 /* PonyExpressTests */,
+				D83E1B5E1411528100CB1258 /* Frameworks */,
+				D83E1B5D1411528100CB1258 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D83E1B5D1411528100CB1258 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D83E1B5C1411528100CB1258 /* PonyExpress.framework */,
+				D83E1B741411528100CB1258 /* PonyExpressTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D83E1B5E1411528100CB1258 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D83E1B5F1411528100CB1258 /* Cocoa.framework */,
+				D83E1B751411528100CB1258 /* SenTestingKit.framework */,
+				D83E1B611411528100CB1258 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D83E1B611411528100CB1258 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D83E1B621411528100CB1258 /* AppKit.framework */,
+				D83E1B631411528100CB1258 /* CoreData.framework */,
+				D83E1B641411528100CB1258 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		D83E1B651411528100CB1258 /* PonyExpress */ = {
+			isa = PBXGroup;
+			children = (
+				D83E1B6C1411528100CB1258 /* PonyExpress.h */,
+				D83E1B661411528100CB1258 /* Supporting Files */,
+			);
+			path = PonyExpress;
+			sourceTree = "<group>";
+		};
+		D83E1B661411528100CB1258 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D83E1B671411528100CB1258 /* PonyExpress-Info.plist */,
+				D83E1B681411528100CB1258 /* InfoPlist.strings */,
+				D83E1B6B1411528100CB1258 /* PonyExpress-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D83E1B7B1411528100CB1258 /* PonyExpressTests */ = {
+			isa = PBXGroup;
+			children = (
+				D83E1B811411528100CB1258 /* PonyExpressTests.h */,
+				D83E1B821411528100CB1258 /* PonyExpressTests.m */,
+				D83E1B7C1411528100CB1258 /* Supporting Files */,
+			);
+			path = PonyExpressTests;
+			sourceTree = "<group>";
+		};
+		D83E1B7C1411528100CB1258 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D83E1B7D1411528100CB1258 /* PonyExpressTests-Info.plist */,
+				D83E1B7E1411528100CB1258 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D83E1B591411528100CB1258 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D83E1B5B1411528100CB1258 /* PonyExpress */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D83E1B861411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress" */;
+			buildPhases = (
+				D83E1B571411528100CB1258 /* Sources */,
+				D83E1B581411528100CB1258 /* Frameworks */,
+				D83E1B591411528100CB1258 /* Headers */,
+				D83E1B5A1411528100CB1258 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PonyExpress;
+			productName = PonyExpress;
+			productReference = D83E1B5C1411528100CB1258 /* PonyExpress.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D83E1B731411528100CB1258 /* PonyExpressTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D83E1B891411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpressTests" */;
+			buildPhases = (
+				D83E1B6F1411528100CB1258 /* Sources */,
+				D83E1B701411528100CB1258 /* Frameworks */,
+				D83E1B711411528100CB1258 /* Resources */,
+				D83E1B721411528100CB1258 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D83E1B791411528100CB1258 /* PBXTargetDependency */,
+			);
+			name = PonyExpressTests;
+			productName = PonyExpressTests;
+			productReference = D83E1B741411528100CB1258 /* PonyExpressTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D83E1B521411528000CB1258 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Chorded Constructions";
+			};
+			buildConfigurationList = D83E1B551411528000CB1258 /* Build configuration list for PBXProject "PonyExpress" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D83E1B501411528000CB1258;
+			productRefGroup = D83E1B5D1411528100CB1258 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D83E1B5B1411528100CB1258 /* PonyExpress */,
+				D83E1B731411528100CB1258 /* PonyExpressTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D83E1B5A1411528100CB1258 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D83E1B6A1411528100CB1258 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D83E1B711411528100CB1258 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D83E1B801411528100CB1258 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D83E1B721411528100CB1258 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D83E1B571411528100CB1258 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D83E1B6F1411528100CB1258 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D83E1B831411528100CB1258 /* PonyExpressTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D83E1B791411528100CB1258 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D83E1B5B1411528100CB1258 /* PonyExpress */;
+			targetProxy = D83E1B781411528100CB1258 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D83E1B681411528100CB1258 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D83E1B691411528100CB1258 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D83E1B7E1411528100CB1258 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D83E1B7F1411528100CB1258 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D83E1B841411528100CB1258 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		D83E1B851411528100CB1258 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+		D83E1B871411528100CB1258 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
+				INFOPLIST_FILE = "PonyExpress/PonyExpress-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		D83E1B881411528100CB1258 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
+				INFOPLIST_FILE = "PonyExpress/PonyExpress-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		D83E1B8A1411528100CB1258 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
+				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		D83E1B8B1411528100CB1258 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
+				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D83E1B551411528000CB1258 /* Build configuration list for PBXProject "PonyExpress" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D83E1B841411528100CB1258 /* Debug */,
+				D83E1B851411528100CB1258 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D83E1B861411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D83E1B871411528100CB1258 /* Debug */,
+				D83E1B881411528100CB1258 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D83E1B891411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpressTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D83E1B8A1411528100CB1258 /* Debug */,
+				D83E1B8B1411528100CB1258 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D83E1B521411528000CB1258 /* Project object */;
+}
