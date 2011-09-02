@@ -21,6 +21,7 @@
 		D83E1BA214119A2C00CB1258 /* PEMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BA014119A2C00CB1258 /* PEMessage.m */; };
 		D83E1BA314119A2C00CB1258 /* PEMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BA014119A2C00CB1258 /* PEMessage.m */; };
 		D83E1BAD1411A36600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
+		D83E1BAF1411A41400CB1258 /* PEMessage-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1BAE1411A41400CB1258 /* PEMessage-Private.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		D83E1B97141190B000CB1258 /* PESender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESender.m; sourceTree = "<group>"; };
 		D83E1B9F14119A2C00CB1258 /* PEMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEMessage.h; sourceTree = "<group>"; };
 		D83E1BA014119A2C00CB1258 /* PEMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEMessage.m; sourceTree = "<group>"; };
+		D83E1BAE1411A41400CB1258 /* PEMessage-Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PEMessage-Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 			children = (
 				D83E1B6C1411528100CB1258 /* PonyExpress.h */,
 				D83E1B9F14119A2C00CB1258 /* PEMessage.h */,
+				D83E1BAE1411A41400CB1258 /* PEMessage-Private.h */,
 				D83E1BA014119A2C00CB1258 /* PEMessage.m */,
 				D83E1B96141190B000CB1258 /* PESender.h */,
 				D83E1B97141190B000CB1258 /* PESender.m */,
@@ -174,6 +177,7 @@
 				D83E1B9C141190E200CB1258 /* PonyExpress.h in Headers */,
 				D83E1BA114119A2C00CB1258 /* PEMessage.h in Headers */,
 				D83E1B98141190B000CB1258 /* PESender.h in Headers */,
+				D83E1BAF1411A41400CB1258 /* PEMessage-Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

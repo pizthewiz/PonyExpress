@@ -7,6 +7,7 @@
 //
 
 #import "PEMessage.h"
+#import "PEMessage-Private.h"
 
 NSString* const PEMessageTypeTagInteger = @"PEMessageTypeTagInteger";
 NSString* const PEMessageTypeTagFloat = @"PEMessageTypeTagFloat";
@@ -35,6 +36,12 @@ NSString* const PEMessageTypeTagTimetag = @"PEMessageTypeTagTimetag";
         self.arguments = arg;
     }
     return self;
+}
+
+#pragma mark -
+
+- (NSString*)_typeTagString {
+    return nil;
 }
 
 @end
