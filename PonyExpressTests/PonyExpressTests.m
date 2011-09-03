@@ -47,11 +47,25 @@
     STAssertEqualObjects(message.arguments, arguments, @"should store proper arguments");
 }
 
-- (void)testMessageTagTypeString {
+- (void)testMessageValidTagTypeString {
     NSString* address = @"/rather/fake";
     NSArray* typeTags = [NSArray arrayWithObjects:PEMessageTypeTagInteger, PEMessageTypeTagFloat, PEMessageTypeTagString, PEMessageTypeTagBlob, PEMessageTypeTagTrue, PEMessageTypeTagFalse, PEMessageTypeTagNull, PEMessageTypeTagImpulse, PEMessageTypeTagTimetag, nil];
     PEMessage* message = [[PEMessage alloc] initWithAddress:address typeTags:typeTags arguments:nil];
-    STAssertEqualObjects([message _typeTagString], @",ifsbTFNIt", @"should generate proper type tag string");    
+    STAssertEqualObjects([message _typeTagString], @",ifsbTFNIt", @"should generate proper type tag string");
+}
+
+- (void)testMessageInalidTagTypeString {
+    NSString* address = @"/rather/fake";
+    NSArray* typeTags = [NSArray array];
+    PEMessage* message = [[PEMessage alloc] initWithAddress:address typeTags:typeTags arguments:nil];
+    STAssertNil([message _typeTagString], @"should catch empty type tag string");
+
+    message = [[PEMessage alloc] initWithAddress:address typeTags:nil arguments:nil];
+    STAssertNil([message _typeTagString], @"should catch empty type tag string");
+
+    typeTags = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], nil];
+    message = [[PEMessage alloc] initWithAddress:address typeTags:typeTags arguments:nil];
+    STAssertNil([message _typeTagString], @"should catch invalid type tag string");
 }
 
 #pragma mark - SENDER
