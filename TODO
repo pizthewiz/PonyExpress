@@ -5,7 +5,7 @@ GENERAL
 
 MESSAGE
 [ ] add initializers with vararg
-[ ] add param/arg enumerator that takes a block
+[X] add param/arg enumerator that takes a block
 
 SENDER
 [ ] create UDP connection

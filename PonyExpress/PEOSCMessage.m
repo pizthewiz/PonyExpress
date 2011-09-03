@@ -54,7 +54,15 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 
 - (void)enumerateTypesAndArgumentsUsingBlock:(void (^)(id type, id argument, BOOL* stop))block {
-    
+    BOOL stop = NO;
+    NSUInteger argIndex = 0;
+    for (NSString* type in self.typeTags) {
+        id argument = [PEOSCMessage typeRequiresArgument:type] ? [self.arguments objectAtIndex:argIndex++] : nil;
+        block(type, argument, &stop);
+        if (!stop)
+            continue;
+        break;
+    }
 }
 
 #pragma mark -

@@ -38,7 +38,7 @@
 }
 
 - (void)testMessageCreationArguments {
-    NSString* address = @"/rather/fake";
+    NSString* address = @"/some/thing";
     NSArray* typeTags = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, nil];
     NSArray* arguments = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], nil];
     PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:address typeTags:typeTags arguments:arguments];
@@ -48,7 +48,7 @@
 }
 
 - (void)testMessageAddressValidity {
-    NSString* address = @"/rather/fake";
+    NSString* address = @"/some/thing";
     PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:address typeTags:nil arguments:nil];
     STAssertTrue([message _isAddressValid], @"should consider legit address valid");
 
@@ -58,7 +58,7 @@
 }
 
 - (void)testMessageTypeTagStringCorrectnessAndValidity {
-    NSString* address = @"/rather/fake";
+    NSString* address = @"/some/thing";
     NSArray* typeTags = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, PEOSCMessageTypeTagTimetag, nil];
     PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:address typeTags:typeTags arguments:nil];
     STAssertEqualObjects([message _typeTagString], @",ifsbTFNIt", @"should generate proper type tag string");
@@ -80,15 +80,37 @@
 }
 
 - (void)testMessageTypesForArguments {
-    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagInteger], @"should report the Integer tpye as requiring an argument ");
-    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagFloat], @"should report the Float tpye as requiring an argument ");
-    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagString], @"should report the String tpye as requiring an argument ");
-    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagBlob], @"should report the Blob tpye as requiring an argument ");
-    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagTrue], @"should report the True tpye as requiring an argument ");
-    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagFalse], @"should report the False tpye as requiring an argument ");
-    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagNull], @"should report the Null tpye as requiring an argument ");
-    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagImpulse], @"should report the Impulse tpye as requiring an argument ");    
-    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagTimetag], @"should report the Timetag tpye as requiring an argument ");    
+    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagInteger], @"should report the Integer type as requiring an argument ");
+    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagFloat], @"should report the Float type as requiring an argument ");
+    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagString], @"should report the String type as requiring an argument ");
+    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagBlob], @"should report the Blob type as requiring an argument ");
+    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagTrue], @"should report the True type as requiring an argument ");
+    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagFalse], @"should report the False type as requiring an argument ");
+    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagNull], @"should report the Null type as requiring an argument ");
+    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagImpulse], @"should report the Impulse type as requiring an argument ");    
+    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagTimetag], @"should report the Timetag type as requiring an argument ");    
+}
+
+- (void)testMessageDataEnumerator {
+    NSString* address = @"/some/thing";
+    NSArray* typeTags = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, PEOSCMessageTypeTagTimetag, nil];
+    NSArray* arguments = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], [NSNumber numberWithFloat:(100./3.)], @"STRING", [NSData data], @"NTP TIME", nil];
+    PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:address typeTags:typeTags arguments:arguments];
+    [message enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
+        if ([PEOSCMessage typeRequiresArgument:type])
+            STAssertNotNil(argument, @"should provide argument for type %@", type);
+        else
+            STAssertNil(argument, @"should NOT provide argument for type %@", type);
+    }];
+
+
+    __block NSUInteger iterations = 0;
+    [message enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
+        if ([type isEqualToString:PEOSCMessageTypeTagTrue])
+            *stop = YES;
+        iterations++;
+    }];
+    STAssertTrue(iterations == 5, @"should allow enumeration to be stopped");
 }
 
 #pragma mark - SENDER
