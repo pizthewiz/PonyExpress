@@ -15,4 +15,5 @@ RECEIVER
 …
 
 LATER
+[ ] mDNS announcement
 [ ] consider a PEOSCValue class to wrap boxing
