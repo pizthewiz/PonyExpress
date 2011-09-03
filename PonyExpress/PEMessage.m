@@ -40,6 +40,12 @@ NSString* const PEMessageTypeTagTimetag = @"PEMessageTypeTagTimetag";
 
 #pragma mark -
 
+- (NSString*)description {
+    return [NSString stringWithFormat:@"%@ %@ %@", self.address, [self _typeTagString], @"ARGUMENTS"];
+}
+
+#pragma mark -
+
 - (BOOL)_isAddressValid {
     // NB - i think # is illegal as well due to blobs and likely ASCII-only as well
     return self.address && [[self.address substringToIndex:1] isEqualToString:@"/"];
