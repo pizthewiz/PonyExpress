@@ -1,1 +1,18 @@
-123
+
+GENERAL
+[ ] rename classes with OSC in name
+[ ] use omgosc for functional tests
+
+MESSAGE
+[ ] add initializers with vararg
+[ ] add param/arg enumerator that takes a block
+
+SENDER
+[ ] create UDP connection
+[ ] tear down UDP connection on dealloc
+
+RECEIVER
+…
+
+LATER
+[ ] consider a PEOSCValue class to wrap boxing
