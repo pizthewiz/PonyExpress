@@ -8,6 +8,7 @@
 
 #import "PonyExpressTests.h"
 #import "PEMessage.h"
+#import "PEMessage-Private.h"
 #import "PESender.h"
 
 @implementation PonyExpressTests
@@ -38,12 +39,19 @@
 
 - (void)testMessageCreationArguments {
     NSString* address = @"/rather/fake";
-    NSArray* typeTags = [NSArray array];
-    NSArray* arguments = [NSArray array];
-    PEMessage* message = [[PEMessage alloc] initWithAddress:address typeTags:[NSArray array] arguments:[NSArray array]];
+    NSArray* typeTags = [NSArray arrayWithObjects:PEMessageTypeTagInteger, nil];
+    NSArray* arguments = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], nil];
+    PEMessage* message = [[PEMessage alloc] initWithAddress:address typeTags:typeTags arguments:arguments];
     STAssertEqualObjects(message.address, address, @"should store proper address");
     STAssertEqualObjects(message.typeTags, typeTags, @"should store proper type tags");
     STAssertEqualObjects(message.arguments, arguments, @"should store proper arguments");
+}
+
+- (void)testMessageTagTypeString {
+    NSString* address = @"/rather/fake";
+    NSArray* typeTags = [NSArray arrayWithObjects:PEMessageTypeTagInteger, PEMessageTypeTagFloat, PEMessageTypeTagString, PEMessageTypeTagBlob, PEMessageTypeTagTrue, PEMessageTypeTagFalse, PEMessageTypeTagNull, PEMessageTypeTagImpulse, PEMessageTypeTagTimetag, nil];
+    PEMessage* message = [[PEMessage alloc] initWithAddress:address typeTags:typeTags arguments:nil];
+    STAssertEqualObjects([message _typeTagString], @",ifsbTFNIt", @"should generate proper type tag string");    
 }
 
 #pragma mark - SENDER
