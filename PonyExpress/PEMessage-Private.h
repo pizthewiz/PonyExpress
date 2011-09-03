@@ -9,5 +9,7 @@
 #import "PEMessage.h"
 
 @interface PEMessage()
+- (BOOL)_isAddressValid;
+- (BOOL)_isTypeTagStringValid;
 - (NSString*)_typeTagString;
 @end

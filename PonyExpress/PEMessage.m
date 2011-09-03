@@ -40,6 +40,15 @@ NSString* const PEMessageTypeTagTimetag = @"PEMessageTypeTagTimetag";
 
 #pragma mark -
 
+- (BOOL)_isAddressValid {
+    // NB - i think # is illegal as well due to blobs and likely ASCII-only as well
+    return self.address && [[self.address substringToIndex:1] isEqualToString:@"/"];
+}
+
+- (BOOL)_isTypeTagStringValid {
+    return [self _typeTagString] != nil;
+}
+
 - (NSString*)_typeTagString {
     if (!self.typeTags.count)
         return nil;
