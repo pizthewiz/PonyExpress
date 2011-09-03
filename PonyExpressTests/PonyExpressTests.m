@@ -57,7 +57,7 @@
     STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
 }
 
-- (void)testMessageTagTypeStringValidity {
+- (void)testMessageTagTypeStringCorrectnessAndValidity {
     NSString* address = @"/rather/fake";
     NSArray* typeTags = [NSArray arrayWithObjects:PEMessageTypeTagInteger, PEMessageTypeTagFloat, PEMessageTypeTagString, PEMessageTypeTagBlob, PEMessageTypeTagTrue, PEMessageTypeTagFalse, PEMessageTypeTagNull, PEMessageTypeTagImpulse, PEMessageTypeTagTimetag, nil];
     PEMessage* message = [[PEMessage alloc] initWithAddress:address typeTags:typeTags arguments:nil];
