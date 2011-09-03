@@ -9,6 +9,7 @@
 #import "PEOSCMessage.h"
 
 @interface PEOSCMessage()
++ (BOOL)_typeHasArgument:(NSString*)type;
 - (BOOL)_isAddressValid;
 - (BOOL)_isTypeTagStringValid;
 - (NSString*)_typeTagString;
