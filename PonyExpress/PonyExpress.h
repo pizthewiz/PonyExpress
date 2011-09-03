@@ -6,4 +6,5 @@
 //  Copyright (c) 2011 Chorded Constructions. All rights reserved.
 //
 
+#import <PonyExpress/PEMessage.h>
 #import <PonyExpress/PESender.h>
