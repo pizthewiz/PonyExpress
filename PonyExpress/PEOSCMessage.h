@@ -37,5 +37,6 @@ extern NSString* const PEOSCMessageTypeTagTimetag;
 @property (nonatomic, retain) NSArray* typeTags;
 @property (nonatomic, retain) NSArray* arguments;
 
++ (BOOL)typeRequiresArgument:(NSString*)type;
 - (void)enumerateTypesAndArgumentsUsingBlock:(void (^)(id type, id argument, BOOL* stop))block;
 @end

@@ -40,6 +40,15 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
 #pragma mark -
 
++ (BOOL)typeRequiresArgument:(NSString*)type {
+    BOOL status = YES;
+    if ([type isEqualToString:PEOSCMessageTypeTagTrue] || [type isEqualToString:PEOSCMessageTypeTagFalse] || [type isEqualToString:PEOSCMessageTypeTagNull] || [type isEqualToString:PEOSCMessageTypeTagImpulse])
+        status = NO;
+    return status;    
+}
+
+#pragma mark -
+
 - (NSString*)description {
     return [NSString stringWithFormat:@"%@ %@ %@", self.address, [self _typeTagString], @"ARGUMENTS"];
 }
@@ -50,20 +59,13 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
 #pragma mark -
 
-+ (BOOL)_typeHasArgument:(NSString*)type {
-    BOOL status = YES;
-    if ([type isEqualToString:PEOSCMessageTypeTagTrue] || [type isEqualToString:PEOSCMessageTypeTagFalse] || [type isEqualToString:PEOSCMessageTypeTagNull] || [type isEqualToString:PEOSCMessageTypeTagImpulse])
-        status = NO;
-    return status;
-}
-
 - (BOOL)_isAddressValid {
     // NB - i think # is illegal as well due to blobs and likely ASCII-only as well
     // TODO - beef up via NSRegularExpression
     return self.address && [[self.address substringToIndex:1] isEqualToString:@"/"];
 }
 
-- (BOOL)_isTypeTagStringValid {
+- (BOOL)_areTypeTagsValid {
     return [self _typeTagString] != nil;
 }
 

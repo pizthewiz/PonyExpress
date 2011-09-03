@@ -62,33 +62,33 @@
     NSArray* typeTags = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, PEOSCMessageTypeTagTimetag, nil];
     PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:address typeTags:typeTags arguments:nil];
     STAssertEqualObjects([message _typeTagString], @",ifsbTFNIt", @"should generate proper type tag string");
-    STAssertTrue([message _isTypeTagStringValid], @"should report string from legit type tag list as valid");
+    STAssertTrue([message _areTypeTagsValid], @"should report string from legit type tag list as valid");
 
     typeTags = [NSArray array];
     message = [[PEOSCMessage alloc] initWithAddress:address typeTags:typeTags arguments:nil];
     STAssertNil([message _typeTagString], @"should catch empty type tag list");
-    STAssertFalse([message _isTypeTagStringValid], @"should report string from empty type tag list as invalid");
+    STAssertFalse([message _areTypeTagsValid], @"should report string from empty type tag list as invalid");
 
     message = [[PEOSCMessage alloc] initWithAddress:address typeTags:nil arguments:nil];
     STAssertNil([message _typeTagString], @"should catch nil type tag list");
-    STAssertFalse([message _isTypeTagStringValid], @"should report string from nil type tag list as invalid");
+    STAssertFalse([message _areTypeTagsValid], @"should report string from nil type tag list as invalid");
 
     typeTags = [NSArray arrayWithObjects:PEOSCMessageTypeTagImpulse, [NSNumber numberWithInt:13], nil];
     message = [[PEOSCMessage alloc] initWithAddress:address typeTags:typeTags arguments:nil];
     STAssertNil([message _typeTagString], @"should not generate a type tag string when the list contains a bad element");
-    STAssertFalse([message _isTypeTagStringValid], @"should report string from bad type tag list as invalid");
+    STAssertFalse([message _areTypeTagsValid], @"should report string from bad type tag list as invalid");
 }
 
 - (void)testMessageTypesForArguments {
-    STAssertTrue([PEOSCMessage _typeHasArgument:PEOSCMessageTypeTagInteger], @"should report the Integer tpye as requiring an argument ");
-    STAssertTrue([PEOSCMessage _typeHasArgument:PEOSCMessageTypeTagFloat], @"should report the Float tpye as requiring an argument ");
-    STAssertTrue([PEOSCMessage _typeHasArgument:PEOSCMessageTypeTagString], @"should report the String tpye as requiring an argument ");
-    STAssertTrue([PEOSCMessage _typeHasArgument:PEOSCMessageTypeTagBlob], @"should report the Blob tpye as requiring an argument ");
-    STAssertFalse([PEOSCMessage _typeHasArgument:PEOSCMessageTypeTagTrue], @"should report the True tpye as requiring an argument ");
-    STAssertFalse([PEOSCMessage _typeHasArgument:PEOSCMessageTypeTagFalse], @"should report the False tpye as requiring an argument ");
-    STAssertFalse([PEOSCMessage _typeHasArgument:PEOSCMessageTypeTagNull], @"should report the Null tpye as requiring an argument ");
-    STAssertFalse([PEOSCMessage _typeHasArgument:PEOSCMessageTypeTagImpulse], @"should report the Impulse tpye as requiring an argument ");    
-    STAssertTrue([PEOSCMessage _typeHasArgument:PEOSCMessageTypeTagTimetag], @"should report the Timetag tpye as requiring an argument ");    
+    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagInteger], @"should report the Integer tpye as requiring an argument ");
+    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagFloat], @"should report the Float tpye as requiring an argument ");
+    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagString], @"should report the String tpye as requiring an argument ");
+    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagBlob], @"should report the Blob tpye as requiring an argument ");
+    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagTrue], @"should report the True tpye as requiring an argument ");
+    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagFalse], @"should report the False tpye as requiring an argument ");
+    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagNull], @"should report the Null tpye as requiring an argument ");
+    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagImpulse], @"should report the Impulse tpye as requiring an argument ");    
+    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagTimetag], @"should report the Timetag tpye as requiring an argument ");    
 }
 
 #pragma mark - SENDER
