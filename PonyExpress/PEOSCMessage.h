@@ -1,5 +1,5 @@
 //
-//  PEMessage.h
+//  PEOSCMessage.h
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 2 Sept 2011.
@@ -19,17 +19,17 @@
 //  I  Impluse: bang, data-less
 //  t  Timetag: OSC Timetag in NTP format
 
-extern NSString* const PEMessageTypeTagInteger;
-extern NSString* const PEMessageTypeTagFloat;
-extern NSString* const PEMessageTypeTagString;
-extern NSString* const PEMessageTypeTagBlob;
-extern NSString* const PEMessageTypeTagTrue;
-extern NSString* const PEMessageTypeTagFalse;
-extern NSString* const PEMessageTypeTagNull;
-extern NSString* const PEMessageTypeTagImpulse;
-extern NSString* const PEMessageTypeTagTimetag;
+extern NSString* const PEOSCMessageTypeTagInteger;
+extern NSString* const PEOSCMessageTypeTagFloat;
+extern NSString* const PEOSCMessageTypeTagString;
+extern NSString* const PEOSCMessageTypeTagBlob;
+extern NSString* const PEOSCMessageTypeTagTrue;
+extern NSString* const PEOSCMessageTypeTagFalse;
+extern NSString* const PEOSCMessageTypeTagNull;
+extern NSString* const PEOSCMessageTypeTagImpulse;
+extern NSString* const PEOSCMessageTypeTagTimetag;
 
-@interface PEMessage : NSObject
+@interface PEOSCMessage : NSObject
 + (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
 - (id)initWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
 

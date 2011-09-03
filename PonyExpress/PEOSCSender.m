@@ -1,19 +1,19 @@
 //
-//  PESender.m
+//  PEOSCSender.m
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 2 Sept 2011.
 //  Copyright (c) 2011 Chorded Constructions. All rights reserved.
 //
 
-#import "PESender.h"
+#import "PEOSCSender.h"
 
-@implementation PESender
+@implementation PEOSCSender
 
 @synthesize host, port;
 
 + (id)senderWithHost:(NSString*)host port:(NSUInteger)port {
-    PESender* sender = [[PESender alloc] initWithHost:host port:port];
+    PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
     return sender;
 }
 

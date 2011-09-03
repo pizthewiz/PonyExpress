@@ -1,6 +1,6 @@
 
 GENERAL
-[ ] rename classes with OSC in name
+[X] rename classes with OSC in name
 [ ] use omgosc for functional tests
 
 MESSAGE

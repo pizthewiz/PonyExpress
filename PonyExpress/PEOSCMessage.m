@@ -1,30 +1,30 @@
 //
-//  PEMessage.m
+//  PEOSCMessage.m
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 9/2/11.
 //  Copyright (c) 2011 Chorded Constructions. All rights reserved.
 //
 
-#import "PEMessage.h"
-#import "PEMessage-Private.h"
+#import "PEOSCMessage.h"
+#import "PEOSCMessage-Private.h"
 
-NSString* const PEMessageTypeTagInteger = @"PEMessageTypeTagInteger";
-NSString* const PEMessageTypeTagFloat = @"PEMessageTypeTagFloat";
-NSString* const PEMessageTypeTagString = @"PEMessageTypeTagString";
-NSString* const PEMessageTypeTagBlob = @"PEMessageTypeTagBlob";
-NSString* const PEMessageTypeTagTrue = @"PEMessageTypeTagTrue";
-NSString* const PEMessageTypeTagFalse = @"PEMessageTypeTagFalse";
-NSString* const PEMessageTypeTagNull = @"PEMessageTypeTagNull";
-NSString* const PEMessageTypeTagImpulse = @"PEMessageTypeTagImpulse";
-NSString* const PEMessageTypeTagTimetag = @"PEMessageTypeTagTimetag";
+NSString* const PEOSCMessageTypeTagInteger = @"PEOSCMessageTypeTagInteger";
+NSString* const PEOSCMessageTypeTagFloat = @"PEOSCMessageTypeTagFloat";
+NSString* const PEOSCMessageTypeTagString = @"PEOSCMessageTypeTagString";
+NSString* const PEOSCMessageTypeTagBlob = @"PEOSCMessageTypeTagBlob";
+NSString* const PEOSCMessageTypeTagTrue = @"PEOSCMessageTypeTagTrue";
+NSString* const PEOSCMessageTypeTagFalse = @"PEOSCMessageTypeTagFalse";
+NSString* const PEOSCMessageTypeTagNull = @"PEOSCMessageTypeTagNull";
+NSString* const PEOSCMessageTypeTagImpulse = @"PEOSCMessageTypeTagImpulse";
+NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
-@implementation PEMessage
+@implementation PEOSCMessage
 
 @synthesize address, typeTags, arguments;
 
 + (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments {
-    id message = [[PEMessage alloc] initWithAddress:address typeTags:typeTags arguments:arguments];
+    id message = [[PEOSCMessage alloc] initWithAddress:address typeTags:typeTags arguments:arguments];
     return message;
 }
 
@@ -67,23 +67,23 @@ NSString* const PEMessageTypeTagTimetag = @"PEMessageTypeTagTimetag";
             *stop = YES;
         }
 
-        else if ([obj isEqualToString:PEMessageTypeTagInteger])
+        else if ([obj isEqualToString:PEOSCMessageTypeTagInteger])
             [string appendString:@"i"];
-        else if ([obj isEqualToString:PEMessageTypeTagFloat])
+        else if ([obj isEqualToString:PEOSCMessageTypeTagFloat])
             [string appendString:@"f"];
-        else if ([obj isEqualToString:PEMessageTypeTagString])
+        else if ([obj isEqualToString:PEOSCMessageTypeTagString])
             [string appendString:@"s"];
-        else if ([obj isEqualToString:PEMessageTypeTagBlob])
+        else if ([obj isEqualToString:PEOSCMessageTypeTagBlob])
             [string appendString:@"b"];
-        else if ([obj isEqualToString:PEMessageTypeTagTrue])
+        else if ([obj isEqualToString:PEOSCMessageTypeTagTrue])
             [string appendString:@"T"];
-        else if ([obj isEqualToString:PEMessageTypeTagFalse])
+        else if ([obj isEqualToString:PEOSCMessageTypeTagFalse])
             [string appendString:@"F"];
-        else if ([obj isEqualToString:PEMessageTypeTagNull])
+        else if ([obj isEqualToString:PEOSCMessageTypeTagNull])
             [string appendString:@"N"];
-        else if ([obj isEqualToString:PEMessageTypeTagImpulse])
+        else if ([obj isEqualToString:PEOSCMessageTypeTagImpulse])
             [string appendString:@"I"];
-        else if ([obj isEqualToString:PEMessageTypeTagTimetag])
+        else if ([obj isEqualToString:PEOSCMessageTypeTagTimetag])
             [string appendString:@"t"];
     }];
     return string;

@@ -1,5 +1,5 @@
 //
-//  PESender.h
+//  PEOSCSender.h
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 2 Sept 2011.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PESender : NSObject
+@interface PEOSCSender : NSObject
 + (id)senderWithHost:(NSString*)host port:(NSUInteger)port;
 - (id)initWithHost:(NSString*)host port:(NSUInteger)port;
 
