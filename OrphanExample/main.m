@@ -11,10 +11,12 @@
 
 int main (int argc, const char * argv[]) {
     @autoreleasepool {
-        PEOSCMessage* message = [PEOSCMessage messageWithAddress:@"/some/thing" typeTags:nil arguments:nil];
+        NSArray* typeTags = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, nil];
+        NSArray* arguments = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], [NSNumber numberWithFloat:(100./3.)], @"STRING", nil];
+        PEOSCMessage* message = [PEOSCMessage messageWithAddress:@"/some/thing" typeTags:typeTags arguments:arguments];
         NSLog(@"%@", message);
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"localhost" port:9000];
-        NSLog(@"%@", sender);        
+        NSLog(@"%@", sender);
     }
     return 0;
 }
