@@ -14,7 +14,7 @@
 
 + (id)senderWithHost:(NSString*)host port:(UInt16)port {
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
-    return sender;
+    return [sender autorelease];
 }
 
 - (id)initWithHost:(NSString*)hos port:(UInt16)por {

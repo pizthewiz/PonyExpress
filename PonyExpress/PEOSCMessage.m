@@ -25,7 +25,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
 + (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments {
     id message = [[PEOSCMessage alloc] initWithAddress:address typeTags:typeTags arguments:arguments];
-    return message;
+    return [message autorelease];
 }
 
 - (id)initWithAddress:(NSString*)add typeTags:(NSArray*)typ arguments:(NSArray*)arg {
@@ -50,7 +50,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 #pragma mark -
 
 - (NSString*)description {
-    NSMutableString* argDescription = [[NSMutableString alloc] init];
+    NSMutableString* argDescription = [NSMutableString string];
     [self.arguments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (idx == 0 || idx+1 > self.arguments.count)
             [argDescription appendString:[NSString stringWithFormat:@"%@", [obj description]]];
@@ -117,7 +117,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     if (!self.typeTags.count)
         return nil;
 
-    __block NSMutableString* string = [[NSMutableString alloc] initWithString:@","];
+    __block NSMutableString* string = [NSMutableString stringWithString:@","];
     [self.typeTags enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
         // catch interlopers
         if (![obj isKindOfClass:[NSString class]]) {
