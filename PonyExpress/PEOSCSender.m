@@ -11,6 +11,8 @@
 #import "AsyncUdpSocket.h"
 
 @interface PEOSCSender()
+@property (nonatomic, readwrite, retain) NSString* host;
+@property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, retain) AsyncUdpSocket* socket;
 - (BOOL)_setupSocket;
 - (BOOL)_tearDownSocket;
