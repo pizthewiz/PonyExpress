@@ -11,5 +11,6 @@
 @interface PEOSCMessage()
 - (BOOL)_isAddressValid;
 - (BOOL)_areTypeTagsValid;
+- (BOOL)_areArgumentsValidGivenTypeTags;
 - (NSString*)_typeTagString;
 @end

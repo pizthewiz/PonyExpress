@@ -25,6 +25,7 @@
 		D83E1BDC1412F87A00CB1258 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BDB1412F87A00CB1258 /* main.m */; };
 		D83E1BE01412F87A00CB1258 /* OrphanExample.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D83E1BDF1412F87A00CB1258 /* OrphanExample.1 */; };
 		D83E1BE41412F98800CB1258 /* PonyExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5C1411528100CB1258 /* PonyExpress.framework */; };
+		D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */,
+				D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */,
 				D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

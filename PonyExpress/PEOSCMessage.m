@@ -77,6 +77,35 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     return [self _typeTagString] != nil;
 }
 
+- (BOOL)_areArgumentsValidGivenTypeTags {
+    // check proper number of arguments
+    NSUInteger numberOfArguments = 0;
+    for (NSString* type in self.typeTags) {
+        if (![PEOSCMessage typeRequiresArgument:type])
+            continue;
+        numberOfArguments++;
+    }
+    if (self.arguments.count != numberOfArguments)
+        return NO;
+
+    __block BOOL status = YES;
+    [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
+        if ([PEOSCMessage typeRequiresArgument:type]) {
+            if (([type isEqualToString:PEOSCMessageTypeTagInteger] || [type isEqualToString:PEOSCMessageTypeTagFloat]) && ![argument isKindOfClass:[NSNumber class]]) {
+                status = NO;
+                *stop = YES;
+            } else if ([type isEqualToString:PEOSCMessageTypeTagString] && ![argument isKindOfClass:[NSString class]]) {
+                status = NO;
+                *stop = YES;
+            } else if ([type isEqualToString:PEOSCMessageTypeTagBlob] && ![argument isKindOfClass:[NSData class]]) {
+                status = NO;
+                *stop = YES;
+            }
+        }
+    }];
+    return status;
+}
+
 - (NSString*)_typeTagString {
     if (!self.typeTags.count)
         return nil;
