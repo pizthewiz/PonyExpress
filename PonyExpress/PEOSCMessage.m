@@ -50,7 +50,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 #pragma mark -
 
 - (NSString*)description {
-    return [NSString stringWithFormat:@"%@ %@ %@", self.address, [self _typeTagString], @"ARGUMENTS"];
+    return [NSString stringWithFormat:@"<%@: %@ %@ %@>", NSStringFromClass([self class]), self.address, [self _typeTagString], @"ARGUMENTS"];
 }
 
 - (void)enumerateTypesAndArgumentsUsingBlock:(void (^)(id type, id argument, BOOL* stop))block {
