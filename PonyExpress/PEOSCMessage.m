@@ -8,6 +8,7 @@
 
 #import "PEOSCMessage.h"
 #import "PEOSCMessage-Private.h"
+#import "PonyExpress-Internal.h"
 
 NSString* const PEOSCMessageTypeTagInteger = @"PEOSCMessageTypeTagInteger";
 NSString* const PEOSCMessageTypeTagFloat = @"PEOSCMessageTypeTagFloat";
@@ -145,6 +146,10 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
             [string appendString:@"t"];
     }];
     return string;
+}
+
+- (NSData*)_data {
+    return [self.address dataUsingEncoding:NSASCIIStringEncoding];
 }
 
 @end

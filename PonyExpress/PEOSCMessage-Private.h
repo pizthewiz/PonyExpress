@@ -13,4 +13,5 @@
 - (BOOL)_areTypeTagsValid;
 - (BOOL)_areArgumentsValidGivenTypeTags;
 - (NSString*)_typeTagString;
+- (NSData*)_data;
 @end
