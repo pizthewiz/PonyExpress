@@ -28,6 +28,7 @@
 		D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
 		D87C17FD1413F3EC005A08F3 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D87C17FB1413F3EC005A08F3 /* AsyncUdpSocket.m */; };
 		D87C17FE1413F3EC005A08F3 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D87C17FB1413F3EC005A08F3 /* AsyncUdpSocket.m */; };
+		D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		D83E1BDF1412F87A00CB1258 /* OrphanExample.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = OrphanExample.1; sourceTree = "<group>"; };
 		D87C17FA1413F3EC005A08F3 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncUdpSocket.h; path = vendor/cocoaasyncsocket/RunLoop/AsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
 		D87C17FB1413F3EC005A08F3 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncUdpSocket.m; path = vendor/cocoaasyncsocket/RunLoop/AsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
+		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				D83E1B6C1411528100CB1258 /* PonyExpress.h */,
+				D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */,
 				D83E1B9F14119A2C00CB1258 /* PEOSCMessage.h */,
 				D83E1BAE1411A41400CB1258 /* PEOSCMessage-Private.h */,
 				D83E1BA014119A2C00CB1258 /* PEOSCMessage.m */,
@@ -245,6 +248,7 @@
 				D83E1BA114119A2C00CB1258 /* PEOSCMessage.h in Headers */,
 				D83E1B98141190B000CB1258 /* PEOSCSender.h in Headers */,
 				D83E1BAF1411A41400CB1258 /* PEOSCMessage-Private.h in Headers */,
+				D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
