@@ -12,12 +12,12 @@
 
 @synthesize host, port;
 
-+ (id)senderWithHost:(NSString*)host port:(NSUInteger)port {
++ (id)senderWithHost:(NSString*)host port:(UInt16)port {
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
     return sender;
 }
 
-- (id)initWithHost:(NSString*)hos port:(NSUInteger)por {
+- (id)initWithHost:(NSString*)hos port:(UInt16)por {
     self = [super init];
     if (self) {
         self.host = hos;
@@ -29,7 +29,7 @@
 #pragma mark -
 
 - (NSString*)description {
-    return [NSString stringWithFormat:@"<%@: %@:%lu>", NSStringFromClass([self class]), self.host, self.port];
+    return [NSString stringWithFormat:@"<%@: %@:%d>", NSStringFromClass([self class]), self.host, self.port];
 }
 
 @end

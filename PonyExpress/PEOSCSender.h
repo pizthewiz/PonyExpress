@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface PEOSCSender : NSObject
-+ (id)senderWithHost:(NSString*)host port:(NSUInteger)port;
-- (id)initWithHost:(NSString*)host port:(NSUInteger)port;
++ (id)senderWithHost:(NSString*)host port:(UInt16)port;
+- (id)initWithHost:(NSString*)host port:(UInt16)port;
 
 @property (nonatomic, retain) NSString* host;
-@property (nonatomic) NSUInteger port;
+@property (nonatomic) UInt16 port;
 @end

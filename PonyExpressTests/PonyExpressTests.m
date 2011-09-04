@@ -131,7 +131,7 @@
 
 - (void)testSenderClassMethodCreation {
     NSString* host = @"apple.com";
-    NSUInteger port = 80;
+    UInt16 port = 80;
     PEOSCSender* sender = [PEOSCSender senderWithHost:host port:port];
 
     STAssertNotNil(sender, @"+senderWithHost:port: should provide a non-nil sender");
@@ -142,7 +142,7 @@
 
 - (void)testSenderInstanceMethodCreation {
     NSString* host = @"apple.com";
-    NSUInteger port = 80;
+    UInt16 port = 80;
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
 
     STAssertNotNil(sender, @"-initWithHost:port: should provide a non-nil sender");
