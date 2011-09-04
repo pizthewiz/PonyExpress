@@ -2,7 +2,7 @@
 # Pony Express
 a small foundation framework to facilitate OSC communication on Mac OS X 10.7
 
-### NOTES
+### GENERAL
 - OSC 1.1 over UDP with support for the Integer, Float, String, True, False, Null and Impulse data types
 
 ### THANKS
