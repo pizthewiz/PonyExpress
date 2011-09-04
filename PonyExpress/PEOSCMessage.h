@@ -22,12 +22,12 @@
 extern NSString* const PEOSCMessageTypeTagInteger;
 extern NSString* const PEOSCMessageTypeTagFloat;
 extern NSString* const PEOSCMessageTypeTagString;
-extern NSString* const PEOSCMessageTypeTagBlob;
+extern NSString* const PEOSCMessageTypeTagBlob; // UNSUPPORTED
 extern NSString* const PEOSCMessageTypeTagTrue;
 extern NSString* const PEOSCMessageTypeTagFalse;
 extern NSString* const PEOSCMessageTypeTagNull;
 extern NSString* const PEOSCMessageTypeTagImpulse;
-extern NSString* const PEOSCMessageTypeTagTimetag;
+extern NSString* const PEOSCMessageTypeTagTimetag; // UNSUPPORTED
 
 @interface PEOSCMessage : NSObject
 + (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
