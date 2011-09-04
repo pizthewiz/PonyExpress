@@ -17,13 +17,19 @@
     return sender;
 }
 
-- (id)initWithHost:(NSString*)h port:(NSUInteger)p {
+- (id)initWithHost:(NSString*)hos port:(NSUInteger)por {
     self = [super init];
     if (self) {
-        self.host = h;
-        self.port = p;
+        self.host = hos;
+        self.port = por;
     }
     return self;
+}
+
+#pragma mark -
+
+- (NSString*)description {
+    return [NSString stringWithFormat:@"<%@: %@:%lu>", NSStringFromClass([self class]), self.host, self.port];
 }
 
 @end
