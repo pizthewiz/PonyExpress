@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D83E1B6A1411528100CB1258 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D83E1B681411528100CB1258 /* InfoPlist.strings */; };
 		D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B751411528100CB1258 /* SenTestingKit.framework */; };
-		D83E1B771411528100CB1258 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5F1411528100CB1258 /* Cocoa.framework */; };
 		D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5C1411528100CB1258 /* PonyExpress.framework */; };
 		D83E1B801411528100CB1258 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D83E1B7E1411528100CB1258 /* InfoPlist.strings */; };
 		D83E1B831411528100CB1258 /* PonyExpressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B821411528100CB1258 /* PonyExpressTests.m */; };
@@ -60,8 +59,6 @@
 
 /* Begin PBXFileReference section */
 		D83E1B5C1411528100CB1258 /* PonyExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PonyExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D83E1B5F1411528100CB1258 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		D83E1B621411528100CB1258 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		D83E1B641411528100CB1258 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D83E1B671411528100CB1258 /* PonyExpress-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpress-Info.plist"; sourceTree = "<group>"; };
 		D83E1B691411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -102,7 +99,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */,
-				D83E1B771411528100CB1258 /* Cocoa.framework in Frameworks */,
 				D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,8 +149,6 @@
 		D83E1B611411528100CB1258 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D83E1B5F1411528100CB1258 /* Cocoa.framework */,
-				D83E1B621411528100CB1258 /* AppKit.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
