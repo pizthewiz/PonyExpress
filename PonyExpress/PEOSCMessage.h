@@ -19,15 +19,15 @@
 //  I  Impluse: bang, data-less
 //  t  Timetag: OSC Timetag in NTP format
 
-extern NSString* const PEOSCMessageTypeTagInteger;
-extern NSString* const PEOSCMessageTypeTagFloat;
-extern NSString* const PEOSCMessageTypeTagString;
-extern NSString* const PEOSCMessageTypeTagBlob; // UNSUPPORTED
+extern NSString* const PEOSCMessageTypeTagInteger; // NSNumber
+extern NSString* const PEOSCMessageTypeTagFloat; // NSNumber
+extern NSString* const PEOSCMessageTypeTagString; // NSString
+extern NSString* const PEOSCMessageTypeTagBlob; // NSData - UNSUPPORTED
 extern NSString* const PEOSCMessageTypeTagTrue;
 extern NSString* const PEOSCMessageTypeTagFalse;
 extern NSString* const PEOSCMessageTypeTagNull;
 extern NSString* const PEOSCMessageTypeTagImpulse;
-extern NSString* const PEOSCMessageTypeTagTimetag; // UNSUPPORTED
+extern NSString* const PEOSCMessageTypeTagTimetag; // {uint32_t, uint32_t} - UNSUPPORTED
 
 @interface PEOSCMessage : NSObject
 + (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
