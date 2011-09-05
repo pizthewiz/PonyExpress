@@ -17,3 +17,4 @@ RECEIVER
 LATER
 [ ] mDNS announcement
 [ ] consider a PEOSCValue class to wrap boxing
+[ ] add socket management layer to allow sharing
