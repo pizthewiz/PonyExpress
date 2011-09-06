@@ -10,6 +10,7 @@
 #import "PonyExpress-Internal.h"
 #import "PEOSCMessage.h"
 #import "PEOSCMessage-Private.h"
+#import "AsyncUdpSocket.h"
 
 @interface PEOSCSender()
 @property (nonatomic, readwrite, retain) NSString* host;

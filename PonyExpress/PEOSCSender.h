@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AsyncUdpSocket.h"
 
 @class PEOSCMessage;
 
-@interface PEOSCSender : NSObject <AsyncUdpSocketDelegate>
+@interface PEOSCSender : NSObject
 + (id)senderWithHost:(NSString*)host port:(UInt16)port;
 - (id)initWithHost:(NSString*)host port:(UInt16)port;
 
