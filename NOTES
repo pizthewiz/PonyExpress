@@ -15,6 +15,7 @@ SENDER
 - advertise via mDNS
 
 RECEIVER
+…
 
 MISC
 - Timetag: struct ntpTimestamp { uint32_t fullSeconds;  uint32_t partSeconds; };

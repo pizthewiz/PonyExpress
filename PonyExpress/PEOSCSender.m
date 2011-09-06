@@ -54,7 +54,13 @@
 #pragma mark -
 
 - (void)sendMessage:(PEOSCMessage*)message {
-    BOOL status = [self.socket sendData:[message _data] withTimeout:0 tag:13];
+    NSData* messageData = [message _data];
+    if (!messageData) {
+        CCErrorLog(@"ERROR - failed to send message: %@", message);
+        return;
+    }
+
+    BOOL status = [self.socket sendData:messageData withTimeout:0 tag:13];
     if (!status) {
         CCWarningLog(@"WARNING - failed to send message: %@ to %@:%@", message, self.host, self.port);
     }
