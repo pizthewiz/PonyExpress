@@ -20,6 +20,8 @@ NSString* const PEOSCMessageTypeTagNull = @"PEOSCMessageTypeTagNull";
 NSString* const PEOSCMessageTypeTagImpulse = @"PEOSCMessageTypeTagImpulse";
 NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
+#pragma mark OSC VALUE CATEGORIES
+
 @interface NSString(PEAdditions)
 - (NSString*)oscString;
 @end
@@ -30,7 +32,43 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 @end
 
-#pragma mark -
+@interface NSNumber(PEAdditions)
+- (SInt32)oscInt;
+- (CFSwappedFloat32)oscFloat;
+@end
+// OSC uses big-endian numerical values
+@implementation NSNumber(PEAdditions)
+- (SInt32)oscInt {
+    SInt32 value = 0;
+    CFNumberGetValue((CFNumberRef)self, kCFNumberSInt32Type, &value);
+    SInt32 swappedValue = CFSwapInt32HostToBig(value);
+    return swappedValue;
+}
+- (CFSwappedFloat32)oscFloat {
+    Float32 value = 0;
+    CFNumberGetValue((CFNumberRef)self, kCFNumberFloat32Type, &value);
+    CFSwappedFloat32 swappedValue = CFConvertFloat32HostToSwapped(value);
+    return swappedValue;
+}
+@end
+
+//@interface NSData(PEAdditions)
+//- (NSData*)oscBlob;
+//@end
+//@implementation NSData(PEAdditions)
+//- (NSData*)oscBlob {
+//    // int32 length + 8bit bytes with 0-3 nulls in termination
+//    NSUInteger numberOfNulls = 4 - (self.length & 3);
+//    NSUInteger totalLength = 4 + self.length + numberOfNulls;
+//    SInt32 swappedTotalLength = [[NSNumber numberWithInt:totalLength] oscInt];
+//
+////    [argumentData appendBytes:&swappedValue length:4];
+//
+//    return nil;
+//}
+//@end
+
+#pragma mark - PEOSCMESSAGE
 
 @implementation PEOSCMessage
 
@@ -179,21 +217,15 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
         if (![[self class] typeRequiresArgument:type])
             return;
         if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
-            SInt32 value = 0;
-            CFNumberGetValue((CFNumberRef)argument, kCFNumberSInt32Type, &value);
-            // OSC uses big-endian numerical values
-            SInt32 swappedValue = CFSwapInt32HostToBig(value);
+            SInt32 swappedValue = [argument oscInt];
             [argumentData appendBytes:&swappedValue length:4];
         } else if ([type isEqualToString:PEOSCMessageTypeTagFloat]) {
-            Float32 value = 0;
-            CFNumberGetValue((CFNumberRef)argument, kCFNumberFloat32Type, &value);
-            // OSC uses big-endian numerical values
-            CFSwappedFloat32 swappedValue = CFConvertFloat32HostToSwapped(value);
+            CFSwappedFloat32 swappedValue = [argument oscFloat];
             [argumentData appendBytes:&swappedValue length:4];
         } else if ([type isEqualToString:PEOSCMessageTypeTagString]) {
             [argumentData appendData:[[argument oscString] dataUsingEncoding:NSASCIIStringEncoding]];
         } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
-            // TODO - int32 length + 8bit bytes with 0-3 nulls in termination, perhaps a nice NSData category
+//            [argumentData appendData:[argumentData oscBlob]];
             CCWarningLog(@"WARNING - cannot serialize Blob type, not yet supported");
         } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
             CCWarningLog(@"WARNING - cannot serialize Timetag type, not yet supported");
