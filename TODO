@@ -6,10 +6,12 @@ GENERAL
 MESSAGE
 [ ] add initializers with vararg
 [X] add param/arg enumerator that takes a block
+[ ] full test coverage
 
 SENDER
-[ ] create UDP connection
-[ ] tear down UDP connection on dealloc
+[X] create UDP connection
+[X] tear down UDP connection on dealloc
+[ ] full test coverage
 
 RECEIVER
 …
