@@ -23,6 +23,6 @@ MISC
 [ ] sample router? ?*[!-]{,}//
 
 LATER
-[ ] mDNS announcement
+[ ] mDNS sender announcement
 [ ] consider a PEOSCValue class to wrap boxing
 [ ] add socket management layer to allow sharing
