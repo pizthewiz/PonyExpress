@@ -8,7 +8,6 @@
 
 #import "PEOSCSender.h"
 #import "PonyExpress-Internal.h"
-#import "AsyncUdpSocket.h"
 #import "PEOSCMessage.h"
 #import "PEOSCMessage-Private.h"
 
@@ -55,10 +54,24 @@
 #pragma mark -
 
 - (void)sendMessage:(PEOSCMessage*)message {
-    BOOL status = [self.socket sendData:[message _data] withTimeout:5 tag:13];
+    BOOL status = [self.socket sendData:[message _data] withTimeout:0 tag:13];
     if (!status) {
         CCWarningLog(@"WARNING - failed to send message: %@ to %@:%@", message, self.host, self.port);
     }
+}
+
+#pragma mark - SOCKET DELEGATE
+
+- (void)onUdpSocketDidClose:(AsyncUdpSocket*)sock {
+    CCDebugLogSelector();
+}
+
+- (void)onUdpSocket:(AsyncUdpSocket*)sock didSendDataWithTag:(long)tag {
+    CCDebugLogSelector();
+}
+
+- (void)onUdpSocket:(AsyncUdpSocket*)sock didNotSendDataWithTag:(long)tag dueToError:(NSError*)error {
+    CCDebugLogSelector();
 }
 
 #pragma mark - PRIVATE
@@ -68,15 +81,12 @@
      self.socket = soc;
      [soc release];
 
+     self.socket.delegate = self;
+
      NSError* error = nil;
      BOOL status = [self.socket connectToHost:self.host onPort:self.port error:&error];
      if (!status) {
          CCErrorLog(@"ERROR - failed to connect to host: %@:%d - %@", self.host, self.port, [error localizedDescription]);
-         return NO;
-     }
-     status = [self.socket enableBroadcast:YES error:&error];
-     if (!status) {
-         CCErrorLog(@"ERROR - failed to enable broadcast for host %@:%d - %@", self.host, self.port, [error localizedDescription]);
          return NO;
      }
 
