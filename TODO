@@ -7,6 +7,7 @@ MESSAGE
 [ ] add initializers with vararg
 [X] add param/arg enumerator that takes a block
 [ ] full test coverage
+[ ] add more complete valadity checking for address
 
 SENDER
 [X] create UDP connection
