@@ -26,3 +26,4 @@ LATER
 [ ] mDNS receiver announcement
 [ ] consider a PEOSCValue class to wrap boxing
 [ ] add socket management layer to allow sharing
+[ ] static library option for iOS
