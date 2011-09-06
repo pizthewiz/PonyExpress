@@ -26,9 +26,9 @@
 		D83E1BE01412F87A00CB1258 /* OrphanExample.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D83E1BDF1412F87A00CB1258 /* OrphanExample.1 */; };
 		D83E1BE41412F98800CB1258 /* PonyExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5C1411528100CB1258 /* PonyExpress.framework */; };
 		D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
-		D87C17FD1413F3EC005A08F3 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D87C17FB1413F3EC005A08F3 /* AsyncUdpSocket.m */; };
-		D87C17FE1413F3EC005A08F3 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D87C17FB1413F3EC005A08F3 /* AsyncUdpSocket.m */; };
 		D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */; };
+		D8BA3BA31416C4C70076037F /* AsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D8BA3BA11416C4C70076037F /* AsyncUdpSocket.h */; };
+		D8BA3BA41416C4C70076037F /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BA3BA21416C4C70076037F /* AsyncUdpSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,9 +87,9 @@
 		D83E1BDB1412F87A00CB1258 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D83E1BDE1412F87A00CB1258 /* OrphanExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OrphanExample-Prefix.pch"; sourceTree = "<group>"; };
 		D83E1BDF1412F87A00CB1258 /* OrphanExample.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = OrphanExample.1; sourceTree = "<group>"; };
-		D87C17FA1413F3EC005A08F3 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncUdpSocket.h; path = vendor/cocoaasyncsocket/RunLoop/AsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
-		D87C17FB1413F3EC005A08F3 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncUdpSocket.m; path = vendor/cocoaasyncsocket/RunLoop/AsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
 		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
+		D8BA3BA11416C4C70076037F /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncUdpSocket.h; path = vendor/CocoaAsyncSocket/RunLoop/AsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
+		D8BA3BA21416C4C70076037F /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncUdpSocket.m; path = vendor/CocoaAsyncSocket/RunLoop/AsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,8 +231,8 @@
 		D87C17F81413F3CF005A08F3 /* AsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
-				D87C17FA1413F3EC005A08F3 /* AsyncUdpSocket.h */,
-				D87C17FB1413F3EC005A08F3 /* AsyncUdpSocket.m */,
+				D8BA3BA11416C4C70076037F /* AsyncUdpSocket.h */,
+				D8BA3BA21416C4C70076037F /* AsyncUdpSocket.m */,
 			);
 			name = AsyncSocket;
 			sourceTree = "<group>";
@@ -249,6 +249,7 @@
 				D83E1B98141190B000CB1258 /* PEOSCSender.h in Headers */,
 				D83E1BAF1411A41400CB1258 /* PEOSCMessage-Private.h in Headers */,
 				D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */,
+				D8BA3BA31416C4C70076037F /* AsyncUdpSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,7 +381,7 @@
 			files = (
 				D83E1B99141190B000CB1258 /* PEOSCSender.m in Sources */,
 				D83E1BA214119A2C00CB1258 /* PEOSCMessage.m in Sources */,
-				D87C17FD1413F3EC005A08F3 /* AsyncUdpSocket.m in Sources */,
+				D8BA3BA41416C4C70076037F /* AsyncUdpSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,7 +392,6 @@
 				D83E1B831411528100CB1258 /* PonyExpressTests.m in Sources */,
 				D83E1B9A141190B000CB1258 /* PEOSCSender.m in Sources */,
 				D83E1BA314119A2C00CB1258 /* PEOSCMessage.m in Sources */,
-				D87C17FE1413F3EC005A08F3 /* AsyncUdpSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
