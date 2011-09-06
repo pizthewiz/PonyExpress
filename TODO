@@ -18,6 +18,9 @@ SENDER
 RECEIVER
 …
 
+MISC
+[ ] sample router? ?*[!-]{,}//
+
 LATER
 [ ] mDNS announcement
 [ ] consider a PEOSCValue class to wrap boxing
