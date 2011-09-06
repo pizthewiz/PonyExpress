@@ -112,12 +112,15 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
         if ([PEOSCMessage typeRequiresArgument:type]) {
             if (([type isEqualToString:PEOSCMessageTypeTagInteger] || [type isEqualToString:PEOSCMessageTypeTagFloat]) && ![argument isKindOfClass:[NSNumber class]]) {
+                CCDebugLog(@"Integer and Float arguments should be represented via NSNumber");
                 status = NO;
                 *stop = YES;
             } else if ([type isEqualToString:PEOSCMessageTypeTagString] && ![argument isKindOfClass:[NSString class]]) {
+                CCDebugLog(@"String arguments should be represented via NSString");
                 status = NO;
                 *stop = YES;
             } else if ([type isEqualToString:PEOSCMessageTypeTagBlob] && ![argument isKindOfClass:[NSData class]]) {
+                CCDebugLog(@"Blob arguments should be represented via NSData");
                 status = NO;
                 *stop = YES;
             }
