@@ -21,10 +21,10 @@ NSString* const PEOSCMessageTypeTagImpulse = @"PEOSCMessageTypeTagImpulse";
 NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
 @interface NSString(PEAdditions)
-- (NSString*)nullPadded;
+- (NSString*)oscString;
 @end
 @implementation NSString(PEAdditions)
-- (NSString*)nullPadded {
+- (NSString*)oscString {
     NSUInteger numberOfNulls = 4 - (self.length & 3);
     return [self stringByPaddingToLength:self.length+numberOfNulls withString:@"\0" startingAtIndex:0];
 }
@@ -170,8 +170,8 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 - (NSData*)_data {
     // TODO - validate first
 
-    NSData* addressData = [[self.address nullPadded] dataUsingEncoding:NSASCIIStringEncoding];
-    NSData* typeTagData = [[[self _typeTagString] nullPadded] dataUsingEncoding:NSASCIIStringEncoding];
+    NSData* addressData = [[self.address oscString] dataUsingEncoding:NSASCIIStringEncoding];
+    NSData* typeTagData = [[[self _typeTagString] oscString] dataUsingEncoding:NSASCIIStringEncoding];
     __block NSMutableData* argumentData = [[NSMutableData alloc] init];
 
     // TODO - it would be nice to have a value class that can serialize then create a message from address and values
@@ -191,8 +191,9 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
             CFSwappedFloat32 swappedValue = CFConvertFloat32HostToSwapped(value);
             [argumentData appendBytes:&swappedValue length:4];
         } else if ([type isEqualToString:PEOSCMessageTypeTagString]) {
-            [argumentData appendData:[[argument nullPadded] dataUsingEncoding:NSASCIIStringEncoding]];
+            [argumentData appendData:[[argument oscString] dataUsingEncoding:NSASCIIStringEncoding]];
         } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
+            // TODO - int32 length + 8bit bytes with 0-3 nulls in termination, perhaps a nice NSData category
             CCWarningLog(@"WARNING - cannot serialize Blob type, not yet supported");
         } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
             CCWarningLog(@"WARNING - cannot serialize Timetag type, not yet supported");
