@@ -8,6 +8,7 @@ MESSAGE
 [X] add param/arg enumerator that takes a block
 [ ] full test coverage
 [ ] add more complete valadity checking for address
+[ ] add cool debug method to dump bytes and ascii
 
 SENDER
 [X] create UDP connection
