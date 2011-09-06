@@ -126,8 +126,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 #pragma mark - PRIVATE
 
 - (BOOL)_isAddressValid {
-    // NB - i think # is illegal as well due to blobs and likely ASCII-only as well
-    // TODO - beef up via NSRegularExpression
+    // TODO - beef up via NSRegularExpression -- check for balanced [] and {}
     return self.address && [[self.address substringToIndex:1] isEqualToString:@"/"];
 }
 
@@ -205,6 +204,22 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     return string;
 }
 
+- (void)_printDataBuffer:(NSData*)data {
+    // yokined from CoreOSC
+    //  https://github.com/mirek/CoreOSC/blob/master/CoreOSC/CoreOSC.c
+    const char* buffer = [data bytes];
+    for (NSUInteger idx = 0; idx < data.length; idx++) {
+        if (buffer[idx] > 0x1f)
+            printf("  %c", buffer[idx]);
+        else
+            printf(" __");
+    }
+    printf("\n");
+    for (NSUInteger idx = 0; idx < data.length; idx++)
+        printf(" %02x", (unsigned char)buffer[idx]);
+    printf("\n");
+}
+
 - (NSData*)_data {
     // validate
     if (![self _isAddressValid]) {
@@ -251,7 +266,8 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     [data appendData:argumentData];
     [argumentData release];
 
-    CCDebugLog(@"%@", data);
+//    CCDebugLog(@"%@", data);
+    [self _printDataBuffer:data];
     return data;
 }
 
