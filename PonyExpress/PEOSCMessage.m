@@ -52,21 +52,27 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 @end
 
-//@interface NSData(PEAdditions)
-//- (NSData*)oscBlob;
-//@end
-//@implementation NSData(PEAdditions)
-//- (NSData*)oscBlob {
-//    // int32 length + 8bit bytes with 0-3 nulls in termination
-//    NSUInteger numberOfNulls = 4 - (self.length & 3);
-//    NSUInteger totalLength = 4 + self.length + numberOfNulls;
-//    SInt32 swappedTotalLength = [[NSNumber numberWithInt:totalLength] oscInt];
-//
-////    [argumentData appendBytes:&swappedValue length:4];
-//
-//    return nil;
-//}
-//@end
+@interface NSData(PEAdditions)
+- (NSData*)oscBlob;
+@end
+@implementation NSData(PEAdditions)
+- (NSData*)oscBlob {
+    // int32 length + 8bit bytes with 0-3 nulls in termination
+    NSUInteger numberOfNulls = 4 - (self.length & 3);
+    NSUInteger paddedLength = self.length + numberOfNulls;
+    SInt32 swappedPaddedLength = [[NSNumber numberWithUnsignedInteger:paddedLength] oscInt];
+
+    NSMutableData* data = [NSMutableData data];
+    [data appendBytes:&swappedPaddedLength length:4];
+    [data appendData:self];
+
+    char nullBytes[4];
+    memset(nullBytes, 0, 4);
+    [data appendBytes:nullBytes length:numberOfNulls];
+
+    return data;
+}
+@end
 
 #pragma mark - PEOSCMESSAGE
 
@@ -205,7 +211,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 
 - (void)_printDataBuffer:(NSData*)data {
-    // yokined from CoreOSC
+    // yokined from CoreOSC:
     //  https://github.com/mirek/CoreOSC/blob/master/CoreOSC/CoreOSC.c
     const char* buffer = [data bytes];
     for (NSUInteger idx = 0; idx < data.length; idx++) {
@@ -252,22 +258,24 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
         } else if ([type isEqualToString:PEOSCMessageTypeTagString]) {
             [argumentData appendData:[[argument oscString] dataUsingEncoding:NSASCIIStringEncoding]];
         } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
-//            [argumentData appendData:[argumentData oscBlob]];
-            CCWarningLog(@"WARNING - cannot serialize Blob type, not yet supported");
+            [argumentData appendData:[argument oscBlob]];
+            CCWarningLog(@"WARNING - serialization for the Blob type, is untested");
         } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
+//            uint64_t swappedValue = CFSwapInt64HostToBig();
             CCWarningLog(@"WARNING - cannot serialize Timetag type, not yet supported");
         }
     }];
 
-//    NSMutableData* data = [NSMutableData dataWithLength:(addressData.length + typeTagData.length + argumentData.length)];
     NSMutableData* data = [NSMutableData data];
     [data appendData:addressData];
     [data appendData:typeTagData];
     [data appendData:argumentData];
     [argumentData release];
 
-//    CCDebugLog(@"%@", data);
+#ifdef DEBUG
     [self _printDataBuffer:data];
+#endif
+
     return data;
 }
 
