@@ -20,6 +20,18 @@ NSString* const PEOSCMessageTypeTagNull = @"PEOSCMessageTypeTagNull";
 NSString* const PEOSCMessageTypeTagImpulse = @"PEOSCMessageTypeTagImpulse";
 NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
+@interface NSString(PEAdditions)
+- (NSString*)nullPadded;
+@end
+@implementation NSString(PEAdditions)
+- (NSString*)nullPadded {
+    NSUInteger numberOfNulls = 4 - (self.length & 3);
+    return [self stringByPaddingToLength:self.length+numberOfNulls withString:@"\0" startingAtIndex:0];
+}
+@end
+
+#pragma mark -
+
 @implementation PEOSCMessage
 
 @synthesize address, typeTags, arguments;
@@ -149,7 +161,20 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 
 - (NSData*)_data {
-    return [self.address dataUsingEncoding:NSASCIIStringEncoding];
+    // TODO - validate first
+
+    NSData* addressData = [[self.address nullPadded] dataUsingEncoding:NSASCIIStringEncoding];
+    NSData* typeTagData = [[[self _typeTagString] nullPadded] dataUsingEncoding:NSASCIIStringEncoding];
+    NSData* argumentData = nil;
+
+//    NSMutableData* data = [NSMutableData dataWithLength:(addressData.length + typeTagData.length + argumentData.length)];
+    NSMutableData* data = [NSMutableData dataWithData:addressData];
+    [data appendData:addressData];
+    [data appendData:typeTagData];
+    [data appendData:argumentData];
+
+    CCDebugLog(@"%@", data);
+    return data;
 }
 
 @end
