@@ -188,7 +188,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
             CFSwappedFloat32 swappedValue = CFConvertFloat32HostToSwapped(value);
             [argumentData appendBytes:&swappedValue length:4];
         } else if ([type isEqualToString:PEOSCMessageTypeTagString]) {
-            [argumentData appendData:[[[self _typeTagString] nullPadded] dataUsingEncoding:NSASCIIStringEncoding]];
+            [argumentData appendData:[[argument nullPadded] dataUsingEncoding:NSASCIIStringEncoding]];
         } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
             CCWarningLog(@"WARNING - cannot serialize Blob type, not yet supported");
         } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
