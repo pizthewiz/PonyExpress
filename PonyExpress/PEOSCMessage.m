@@ -215,14 +215,19 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     //  https://github.com/mirek/CoreOSC/blob/master/CoreOSC/CoreOSC.c
     const char* buffer = [data bytes];
     for (NSUInteger idx = 0; idx < data.length; idx++) {
+        if (idx > 0 && !(idx % 4))
+            printf(" ");
         if (buffer[idx] > 0x1f)
             printf("  %c", buffer[idx]);
         else
             printf(" __");
     }
     printf("\n");
-    for (NSUInteger idx = 0; idx < data.length; idx++)
-        printf(" %02x", (unsigned char)buffer[idx]);
+    for (NSUInteger idx = 0; idx < data.length; idx++) {
+        if (idx > 0 && !(idx % 4))
+            printf(" ");
+        printf(" %02x", (unsigned char)buffer[idx]);        
+    }
     printf("\n");
 }
 
