@@ -23,10 +23,10 @@ extern NSString* const PEOSCMessageTypeTagInteger; // NSNumber
 extern NSString* const PEOSCMessageTypeTagFloat; // NSNumber
 extern NSString* const PEOSCMessageTypeTagString; // NSString (ASCII)
 extern NSString* const PEOSCMessageTypeTagBlob; // NSData - UNTESTED
-extern NSString* const PEOSCMessageTypeTagTrue;
-extern NSString* const PEOSCMessageTypeTagFalse;
-extern NSString* const PEOSCMessageTypeTagNull;
-extern NSString* const PEOSCMessageTypeTagImpulse;
+extern NSString* const PEOSCMessageTypeTagTrue; // ARG-LESS
+extern NSString* const PEOSCMessageTypeTagFalse; // ARG-LESS
+extern NSString* const PEOSCMessageTypeTagNull; // ARG-LESS
+extern NSString* const PEOSCMessageTypeTagImpulse; // ARG-LESS
 extern NSString* const PEOSCMessageTypeTagTimetag; // {uint32_t, uint32_t} - UNSUPPORTED
 
 @interface PEOSCMessage : NSObject
