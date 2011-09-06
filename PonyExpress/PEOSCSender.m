@@ -77,11 +77,9 @@
 #pragma mark - PRIVATE
  
  - (BOOL)_setupSocket {
-     AsyncUdpSocket* soc = [[AsyncUdpSocket alloc] init];
+     AsyncUdpSocket* soc = [[AsyncUdpSocket alloc] initWithDelegate:self];
      self.socket = soc;
      [soc release];
-
-     self.socket.delegate = self;
 
      NSError* error = nil;
      BOOL status = [self.socket connectToHost:self.host onPort:self.port error:&error];
