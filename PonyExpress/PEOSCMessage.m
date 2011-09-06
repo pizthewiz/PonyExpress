@@ -121,6 +121,10 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
                 status = NO;
                 *stop = YES;
             }
+//            else if ([type isEqualToString:PEOSCMessageTypeTagTimetag] && ???) {
+//                status = NO;
+//                *stop = YES;
+//            }
         }
     }];
     return status;
@@ -165,13 +169,39 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
     NSData* addressData = [[self.address nullPadded] dataUsingEncoding:NSASCIIStringEncoding];
     NSData* typeTagData = [[[self _typeTagString] nullPadded] dataUsingEncoding:NSASCIIStringEncoding];
-    NSData* argumentData = nil;
+    __block NSMutableData* argumentData = [[NSMutableData alloc] init];
+
+    // TODO - it would be nice to have a value class that can serialize then create a message from address and values
+    [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
+        if (![[self class] typeRequiresArgument:type])
+            return;
+        if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
+            SInt32 value = 0;
+            CFNumberGetValue((CFNumberRef)argument, kCFNumberSInt32Type, &value);
+            // OSC uses big-endian numerical values
+            SInt32 swappedValue = CFSwapInt32HostToBig(value);
+            [argumentData appendBytes:&swappedValue length:4];
+        } else if ([type isEqualToString:PEOSCMessageTypeTagFloat]) {
+            Float32 value = 0;
+            CFNumberGetValue((CFNumberRef)argument, kCFNumberFloat32Type, &value);
+            // OSC uses big-endian numerical values
+            CFSwappedFloat32 swappedValue = CFConvertFloat32HostToSwapped(value);
+            [argumentData appendBytes:&swappedValue length:4];
+        } else if ([type isEqualToString:PEOSCMessageTypeTagString]) {
+            [argumentData appendData:[[[self _typeTagString] nullPadded] dataUsingEncoding:NSASCIIStringEncoding]];
+        } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
+            CCWarningLog(@"WARNING - cannot serialize Blob type, not yet supported");
+        } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
+            CCWarningLog(@"WARNING - cannot serialize Timetag type, not yet supported");
+        }
+    }];
 
 //    NSMutableData* data = [NSMutableData dataWithLength:(addressData.length + typeTagData.length + argumentData.length)];
-    NSMutableData* data = [NSMutableData dataWithData:addressData];
+    NSMutableData* data = [NSMutableData data];
     [data appendData:addressData];
     [data appendData:typeTagData];
     [data appendData:argumentData];
+    [argumentData release];
 
     CCDebugLog(@"%@", data);
     return data;
