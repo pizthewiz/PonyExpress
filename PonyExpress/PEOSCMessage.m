@@ -123,7 +123,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     }
 }
 
-#pragma mark -
+#pragma mark - PRIVATE
 
 - (BOOL)_isAddressValid {
     // NB - i think # is illegal as well due to blobs and likely ASCII-only as well
@@ -206,7 +206,19 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 
 - (NSData*)_data {
-    // TODO - validate first
+    // validate
+    if (![self _isAddressValid]) {
+        CCErrorLog(@"ERROR - invalid address: %@", self.address);
+        return nil;
+    }
+    if (![self _areTypeTagsValid]) {
+        CCErrorLog(@"ERROR - invalid type tags: %@", self.typeTags);
+        return nil;
+    }
+    if (![self _areArgumentsValidGivenTypeTags]) {
+        CCErrorLog(@"ERROR - invalid arguments: %@", self.arguments);
+        return nil;
+    }
 
     NSData* addressData = [[self.address oscString] dataUsingEncoding:NSASCIIStringEncoding];
     NSData* typeTagData = [[[self _typeTagString] oscString] dataUsingEncoding:NSASCIIStringEncoding];
