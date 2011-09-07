@@ -40,13 +40,13 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 @implementation NSNumber(PEAdditions)
 - (SInt32)oscInt {
     SInt32 value = 0;
-    CFNumberGetValue((CFNumberRef)self, kCFNumberSInt32Type, &value);
+    CFNumberGetValue((__bridge CFNumberRef)self, kCFNumberSInt32Type, &value);
     SInt32 swappedValue = CFSwapInt32HostToBig(value);
     return swappedValue;
 }
 - (CFSwappedFloat32)oscFloat {
     Float32 value = 0;
-    CFNumberGetValue((CFNumberRef)self, kCFNumberFloat32Type, &value);
+    CFNumberGetValue((__bridge CFNumberRef)self, kCFNumberFloat32Type, &value);
     CFSwappedFloat32 swappedValue = CFConvertFloat32HostToSwapped(value);
     return swappedValue;
 }
@@ -82,7 +82,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
 + (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments {
     id message = [[PEOSCMessage alloc] initWithAddress:address typeTags:typeTags arguments:arguments];
-    return [message autorelease];
+    return message;
 }
 
 - (id)initWithAddress:(NSString*)add typeTags:(NSArray*)typ arguments:(NSArray*)arg {
@@ -253,7 +253,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
     NSData* addressData = [[self.address oscString] dataUsingEncoding:NSASCIIStringEncoding];
     NSData* typeTagData = [[[self _typeTagString] oscString] dataUsingEncoding:NSASCIIStringEncoding];
-    __block NSMutableData* argumentData = [[NSMutableData alloc] init];
+    __block NSMutableData* argumentData = [NSMutableData data];
 
     // TODO - it would be nice to have a value class that can serialize then create a message from address and values
     [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
@@ -280,7 +280,6 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     [data appendData:addressData];
     [data appendData:typeTagData];
     [data appendData:argumentData];
-    [argumentData release];
 
 #ifdef DEBUG
     [self _printDataBuffer:data];

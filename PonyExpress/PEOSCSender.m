@@ -13,9 +13,9 @@
 #import "AsyncUdpSocket.h"
 
 @interface PEOSCSender()
-@property (nonatomic, readwrite, retain) NSString* host;
+@property (nonatomic, readwrite, strong) NSString* host;
 @property (nonatomic, readwrite) UInt16 port;
-@property (nonatomic, retain) AsyncUdpSocket* socket;
+@property (nonatomic, strong) AsyncUdpSocket* socket;
 - (BOOL)_setupSocket;
 - (BOOL)_tearDownSocket;
 @end
@@ -26,7 +26,7 @@
 
 + (id)senderWithHost:(NSString*)host port:(UInt16)port {
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
-    return [sender autorelease];
+    return sender;
 }
 
 - (id)initWithHost:(NSString*)hos port:(UInt16)por {
@@ -42,8 +42,6 @@
 
 - (void)dealloc {
     [self _tearDownSocket];
-
-    [super dealloc];
 }
 
 #pragma mark -
@@ -86,7 +84,6 @@
  - (BOOL)_setupSocket {
      AsyncUdpSocket* soc = [[AsyncUdpSocket alloc] initWithDelegate:self];
      self.socket = soc;
-     [soc release];
 
      NSError* error = nil;
      BOOL status = [self.socket connectToHost:self.host onPort:self.port error:&error];

@@ -14,7 +14,7 @@
 + (id)senderWithHost:(NSString*)host port:(UInt16)port;
 - (id)initWithHost:(NSString*)host port:(UInt16)port;
 
-@property (nonatomic, readonly, retain) NSString* host;
+@property (nonatomic, readonly, strong) NSString* host;
 @property (nonatomic, readonly) UInt16 port;
 
 - (void)sendMessage:(PEOSCMessage*)message;
