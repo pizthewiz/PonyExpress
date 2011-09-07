@@ -70,11 +70,47 @@
     message.address = @"/oscillator/[1-4]/frequency";
     STAssertTrue([message _isAddressValid], @"should consider legit address valid");
 
-    message.address = @"/oscillator/{3,9}/frequency";
+    message.address = @"/oscillator/[1234]/frequency";
+    STAssertTrue([message _isAddressValid], @"should consider legit address valid");
+
+    message.address = @"/oscillator/[!5-6]/frequency";
+    STAssertTrue([message _isAddressValid], @"should consider legit address valid");
+
+    message.address = @"/oscillator/[!56]/frequency";
+    STAssertTrue([message _isAddressValid], @"should consider legit address valid");
+
+    message.address = @"/oscillator/3/frequency!";
+    STAssertTrue([message _isAddressValid], @"should consider legit address valid");
+
+    message.address = @"/oscillator/{1,3,5,7}/frequency";
     STAssertTrue([message _isAddressValid], @"should consider legit address valid");
 
 
     message.address = @"oscillator/666";
+    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+
+    message.address = @"/super oscillator/666";
+    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+
+    message.address = @"/oscillator/3,9/frequency";
+    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+
+    message.address = @"/oscillator/{3-9}/frequency";
+    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+
+    message.address = @"/oscillator/{3,9/frequency";
+    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+
+    message.address = @"/oscillator/[3,9]/frequency";
+    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+
+    message.address = @"/oscillator/[3-9/frequency";
+    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+
+    message.address = @"/oscillator/[3-9}/frequency";
+    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+
+    message.address = @"/oscillator/{[3-9],13}/frequency";
     STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
 }
 
