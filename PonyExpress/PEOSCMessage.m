@@ -245,6 +245,11 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
         CCErrorLog(@"ERROR - invalid arguments: %@", self.arguments);
         return nil;
     }
+    // fail on timetag
+    if ([self.typeTags indexOfObject:PEOSCMessageTypeTagTimetag] != NSNotFound) {
+        CCErrorLog(@"ERROR - cannot generate data for message with Timetag type, not yet supported");
+        return nil;
+    }
 
     NSData* addressData = [[self.address oscString] dataUsingEncoding:NSASCIIStringEncoding];
     NSData* typeTagData = [[[self _typeTagString] oscString] dataUsingEncoding:NSASCIIStringEncoding];
