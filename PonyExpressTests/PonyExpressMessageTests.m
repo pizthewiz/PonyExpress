@@ -87,31 +87,28 @@
 
 
     message.address = @"oscillator/666";
-    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+    STAssertFalse([message _isAddressValid], @"should require address to begin with backslash");
 
     message.address = @"/super oscillator/666";
-    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+    STAssertFalse([message _isAddressValid], @"should disallow spaces");
 
     message.address = @"/oscillator/3,9/frequency";
-    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+    STAssertFalse([message _isAddressValid], @"should disallow comma when not in curly braces");
 
     message.address = @"/oscillator/{3-9}/frequency";
-    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+    STAssertFalse([message _isAddressValid], @"should not allow minus within curly braces");
 
     message.address = @"/oscillator/{3,9/frequency";
-    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+    STAssertFalse([message _isAddressValid], @"should require closing curly brace");
 
     message.address = @"/oscillator/[3,9]/frequency";
-    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+    STAssertFalse([message _isAddressValid], @"should not allow comma in square bracket");
 
     message.address = @"/oscillator/[3-9/frequency";
-    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
-
-    message.address = @"/oscillator/[3-9}/frequency";
-    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+    STAssertFalse([message _isAddressValid], @"should require closing square bracket");
 
     message.address = @"/oscillator/{[3-9],13}/frequency";
-    STAssertFalse([message _isAddressValid], @"should consider illigitimate address invalid");
+    STAssertFalse([message _isAddressValid], @"should not allow square bracket range within curly braces");
 }
 
 - (void)testTypeTagStringCorrectnessAndValidity {

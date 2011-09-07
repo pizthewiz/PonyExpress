@@ -253,9 +253,9 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
     NSData* addressData = [[self.address oscString] dataUsingEncoding:NSASCIIStringEncoding];
     NSData* typeTagData = [[[self _typeTagString] oscString] dataUsingEncoding:NSASCIIStringEncoding];
-    __block NSMutableData* argumentData = [NSMutableData data];
 
     // TODO - it would be nice to have a value class that can serialize then create a message from address and values
+    __block NSMutableData* argumentData = [NSMutableData data];
     [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
         if (![[self class] typeRequiresArgument:type])
             return;
