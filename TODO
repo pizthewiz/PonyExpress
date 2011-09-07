@@ -6,7 +6,6 @@ GENERAL
 MESSAGE
 [ ] add initializers with vararg
 [X] add param/arg enumerator that takes a block
-[ ] full test coverage
 [ ] add more complete valadity checking for address via NSRegularExpression
 [X] add cool debug method to dump bytes and ascii
 [ ] make debug buffer dump multi-line and byte-gap configurable
@@ -16,11 +15,18 @@ MESSAGE
 SENDER
 [X] create UDP connection
 [X] tear down UDP connection on dealloc
-[ ] full test coverage
 [ ] consider adding a means to connect/disconnect
 
 RECEIVER
 …
+
+TESTS
+[ ] add tests for message data generation
+[ ] test Blob serialization
+[ ] test sender with privledged port, < 1024
+[ ] test sender with bad host
+[ ] test two senders on the same host/port
+[ ] test send with bad message data
 
 MISC
 [ ] sample router? ?*[!-]{,}//
