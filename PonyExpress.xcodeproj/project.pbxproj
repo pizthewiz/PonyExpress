@@ -28,7 +28,7 @@
 		D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
 		D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */; };
 		D8BA3BA31416C4C70076037F /* AsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D8BA3BA11416C4C70076037F /* AsyncUdpSocket.h */; };
-		D8BA3BA41416C4C70076037F /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BA3BA21416C4C70076037F /* AsyncUdpSocket.m */; };
+		D8BA3BA41416C4C70076037F /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BA3BA21416C4C70076037F /* AsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
