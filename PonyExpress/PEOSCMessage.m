@@ -58,16 +58,15 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 @implementation NSData(PEAdditions)
 - (NSData*)oscBlob {
     // int32 length + 8bit bytes with 0-3 nulls in termination
-    NSUInteger numberOfNulls = 4 - (self.length & 3);
-    NSUInteger paddedLength = self.length + numberOfNulls;
-    SInt32 swappedPaddedLength = [[NSNumber numberWithUnsignedInteger:paddedLength] oscInt];
+    SInt32 swappedLength = [[NSNumber numberWithUnsignedInteger:self.length] oscInt];
 
     NSMutableData* data = [NSMutableData data];
-    [data appendBytes:&swappedPaddedLength length:4];
+    [data appendBytes:&swappedLength length:4];
     [data appendData:self];
 
-    char nullBytes[4];
-    memset(nullBytes, 0, 4);
+    NSUInteger numberOfNulls = 4 - (self.length & 3);
+    char nullBytes[numberOfNulls];
+    memset(nullBytes, 0, numberOfNulls);
     [data appendBytes:nullBytes length:numberOfNulls];
 
     return data;
@@ -269,7 +268,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
             [argumentData appendData:[[argument oscString] dataUsingEncoding:NSASCIIStringEncoding]];
         } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
             [argumentData appendData:[argument oscBlob]];
-            CCWarningLog(@"WARNING - serialization for the Blob type, is untested");
+            CCWarningLog(@"WARNING - serialization for the Blob type is untested");
         } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
 //            uint64_t swappedValue = CFSwapInt64HostToBig();
             CCWarningLog(@"WARNING - cannot serialize Timetag type, not yet supported");
