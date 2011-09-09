@@ -22,7 +22,7 @@
 extern NSString* const PEOSCMessageTypeTagInteger; // NSNumber
 extern NSString* const PEOSCMessageTypeTagFloat; // NSNumber
 extern NSString* const PEOSCMessageTypeTagString; // NSString (ASCII)
-extern NSString* const PEOSCMessageTypeTagBlob; // NSData - UNTESTED
+extern NSString* const PEOSCMessageTypeTagBlob; // NSData
 extern NSString* const PEOSCMessageTypeTagTrue; // ARG-LESS
 extern NSString* const PEOSCMessageTypeTagFalse; // ARG-LESS
 extern NSString* const PEOSCMessageTypeTagNull; // ARG-LESS

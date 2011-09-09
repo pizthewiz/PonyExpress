@@ -298,7 +298,6 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
             [argumentData appendData:[[argument oscString] dataUsingEncoding:NSASCIIStringEncoding]];
         } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
             [argumentData appendData:[argument oscBlob]];
-            CCWarningLog(@"WARNING - serialization for the Blob type is untested");
         } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
 //            uint64_t swappedValue = CFSwapInt64HostToBig();
             CCWarningLog(@"WARNING - cannot serialize Timetag type, not yet supported");
