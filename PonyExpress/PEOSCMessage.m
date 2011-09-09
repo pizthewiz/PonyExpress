@@ -104,6 +104,30 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     return status;
 }
 
++ (NSString*)displayNameForType:(NSString*)type {
+    NSString* name = nil;
+    // TODO - move to strings file
+    if ([type isEqualToString:PEOSCMessageTypeTagInteger])
+        name = @"Integer";
+    else if ([type isEqualToString:PEOSCMessageTypeTagFloat])
+        name = @"Float";
+    else if ([type isEqualToString:PEOSCMessageTypeTagString])
+        name = @"String";
+    else if ([type isEqualToString:PEOSCMessageTypeTagBlob])
+        name = @"Blob";
+    else if ([type isEqualToString:PEOSCMessageTypeTagTrue])
+        name = @"True";
+    else if ([type isEqualToString:PEOSCMessageTypeTagFalse])
+        name = @"False";
+    else if ([type isEqualToString:PEOSCMessageTypeTagNull])
+        name = @"Null";
+    else if ([type isEqualToString:PEOSCMessageTypeTagImpulse])
+        name = @"Impulse";
+    else if ([type isEqualToString:PEOSCMessageTypeTagTimetag])
+        name = @"Timetag";
+    return name;
+}
+
 #pragma mark -
 
 - (NSString*)description {
