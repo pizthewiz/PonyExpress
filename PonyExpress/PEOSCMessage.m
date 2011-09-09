@@ -27,6 +27,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 @end
 @implementation NSString(PEAdditions)
 - (NSString*)oscString {
+    // string + 1 null in termination + 0-3 nulls in padding for 4-byte alignment
     NSUInteger numberOfNulls = 4 - (self.length & 3);
     return [self stringByPaddingToLength:self.length+numberOfNulls withString:@"\0" startingAtIndex:0];
 }
@@ -57,17 +58,17 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 @end
 @implementation NSData(PEAdditions)
 - (NSData*)oscBlob {
-    // int32 length + 8bit bytes with 0-3 nulls in termination
+    // int32 length + 8bit bytes + 0-3 nulls in padding for 4-byte alignment
     SInt32 swappedLength = [[NSNumber numberWithUnsignedInteger:self.length] oscInt];
 
     NSMutableData* data = [NSMutableData data];
     [data appendBytes:&swappedLength length:4];
     [data appendData:self];
 
-    NSUInteger numberOfNulls = 4 - (self.length & 3);
-    char nullBytes[numberOfNulls];
-    memset(nullBytes, 0, numberOfNulls);
-    [data appendBytes:nullBytes length:numberOfNulls];
+    NSUInteger numberOfPaddingNulls = (4 - (self.length % 4)) % 4;
+    char nullBytes[numberOfPaddingNulls];
+    memset(nullBytes, 0, numberOfPaddingNulls);
+    [data appendBytes:nullBytes length:numberOfPaddingNulls];
 
     return data;
 }
