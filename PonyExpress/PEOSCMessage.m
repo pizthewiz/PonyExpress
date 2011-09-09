@@ -109,10 +109,15 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 - (NSString*)description {
     NSMutableString* argDescription = [NSMutableString string];
     [self.arguments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if (idx == 0 || idx+1 > self.arguments.count)
-            [argDescription appendString:[NSString stringWithFormat:@"%@", [obj description]]];
-        else
-            [argDescription appendString:[NSString stringWithFormat:@", %@", [obj description]]];            
+        BOOL isFirstOrLastArg = idx == 0 || idx+1 > self.arguments.count;
+        NSString* description = nil;
+        if ([obj isKindOfClass:[NSData class]] && [(NSData*)obj length] > 4 * 1024) {
+            description = @"<BINARY DATA TOO LARGE TO PRINT>";
+        } else {
+            description = [obj description];
+        }
+
+        [argDescription appendString:[NSString stringWithFormat:@"%@%@", (isFirstOrLastArg ? @"" : @", "), description]];
     }];
     return [NSString stringWithFormat:@"<%@: %@ %@ [%@]>", NSStringFromClass([self class]), self.address, [self _typeTagString], argDescription];
 }
@@ -282,7 +287,9 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     [data appendData:argumentData];
 
 #ifdef DEBUG
-    [self _printDataBuffer:data];
+    // only dump the buffer when less than 4k
+    if (data.length < 4 * 1024)
+        [self _printDataBuffer:data];
 #endif
 
     return data;
