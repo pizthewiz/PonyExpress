@@ -19,6 +19,7 @@ int main (int argc, const char * argv[]) {
         NSLog(@"%@", message);
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"0.0.0.0" port:7777];
         NSLog(@"%@", sender);
+        [sender connect];
         [sender sendMessage:message];
 
         [[NSRunLoop currentRunLoop] run];

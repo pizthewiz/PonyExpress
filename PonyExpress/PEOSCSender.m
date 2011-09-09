@@ -16,13 +16,14 @@
 @property (nonatomic, readwrite, strong) NSString* host;
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) AsyncUdpSocket* socket;
-- (BOOL)_setupSocket;
-- (BOOL)_tearDownSocket;
+@property (nonatomic, readwrite, getter = isConnected) BOOL connected;
+- (void)_setupSocket;
+- (void)_tearDownSocket;
 @end
 
 @implementation PEOSCSender
 
-@synthesize socket, host, port;
+@synthesize socket, host, port, connected;
 
 + (id)senderWithHost:(NSString*)host port:(UInt16)port {
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
@@ -52,7 +53,36 @@
 
 #pragma mark -
 
+- (BOOL)connect {
+    if (self.isConnected)
+        return NO;
+
+    NSError* error = nil;
+    BOOL status = [self.socket connectToHost:self.host onPort:self.port error:&error];
+    if (!status) {
+        CCErrorLog(@"ERROR - failed to connect to host: %@:%d - %@", self.host, self.port, [error localizedDescription]);
+        return NO;
+    }
+
+    self.connected = YES;
+    return self.isConnected;
+}
+
+- (BOOL)disconnect {
+    if (!self.isConnected)
+        return NO;
+    [self.socket close];
+
+    self.connected = NO;
+    return !self.isConnected;
+}
+
 - (void)sendMessage:(PEOSCMessage*)message {
+    if (!self.isConnected) {
+        CCErrorLog(@"ERROR - cannot send message when disconnected");
+        return;
+    }
+
     NSData* messageData = [message _data];
     if (!messageData) {
         CCErrorLog(@"ERROR - failed to send message: %@", message);
@@ -81,24 +111,13 @@
 
 #pragma mark - PRIVATE
  
- - (BOOL)_setupSocket {
+ - (void)_setupSocket {
      AsyncUdpSocket* soc = [[AsyncUdpSocket alloc] initWithDelegate:self];
      self.socket = soc;
-
-     NSError* error = nil;
-     BOOL status = [self.socket connectToHost:self.host onPort:self.port error:&error];
-     if (!status) {
-         CCErrorLog(@"ERROR - failed to connect to host: %@:%d - %@", self.host, self.port, [error localizedDescription]);
-         return NO;
-     }
-
-     return YES;
 }
 
-- (BOOL)_tearDownSocket {
-    [self.socket close];
-
-    return YES;
+- (void)_tearDownSocket {
+    self.socket = nil;
 }
 
 @end

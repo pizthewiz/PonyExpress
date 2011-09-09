@@ -15,7 +15,8 @@ MESSAGE
 SENDER
 [X] create UDP connection
 [X] tear down UDP connection on dealloc
-[ ] consider adding a means to connect/disconnect
+[X] consider adding a means to connect/disconnect
+[ ] allow host and port changes when disconnected
 
 RECEIVER
 …
