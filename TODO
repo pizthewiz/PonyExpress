@@ -9,17 +9,20 @@ MESSAGE
 [ ] add more complete valadity checking for address via NSRegularExpression
 [X] add cool debug method to dump bytes and ascii
 [ ] make debug buffer dump multi-line and byte-gap configurable
-[ ] test Blob serialization
+[X] test Blob serialization
 [ ] implement Timetag
 
 SENDER
 [X] create UDP connection
 [X] tear down UDP connection on dealloc
 [X] consider adding a means to connect/disconnect
-[ ] allow host and port changes when disconnected
+[X] allow host and port changes when disconnected
+  sockets cannot be reconnected
+[ ] rename to denote as UDP
+[ ] document 9k UDP limit and Blob use
 
 RECEIVER
-…
+[ ] create one
 
 TESTS
 [ ] add tests for message data generation
@@ -37,3 +40,4 @@ LATER
 [ ] consider a PEOSCValue class to wrap boxing
 [ ] add socket management layer to allow sharing
 [ ] static library option for iOS
+[ ] add TCP and Serial sender/receiver classes
