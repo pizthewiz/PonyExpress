@@ -106,7 +106,8 @@
 }
 
 - (void)onUdpSocket:(AsyncUdpSocket*)sock didNotSendDataWithTag:(long)tag dueToError:(NSError*)error {
-    CCDebugLogSelector();
+    CCErrorLog(@"ERROR - failed to send data to host %@:%d due to %@", self.host, self.port, [error localizedDescription]);
+//    CCErrorLog(@" socket MTU: %d", [self.socket maximumTransmissionUnit]);
 }
 
 #pragma mark - PRIVATE
