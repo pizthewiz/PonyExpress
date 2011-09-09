@@ -130,15 +130,15 @@
 }
 
 - (void)testTypesForArguments {
-    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagInteger], @"should report the Integer type as requiring an argument ");
-    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagFloat], @"should report the Float type as requiring an argument ");
-    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagString], @"should report the String type as requiring an argument ");
-    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagBlob], @"should report the Blob type as requiring an argument ");
-    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagTrue], @"should report the True type as requiring an argument ");
-    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagFalse], @"should report the False type as requiring an argument ");
-    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagNull], @"should report the Null type as requiring an argument ");
-    STAssertFalse([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagImpulse], @"should report the Impulse type as requiring an argument ");    
-    STAssertTrue([PEOSCMessage typeRequiresArgument:PEOSCMessageTypeTagTimetag], @"should report the Timetag type as requiring an argument ");    
+    STAssertTrue([PEOSCMessage argumentRequiredByType:PEOSCMessageTypeTagInteger], @"should report the Integer type as requiring an argument ");
+    STAssertTrue([PEOSCMessage argumentRequiredByType:PEOSCMessageTypeTagFloat], @"should report the Float type as requiring an argument ");
+    STAssertTrue([PEOSCMessage argumentRequiredByType:PEOSCMessageTypeTagString], @"should report the String type as requiring an argument ");
+    STAssertTrue([PEOSCMessage argumentRequiredByType:PEOSCMessageTypeTagBlob], @"should report the Blob type as requiring an argument ");
+    STAssertFalse([PEOSCMessage argumentRequiredByType:PEOSCMessageTypeTagTrue], @"should report the True type as requiring an argument ");
+    STAssertFalse([PEOSCMessage argumentRequiredByType:PEOSCMessageTypeTagFalse], @"should report the False type as requiring an argument ");
+    STAssertFalse([PEOSCMessage argumentRequiredByType:PEOSCMessageTypeTagNull], @"should report the Null type as requiring an argument ");
+    STAssertFalse([PEOSCMessage argumentRequiredByType:PEOSCMessageTypeTagImpulse], @"should report the Impulse type as requiring an argument ");    
+    STAssertTrue([PEOSCMessage argumentRequiredByType:PEOSCMessageTypeTagTimetag], @"should report the Timetag type as requiring an argument ");    
 }
 
 - (void)testArgumentValidity {
@@ -159,7 +159,7 @@
 - (void)testDataEnumerator {
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:self.legitAddress typeTags:self.allTypes arguments:self.allArgs];
     [message enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
-        if ([PEOSCMessage typeRequiresArgument:type])
+        if ([PEOSCMessage argumentRequiredByType:type])
             STAssertNotNil(argument, @"should provide argument for type %@", type);
         else
             STAssertNil(argument, @"should NOT provide argument for type %@", type);

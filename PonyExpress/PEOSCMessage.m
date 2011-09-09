@@ -97,7 +97,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
 #pragma mark -
 
-+ (BOOL)typeRequiresArgument:(NSString*)type {
++ (BOOL)argumentRequiredByType:(NSString*)type {
     BOOL status = YES;
     if ([type isEqualToString:PEOSCMessageTypeTagTrue] || [type isEqualToString:PEOSCMessageTypeTagFalse] || [type isEqualToString:PEOSCMessageTypeTagNull] || [type isEqualToString:PEOSCMessageTypeTagImpulse])
         status = NO;
@@ -150,7 +150,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     BOOL stop = NO;
     NSUInteger argIndex = 0;
     for (NSString* type in self.typeTags) {
-        id argument = [PEOSCMessage typeRequiresArgument:type] ? [self.arguments objectAtIndex:argIndex++] : nil;
+        id argument = [PEOSCMessage argumentRequiredByType:type] ? [self.arguments objectAtIndex:argIndex++] : nil;
         block(type, argument, &stop);
         if (!stop)
             continue;
@@ -173,7 +173,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     // check proper number of arguments
     NSUInteger numberOfArguments = 0;
     for (NSString* type in self.typeTags) {
-        if (![PEOSCMessage typeRequiresArgument:type])
+        if (![PEOSCMessage argumentRequiredByType:type])
             continue;
         numberOfArguments++;
     }
@@ -182,7 +182,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
     __block BOOL status = YES;
     [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
-        if ([PEOSCMessage typeRequiresArgument:type]) {
+        if ([PEOSCMessage argumentRequiredByType:type]) {
             if (([type isEqualToString:PEOSCMessageTypeTagInteger] || [type isEqualToString:PEOSCMessageTypeTagFloat]) && ![argument isKindOfClass:[NSNumber class]]) {
                 CCDebugLog(@"Integer and Float arguments should be represented via NSNumber");
                 status = NO;
@@ -286,7 +286,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     // TODO - it would be nice to have a value class that can serialize then create a message from address and values
     __block NSMutableData* argumentData = [NSMutableData data];
     [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
-        if (![[self class] typeRequiresArgument:type])
+        if (![[self class] argumentRequiredByType:type])
             return;
         if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
             SInt32 swappedValue = [argument oscInt];
