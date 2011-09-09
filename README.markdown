@@ -3,8 +3,8 @@
 a small foundation framework to facilitate OSC communication on Mac OS X 10.7
 
 ### GENERAL
-- OSC 1.0 over UDP with support for most of the 1.1 data types: Integer, Float, String, Blob, True, False, Null and Impulse
-- Integer and Float arguments are defined in NSNumbers and String as an NSString
+- OSC 1.1 over UDP with support for most 1.1 data types: Integer, Float, String, Blob, True, False, Null and Impulse
+- Integer and Float arguments are defined in NSNumbers, String as an NSString and Blob as NSData
 - the hostname can be an IPv4 or IPv6 IP address a symbolic hostname like _localhost_, ZeroConf hostname like _one-eyed-jacks.local._ or domain name like _audrey.horne.dk_
 
 ### THANKS
