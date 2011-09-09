@@ -71,7 +71,10 @@
 - (BOOL)disconnect {
     if (!self.isConnected)
         return NO;
-    [self.socket close];
+    [self.socket closeAfterSending];
+
+    // sender is probably going to be dumped, perhaps if AsyncUdpSocket had a weak reference to its delegate…
+    self.socket.delegate = nil;
 
     self.connected = NO;
     return !self.isConnected;
