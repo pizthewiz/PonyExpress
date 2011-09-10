@@ -11,6 +11,7 @@ MESSAGE
 [ ] make debug buffer dump multi-line and byte-gap configurable
 [X] test Blob serialization
 [ ] implement Timetag
+[ ] do a better job with NSData allocation and writing in -_data
 
 SENDER
 [X] create UDP connection
