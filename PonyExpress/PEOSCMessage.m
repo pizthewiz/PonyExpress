@@ -65,7 +65,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     [data appendBytes:&swappedLength length:4];
     [data appendData:self];
 
-    NSUInteger numberOfPaddingNulls = (4 - (self.length % 4)) % 4;
+    NSUInteger numberOfPaddingNulls = (4 - (self.length & 3)) & 3;
     char nullBytes[numberOfPaddingNulls];
     memset(nullBytes, 0, numberOfPaddingNulls);
     [data appendBytes:nullBytes length:numberOfPaddingNulls];
