@@ -11,7 +11,7 @@
 		D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B751411528100CB1258 /* SenTestingKit.framework */; };
 		D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5C1411528100CB1258 /* PonyExpress.framework */; };
 		D83E1B801411528100CB1258 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D83E1B7E1411528100CB1258 /* InfoPlist.strings */; };
-		D83E1B831411528100CB1258 /* PonyExpressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B821411528100CB1258 /* PonyExpressTests.m */; };
+		D83E1B831411528100CB1258 /* PonyExpressSenderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B821411528100CB1258 /* PonyExpressSenderTests.m */; };
 		D83E1B98141190B000CB1258 /* PEOSCSender.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B96141190B000CB1258 /* PEOSCSender.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D83E1B99141190B000CB1258 /* PEOSCSender.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B97141190B000CB1258 /* PEOSCSender.m */; };
 		D83E1B9A141190B000CB1258 /* PEOSCSender.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B97141190B000CB1258 /* PEOSCSender.m */; };
@@ -76,8 +76,8 @@
 		D83E1B751411528100CB1258 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		D83E1B7D1411528100CB1258 /* PonyExpressTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpressTests-Info.plist"; sourceTree = "<group>"; };
 		D83E1B7F1411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D83E1B811411528100CB1258 /* PonyExpressTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressTests.h; sourceTree = "<group>"; };
-		D83E1B821411528100CB1258 /* PonyExpressTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PonyExpressTests.m; sourceTree = "<group>"; };
+		D83E1B811411528100CB1258 /* PonyExpressSenderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressSenderTests.h; sourceTree = "<group>"; };
+		D83E1B821411528100CB1258 /* PonyExpressSenderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PonyExpressSenderTests.m; sourceTree = "<group>"; };
 		D83E1B8C1411737B00CB1258 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
 		D83E1B8D1411737B00CB1258 /* NOTES */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES; sourceTree = SOURCE_ROOT; };
 		D83E1B8E1411737B00CB1258 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
@@ -204,10 +204,10 @@
 		D83E1B7B1411528100CB1258 /* PonyExpressTests */ = {
 			isa = PBXGroup;
 			children = (
-				D83E1B811411528100CB1258 /* PonyExpressTests.h */,
-				D83E1B821411528100CB1258 /* PonyExpressTests.m */,
 				D84ED0711417FC9C00AD4737 /* PonyExpressMessageTests.h */,
 				D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */,
+				D83E1B811411528100CB1258 /* PonyExpressSenderTests.h */,
+				D83E1B821411528100CB1258 /* PonyExpressSenderTests.m */,
 				D83E1B7C1411528100CB1258 /* Supporting Files */,
 			);
 			path = PonyExpressTests;
@@ -403,7 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D83E1B831411528100CB1258 /* PonyExpressTests.m in Sources */,
+				D83E1B831411528100CB1258 /* PonyExpressSenderTests.m in Sources */,
 				D83E1B9A141190B000CB1258 /* PEOSCSender.m in Sources */,
 				D83E1BA314119A2C00CB1258 /* PEOSCMessage.m in Sources */,
 				D84ED0731417FC9C00AD4737 /* PonyExpressMessageTests.m in Sources */,

@@ -1,17 +1,17 @@
 //
-//  PonyExpressTests.m
-//  PonyExpressTests
+//  PonyExpressSenderTests.m
+//  PonyExpressSenderTests
 //
 //  Created by Jean-Pierre Mouilleseaux on 2 Sept 2011.
 //  Copyright (c) 2011 Chorded Constructions. All rights reserved.
 //
 
-#import "PonyExpressTests.h"
+#import "PonyExpressSenderTests.h"
 #import "PEOSCMessage.h"
 #import "PEOSCMessage-Private.h"
 #import "PEOSCSender.h"
 
-@implementation PonyExpressTests
+@implementation PonyExpressSenderTests
 
 - (void)setUp {
     [super setUp];
