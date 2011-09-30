@@ -33,6 +33,7 @@
 		D8C53D371436795700C8CF3E /* PEOSCReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C53D351436795700C8CF3E /* PEOSCReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8C53D381436795700C8CF3E /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
 		D8C53D391436795700C8CF3E /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
+		D8C53D4114367AEC00C8CF3E /* PonyEpressReceiverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,8 @@
 		D8BA3BA21416C4C70076037F /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncUdpSocket.m; path = vendor/CocoaAsyncSocket/RunLoop/AsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
 		D8C53D351436795700C8CF3E /* PEOSCReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCReceiver.h; sourceTree = "<group>"; };
 		D8C53D361436795700C8CF3E /* PEOSCReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCReceiver.m; sourceTree = "<group>"; };
+		D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonyEpressReceiverTests.h; sourceTree = "<group>"; };
+		D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonyEpressReceiverTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +211,8 @@
 				D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */,
 				D83E1B811411528100CB1258 /* PonyExpressSenderTests.h */,
 				D83E1B821411528100CB1258 /* PonyExpressSenderTests.m */,
+				D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */,
+				D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */,
 				D83E1B7C1411528100CB1258 /* Supporting Files */,
 			);
 			path = PonyExpressTests;
@@ -408,6 +413,7 @@
 				D83E1BA314119A2C00CB1258 /* PEOSCMessage.m in Sources */,
 				D84ED0731417FC9C00AD4737 /* PonyExpressMessageTests.m in Sources */,
 				D8C53D391436795700C8CF3E /* PEOSCReceiver.m in Sources */,
+				D8C53D4114367AEC00C8CF3E /* PonyEpressReceiverTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
