@@ -161,8 +161,78 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 #pragma mark - PRIVATE
 
 - (BOOL)_isAddressValid {
-    // TODO - beef up via NSRegularExpression -- check for balanced [] and {}
-    return self.address && [[self.address substringToIndex:1] isEqualToString:@"/"];
+    BOOL status = YES;
+
+    // check for leading / and lack of spaces
+    NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^/(\\S*)$" options:NSRegularExpressionCaseInsensitive error:NULL];
+    NSUInteger matches = [reg numberOfMatchesInString:self.address options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, [self.address length])];
+    status = matches == 1;
+
+    // check more involved stuff
+    if (status) {
+        NSArray* components = [self.address componentsSeparatedByString:@"/"];
+        for (NSString* component in components) {
+            NSUInteger length = component.length;
+            unichar buffer[length + 1];
+            [component getCharacters:buffer range:NSMakeRange(0, length)];
+
+            NSUInteger curleyBraceStack = 0;
+            NSUInteger bracketStack = 0;
+            for (NSUInteger idx = 0; idx < length; idx++) {
+                unichar c = buffer[idx];
+                if (c == '{') {
+                    // disallow nested lists or ranges
+                    if (curleyBraceStack != 0 || bracketStack != 0) {
+                        status = NO;
+                        goto bail;
+                    }
+                    curleyBraceStack++;
+                } else if (c == '}') {
+                    if (curleyBraceStack < 1) {
+                        status = NO;
+                        goto bail;
+                    }
+                    curleyBraceStack--;
+                } else if (c == ',') {
+                    // disallow comma except within list
+                    if (curleyBraceStack < 1) {
+                        status = NO;
+                        goto bail;
+                    }
+                }
+
+                else if (c == '[') {
+                    // disallow nested lists or ranges
+                    if (curleyBraceStack != 0 || bracketStack != 0) {
+                        status = NO;
+                        goto bail;
+                    }
+                    bracketStack++;
+                } else if (c == ']') {
+                    if (bracketStack < 1) {
+                        status = NO;
+                        goto bail;
+                    }
+                    bracketStack--;
+                } else if (c == '-') {
+                    // disallow dash except in range
+                    if (bracketStack < 1) {
+                        status = NO;
+                        goto bail;
+                    }
+                }
+            }
+
+            // check for balance
+            if (curleyBraceStack != 0 || bracketStack != 0) {
+                status = NO;
+                goto bail;
+            }
+        }
+    }
+
+bail:
+    return status;
 }
 
 - (BOOL)_areTypeTagsValid {

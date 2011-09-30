@@ -93,22 +93,31 @@
     STAssertFalse([message _isAddressValid], @"should disallow spaces");
 
     message.address = @"/oscillator/3,9/frequency";
-    STAssertFalse([message _isAddressValid], @"should disallow comma when not in curly braces");
+    STAssertFalse([message _isAddressValid], @"should disallow comma when not in curly brace list");
+
+    message.address = @"/oscillator/op-1/frequency";
+    STAssertFalse([message _isAddressValid], @"should disallow dash when not in bracket range");
 
     message.address = @"/oscillator/{3-9}/frequency";
-    STAssertFalse([message _isAddressValid], @"should not allow minus within curly braces");
+    STAssertFalse([message _isAddressValid], @"should not allow dash within curly brace list");
 
     message.address = @"/oscillator/{3,9/frequency";
-    STAssertFalse([message _isAddressValid], @"should require closing curly brace");
+    STAssertFalse([message _isAddressValid], @"should require closing curly brace in list");
 
     message.address = @"/oscillator/[3,9]/frequency";
-    STAssertFalse([message _isAddressValid], @"should not allow comma in square bracket");
+    STAssertFalse([message _isAddressValid], @"should not allow comma in square bracket range");
 
     message.address = @"/oscillator/[3-9/frequency";
-    STAssertFalse([message _isAddressValid], @"should require closing square bracket");
+    STAssertFalse([message _isAddressValid], @"should require closing square bracket in range");
 
     message.address = @"/oscillator/{[3-9],13}/frequency";
-    STAssertFalse([message _isAddressValid], @"should not allow square bracket range within curly braces");
+    STAssertFalse([message _isAddressValid], @"should not allow nested range within list");
+
+    message.address = @"/oscillator/{{3,4},13}/frequency";
+    STAssertFalse([message _isAddressValid], @"should not allow nested lists");
+
+    message.address = @"/oscillator/[[3-4]-13]/frequency";
+    STAssertFalse([message _isAddressValid], @"should not allow nested ranges");
 }
 
 - (void)testTypeTagStringCorrectnessAndValidity {

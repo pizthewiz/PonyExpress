@@ -6,7 +6,7 @@ GENERAL
 MESSAGE
 [ ] add initializers with vararg
 [X] add param/arg enumerator that takes a block
-[ ] add more complete valadity checking for address via NSRegularExpression
+[X] add more complete valadity checking for address via NSRegularExpression
 [X] add cool debug method to dump bytes and ascii
 [ ] make debug buffer dump multi-line and byte-gap configurable
 [X] test Blob serialization
