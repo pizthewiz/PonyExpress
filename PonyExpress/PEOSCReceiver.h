@@ -11,4 +11,8 @@
 @class PEOSCMessage;
 
 @interface PEOSCReceiver : NSObject
++ (id)receiverWithPort:(UInt16)port;
+- (id)initWithPort:(UInt16)port;
+
+@property (nonatomic, readonly) UInt16 port;
 @end

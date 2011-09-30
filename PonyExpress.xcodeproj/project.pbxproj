@@ -397,9 +397,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D83E1B99141190B000CB1258 /* PEOSCSender.m in Sources */,
 				D83E1BA214119A2C00CB1258 /* PEOSCMessage.m in Sources */,
 				D8BA3BA41416C4C70076037F /* AsyncUdpSocket.m in Sources */,
+				D83E1B99141190B000CB1258 /* PEOSCSender.m in Sources */,
 				D8C53D381436795700C8CF3E /* PEOSCReceiver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,11 +408,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D83E1B831411528100CB1258 /* PonyExpressSenderTests.m in Sources */,
-				D83E1B9A141190B000CB1258 /* PEOSCSender.m in Sources */,
 				D83E1BA314119A2C00CB1258 /* PEOSCMessage.m in Sources */,
-				D84ED0731417FC9C00AD4737 /* PonyExpressMessageTests.m in Sources */,
+				D83E1B9A141190B000CB1258 /* PEOSCSender.m in Sources */,
 				D8C53D391436795700C8CF3E /* PEOSCReceiver.m in Sources */,
+				D84ED0731417FC9C00AD4737 /* PonyExpressMessageTests.m in Sources */,
+				D83E1B831411528100CB1258 /* PonyExpressSenderTests.m in Sources */,
 				D8C53D4114367AEC00C8CF3E /* PonyEpressReceiverTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
