@@ -12,6 +12,7 @@ MESSAGE
 [X] test Blob serialization
 [ ] implement Timetag
 [ ] do a better job with NSData allocation and writing in -_data
+[ ] sort out bundles
 
 SENDER
 [X] create UDP connection

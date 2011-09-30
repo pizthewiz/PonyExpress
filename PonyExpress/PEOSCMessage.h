@@ -30,6 +30,7 @@ extern NSString* const PEOSCMessageTypeTagImpulse; // ARG-LESS
 extern NSString* const PEOSCMessageTypeTagTimetag; // {uint32_t, uint32_t} - UNSUPPORTED
 
 @interface PEOSCMessage : NSObject
+// arg-less types should not include anything in the arguments array
 + (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
 - (id)initWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
 
@@ -40,5 +41,6 @@ extern NSString* const PEOSCMessageTypeTagTimetag; // {uint32_t, uint32_t} - UNS
 + (BOOL)argumentRequiredByType:(NSString*)type;
 + (NSString*)displayNameForType:(NSString*)type;
 
+// arg-less types provide a nil argument
 - (void)enumerateTypesAndArgumentsUsingBlock:(void (^)(id type, id argument, BOOL* stop))block;
 @end
