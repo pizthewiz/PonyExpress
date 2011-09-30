@@ -8,3 +8,4 @@
 
 #import <PonyExpress/PEOSCMessage.h>
 #import <PonyExpress/PEOSCSender.h>
+#import <PonyExpress/PEOSCReceiver.h>
