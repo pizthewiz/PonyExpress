@@ -22,9 +22,12 @@ SENDER
   sockets cannot be reconnected
 [ ] rename to denote as UDP
 [ ] document 9k UDP limit and Blob use
+[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect
 
 RECEIVER
-[ ] create one
+[X] create UDP connection
+[ ] implement receiver delegation protocol
+[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect
 
 TESTS
 [ ] add tests for message data generation

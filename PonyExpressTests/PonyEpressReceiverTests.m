@@ -34,24 +34,47 @@
     STAssertNotNil(receiver, @"should provide alloc/init initializer");
 }
 
-- (void)testPortStorage {
+- (void)testPortAssignment {
     UInt16 goodPort = 8000;
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:goodPort];
     STAssertEquals(goodPort, receiver.port, @"should store port");
 }
 
-- (void)testPrivledgedPort {
-    UInt16 badPort = 80;
-    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:badPort];
-    STAssertNil(receiver, @"should not create receiver with privledged port");
-    // TODO - probably cannot test until connect
+- (void)testConnectionFlow {
+    UInt16 goodPort = 8000;
+    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:goodPort];
+    BOOL status = [receiver connect];
+    STAssertTrue(status, @"should report successful connection");
+    STAssertTrue(receiver.isConnected, @"should report as connected");
+    // double connection
+    status = [receiver connect];
+    STAssertFalse(status, @"should report unsuccessful connection");
+    STAssertTrue(receiver.isConnected, @"should report as connected");
+    // disconnect
+    status = [receiver disconnect];
+    STAssertTrue(status, @"should report successful disconnection");
+    STAssertFalse(receiver.isConnected, @"should report as disconnected");
+    // double disconnect
+    status = [receiver disconnect];
+    STAssertFalse(status, @"should report unsuccessful disconnection");
+    STAssertFalse(receiver.isConnected, @"should report as disconnected");
 }
 
-- (void)testPortInUse {
-    UInt16 inUsePort = 8888;
+- (void)testConnectingToAPrivledgedPort {
+    UInt16 badPort = 80;
+    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:badPort];
+    BOOL status = [receiver connect];
+    STAssertFalse(status, @"should report unsuccessful connection");
+    STAssertFalse(receiver.isConnected, @"should report as disconnected");
+}
+
+- (void)testConnectingToAPortInUse {
+    // TODO - need to somehow spin up something on port 9999
+    UInt16 inUsePort = 9999;
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:inUsePort];
-    STAssertNil(receiver, @"should not create receiver on in use port");
-    // TODO - probably cannot test until connect
+    BOOL status = [receiver connect];
+    STAssertFalse(status, @"should report unsuccessful connection");
+    STAssertFalse(receiver.isConnected, @"should report as disconnected");
 }
 
 @end

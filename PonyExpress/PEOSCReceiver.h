@@ -15,4 +15,8 @@
 - (id)initWithPort:(UInt16)port;
 
 @property (nonatomic, readonly) UInt16 port;
+@property (nonatomic, readonly, getter = isConnected) BOOL connected;
+
+- (BOOL)connect;
+- (BOOL)disconnect;
 @end

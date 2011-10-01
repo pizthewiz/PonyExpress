@@ -23,7 +23,7 @@
 
 @implementation PEOSCSender
 
-@synthesize socket, host, port, connected;
+@synthesize host, port, socket, connected;
 
 + (id)senderWithHost:(NSString*)host port:(UInt16)port {
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
@@ -71,7 +71,8 @@
 - (BOOL)disconnect {
     if (!self.isConnected)
         return NO;
-    [self.socket closeAfterSending];
+
+    [self.socket close];
 
     // sender is probably going to be dumped, perhaps if AsyncUdpSocket had a weak reference to its delegate…
     self.socket.delegate = nil;
@@ -100,10 +101,6 @@
 
 #pragma mark - SOCKET DELEGATE
 
-- (void)onUdpSocketDidClose:(AsyncUdpSocket*)sock {
-    CCDebugLogSelector();
-}
-
 - (void)onUdpSocket:(AsyncUdpSocket*)sock didSendDataWithTag:(long)tag {
     CCDebugLogSelector();
 }
@@ -111,6 +108,10 @@
 - (void)onUdpSocket:(AsyncUdpSocket*)sock didNotSendDataWithTag:(long)tag dueToError:(NSError*)error {
     CCErrorLog(@"ERROR - failed to send data to host %@:%d due to %@", self.host, self.port, [error localizedDescription]);
 //    CCErrorLog(@" socket MTU: %d", [self.socket maximumTransmissionUnit]);
+}
+
+- (void)onUdpSocketDidClose:(AsyncUdpSocket*)sock {
+    CCDebugLogSelector();
 }
 
 #pragma mark - PRIVATE
