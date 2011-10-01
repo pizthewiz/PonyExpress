@@ -165,6 +165,56 @@ static NSUInteger readString(const char* buffer, NSUInteger start, NSUInteger le
     return name;
 }
 
++ (NSString*)_codeForType:(NSString*)type {
+    NSString* code = nil;
+    if ([type isEqualToString:PEOSCMessageTypeTagInteger])
+        code = @"i";
+    else if ([type isEqualToString:PEOSCMessageTypeTagFloat])
+        code = @"f";
+    else if ([type isEqualToString:PEOSCMessageTypeTagString])
+        code = @"s";
+    else if ([type isEqualToString:PEOSCMessageTypeTagBlob])
+        code = @"b";
+    else if ([type isEqualToString:PEOSCMessageTypeTagTrue])
+        code = @"T";
+    else if ([type isEqualToString:PEOSCMessageTypeTagFalse])
+        code = @"F";
+    else if ([type isEqualToString:PEOSCMessageTypeTagNull])
+        code = @"N";
+    else if ([type isEqualToString:PEOSCMessageTypeTagImpulse])
+        code = @"I";
+    else if ([type isEqualToString:PEOSCMessageTypeTagTimetag])
+        code = @"t";
+    else
+        CCDebugLog(@"unrecognized type %@", type);
+    return code;
+}
+
++ (NSString*)_typeForCode:(NSString*)code {
+    NSString* type = nil;
+    if ([code isEqualToString:@"i"])
+        type = PEOSCMessageTypeTagInteger;
+    else if ([code isEqualToString:@"f"])
+        type = PEOSCMessageTypeTagFloat;
+    else if ([code isEqualToString:@"s"])
+        type = PEOSCMessageTypeTagString;
+    else if ([code isEqualToString:@"b"])
+        type = PEOSCMessageTypeTagBlob;
+    else if ([code isEqualToString:@"T"])
+        type = PEOSCMessageTypeTagTrue;
+    else if ([code isEqualToString:@"F"])
+        type = PEOSCMessageTypeTagFalse;
+    else if ([code isEqualToString:@"N"])
+        type = PEOSCMessageTypeTagNull;
+    else if ([code isEqualToString:@"I"])
+        type = PEOSCMessageTypeTagImpulse;
+    else if ([code isEqualToString:@"t"])
+        type = PEOSCMessageTypeTagTimetag;
+    else
+        CCDebugLog(@"unrecognized code %@", code);
+    return type;
+}
+
 #pragma mark -
 
 - (NSString*)description {
@@ -322,26 +372,10 @@ bail:
         if (![obj isKindOfClass:[NSString class]]) {
             string = nil;
             *stop = YES;
+        } else {
+            NSString* code = [[self class] _codeForType:obj];
+            [string appendString:code];
         }
-
-        else if ([obj isEqualToString:PEOSCMessageTypeTagInteger])
-            [string appendString:@"i"];
-        else if ([obj isEqualToString:PEOSCMessageTypeTagFloat])
-            [string appendString:@"f"];
-        else if ([obj isEqualToString:PEOSCMessageTypeTagString])
-            [string appendString:@"s"];
-        else if ([obj isEqualToString:PEOSCMessageTypeTagBlob])
-            [string appendString:@"b"];
-        else if ([obj isEqualToString:PEOSCMessageTypeTagTrue])
-            [string appendString:@"T"];
-        else if ([obj isEqualToString:PEOSCMessageTypeTagFalse])
-            [string appendString:@"F"];
-        else if ([obj isEqualToString:PEOSCMessageTypeTagNull])
-            [string appendString:@"N"];
-        else if ([obj isEqualToString:PEOSCMessageTypeTagImpulse])
-            [string appendString:@"I"];
-        else if ([obj isEqualToString:PEOSCMessageTypeTagTimetag])
-            [string appendString:@"t"];
     }];
     return string;
 }

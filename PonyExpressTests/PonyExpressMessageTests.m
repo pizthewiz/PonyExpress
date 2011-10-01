@@ -208,15 +208,15 @@
 }
 
 - (void)testGoodMessageGeneration {
-    PEOSCMessage* m = [[PEOSCMessage alloc] initWithAddress:self.legitAddress typeTags:self.legitTypes arguments:self.legitArgs];
-    NSData* data = [m _data];
+    PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:self.legitAddress typeTags:self.legitTypes arguments:self.legitArgs];
+    NSData* data = [message _data];
     STAssertNotNil(data, @"should generate valid data");
     // TODO - compare to expected length?
 }
 
 - (void)testBadMessageGeneration {
-    PEOSCMessage* m = [[PEOSCMessage alloc] initWithAddress:self.badAddress typeTags:self.legitTypes arguments:self.legitArgs];
-    NSData* data = [m _data];
+    PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:self.badAddress typeTags:self.legitTypes arguments:self.legitArgs];
+    NSData* data = [message _data];
     STAssertNil(data, @"should not generate data for bad message");
 }
 
