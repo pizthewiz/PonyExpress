@@ -77,4 +77,6 @@
     STAssertFalse(receiver.isConnected, @"should report as disconnected");
 }
 
+// TODO - functional test receiver
+
 @end

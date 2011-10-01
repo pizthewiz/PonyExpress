@@ -36,6 +36,8 @@ TESTS
 [ ] test sender with bad host
 [ ] test two senders on the same host/port
 [ ] test send with bad message data
+[ ] functional test for sender
+[ ] functional test for receiver
 
 MISC
 [ ] sample router? ?*[!-]{,}//

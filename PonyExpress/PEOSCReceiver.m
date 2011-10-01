@@ -55,6 +55,8 @@
         CCErrorLog(@"ERROR - failed to bind to port %d with error %@", self.port, [error localizedDescription]);
     }
 
+    [self.socket receiveWithTimeout:-1 tag:0];
+
     self.connected = status;
     return self.isConnected;
 }
@@ -76,7 +78,12 @@
 
 - (BOOL)onUdpSocket:(AsyncUdpSocket*)sock didReceiveData:(NSData*)data withTag:(long)tag fromHost:(NSString*)host port:(UInt16)port {
     CCDebugLogSelector();
-    return NO;
+
+    // TODO - make an PEOSCMessage from data
+
+    [self.socket receiveWithTimeout:-1 tag:0];
+
+    return YES;
 }
 
 - (void)onUdpSocket:(AsyncUdpSocket*)sock didNotReceiveDataWithTag:(long)tag dueToError:(NSError*)error {
@@ -92,6 +99,7 @@
 -(void)_setupSocket {
     AsyncUdpSocket* soc = [[AsyncUdpSocket alloc] initWithDelegate:self];
     self.socket = soc;
+    [self.socket setRunLoopModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
 }
 
 - (void)_tearDownSocket {
