@@ -9,6 +9,8 @@
 #import "PEOSCMessage.h"
 
 @interface PEOSCMessage()
++ (id)messageWithData:(NSData*)data;
+- (id)initWithData:(NSData*)data;
 - (BOOL)_isAddressValid;
 - (BOOL)_areTypeTagsValid;
 - (BOOL)_areArgumentsValidGivenTypeTags;

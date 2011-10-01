@@ -26,15 +26,16 @@ SENDER
 
 RECEIVER
 [X] create UDP connection
+[ ] generate message from received data
 [ ] implement receiver delegation protocol
 [ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect
 
 TESTS
-[ ] add tests for message data generation
+[ ] add tests for message argument data generation
 [ ] test Blob serialization
 [ ] test sender with privledged port, < 1024
 [ ] test sender with bad host
-[ ] test two senders on the same host/port
+[ ] test sender on port in use
 [ ] test send with bad message data
 [ ] functional test for sender
 [ ] functional test for receiver

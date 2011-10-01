@@ -13,12 +13,15 @@
 @interface PonyExpressMessageTests()
 @property (nonatomic, strong) NSArray* allTypes;
 @property (nonatomic, strong) NSArray* allArgs;
+@property (nonatomic, strong) NSArray* legitTypes;
+@property (nonatomic, strong) NSArray* legitArgs;
 @property (nonatomic, strong) NSString* legitAddress;
+@property (nonatomic, strong) NSString* badAddress;
 @end
 
 @implementation PonyExpressMessageTests
 
-@synthesize allTypes, allArgs, legitAddress;
+@synthesize allTypes, allArgs, legitTypes, legitArgs, legitAddress, badAddress;
 
 - (void)setUp {
     [super setUp];
@@ -26,7 +29,12 @@
     self.allTypes = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, PEOSCMessageTypeTagTimetag, nil];
     // TODO - set proper NTP TIME when available
     self.allArgs = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], [NSNumber numberWithFloat:(100./3.)], @"STRING", [NSData data], @"NTPTIME-UNIMPLEMENTED", nil];
+
+    self.legitTypes = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, nil];
+    self.legitArgs = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], [NSNumber numberWithFloat:(100./3.)], @"STRING", [NSData data], nil];
+
     self.legitAddress = @"/oscillator/3/frequency";
+    self.badAddress = @"bad/address";
 }
 
 - (void)tearDown {
@@ -45,6 +53,22 @@
 - (void)testInstanceMethodCreation {
     PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:@"/oscillator/3/configuration" typeTags:self.allTypes arguments:self.allArgs];
     STAssertNotNil(message, @"should provide a non-nil message");
+}
+
+- (void)testCreationFromData {
+    PEOSCMessage* m = [[PEOSCMessage alloc] initWithAddress:self.legitAddress typeTags:self.legitTypes arguments:self.legitArgs];
+    NSData* data = [m _data];
+
+    PEOSCMessage* message = [PEOSCMessage messageWithData:data];
+    STAssertNotNil(message, @"should create message from valid data");
+    STAssertEqualObjects(message.address, m.address, @"should restore address");
+    STAssertEqualObjects(message.typeTags, m.typeTags, @"should restore type tags");
+    STAssertEqualObjects(message.arguments, m.arguments, @"should restore arguments");
+}
+
+- (void)testCreationFromBadData {
+    PEOSCMessage* message = [PEOSCMessage messageWithData:[NSData data]];
+    STAssertNil(message, @"should create message from valid data");
 }
 
 - (void)testCreationArguments {
@@ -181,6 +205,19 @@
         iterations++;
     }];
     STAssertTrue(iterations == 5, @"should allow enumeration to be stopped");
+}
+
+- (void)testGoodMessageGeneration {
+    PEOSCMessage* m = [[PEOSCMessage alloc] initWithAddress:self.legitAddress typeTags:self.legitTypes arguments:self.legitArgs];
+    NSData* data = [m _data];
+    STAssertNotNil(data, @"should generate valid data");
+    // TODO - compare to expected length?
+}
+
+- (void)testBadMessageGeneration {
+    PEOSCMessage* m = [[PEOSCMessage alloc] initWithAddress:self.badAddress typeTags:self.legitTypes arguments:self.legitArgs];
+    NSData* data = [m _data];
+    STAssertNil(data, @"should not generate data for bad message");
 }
 
 @end

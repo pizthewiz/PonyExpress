@@ -74,6 +74,14 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 @end
 
+static NSUInteger readString(const char* buffer, NSUInteger start, NSUInteger length) {
+    NSUInteger end = start;
+    while (end < length && buffer[end] != 0x00) {
+        end++;
+    }
+    return end;
+}
+
 #pragma mark - PEOSCMESSAGE
 
 @implementation PEOSCMessage
@@ -91,6 +99,35 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
         self.address = add;
         self.typeTags = typ;
         self.arguments = arg;
+    }
+    return self;
+}
+
++ (id)messageWithData:(NSData*)data {
+    id message = [[PEOSCMessage alloc] initWithData:data];
+    return message;
+}
+
+- (id)initWithData:(NSData*)data {
+    self = [super init];
+    if (self) {
+        const char* buffer = [data bytes];
+        NSUInteger length = [data length];
+        NSUInteger start = 0;
+
+        NSUInteger end = readString(buffer, start, length);
+        NSRange range = NSMakeRange(start, end);
+        NSString* addressString = [[NSString alloc] initWithData:[data subdataWithRange:range] encoding:NSASCIIStringEncoding];
+        start += addressString.length + 4 - (addressString.length & 3);
+        // TODO - validate
+        self.address = addressString;
+
+        end = readString(buffer, start, length);
+        range = NSMakeRange(start, end-start);
+        NSString* typeTagString = [[NSString alloc] initWithData:[data subdataWithRange:range] encoding:NSASCIIStringEncoding];
+        start += typeTagString.length + 4 - (typeTagString.length & 3);
+        CCDebugLog(@"typeTagString: %@", typeTagString);
+        // TODO - parse types and validate
     }
     return self;
 }

@@ -16,8 +16,8 @@
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) AsyncUdpSocket* socket;
 @property (nonatomic, readwrite, getter = isConnected) BOOL connected;
--(void)_setupSocket;
--(void)_tearDownSocket;
+- (void)_setupSocket;
+- (void)_tearDownSocket;
 @end
 
 @implementation PEOSCReceiver
@@ -79,7 +79,9 @@
 - (BOOL)onUdpSocket:(AsyncUdpSocket*)sock didReceiveData:(NSData*)data withTag:(long)tag fromHost:(NSString*)host port:(UInt16)port {
     CCDebugLogSelector();
 
-    // TODO - make an PEOSCMessage from data
+    PEOSCMessage* message = [PEOSCMessage messageWithData:data];
+    CCDebugLog(@"received message: %@", message);
+    // TODO - send message to delegate
 
     [self.socket receiveWithTimeout:-1 tag:0];
 
@@ -96,7 +98,7 @@
 
 #pragma mark - PRIVATE
 
--(void)_setupSocket {
+- (void)_setupSocket {
     AsyncUdpSocket* soc = [[AsyncUdpSocket alloc] initWithDelegate:self];
     self.socket = soc;
     [self.socket setRunLoopModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
