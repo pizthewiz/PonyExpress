@@ -13,6 +13,7 @@ MESSAGE
 [ ] implement Timetag
 [ ] do a better job with NSData allocation and writing in -_data
 [ ] sort out bundles
+[ ] take a stance on unrecognized type tags
 
 SENDER
 [X] create UDP connection
@@ -26,7 +27,7 @@ SENDER
 
 RECEIVER
 [X] create UDP connection
-[ ] generate message from received data
+[X] generate message from received data
 [ ] implement receiver delegation protocol
 [ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect
 

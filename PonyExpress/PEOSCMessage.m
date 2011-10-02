@@ -74,12 +74,30 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 @end
 
-static NSUInteger readString(const char* buffer, NSUInteger start, NSUInteger length) {
+static NSString* readString(NSData* data, NSUInteger start, NSUInteger length) {
+    const char* buffer = [data bytes];
     NSUInteger end = start;
     while (end < length && buffer[end] != 0x00) {
         end++;
     }
-    return end;
+
+    NSRange range = NSMakeRange(start, end-start);
+    NSString* string = [[NSString alloc] initWithData:[data subdataWithRange:range] encoding:NSASCIIStringEncoding];
+    return string;
+}
+
+static SInt32 readInteger(NSData* data, NSUInteger start) {
+    void* b[4];
+    [data getBytes:&b range:NSMakeRange(start, 4)];
+    SInt32 value = CFSwapInt32BigToHost(*(uint32_t*)b);
+    return value;
+}
+
+static Float32 readFloat(NSData* data, NSUInteger start) {
+    void* b[4];
+    [data getBytes:&b range:NSMakeRange(start, 4)];
+    Float32 value = CFConvertFloat32SwappedToHost(*(CFSwappedFloat32*)b);
+    return value;
 }
 
 #pragma mark - PEOSCMESSAGE
@@ -111,28 +129,73 @@ static NSUInteger readString(const char* buffer, NSUInteger start, NSUInteger le
 - (id)initWithData:(NSData*)data {
     self = [super init];
     if (self) {
-        const char* buffer = [data bytes];
         NSUInteger length = [data length];
         NSUInteger start = 0;
 
-        NSUInteger end = readString(buffer, start, length);
-        NSRange range = NSMakeRange(start, end);
-        NSString* addressString = [[NSString alloc] initWithData:[data subdataWithRange:range] encoding:NSASCIIStringEncoding];
-        start += addressString.length + 4 - (addressString.length & 3);
+        // address
+        NSString* addressString = readString(data, start, length);
         // TODO - validate
         self.address = addressString;
 
-        end = readString(buffer, start, length);
-        range = NSMakeRange(start, end-start);
-        NSString* typeTagString = [[NSString alloc] initWithData:[data subdataWithRange:range] encoding:NSASCIIStringEncoding];
-        start += typeTagString.length + 4 - (typeTagString.length & 3);
+
+        // type tags
+        start += addressString.length + 4 - (addressString.length & 3);
+        NSString* typeTagString = readString(data, start, length);
         CCDebugLog(@"typeTagString: %@", typeTagString);
-        // TODO - parse types and validate
+
+        // NB - this is probably too aggressive
+        NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^,([ifsbTFNI]+)$" options:0 error:NULL];
+        NSUInteger matches = [reg numberOfMatchesInString:typeTagString options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, typeTagString.length)];
+        if (matches == 0) {
+            // BAIL
+        }
+        NSMutableArray* list = [NSMutableArray array];
+        for (NSUInteger idx = 1; idx < typeTagString.length; idx++) {
+            NSString* code = [typeTagString substringWithRange:NSMakeRange(idx, 1)];
+            if (!code) {
+                // BAIL?
+            }
+            [list addObject:[[self class] _typeForCode:code]];
+        }
+        self.typeTags = list;
+
+
+        // arguments
+        start += typeTagString.length + 4 - (typeTagString.length & 3);
+        list = [NSMutableArray array];
+        for (NSString* type in self.typeTags) {
+            if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
+                SInt32 value = readInteger(data, start);
+                [list addObject:[NSNumber numberWithInt:value]];
+                start += 4;
+            } else if ([type isEqualToString:PEOSCMessageTypeTagFloat]) {
+                Float32 value = readFloat(data, start);
+                [list addObject:[NSNumber numberWithFloat:value]];
+                start += 4;
+            } else if ([type isEqualToString:PEOSCMessageTypeTagString]) {
+                NSString* string = readString(data, start, length);
+                [list addObject:string];
+                start += string.length + 4 - (string.length & 3);
+            } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
+                SInt32 blobLength = readInteger(data, start);
+                start += 4;
+                NSData* d = [data subdataWithRange:NSMakeRange(start, blobLength)];
+                [list addObject:d];
+                start += d.length + 4 - (d.length & 3);
+            }
+//            else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
+//            }
+            else {
+                CCDebugLog(@"unrecognized type %@", type);
+                // BAIL?
+            }
+        }
+        self.arguments = list;
     }
     return self;
 }
 
-#pragma mark -
+#pragma mark - TYPES
 
 + (BOOL)argumentRequiredByType:(NSString*)type {
     BOOL status = YES;
@@ -252,7 +315,7 @@ static NSUInteger readString(const char* buffer, NSUInteger start, NSUInteger le
 
     // check for leading / and lack of spaces
     NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^/(\\S*)$" options:NSRegularExpressionCaseInsensitive error:NULL];
-    NSUInteger matches = [reg numberOfMatchesInString:self.address options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, [self.address length])];
+    NSUInteger matches = [reg numberOfMatchesInString:self.address options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, self.address.length)];
     status = matches == 1;
 
     // check more involved stuff
