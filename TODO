@@ -28,7 +28,7 @@ SENDER
 RECEIVER
 [X] create UDP connection
 [X] generate message from received data
-[ ] implement receiver delegation protocol
+[X] implement receiver delegation protocol
 [ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect
 
 TESTS

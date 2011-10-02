@@ -10,12 +10,17 @@
 
 @class PEOSCMessage;
 
+@protocol PEOSCReceiverDelegate
+- (void)didReceiveMessage:(PEOSCMessage*)message;
+@end
+
 @interface PEOSCReceiver : NSObject
 + (id)receiverWithPort:(UInt16)port;
 - (id)initWithPort:(UInt16)port;
 
 @property (nonatomic, readonly) UInt16 port;
 @property (nonatomic, readonly, getter = isConnected) BOOL connected;
+@property (nonatomic, weak) id <PEOSCReceiverDelegate> delegate;
 
 - (BOOL)connect;
 - (BOOL)disconnect;

@@ -77,6 +77,15 @@
     STAssertFalse(receiver.isConnected, @"should report as disconnected");
 }
 
+/*
+- (void)testDelegateAssignment {
+    UInt16 goodPort = 8000;
+    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:goodPort];
+    receiver.delegate = self;
+    STAssertEqualObjects(receiver.delegate, self, @"should");
+}
+*/
+
 // TODO - functional test receiver
 
 @end

@@ -141,7 +141,6 @@ static Float32 readFloat(NSData* data, NSUInteger start) {
         // type tags
         start += addressString.length + 4 - (addressString.length & 3);
         NSString* typeTagString = readString(data, start, length);
-        CCDebugLog(@"typeTagString: %@", typeTagString);
 
         // NB - this is probably too aggressive
         NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^,([ifsbTFNI]+)$" options:0 error:NULL];
@@ -164,6 +163,9 @@ static Float32 readFloat(NSData* data, NSUInteger start) {
         start += typeTagString.length + 4 - (typeTagString.length & 3);
         list = [NSMutableArray array];
         for (NSString* type in self.typeTags) {
+            if (![[self class] argumentRequiredByType:type])
+                continue;
+
             if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
                 SInt32 value = readInteger(data, start);
                 [list addObject:[NSNumber numberWithInt:value]];

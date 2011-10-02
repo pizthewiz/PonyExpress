@@ -22,7 +22,7 @@
 
 @implementation PEOSCReceiver
 
-@synthesize port, socket, connected;
+@synthesize port, socket, connected, delegate;
 
 + (id)receiverWithPort:(UInt16)port {
     PEOSCReceiver* receiver = [[PEOSCReceiver alloc] initWithPort:port];
@@ -80,12 +80,10 @@
     CCDebugLogSelector();
 
     PEOSCMessage* message = [PEOSCMessage messageWithData:data];
-    CCDebugLog(@"received message: %@", message);
-    // TODO - send message to delegate
+    [self.delegate didReceiveMessage:message];
 
     [self.socket receiveWithTimeout:-1 tag:0];
-
-    return YES;
+    return message != nil;
 }
 
 - (void)onUdpSocket:(AsyncUdpSocket*)sock didNotReceiveDataWithTag:(long)tag dueToError:(NSError*)error {
