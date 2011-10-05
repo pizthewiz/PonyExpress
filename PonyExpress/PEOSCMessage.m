@@ -147,13 +147,13 @@ static Float32 readFloat(NSData* data, NSUInteger start) {
         NSUInteger matches = [reg numberOfMatchesInString:typeTagString options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, typeTagString.length)];
         if (matches == 0) {
             // BAIL
+            return nil;
         }
         NSMutableArray* list = [NSMutableArray array];
         for (NSUInteger idx = 1; idx < typeTagString.length; idx++) {
             NSString* code = [typeTagString substringWithRange:NSMakeRange(idx, 1)];
-            if (!code) {
-                // BAIL?
-            }
+            if (!code)
+                continue;
             [list addObject:[[self class] _typeForCode:code]];
         }
         self.typeTags = list;
@@ -189,7 +189,8 @@ static Float32 readFloat(NSData* data, NSUInteger start) {
 //            }
             else {
                 CCDebugLog(@"unrecognized type %@", type);
-                // BAIL?
+                // BAIL
+                return nil;
             }
         }
         self.arguments = list;

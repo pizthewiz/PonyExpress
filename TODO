@@ -23,23 +23,23 @@ SENDER
   sockets cannot be reconnected
 [ ] rename to denote as UDP
 [ ] document 9k UDP limit and Blob use
-[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect
+[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways
 
 RECEIVER
 [X] create UDP connection
 [X] generate message from received data
 [X] implement receiver delegation protocol
-[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect
+[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways
 
 TESTS
-[ ] add tests for message argument data generation
-[ ] test Blob serialization
-[ ] test sender with privledged port, < 1024
+[ ] test message argument serialization
 [ ] test sender with bad host
+[ ] test sender with privledged port, < 1024
 [ ] test sender on port in use
 [ ] test send with bad message data
-[ ] functional test for sender
-[ ] functional test for receiver
+[ ] functional tests for sender
+[ ] functional tests for receiver
+[ ] look into OCMock for more testing
 
 MISC
 [ ] sample router? ?*[!-]{,}//
