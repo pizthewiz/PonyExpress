@@ -103,6 +103,8 @@
 }
 
 - (void)_tearDownSocket {
+    [self disconnect];
+
     self.socket = nil;
 }
 
