@@ -45,6 +45,12 @@
 
 #pragma mark -
 
+- (NSString*)description {
+    return [NSString stringWithFormat:@"<%@: INADDR_ANY:%d>", NSStringFromClass([self class]), self.port];
+}
+
+#pragma mark -
+
 - (BOOL)connect {
     if (self.isConnected)
         return NO;
