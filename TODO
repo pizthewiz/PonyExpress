@@ -37,11 +37,14 @@ TESTS
 [ ] test message argument serialization
 [ ] test message argument deserialization
 [ ] test sender with bad host
-[ ] test sender/receiver with privledged port, < 1024
-[ ] test sender/receiver on port in use
-[ ] test send/receive with bad message data
+[ ] test sender with privledged port, < 1024
+[ ] test sender on port in use
+[X] test receiver with privledged port, < 1024
+[X] test receiver on port in use
 [ ] functional tests for sender
 [ ] functional tests for receiver
+[ ] test send bad message data
+[ ] test receive bad message data
 
 MISC
 [ ] sample router? ?*[!-]{,}//

@@ -46,6 +46,13 @@
     STAssertEquals(self.unprivledgedPort, receiver.port, @"should store port");
 }
 
+- (void)testDelegateAssignment {
+    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
+    id mockDelegate = [OCMockObject mockForProtocol:@protocol(PEOSCReceiverDelegate)];
+    receiver.delegate = mockDelegate;
+    STAssertEqualObjects(mockDelegate, receiver.delegate, @"should assign proper delegate");
+}
+
 - (void)testConnectionFlow {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
     BOOL status = [receiver connect];
@@ -65,28 +72,46 @@
     STAssertFalse(receiver.isConnected, @"should report as disconnected");
 }
 
-- (void)testConnectingToAPrivledgedPort {
+- (void)testConnectionOnAPrivledgedPort {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.privledgedPort];
     BOOL status = [receiver connect];
     STAssertFalse(status, @"should report unsuccessful connection");
     STAssertFalse(receiver.isConnected, @"should report as disconnected");
-}
 
-- (void)testDelegateAssignment {
-    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
-    id mockDelegate = [OCMockObject mockForProtocol:@protocol(PEOSCReceiverDelegate)];
-    receiver.delegate = mockDelegate;
-    STAssertEqualObjects(mockDelegate, receiver.delegate, @"should assign proper delegate");
-}
-
-/*
-- (void)testListeningToAPortInUse {
-    UInt16 inUsePort = 9999;
-    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:inUsePort];
-    BOOL status = [receiver connect];
-    STAssertFalse(status, @"should report unsuccessful connection");
+    status = [receiver disconnect];
+    STAssertFalse(status, @"should report unsuccessful disconnection");
     STAssertFalse(receiver.isConnected, @"should report as disconnected");
 }
-*/
+
+- (void)testConnectionOnAnUnprivledgedPort {
+    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
+    BOOL status = [receiver connect];
+    STAssertTrue(status, @"should report successful connection");
+    STAssertTrue(receiver.isConnected, @"should report as connected");
+
+    status = [receiver disconnect];
+    STAssertTrue(status, @"should report successful disconnection");
+    STAssertFalse(receiver.isConnected, @"should report as disconnected");
+}
+
+- (void)testConnectionOnAPortInUse {
+    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
+    BOOL status = [receiver connect];
+    STAssertTrue(status, @"should report successful connection");
+    STAssertTrue(receiver.isConnected, @"should report as connected");
+
+    PEOSCReceiver* otherReceiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
+    status = [otherReceiver connect];
+    STAssertFalse(status, @"should report unsuccessful connection");
+    STAssertFalse(receiver.isConnected, @"should report as disconnected");
+
+    // disconnect first
+    [receiver disconnect];
+
+    // connect second
+    status = [otherReceiver connect];
+    STAssertTrue(status, @"should report successful connection");
+    STAssertTrue(receiver.isConnected, @"should report as connected");
+}
 
 @end
