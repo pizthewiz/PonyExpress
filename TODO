@@ -36,15 +36,15 @@ TESTS
 [X] look into OCMock for more testing
 [ ] test message argument serialization
 [ ] test message argument deserialization
-[ ] test sender with bad host
-[ ] test sender with privledged port, < 1024
-[ ] test sender on port in use
+[~] test sender with bad host
+[X] test sender with privledged port, < 1024
+[X] test sender on port in use
 [X] test receiver with privledged port, < 1024
-[X] test receiver on port in use
-[ ] functional tests for sender
-[ ] functional tests for receiver
+[~] test receiver on port in use
 [ ] test send bad message data
 [ ] test receive bad message data
+[ ] functional tests for sender
+[ ] functional tests for receiver
 
 MISC
 [ ] sample router? ?*[!-]{,}//

@@ -46,12 +46,16 @@
     STAssertEquals(self.unprivledgedPort, receiver.port, @"should store port");
 }
 
+/*
 - (void)testDelegateAssignment {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
     id mockDelegate = [OCMockObject mockForProtocol:@protocol(PEOSCReceiverDelegate)];
     receiver.delegate = mockDelegate;
     STAssertEqualObjects(mockDelegate, receiver.delegate, @"should assign proper delegate");
 }
+*/
+
+#pragma mark - CONNECTION
 
 - (void)testConnectionFlow {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
@@ -111,7 +115,7 @@
     // connect second
     status = [otherReceiver connect];
     STAssertTrue(status, @"should report successful connection");
-    STAssertTrue(receiver.isConnected, @"should report as connected");
+    STAssertTrue(otherReceiver.isConnected, @"should report as connected");
 }
 
 @end

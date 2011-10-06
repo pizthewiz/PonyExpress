@@ -11,41 +11,107 @@
 #import "PEOSCMessage-Private.h"
 #import "PEOSCSender.h"
 
+@interface PonyExpressSenderTests()
+@property (nonatomic, retain) NSString* loopbackHost;
+@property (nonatomic) UInt16 unprivledgedPort;
+@property (nonatomic) UInt16 privledgedPort;
+@end
+
 @implementation PonyExpressSenderTests
+
+@synthesize loopbackHost, unprivledgedPort, privledgedPort;
 
 - (void)setUp {
     [super setUp];
 
-    // Set-up code here.
+    self.loopbackHost = @"127.0.0.1";
+
+    self.privledgedPort = 80;
+    self.unprivledgedPort = 31337;
 }
 
 - (void)tearDown {
     // Tear-down code here.
-    
+
     [super tearDown];
 }
 
 #pragma mark - SENDER
 
-- (void)testSenderClassMethodCreation {
-    NSString* host = @"apple.com";
-    UInt16 port = 80;
-    PEOSCSender* sender = [PEOSCSender senderWithHost:host port:port];
+- (void)testCreation {
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+    STAssertNotNil(sender, @"should provide instance from class initializer");
 
-    STAssertNotNil(sender, @"+senderWithHost:port: should provide a non-nil sender");
-
-    STAssertEqualObjects(host, sender.host, @"+senderWithHost:port: should store proper host");
-    STAssertEquals(port, sender.port, @"+senderWithHost:port: should store proper port");
+    sender = [[PEOSCSender alloc] initWithHost:self.loopbackHost port:self.unprivledgedPort];
+    STAssertNotNil(sender, @"should provide instance from default initializer");
 }
 
-- (void)testSenderInstanceMethodCreation {
-    NSString* host = @"apple.com";
-    UInt16 port = 80;
-    PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
+- (void)testHostAndPortAssignment {
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+    STAssertEqualObjects(self.loopbackHost, sender.host, @"should store proper host");
+    STAssertEquals(self.unprivledgedPort, sender.port, @"should store port");
+}
 
-    STAssertNotNil(sender, @"-initWithHost:port: should provide a non-nil sender");
-    STAssertEqualObjects(host, sender.host, @"-initWithHost:port: should store proper host");
-    STAssertEquals(port, sender.port, @"-initWithHost:port: should store proper port");
+#pragma mark - CONNECTION
+
+- (void)testConnectionToBadHost {
+    PEOSCSender* sender = [PEOSCSender senderWithHost:@"log lady" port:self.unprivledgedPort];
+    BOOL status = [sender connect];
+    STAssertFalse(status, @"should report unsuccessful connection");
+    STAssertFalse(sender.isConnected, @"should report as disconnected");
+}
+
+- (void)testConnectionFlow {
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+    BOOL status = [sender connect];
+    STAssertTrue(status, @"should report successful connection");
+    STAssertTrue(sender.isConnected, @"should report as connected");
+    // double connection
+    status = [sender connect];
+    STAssertFalse(status, @"should report unsuccessful connection");
+    STAssertTrue(sender.isConnected, @"should report as connected");
+    // disconnect
+    status = [sender disconnect];
+    STAssertTrue(status, @"should report successful disconnection");
+    STAssertFalse(sender.isConnected, @"should report as disconnected");
+    // double disconnect
+    status = [sender disconnect];
+    STAssertFalse(status, @"should report unsuccessful disconnection");
+    STAssertFalse(sender.isConnected, @"should report as disconnected");
+}
+
+- (void)testConnectionOnAPrivledgedPort {
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.privledgedPort];
+    BOOL status = [sender connect];
+    STAssertTrue(status, @"should report successful connection");
+    STAssertTrue(sender.isConnected, @"should report as connected");
+
+    status = [sender disconnect];
+    STAssertTrue(status, @"should report successful disconnection");
+    STAssertFalse(sender.isConnected, @"should report as disconnected");
+}
+
+- (void)testConnectionOnAnUnprivledgedPort {
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+    BOOL status = [sender connect];
+    STAssertTrue(status, @"should report successful connection");
+    STAssertTrue(sender.isConnected, @"should report as connected");
+
+    status = [sender disconnect];
+    STAssertTrue(status, @"should report successful disconnection");
+    STAssertFalse(sender.isConnected, @"should report as disconnected");
+}
+
+- (void)testConnectionOnAPortInUse {
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+    BOOL status = [sender connect];
+    STAssertTrue(status, @"should report successful connection");
+    STAssertTrue(sender.isConnected, @"should report as connected");
+
+    PEOSCSender* otherSender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+    status = [otherSender connect];
+    STAssertTrue(status, @"should report unsuccessful connection");
+    STAssertTrue(sender.isConnected, @"should report as disconnected");
 }
 
 @end

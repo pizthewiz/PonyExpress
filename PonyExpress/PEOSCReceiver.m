@@ -71,10 +71,10 @@
     if (!self.isConnected)
         return NO;
 
-    [self.socket close];
-
     // receiver is probably going to be dumped, perhaps if AsyncUdpSocket had a weak reference to its delegate…
     self.socket.delegate = nil;
+
+    [self.socket close];
 
     self.connected = NO;
     return !self.isConnected;
