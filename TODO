@@ -13,7 +13,8 @@ MESSAGE
 [ ] implement Timetag
 [ ] do a better job with NSData allocation and writing in -_data
 [ ] sort out bundles
-[ ] take a stance on unrecognized type tags
+[X] take a stance on unrecognized type tags
+  considered an error, i'm not sure how we'd parse the arguments
 
 SENDER
 [X] create UDP connection
@@ -32,14 +33,15 @@ RECEIVER
 [ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways
 
 TESTS
+[ ] look into OCMock for more testing
 [ ] test message argument serialization
+[ ] test message argument deserialization
 [ ] test sender with bad host
-[ ] test sender with privledged port, < 1024
-[ ] test sender on port in use
-[ ] test send with bad message data
+[ ] test sender/receiver with privledged port, < 1024
+[ ] test sender/receiver on port in use
+[ ] test send/receive with bad message data
 [ ] functional tests for sender
 [ ] functional tests for receiver
-[ ] look into OCMock for more testing
 
 MISC
 [ ] sample router? ?*[!-]{,}//

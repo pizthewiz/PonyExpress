@@ -167,28 +167,48 @@ static Float32 readFloat(NSData* data, NSUInteger start) {
                 continue;
 
             if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
+                if (start+4 > length) {
+                    CCErrorLog(@"ERROR - cannot read int from data, out of range");
+                    return nil;
+                }
                 SInt32 value = readInteger(data, start);
                 [list addObject:[NSNumber numberWithInt:value]];
                 start += 4;
             } else if ([type isEqualToString:PEOSCMessageTypeTagFloat]) {
+                if (start+4 > length) {
+                    CCErrorLog(@"ERROR - cannot read float from data, out of range");
+                    return nil;
+                }
                 Float32 value = readFloat(data, start);
                 [list addObject:[NSNumber numberWithFloat:value]];
                 start += 4;
             } else if ([type isEqualToString:PEOSCMessageTypeTagString]) {
                 NSString* string = readString(data, start, length);
+                if (!string) {
+                    CCErrorLog(@"ERROR - failed to read string");
+                    return nil;
+                }
                 [list addObject:string];
                 start += string.length + 4 - (string.length & 3);
             } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
                 SInt32 blobLength = readInteger(data, start);
+                if (start+blobLength > length) {
+                    CCErrorLog(@"ERROR - failed to read data blob, length is out of range");
+                    return nil;
+                }
                 start += 4;
                 NSData* d = [data subdataWithRange:NSMakeRange(start, blobLength)];
+                if (!d) {
+                    CCErrorLog(@"ERROR - failed to read data blob");
+                    return nil;
+                }
                 [list addObject:d];
                 start += d.length + 4 - (d.length & 3);
             }
 //            else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
 //            }
             else {
-                CCDebugLog(@"unrecognized type %@", type);
+                CCDebugLog(@"unrecognized type '%@', bailing", type);
                 // BAIL
                 return nil;
             }
@@ -440,6 +460,10 @@ bail:
             *stop = YES;
         } else {
             NSString* code = [[self class] _codeForType:obj];
+            if (!code) {
+                string = nil;
+                *stop = YES;
+            }
             [string appendString:code];
         }
     }];
