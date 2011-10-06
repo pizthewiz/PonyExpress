@@ -26,12 +26,14 @@
 - (void)setUp {
     [super setUp];
 
+    NSData* stringData = [@"One-Eyed Jacks" dataUsingEncoding:NSASCIIStringEncoding];
+
     self.allTypes = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, PEOSCMessageTypeTagTimetag, nil];
     // TODO - set proper NTP TIME when available
-    self.allArgs = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], [NSNumber numberWithFloat:(100./3.)], @"STRING", [NSData data], [NSDate date], nil];
+    self.allArgs = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], [NSNumber numberWithFloat:(100./3.)], @"STRING", stringData, [NSDate date], nil];
 
     self.workingTypes = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, nil];
-    self.workingArgs = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], [NSNumber numberWithFloat:(100./3.)], @"STRING", [NSData data], nil];
+    self.workingArgs = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], [NSNumber numberWithFloat:(100./3.)], @"STRING", stringData, nil];
 
     self.goodAddress = @"/oscillator/3/frequency";
     self.badAddress = @"bad/address";
@@ -77,8 +79,8 @@
 }
 
 - (void)testCreationFromBadData {
-    PEOSCMessage* message = [PEOSCMessage messageWithData:[NSData data]];
-    STAssertNil(message, @"should create message from valid data");
+    PEOSCMessage* message = [PEOSCMessage messageWithData:[@"Nonsensical" dataUsingEncoding:NSASCIIStringEncoding]];
+    STAssertNil(message, @"should not create message from invalid data");
 }
 
 #pragma mark - ADDRESS
@@ -224,8 +226,13 @@
 
 - (void)testBadMessageGeneration {
     PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:self.badAddress typeTags:self.workingTypes arguments:self.workingArgs];
-    NSData* data = [message _data];
-    STAssertNil(data, @"should not generate data for bad message");
+    STAssertNil([message _data], @"should not generate data for message with bad address");
+
+    message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:[NSArray arrayWithObject:@"Nonsensical"] arguments:self.workingArgs];
+    STAssertNil([message _data], @"should not generate data for message with bad types");
+
+    message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:self.workingTypes arguments:[NSArray arrayWithObject:@"Nonsensical"]];
+    STAssertNil([message _data], @"should not generate data for message with bad arguments");
 }
 
 @end
