@@ -112,6 +112,7 @@
 
 - (void)onUdpSocketDidClose:(AsyncUdpSocket*)sock {
     CCDebugLogSelector();
+    // NB - not likely received as the delegate is removed before we disconnect, might occur in an error condition however
 }
 
 #pragma mark - PRIVATE
