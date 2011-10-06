@@ -28,6 +28,7 @@
 		D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
 		D84ED0731417FC9C00AD4737 /* PonyExpressMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */; };
 		D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */; };
+		D88A20DD143D8F48005C2E76 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88A20D6143D6BCB005C2E76 /* OCMock.framework */; };
 		D8BA3BA31416C4C70076037F /* AsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D8BA3BA11416C4C70076037F /* AsyncUdpSocket.h */; };
 		D8BA3BA41416C4C70076037F /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BA3BA21416C4C70076037F /* AsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D8C53D371436795700C8CF3E /* PEOSCReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C53D351436795700C8CF3E /* PEOSCReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -119,6 +120,7 @@
 			files = (
 				D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */,
 				D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */,
+				D88A20DD143D8F48005C2E76 /* OCMock.framework in Frameworks */,
 				D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,6 +554,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
 				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = /Library/Frameworks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -564,6 +567,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
 				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = /Library/Frameworks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
