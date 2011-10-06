@@ -33,7 +33,7 @@ RECEIVER
 [ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways
 
 TESTS
-[ ] look into OCMock for more testing
+[X] look into OCMock for more testing
 [ ] test message argument serialization
 [ ] test message argument deserialization
 [ ] test sender with bad host

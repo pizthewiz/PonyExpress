@@ -9,12 +9,20 @@
 #import "PonyEpressReceiverTests.h"
 #import "PEOSCReceiver.h"
 
+@interface PonyEpressReceiverTests()
+@property (nonatomic) UInt16 unprivledgedPort;
+@property (nonatomic) UInt16 privledgedPort;
+@end
+
 @implementation PonyEpressReceiverTests
+
+@synthesize unprivledgedPort, privledgedPort;
 
 - (void)setUp {
     [super setUp];
 
-    // Set-up code here.
+    self.privledgedPort = 80;
+    self.unprivledgedPort = 31337;
 }
 
 - (void)tearDown {
@@ -26,23 +34,20 @@
 #pragma mark -
 
 - (void)testCreation {
-    UInt16 port = 31337;
-    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:port];
+    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
     STAssertNotNil(receiver, @"should provide class initializer");
 
-    receiver = [[PEOSCReceiver alloc] initWithPort:port];
+    receiver = [[PEOSCReceiver alloc] initWithPort:self.unprivledgedPort];
     STAssertNotNil(receiver, @"should provide alloc/init initializer");
 }
 
 - (void)testPortAssignment {
-    UInt16 goodPort = 8000;
-    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:goodPort];
-    STAssertEquals(goodPort, receiver.port, @"should store port");
+    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
+    STAssertEquals(self.unprivledgedPort, receiver.port, @"should store port");
 }
 
 - (void)testConnectionFlow {
-    UInt16 goodPort = 8000;
-    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:goodPort];
+    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
     BOOL status = [receiver connect];
     STAssertTrue(status, @"should report successful connection");
     STAssertTrue(receiver.isConnected, @"should report as connected");
@@ -61,31 +66,27 @@
 }
 
 - (void)testConnectingToAPrivledgedPort {
-    UInt16 badPort = 80;
-    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:badPort];
+    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.privledgedPort];
     BOOL status = [receiver connect];
     STAssertFalse(status, @"should report unsuccessful connection");
     STAssertFalse(receiver.isConnected, @"should report as disconnected");
 }
 
-- (void)testConnectingToAPortInUse {
-    // TODO - need to somehow spin up something on port 9999
+- (void)testDelegateAssignment {
+    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
+    id mockDelegate = [OCMockObject mockForProtocol:@protocol(PEOSCReceiverDelegate)];
+    receiver.delegate = mockDelegate;
+    STAssertEqualObjects(mockDelegate, receiver.delegate, @"should assign proper delegate");
+}
+
+/*
+- (void)testListeningToAPortInUse {
     UInt16 inUsePort = 9999;
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:inUsePort];
     BOOL status = [receiver connect];
     STAssertFalse(status, @"should report unsuccessful connection");
     STAssertFalse(receiver.isConnected, @"should report as disconnected");
 }
-
-/*
-- (void)testDelegateAssignment {
-    UInt16 goodPort = 8000;
-    PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:goodPort];
-    receiver.delegate = self;
-    STAssertEqualObjects(receiver.delegate, self, @"should");
-}
 */
-
-// TODO - functional test receiver
 
 @end
