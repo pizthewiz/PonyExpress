@@ -57,6 +57,7 @@
 - (void)testConnectionToBadHost {
     PEOSCSender* sender = [PEOSCSender senderWithHost:@"log lady" port:self.unprivledgedPort];
     BOOL status = [sender connect];
+    // NB - the failure does not occur until send
     STAssertFalse(status, @"should report unsuccessful connection");
     STAssertFalse(sender.isConnected, @"should report as disconnected");
 }
