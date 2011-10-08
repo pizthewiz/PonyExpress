@@ -96,6 +96,7 @@
     STAssertFalse(receiver.isConnected, @"should report as disconnected");
 }
 
+// TODO - multicast vs unicast makes a difference here
 - (void)testConnectionOnAPortInUse {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
     BOOL status = [receiver connect];
