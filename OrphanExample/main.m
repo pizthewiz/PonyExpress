@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <PonyExpress/PonyExpress.h>
 
+@interface ReceiverDelegate : NSObject <PEOSCReceiverDelegate>
+@end
+@implementation ReceiverDelegate
+- (void)didReceiveMessage:(PEOSCMessage*)message {
+    NSLog(@"delegate received: %@", message);
+}
+@end
+
 int main (int argc, const char * argv[]) {
     @autoreleasepool {
         NSArray* typeTags = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, nil];
@@ -17,6 +25,8 @@ int main (int argc, const char * argv[]) {
         NSLog(@"message to send: %@", message);
 
         PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:7777];
+        ReceiverDelegate* del = [[ReceiverDelegate alloc] init];
+        receiver.delegate = del;
         NSLog(@"receiver: %@", receiver);
         [receiver connect];
 
