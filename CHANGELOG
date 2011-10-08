@@ -1,3 +1,7 @@
 
+v0.2.0 (8 Oct 2011)
+* offer OSC message receiver over UDP
+* expand test coverage
+
 v0.1.0 (9 Sept 2011)
 * initial release
