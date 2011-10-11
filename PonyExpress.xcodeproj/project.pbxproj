@@ -97,6 +97,7 @@
 		D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonyExpressMessageTests.m; sourceTree = "<group>"; };
 		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
 		D88A20D6143D6BCB005C2E76 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = ../../../../../../Library/Frameworks/OCMock.framework; sourceTree = "<group>"; };
+		D899B5901443EE2D0059A19F /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = SOURCE_ROOT; };
 		D8BA3BA11416C4C70076037F /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncUdpSocket.h; path = vendor/CocoaAsyncSocket/RunLoop/AsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
 		D8BA3BA21416C4C70076037F /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncUdpSocket.m; path = vendor/CocoaAsyncSocket/RunLoop/AsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
 		D8C53D351436795700C8CF3E /* PEOSCReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCReceiver.h; sourceTree = "<group>"; };
@@ -194,6 +195,7 @@
 				D83E1B8C1411737B00CB1258 /* CHANGELOG */,
 				D83E1B8D1411737B00CB1258 /* NOTES */,
 				D83E1B8F1411737B00CB1258 /* TODO */,
+				D899B5901443EE2D0059A19F /* Rakefile */,
 			);
 			path = PonyExpress;
 			sourceTree = "<group>";
@@ -285,6 +287,7 @@
 				D83E1B571411528100CB1258 /* Sources */,
 				D83E1B581411528100CB1258 /* Frameworks */,
 				D83E1B591411528100CB1258 /* Headers */,
+				D899B5921443EE6E0059A19F /* Update Info.plist With git Info */,
 				D83E1B5A1411528100CB1258 /* Resources */,
 			);
 			buildRules = (
@@ -393,6 +396,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		D899B5921443EE6E0059A19F /* Update Info.plist With git Info */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Info.plist With git Info";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/macrake update_bundle_version\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
