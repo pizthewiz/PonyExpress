@@ -31,6 +31,7 @@ RECEIVER
 [X] generate message from received data
 [X] implement receiver delegation protocol
 [ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways
+[ ] rename to denote as UDP
 
 TESTS
 [X] look into OCMock for more testing
