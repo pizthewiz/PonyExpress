@@ -342,7 +342,7 @@
 		D83E1B521411528000CB1258 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Chorded Constructions";
 			};
 			buildConfigurationList = D83E1B551411528000CB1258 /* Build configuration list for PBXProject "PonyExpress" */;
