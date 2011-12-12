@@ -49,6 +49,7 @@ TESTS
 
 MISC
 [ ] sample router? ?*[!-]{,}//
+[ ] example message snooper
 
 LATER
 [ ] mDNS receiver announcement
