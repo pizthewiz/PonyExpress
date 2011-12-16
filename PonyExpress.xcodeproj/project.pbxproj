@@ -287,6 +287,7 @@
 				D83E1B571411528100CB1258 /* Sources */,
 				D83E1B581411528100CB1258 /* Frameworks */,
 				D83E1B591411528100CB1258 /* Headers */,
+				D8DFE1E8149B144700AB2F75 /* Generate BridgeSupport File */,
 				D899B5921443EE6E0059A19F /* Update Info.plist With git Info */,
 				D83E1B5A1411528100CB1258 /* Resources */,
 			);
@@ -410,6 +411,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/macrake update_bundle_version\n";
+		};
+		D8DFE1E8149B144700AB2F75 /* Generate BridgeSupport File */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate BridgeSupport File";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mkdir -p $TARGET_BUILD_DIR/$PROJECT_NAME.framework/Resources/BridgeSupport/\ngen_bridge_metadata --64-bit -f $TARGET_BUILD_DIR/$PROJECT_NAME.framework/ -o $TARGET_BUILD_DIR/$PROJECT_NAME.framework/Resources/BridgeSupport/$PROJECT_NAME.bridgesupport\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
