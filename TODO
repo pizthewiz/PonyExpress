@@ -57,3 +57,4 @@ LATER
 [ ] add socket management layer to allow sharing
 [ ] static library option for iOS
 [ ] add TCP and Serial sender/receiver classes
+[ ] allow end points to be discovered through query proposal
