@@ -68,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D8166C5614A182FC00C1D44C /* test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = SOURCE_ROOT; };
 		D83E1B5C1411528100CB1258 /* PonyExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PonyExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D83E1B641411528100CB1258 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D83E1B671411528100CB1258 /* PonyExpress-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpress-Info.plist"; sourceTree = "<group>"; };
@@ -220,6 +221,7 @@
 				D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */,
 				D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */,
 				D83E1B7C1411528100CB1258 /* Supporting Files */,
+				D8166C5614A182FC00C1D44C /* test.js */,
 			);
 			path = PonyExpressTests;
 			sourceTree = "<group>";
