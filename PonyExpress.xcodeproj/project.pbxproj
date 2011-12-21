@@ -398,7 +398,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/node test.js $TARGET_BUILD_DIR/$PROJECT_NAME.framework\n";
+			shellScript = "if [ -f /usr/local/bin/node ]; then\n  /usr/local/bin/node test.js $TARGET_BUILD_DIR/$PROJECT_NAME.framework\nelse\n  echo \"WARNING - could not find node, functional tests not run\"\nfi\n";
 		};
 		D83E1B721411528100CB1258 /* Unit Tests */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -426,7 +426,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/macrake update_bundle_version\n";
+			shellScript = "if [ -f /usr/local/bin/macrake ]; then\n  /usr/local/bin/macrake update_bundle_version\nelse\n  echo \"WARNING - could not find macrake, bundle versions left unset\"\nfi\n";
 		};
 		D8DFE1E8149B144700AB2F75 /* Generate BridgeSupport File */ = {
 			isa = PBXShellScriptBuildPhase;

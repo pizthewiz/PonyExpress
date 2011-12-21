@@ -50,7 +50,7 @@ TESTS
 MISC
 [ ] sample router? ?*[!-]{,}//
 [ ] example message snooper
-[ ] conditionalize macruby and node use in Run Script build phases to not blow up if missing
+[X] conditionalize macruby and node use in Run Script build phases to not blow up if missing
 
 LATER
 [ ] mDNS receiver announcement
