@@ -307,7 +307,8 @@
 				D83E1B6F1411528100CB1258 /* Sources */,
 				D83E1B701411528100CB1258 /* Frameworks */,
 				D83E1B711411528100CB1258 /* Resources */,
-				D83E1B721411528100CB1258 /* ShellScript */,
+				D83E1B721411528100CB1258 /* Unit Tests */,
+				D82670E5149C3E8F008043AE /* Functional Tests */,
 			);
 			buildRules = (
 			);
@@ -385,13 +386,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D83E1B721411528100CB1258 /* ShellScript */ = {
+		D82670E5149C3E8F008043AE /* Functional Tests */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Functional Tests";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/node test.js $TARGET_BUILD_DIR/$PROJECT_NAME.framework\n";
+		};
+		D83E1B721411528100CB1258 /* Unit Tests */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Unit Tests";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
