@@ -2,6 +2,7 @@
 GENERAL
 [X] rename classes with OSC in name
 [ ] use omgosc for functional tests
+[ ] investigate using GCDAsyncUdpSocket instead of AsyncUdpSocket
 
 MESSAGE
 [ ] add initializers with vararg
