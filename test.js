@@ -2,11 +2,22 @@
 var $ = require('NodObjC')
   osc = require('omgosc/omgosc.js');
 
+$.import('Foundation');
 var frameworkPath = process.argv[2];
 $.import(frameworkPath);
 
-var pool = $.NSAutoreleasePool('alloc')('init');
 
+// WORKAROUND - https://github.com/TooTallNate/NodObjC/issues/6 support variadic
+function boxArray(array) {
+  var boxedArray = $.NSMutableArray('arrayWithCapacity', array.length);
+  for (var idx = 0; idx < array.length; idx++) {
+    boxedArray('addObject', array[idx]);
+  }
+  return boxedArray;
+}
+
+
+var pool = $.NSAutoreleasePool('alloc')('init');
 
 var receiver = $.PEOSCReceiver('receiverWithPort', 9999);
 
@@ -24,9 +35,7 @@ console.log(status);
 
 var sender = $.PEOSCSender('senderWithHost', $('0.0.0.0'), 'port', 9999);
 
-// TODO - figure out varargs
-// var list = $.NSArray('arrayWithObjects', $('one'), null, $.NSNumber('numberWithInt', 2));
-var types = $.NSArray('arrayWithObject', $.PEOSCMessageTypeTagTrue);
+var types = boxArray([$.PEOSCMessageTypeTagTrue]);
 var message = $.PEOSCMessage('messageWithAddress', $('/oscillator/1/active'), 'typeTags', types, 'arguments', null);
 
 status = sender('connect');
