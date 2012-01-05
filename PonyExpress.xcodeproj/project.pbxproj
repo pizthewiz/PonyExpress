@@ -68,7 +68,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D8166C5614A182FC00C1D44C /* test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = SOURCE_ROOT; };
 		D83E1B5C1411528100CB1258 /* PonyExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PonyExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D83E1B641411528100CB1258 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D83E1B671411528100CB1258 /* PonyExpress-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpress-Info.plist"; sourceTree = "<group>"; };
@@ -105,6 +104,7 @@
 		D8C53D361436795700C8CF3E /* PEOSCReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCReceiver.m; sourceTree = "<group>"; };
 		D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonyEpressReceiverTests.h; sourceTree = "<group>"; };
 		D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonyEpressReceiverTests.m; sourceTree = "<group>"; };
+		D8F8C55914B596F600AAE590 /* receiver.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = receiver.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,8 +220,8 @@
 				D83E1B821411528100CB1258 /* PonyExpressSenderTests.m */,
 				D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */,
 				D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */,
+				D8F8C55814B596F600AAE590 /* Functional Tests */,
 				D83E1B7C1411528100CB1258 /* Supporting Files */,
-				D8166C5614A182FC00C1D44C /* test.js */,
 			);
 			path = PonyExpressTests;
 			sourceTree = "<group>";
@@ -261,6 +261,15 @@
 			);
 			name = AsyncSocket;
 			sourceTree = "<group>";
+		};
+		D8F8C55814B596F600AAE590 /* Functional Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D8F8C55914B596F600AAE590 /* receiver.js */,
+			);
+			name = "Functional Tests";
+			path = test;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -400,7 +409,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f /usr/local/bin/node ]; then\n  /usr/local/bin/node test.js $TARGET_BUILD_DIR/$PROJECT_NAME.framework\nelse\n  echo \"WARNING - could not find node, functional tests not run\"\nfi\n";
+			shellScript = "# conditional is not quite right\nif [ -f /usr/local/bin/node ]; then\n  PONYEXPRESS_FRAMEWORK=$TARGET_BUILD_DIR/$PROJECT_NAME.framework ./node_modules/mocha/bin/mocha --reporter list\nelse\n  echo \"WARNING - could not find node, functional tests not run\"\nfi\n";
 		};
 		D83E1B721411528100CB1258 /* Unit Tests */ = {
 			isa = PBXShellScriptBuildPhase;
