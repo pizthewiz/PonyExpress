@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 Chorded Constructions. All rights reserved.
 //
 
-#ifdef DEBUG
+#if LOGGING
     #define CCDebugLogSelector() NSLog(@"-[%@ %@]", /*NSStringFromClass([self class])*/self, NSStringFromSelector(_cmd))
     #define CCDebugLog(a...) NSLog(a)
     #define CCWarningLog(a...) NSLog(a)

@@ -540,7 +540,7 @@ bail:
     [data appendData:typeTagData];
     [data appendData:argumentData];
 
-#ifdef DEBUG
+#ifdef LOGGING
     // only dump the buffer when less than 4k
     if (data.length < 4 * 1024)
         [self _printDataBuffer:data];
