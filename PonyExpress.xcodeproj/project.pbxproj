@@ -409,7 +409,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# conditional is not quite right\nif [ -f /usr/local/bin/node ]; then\n  PONYEXPRESS_FRAMEWORK=$TARGET_BUILD_DIR/$PROJECT_NAME.framework ./node_modules/mocha/bin/mocha --reporter list\nelse\n  echo \"WARNING - could not find node, functional tests not run\"\nfi\n";
+			shellScript = "if [ -f /usr/local/bin/node ]; then\n  PATH=/usr/local/bin:$PATH PONYEXPRESS_FRAMEWORK=$TARGET_BUILD_DIR/$PROJECT_NAME.framework ./node_modules/mocha/bin/mocha --reporter list\nelse\n  echo \"WARNING - could not find node, functional tests not run\"\nfi\n";
 		};
 		D83E1B721411528100CB1258 /* Unit Tests */ = {
 			isa = PBXShellScriptBuildPhase;
