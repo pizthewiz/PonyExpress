@@ -17,13 +17,14 @@
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
 @property (nonatomic, readwrite, getter = isConnected) BOOL connected;
+@property (nonatomic) long messageTag;
 - (void)_setupSocket;
 - (void)_tearDownSocket;
 @end
 
 @implementation PEOSCSender
 
-@synthesize host, port, socket, connected;
+@synthesize host, port, socket, connected, messageTag;
 
 + (id)senderWithHost:(NSString*)host port:(UInt16)port {
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
@@ -94,8 +95,8 @@
         return;
     }
 
-    // TODO - actually add a tag
-    [self.socket sendData:messageData withTimeout:-1.0 tag:13];
+    [self.socket sendData:messageData withTimeout:-1.0 tag:self.messageTag];
+    self.messageTag = self.messageTag+1;
 }
 
 #pragma mark - SOCKET DELEGATE
@@ -120,7 +121,7 @@
 
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didNotSendDataWithTag:(long)tag dueToError:(NSError*)error {
     CCDebugLogSelector();
-    CCErrorLog(@"ERROR - failed to send data to host %@:%d due to %@", self.host, self.port, [error localizedDescription]);
+    CCErrorLog(@"ERROR - failed to send data with tag %lu to host %@:%d due to %@", tag, self.host, self.port, [error localizedDescription]);
     // TODO - notify delegate
 }
 
