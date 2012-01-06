@@ -1,7 +1,6 @@
 
 GENERAL
 [X] rename classes with OSC in name
-[ ] use omgosc for functional tests
 
 MESSAGE
 [ ] add initializers with vararg
@@ -22,30 +21,38 @@ SENDER
 [X] consider adding a means to connect/disconnect
 [X] allow host and port changes when disconnected
   sockets cannot be reconnected
+[ ] add sender delegate protocol
+[ ] migrate to GCD socket
 [ ] rename to denote as UDP
 [ ] document 9k UDP limit and Blob use
-[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways
+[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways?
 
 RECEIVER
 [X] create UDP connection
 [X] generate message from received data
 [X] implement receiver delegation protocol
-[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways
+[ ] migrate to GCD socket
+[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways?
 [ ] rename to denote as UDP
 
-TESTS
+UNIT TESTS
 [X] look into OCMock for more testing
 [ ] test message argument serialization
 [ ] test message argument deserialization
 [~] test sender with bad host
-[X] test sender with privledged port, < 1024
-[X] test sender on port in use
-[X] test receiver with privledged port, < 1024
-[~] test receiver on port in use
-[ ] test send bad message data
-[ ] test receive bad message data
-[ ] functional tests for sender
-[ ] functional tests for receiver
+[ ] remove port in use / privileged port tests as they 
+
+FUNCTIONAL TESTS
+[ ] use omgosc for functional tests
+[X] functional check receipt of message
+[ ] functional check delivery of message
+[ ] functional check handling of send bad message data
+[ ] functional check handling of receive bad message data
+[ ] send data on privileged port, < 1024
+[ ] try to connect/send data to port in use
+[ ] send data to bad host
+[ ] receive data on privileged port, < 1024
+[ ] try to connect/receive data to port in use
 
 MISC
 [ ] sample router? ?*[!-]{,}//
