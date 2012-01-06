@@ -3,7 +3,7 @@
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 30 Sept 2011.
-//  Copyright (c) 2011 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2011-2012 Chorded Constructions. All rights reserved.
 //
 
 #import "PonyEpressReceiverTests.h"
@@ -57,64 +57,64 @@
 
 - (void)testConnectionFlow {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
-    BOOL status = [receiver connect];
-    STAssertTrue(status, @"should report successful connection");
-    STAssertTrue(receiver.isConnected, @"should report as connected");
+    BOOL status = [receiver beginListening];
+    STAssertTrue(status, @"should report begin listening");
+    STAssertTrue(receiver.isListening, @"should report as listening");
     // double connection
-    status = [receiver connect];
-    STAssertFalse(status, @"should report unsuccessful connection");
-    STAssertTrue(receiver.isConnected, @"should report as connected");
+    status = [receiver beginListening];
+    STAssertFalse(status, @"should report unsuccessful begin listening");
+    STAssertTrue(receiver.isListening, @"should report as listening");
     // disconnect
-    status = [receiver disconnect];
-    STAssertTrue(status, @"should report successful disconnection");
-    STAssertFalse(receiver.isConnected, @"should report as disconnected");
+    status = [receiver stopListening];
+    STAssertTrue(status, @"should report successful stop listening");
+    STAssertFalse(receiver.isListening, @"should report as not listening");
     // double disconnect
-    status = [receiver disconnect];
-    STAssertFalse(status, @"should report unsuccessful disconnection");
-    STAssertFalse(receiver.isConnected, @"should report as disconnected");
+    status = [receiver stopListening];
+    STAssertFalse(status, @"should report unsuccessful stop listening");
+    STAssertFalse(receiver.isListening, @"should report as not listening");
 }
 
 - (void)testConnectionOnAPrivledgedPort {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.privledgedPort];
-    BOOL status = [receiver connect];
-    STAssertFalse(status, @"should report unsuccessful connection");
-    STAssertFalse(receiver.isConnected, @"should report as disconnected");
+    BOOL status = [receiver beginListening];
+    STAssertFalse(status, @"should report unsuccessful begin listening");
+    STAssertFalse(receiver.isListening, @"should report as not listening");
 
-    status = [receiver disconnect];
-    STAssertFalse(status, @"should report unsuccessful disconnection");
-    STAssertFalse(receiver.isConnected, @"should report as disconnected");
+    status = [receiver stopListening];
+    STAssertFalse(status, @"should report unsuccessful stop listening");
+    STAssertFalse(receiver.isListening, @"should report as not listening");
 }
 
 - (void)testConnectionOnAnUnprivledgedPort {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
-    BOOL status = [receiver connect];
-    STAssertTrue(status, @"should report successful connection");
-    STAssertTrue(receiver.isConnected, @"should report as connected");
+    BOOL status = [receiver beginListening];
+    STAssertTrue(status, @"should report successful begin listening");
+    STAssertTrue(receiver.isListening, @"should report as listening");
 
-    status = [receiver disconnect];
-    STAssertTrue(status, @"should report successful disconnection");
-    STAssertFalse(receiver.isConnected, @"should report as disconnected");
+    status = [receiver stopListening];
+    STAssertTrue(status, @"should report successful stop listening");
+    STAssertFalse(receiver.isListening, @"should report as not listening");
 }
 
 // TODO - multicast vs unicast makes a difference here
 - (void)testConnectionOnAPortInUse {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
-    BOOL status = [receiver connect];
-    STAssertTrue(status, @"should report successful connection");
-    STAssertTrue(receiver.isConnected, @"should report as connected");
+    BOOL status = [receiver beginListening];
+    STAssertTrue(status, @"should report successful begin listening");
+    STAssertTrue(receiver.isListening, @"should report as listening");
 
     PEOSCReceiver* otherReceiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
-    status = [otherReceiver connect];
-    STAssertFalse(status, @"should report unsuccessful connection");
-    STAssertFalse(receiver.isConnected, @"should report as disconnected");
+    status = [otherReceiver beginListening];
+    STAssertFalse(status, @"should report unsuccessful begin listening");
+    STAssertFalse(receiver.isListening, @"should report as not listening");
 
     // disconnect first
-    [receiver disconnect];
+    [receiver stopListening];
 
     // connect second
-    status = [otherReceiver connect];
-    STAssertTrue(status, @"should report successful connection");
-    STAssertTrue(otherReceiver.isConnected, @"should report as connected");
+    status = [otherReceiver beginListening];
+    STAssertTrue(status, @"should report successful begin listening");
+    STAssertTrue(otherReceiver.isListening, @"should report as listening");
 }
 
 @end

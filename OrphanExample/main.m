@@ -28,7 +28,7 @@ int main (int argc, const char * argv[]) {
         ReceiverDelegate* del = [[ReceiverDelegate alloc] init];
         receiver.delegate = del;
         NSLog(@"receiver: %@", receiver);
-        [receiver connect];
+        [receiver beginListening];
 
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"0.0.0.0" port:7777];
         NSLog(@"sender: %@", sender);

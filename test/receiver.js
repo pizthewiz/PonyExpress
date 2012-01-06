@@ -51,7 +51,7 @@ describe('Receiver', function () {
     var receiver = $.PEOSCReceiver('receiverWithPort', 9999);
     receiver.should.be.ok;
     receiver('setDelegate', delegate);
-    var status = receiver('connect');
+    var status = receiver('beginListening');
     status.should.be.ok;
 
     var sender = $.PEOSCSender('senderWithHost', $('0.0.0.0'), 'port', 9999);

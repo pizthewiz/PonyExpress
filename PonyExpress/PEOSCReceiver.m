@@ -3,7 +3,7 @@
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 30 Sept 2011.
-//  Copyright (c) 2011 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2011-2012 Chorded Constructions. All rights reserved.
 //
 
 #import "PEOSCReceiver.h"
@@ -15,14 +15,14 @@
 @interface PEOSCReceiver()
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
-@property (nonatomic, readwrite, getter = isConnected) BOOL connected;
+@property (nonatomic, readwrite, getter = isListening) BOOL listening;
 - (void)_setupSocket;
 - (void)_tearDownSocket;
 @end
 
 @implementation PEOSCReceiver
 
-@synthesize port, socket, connected, delegate;
+@synthesize port, socket, listening, delegate;
 
 + (id)receiverWithPort:(UInt16)port {
     PEOSCReceiver* receiver = [[PEOSCReceiver alloc] initWithPort:port];
@@ -51,26 +51,28 @@
 
 #pragma mark -
 
-- (BOOL)connect {
-    if (self.isConnected)
+- (BOOL)beginListening {
+    if (self.isListening)
         return NO;
 
     NSError* error;
     BOOL status = [self.socket bindToPort:self.port error:&error];
     if (!status) {
         CCErrorLog(@"ERROR - failed to bind to port %d with error %@", self.port, [error localizedDescription]);
+        return NO;
     }
     status = [self.socket beginReceiving:&error];
     if (!status) {
         CCErrorLog(@"ERROR - failed to begin receiving on socket with error %@", [error localizedDescription]);
+        return NO;
     }
 
-    self.connected = self.socket.isConnected;
-    return self.isConnected;
+    self.listening = YES;
+    return self.isListening;
 }
 
-- (BOOL)disconnect {
-    if (!self.isConnected)
+- (BOOL)stopListening {
+    if (!self.isListening)
         return NO;
 
     // receiver is probably going to be dumped, perhaps if AsyncUdpSocket had a weak reference to its delegate…
@@ -78,8 +80,9 @@
 
     [self.socket close];
 
-    self.connected = self.socket.isConnected;
-    return !self.isConnected;
+    // FIXME - not actually disconnected until messaged with -udpSocketDidClose:withError:
+    self.listening = NO;
+    return !self.isListening;
 }
 
 #pragma mark - SOCKET DELEGATE
@@ -93,6 +96,9 @@
 
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket*)sock withError:(NSError*)error {
     CCDebugLogSelector();
+
+    self.listening = NO;
+    // TODO - notify delegate
 }
 
 #pragma mark - PRIVATE
@@ -103,7 +109,7 @@
 }
 
 - (void)_tearDownSocket {
-    [self disconnect];
+    [self stopListening];
 
     self.socket = nil;
 }

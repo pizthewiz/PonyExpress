@@ -3,7 +3,7 @@
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 30 Sept 2011.
-//  Copyright (c) 2011 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2011-2012 Chorded Constructions. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -20,8 +20,8 @@
 
 @property (nonatomic, readonly) UInt16 port;
 @property (nonatomic, weak) id <PEOSCReceiverDelegate> delegate;
-@property (nonatomic, readonly, getter = isConnected) BOOL connected;
+@property (nonatomic, readonly, getter = isListening) BOOL listening;
 
-- (BOOL)connect;
-- (BOOL)disconnect;
+- (BOOL)beginListening;
+- (BOOL)stopListening;
 @end
