@@ -19,8 +19,8 @@ function boxArray(array) {
 }
 // other helpers
 function unboxString(string) { return string('UTF8String'); }
-function unboxStrinyInteger(number) { return parseInt(number, 10); }
-function unboxStrinyFloat(number) { return parseFloat(number, 10); }
+function unboxStringyInteger(number) { return parseInt(number, 10); } // will overflow at 2^63, but should be fine for our needs
+function unboxStringyFloat(number) { return parseFloat(number, 10); }
 
 
 
@@ -38,14 +38,14 @@ describe('Receiver', function () {
     ReceiverDelegate.addMethod('didReceiveMessage:', 'v@:@', function (self, _cmd, message) {
       should.exist(message);
       unboxString(message('address')).should.eql('/track/1/gain');
-      unboxStrinyInteger(message('typeTags')('count')).should.eql(1);
+      unboxStringyInteger(message('typeTags')('count')).should.eql(1);
       message('typeTags')('objectAtIndex', 0).should.eql($.PEOSCMessageTypeTagFloat);
-      unboxStrinyInteger(message('arguments')('count')).should.eql(1);
-      unboxStrinyFloat(message('arguments')('objectAtIndex', 0)).should.eql(0.333);
+      unboxStringyInteger(message('arguments')('count')).should.eql(1);
+      unboxStringyFloat(message('arguments')('objectAtIndex', 0)).should.eql(0.333);
       done();
     });
     ReceiverDelegate.register();
-    var delegate = ReceiverDelegate('alloc')('init');
+    var delegate = ReceiverDelegate('alloc')('init')('autorelease');
     delegate.should.be.ok;
 
     var receiver = $.PEOSCReceiver('receiverWithPort', 9999);
@@ -65,7 +65,7 @@ describe('Receiver', function () {
     sender('sendMessage', message);
 
     // give it a 2 second leash
-    var stopDate = $.NSDate('alloc')('initWithTimeIntervalSinceNow', 2);
+    var stopDate = $.NSDate('alloc')('initWithTimeIntervalSinceNow', 2)('autorelease');
     $.NSRunLoop('currentRunLoop')('runUntilDate', stopDate);
   });
 
