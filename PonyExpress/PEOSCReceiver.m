@@ -10,11 +10,11 @@
 #import "PonyExpress-Internal.h"
 #import "PEOSCMessage.h"
 #import "PEOSCMessage-Private.h"
-#import "AsyncUdpSocket.h"
+#import "GCDAsyncUdpSocket.h"
 
 @interface PEOSCReceiver()
 @property (nonatomic, readwrite) UInt16 port;
-@property (nonatomic, strong) AsyncUdpSocket* socket;
+@property (nonatomic, strong) GCDAsyncUdpSocket* socket;
 @property (nonatomic, readwrite, getter = isConnected) BOOL connected;
 - (void)_setupSocket;
 - (void)_tearDownSocket;
@@ -60,10 +60,12 @@
     if (!status) {
         CCErrorLog(@"ERROR - failed to bind to port %d with error %@", self.port, [error localizedDescription]);
     }
+    status = [self.socket beginReceiving:&error];
+    if (!status) {
+        CCErrorLog(@"ERROR - failed to begin receiving on socket with error %@", [error localizedDescription]);
+    }
 
-    [self.socket receiveWithTimeout:-1 tag:0];
-
-    self.connected = status;
+    self.connected = self.socket.isConnected;
     return self.isConnected;
 }
 
@@ -76,38 +78,28 @@
 
     [self.socket close];
 
-    self.connected = NO;
+    self.connected = self.socket.isConnected;
     return !self.isConnected;
 }
 
 #pragma mark - SOCKET DELEGATE
 
-- (BOOL)onUdpSocket:(AsyncUdpSocket*)sock didReceiveData:(NSData*)data withTag:(long)tag fromHost:(NSString*)host port:(UInt16)port {
+- (void)udpSocket:(GCDAsyncUdpSocket*)sock didReceiveData:(NSData*)data fromAddress:(NSData*)address withFilterContext:(id)filterContext {
     CCDebugLogSelector();
 
     PEOSCMessage* message = [PEOSCMessage messageWithData:data];
     [self.delegate didReceiveMessage:message];
-
-    [self.socket receiveWithTimeout:-1 tag:0];
-    return message != nil;
 }
 
-- (void)onUdpSocket:(AsyncUdpSocket*)sock didNotReceiveDataWithTag:(long)tag dueToError:(NSError*)error {
+- (void)udpSocketDidClose:(GCDAsyncUdpSocket*)sock withError:(NSError*)error {
     CCDebugLogSelector();
-}
-
-- (void)onUdpSocketDidClose:(AsyncUdpSocket*)sock {
-    CCDebugLogSelector();
-
-    // NB - not likely received as the delegate is removed before we disconnect, might occur in an error condition however
 }
 
 #pragma mark - PRIVATE
 
 - (void)_setupSocket {
-    AsyncUdpSocket* soc = [[AsyncUdpSocket alloc] initWithDelegate:self];
-    self.socket = soc;
-    [self.socket setRunLoopModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+    GCDAsyncUdpSocket* sock = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    self.socket = sock;
 }
 
 - (void)_tearDownSocket {
