@@ -10,12 +10,12 @@
 #import "PonyExpress-Internal.h"
 #import "PEOSCMessage.h"
 #import "PEOSCMessage-Private.h"
-#import "AsyncUdpSocket.h"
+#import "GCDAsyncUdpSocket.h"
 
 @interface PEOSCSender()
 @property (nonatomic, readwrite, strong) NSString* host;
 @property (nonatomic, readwrite) UInt16 port;
-@property (nonatomic, strong) AsyncUdpSocket* socket;
+@property (nonatomic, strong) GCDAsyncUdpSocket* socket;
 @property (nonatomic, readwrite, getter = isConnected) BOOL connected;
 - (void)_setupSocket;
 - (void)_tearDownSocket;
@@ -57,14 +57,14 @@
     if (self.isConnected)
         return NO;
 
-    NSError* error = nil;
+    NSError* error;
     BOOL status = [self.socket connectToHost:self.host onPort:self.port error:&error];
     if (!status) {
         CCErrorLog(@"ERROR - failed to connect to host: %@:%d - %@", self.host, self.port, [error localizedDescription]);
-        return NO;
     }
 
-    self.connected = YES;
+    // FIXME - not actually connected until messaged with -udpSocket:didConnectToAddress:
+    self.connected = YES;//self.socket.isConnected;
     return self.isConnected;
 }
 
@@ -77,7 +77,8 @@
 
     [self.socket close];
 
-    self.connected = NO;
+    // FIXME - not actually disconnected until messaged with -udpSocketDidClose:withError:
+    self.connected = NO;//self.socket.isConnected;
     return !self.isConnected;
 }
 
@@ -93,33 +94,48 @@
         return;
     }
 
-    BOOL status = [self.socket sendData:messageData withTimeout:0 tag:13];
-    if (!status) {
-        CCWarningLog(@"WARNING - failed to send message: %@ to %@:%@", message, self.host, self.port);
-    }
+    // TODO - actually add a tag
+    [self.socket sendData:messageData withTimeout:-1.0 tag:13];
 }
 
 #pragma mark - SOCKET DELEGATE
 
-- (void)onUdpSocket:(AsyncUdpSocket*)sock didSendDataWithTag:(long)tag {
+- (void)udpSocket:(GCDAsyncUdpSocket*)sock didConnectToAddress:(NSData*)address {
     CCDebugLogSelector();
+
+    self.connected = YES;
+    // TODO - notify delegate
 }
 
-- (void)onUdpSocket:(AsyncUdpSocket*)sock didNotSendDataWithTag:(long)tag dueToError:(NSError*)error {
+- (void)udpSocket:(GCDAsyncUdpSocket*)sock didNotConnect:(NSError*)error {
+    CCDebugLogSelector();
+    CCErrorLog(@"ERROR - failed to connect to host %@:%d due to %@", self.host, self.port, [error localizedDescription]);
+    // TODO - notify delegate
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket*)sock didSendDataWithTag:(long)tag {
+    CCDebugLogSelector();
+    // TODO - notify delegate
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket*)sock didNotSendDataWithTag:(long)tag dueToError:(NSError*)error {
+    CCDebugLogSelector();
     CCErrorLog(@"ERROR - failed to send data to host %@:%d due to %@", self.host, self.port, [error localizedDescription]);
-//    CCErrorLog(@" socket MTU: %d", [self.socket maximumTransmissionUnit]);
+    // TODO - notify delegate
 }
 
-- (void)onUdpSocketDidClose:(AsyncUdpSocket*)sock {
+- (void)udpSocketDidClose:(GCDAsyncUdpSocket*)sock withError:(NSError*)error {
     CCDebugLogSelector();
-    // NB - not likely received as the delegate is removed before we disconnect, might occur in an error condition however
+
+    self.connected = NO;
+    // TODO - notify delegate
 }
 
 #pragma mark - PRIVATE
  
  - (void)_setupSocket {
-     AsyncUdpSocket* soc = [[AsyncUdpSocket alloc] initWithDelegate:self];
-     self.socket = soc;
+     GCDAsyncUdpSocket* sock = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+     self.socket = sock;
 }
 
 - (void)_tearDownSocket {

@@ -23,7 +23,9 @@ SENDER
 [X] allow host and port changes when disconnected
   sockets cannot be reconnected
 [ ] add sender delegate protocol
-[ ] migrate to GCD socket
+[X] migrate to GCD socket
+[ ] sort out potential connect/send timing issue
+[ ] add a tag to the sender
 [ ] rename to denote as UDP
 [ ] document 9k UDP limit and Blob use
 [ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways?

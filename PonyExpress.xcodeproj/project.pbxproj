@@ -31,8 +31,6 @@
 		D88A20DD143D8F48005C2E76 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88A20D6143D6BCB005C2E76 /* OCMock.framework */; };
 		D8AF167B14B78C060002A885 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */; };
 		D8AF167C14B78C060002A885 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D8BA3BA31416C4C70076037F /* AsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D8BA3BA11416C4C70076037F /* AsyncUdpSocket.h */; };
-		D8BA3BA41416C4C70076037F /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BA3BA21416C4C70076037F /* AsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D8C53D371436795700C8CF3E /* PEOSCReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C53D351436795700C8CF3E /* PEOSCReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8C53D381436795700C8CF3E /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
 		D8C53D391436795700C8CF3E /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
@@ -102,8 +100,6 @@
 		D899B5901443EE2D0059A19F /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = SOURCE_ROOT; };
 		D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
 		D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
-		D8BA3BA11416C4C70076037F /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncUdpSocket.h; path = vendor/CocoaAsyncSocket/RunLoop/AsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
-		D8BA3BA21416C4C70076037F /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncUdpSocket.m; path = vendor/CocoaAsyncSocket/RunLoop/AsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
 		D8C53D351436795700C8CF3E /* PEOSCReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCReceiver.h; sourceTree = "<group>"; };
 		D8C53D361436795700C8CF3E /* PEOSCReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCReceiver.m; sourceTree = "<group>"; };
 		D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonyEpressReceiverTests.h; sourceTree = "<group>"; };
@@ -260,8 +256,6 @@
 		D87C17F81413F3CF005A08F3 /* AsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
-				D8BA3BA11416C4C70076037F /* AsyncUdpSocket.h */,
-				D8BA3BA21416C4C70076037F /* AsyncUdpSocket.m */,
 				D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */,
 				D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */,
 			);
@@ -290,7 +284,6 @@
 				D8C53D371436795700C8CF3E /* PEOSCReceiver.h in Headers */,
 				D83E1BAF1411A41400CB1258 /* PEOSCMessage-Private.h in Headers */,
 				D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */,
-				D8BA3BA31416C4C70076037F /* AsyncUdpSocket.h in Headers */,
 				D8AF167B14B78C060002A885 /* GCDAsyncUdpSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,7 +461,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D83E1BA214119A2C00CB1258 /* PEOSCMessage.m in Sources */,
-				D8BA3BA41416C4C70076037F /* AsyncUdpSocket.m in Sources */,
 				D83E1B99141190B000CB1258 /* PEOSCSender.m in Sources */,
 				D8C53D381436795700C8CF3E /* PEOSCReceiver.m in Sources */,
 				D8AF167C14B78C060002A885 /* GCDAsyncUdpSocket.m in Sources */,
@@ -543,6 +535,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					LOGGING,
 					DEBUG,
 					"$(inherited)",
 				);
