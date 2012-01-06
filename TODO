@@ -1,6 +1,7 @@
 
 GENERAL
 [X] rename classes with OSC in name
+[ ] offer separate LOGGING define from DEBUG?
 
 MESSAGE
 [ ] add initializers with vararg
