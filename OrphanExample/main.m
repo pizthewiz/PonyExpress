@@ -3,7 +3,7 @@
 //  OrphanExample
 //
 //  Created by Jean-Pierre Mouilleseaux on 3 Sept 2011.
-//  Copyright (c) 2011 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2011-2012 Chorded Constructions. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,6 +14,17 @@
 @implementation ReceiverDelegate
 - (void)didReceiveMessage:(PEOSCMessage*)message {
     NSLog(@"delegate received: %@", message);
+}
+@end
+
+@interface SenderDelegate : NSObject <PEOSCSenderDelegate>
+@end
+@implementation SenderDelegate
+- (void)didSendMessage:(PEOSCMessage*)message {
+    NSLog(@"delegate sent: %@", message);
+}
+- (void)didNotSendMessage:(PEOSCMessage*)message dueToError:(NSError*)error {
+    NSLog(@"delegate FAILED to send: %@ due to - %@", message, [error localizedDescription]);
 }
 @end
 
@@ -31,11 +42,13 @@ int main (int argc, const char * argv[]) {
         [receiver beginListening];
 
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"0.0.0.0" port:7777];
+        SenderDelegate* dell = [[SenderDelegate alloc] init];
+        sender.delegate = dell;
         NSLog(@"sender: %@", sender);
         [sender connect];
         [sender sendMessage:message];
 
-        [[NSRunLoop currentRunLoop] run];
+        dispatch_main();
     }
     return 0;
 }

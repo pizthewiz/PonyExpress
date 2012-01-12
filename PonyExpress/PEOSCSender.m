@@ -17,6 +17,7 @@
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
 @property (nonatomic, readwrite, getter = isConnected) BOOL connected;
+@property (nonatomic) NSMutableDictionary* messageCache;
 @property (nonatomic) long messageTag;
 - (void)_setupSocket;
 - (void)_tearDownSocket;
@@ -24,7 +25,7 @@
 
 @implementation PEOSCSender
 
-@synthesize host, port, socket, connected, messageTag;
+@synthesize host, port, socket, connected, delegate, messageCache, messageTag;
 
 + (id)senderWithHost:(NSString*)host port:(UInt16)port {
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
@@ -36,6 +37,8 @@
     if (self) {
         self.host = hos;
         self.port = por;
+
+        self.messageCache = [NSMutableDictionary dictionaryWithCapacity:10];
 
         [self _setupSocket];
     }
@@ -95,6 +98,9 @@
         return;
     }
 
+    // hold onto the message for a spell
+    [messageCache setObject:message forKey:[NSString stringWithFormat:@"%lu", self.messageTag]];
+
     [self.socket sendData:messageData withTimeout:-1.0 tag:self.messageTag];
     self.messageTag = self.messageTag+1;
 }
@@ -116,13 +122,21 @@
 
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didSendDataWithTag:(long)tag {
     CCDebugLogSelector();
-    // TODO - notify delegate
+
+    NSString* key = [NSString stringWithFormat:@"%lu", tag];
+    PEOSCMessage* message = [messageCache objectForKey:key];
+    [self.delegate didSendMessage:message];
+    [messageCache removeObjectForKey:key];
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didNotSendDataWithTag:(long)tag dueToError:(NSError*)error {
     CCDebugLogSelector();
     CCErrorLog(@"ERROR - failed to send data with tag %lu to host %@:%d due to %@", tag, self.host, self.port, [error localizedDescription]);
-    // TODO - notify delegate
+
+    NSString* key = [NSString stringWithFormat:@"%lu", tag];
+    PEOSCMessage* message = [messageCache objectForKey:key];
+    [self.delegate didNotSendMessage:message dueToError:error];
+    [messageCache removeObjectForKey:key];
 }
 
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket*)sock withError:(NSError*)error {

@@ -22,7 +22,7 @@ SENDER
 [X] consider adding a means to connect/disconnect
 [X] allow host and port changes when disconnected
   sockets cannot be reconnected
-[ ] add sender delegate protocol
+[X] add sender delegate protocol
 [X] migrate to GCD socket
 [ ] sort out potential connect/send timing issue
 [X] add a tag to the sender
