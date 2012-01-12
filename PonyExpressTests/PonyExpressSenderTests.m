@@ -3,7 +3,7 @@
 //  PonyExpressSenderTests
 //
 //  Created by Jean-Pierre Mouilleseaux on 2 Sept 2011.
-//  Copyright (c) 2011 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2011-2012 Chorded Constructions. All rights reserved.
 //
 
 #import "PonyExpressSenderTests.h"
@@ -52,12 +52,20 @@
     STAssertEquals(self.unprivledgedPort, sender.port, @"should store port");
 }
 
+- (void)testDelegateAssignment {
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+    id mockDelegate = [OCMockObject mockForProtocol:@protocol(PEOSCSenderDelegate)];
+    sender.delegate = mockDelegate;
+    STAssertEqualObjects(mockDelegate, sender.delegate, @"should assign proper delegate");
+}
+
 #pragma mark - CONNECTION
 
 - (void)testConnectionToBadHost {
     PEOSCSender* sender = [PEOSCSender senderWithHost:@"log lady" port:self.unprivledgedPort];
     BOOL status = [sender connect];
-    // NB - the failure does not occur until send
+
+    // NB - -connect is innaccurate, more like begin connecting as the process is async
     STAssertFalse(status, @"should report unsuccessful connection");
     STAssertFalse(sender.isConnected, @"should report as disconnected");
 }

@@ -166,16 +166,8 @@
 				D83E1B641411528100CB1258 /* Foundation.framework */,
 				D83E1B751411528100CB1258 /* SenTestingKit.framework */,
 				D88A20D6143D6BCB005C2E76 /* OCMock.framework */,
-				D83E1B611411528100CB1258 /* Other Frameworks */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D83E1B611411528100CB1258 /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		D83E1B651411528100CB1258 /* PonyExpress */ = {
