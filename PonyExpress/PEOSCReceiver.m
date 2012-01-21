@@ -22,17 +22,17 @@
 
 @implementation PEOSCReceiver
 
-@synthesize port, socket, listening, delegate;
+@synthesize port = _port, socket = _socket, listening = _listening, delegate = _delegate;
 
 + (id)receiverWithPort:(UInt16)port {
     PEOSCReceiver* receiver = [[PEOSCReceiver alloc] initWithPort:port];
     return receiver;
 }
 
-- (id)initWithPort:(UInt16)por {
+- (id)initWithPort:(UInt16)port {
     self = [super init];
     if (self) {
-        self.port = por;
+        self.port = port;
 
         [self _setupSocket];
     }
