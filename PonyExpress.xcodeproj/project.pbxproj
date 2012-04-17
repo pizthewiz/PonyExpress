@@ -30,7 +30,7 @@
 		D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */; };
 		D88A20DD143D8F48005C2E76 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88A20D6143D6BCB005C2E76 /* OCMock.framework */; };
 		D8AF167B14B78C060002A885 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */; };
-		D8AF167C14B78C060002A885 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D8AF167C14B78C060002A885 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */; };
 		D8C53D371436795700C8CF3E /* PEOSCReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C53D351436795700C8CF3E /* PEOSCReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8C53D381436795700C8CF3E /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
 		D8C53D391436795700C8CF3E /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
@@ -527,6 +527,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					LOGGING,
 					DEBUG,
 					"$(inherited)",
 				);
