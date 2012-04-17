@@ -36,7 +36,7 @@
     [super tearDown];
 }
 
-#pragma mark - SENDER
+#pragma mark -
 
 - (void)testCreation {
     PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
@@ -65,7 +65,7 @@
     PEOSCSender* sender = [PEOSCSender senderWithHost:@"log lady" port:self.unprivledgedPort];
     BOOL status = [sender connect];
 
-    // NB - -connect is innaccurate, more like begin connecting as the process is async
+    // NB - -connect is innaccurate, more akin to begin connecting as the process is async
     STAssertFalse(status, @"should report unsuccessful connection");
     STAssertFalse(sender.isConnected, @"should report as disconnected");
 }
