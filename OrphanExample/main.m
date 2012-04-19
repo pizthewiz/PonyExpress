@@ -39,7 +39,11 @@ int main (int argc, const char * argv[]) {
         ReceiverDelegate* del = [[ReceiverDelegate alloc] init];
         receiver.delegate = del;
         NSLog(@"receiver: %@", receiver);
-        [receiver beginListening];
+        BOOL status = [receiver beginListening];
+        if (!status) {
+            NSLog(@"ERROR - receiver failed to begin listneing: %@", receiver);
+            return 1;
+        }
 
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"0.0.0.0" port:7777];
         SenderDelegate* dell = [[SenderDelegate alloc] init];

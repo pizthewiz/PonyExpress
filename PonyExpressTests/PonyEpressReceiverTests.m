@@ -65,13 +65,15 @@
     STAssertFalse(status, @"should report unsuccessful begin listening");
     STAssertTrue(receiver.isListening, @"should report as listening");
     // disconnect
-    status = [receiver stopListening];
-    STAssertTrue(status, @"should report successful stop listening");
-    STAssertFalse(receiver.isListening, @"should report as not listening");
-    // double disconnect
-    status = [receiver stopListening];
-    STAssertFalse(status, @"should report unsuccessful stop listening");
-    STAssertFalse(receiver.isListening, @"should report as not listening");
+    [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError *error) {
+        STAssertTrue(success, @"should report successful stop listening");
+        STAssertFalse(receiver.isListening, @"should report as not listening");
+        // double disconnect
+        [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError *error) {
+            STAssertFalse(success, @"should report unsuccessful stop listening");
+            STAssertFalse(receiver.isListening, @"should report as not listening");
+        }];
+    }];
 }
 
 - (void)testConnectionOnAPrivledgedPort {
@@ -80,9 +82,10 @@
     STAssertFalse(status, @"should report unsuccessful begin listening");
     STAssertFalse(receiver.isListening, @"should report as not listening");
 
-    status = [receiver stopListening];
-    STAssertFalse(status, @"should report unsuccessful stop listening");
-    STAssertFalse(receiver.isListening, @"should report as not listening");
+    [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError *error) {
+        STAssertFalse(success, @"should report unsuccessful stop listening");
+        STAssertFalse(receiver.isListening, @"should report as not listening");
+    }];
 }
 
 - (void)testConnectionOnAnUnprivledgedPort {
@@ -91,15 +94,16 @@
     STAssertTrue(status, @"should report successful begin listening");
     STAssertTrue(receiver.isListening, @"should report as listening");
 
-    status = [receiver stopListening];
-    STAssertTrue(status, @"should report successful stop listening");
-    STAssertFalse(receiver.isListening, @"should report as not listening");
+    [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError *error) {
+        STAssertTrue(success, @"should report successful stop listening");
+        STAssertFalse(receiver.isListening, @"should report as not listening");
+    }];
 }
 
 // TODO - multicast vs unicast makes a difference here
 - (void)testConnectionOnAPortInUse {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
-    BOOL status = [receiver beginListening];
+    __block BOOL status = [receiver beginListening];
     STAssertTrue(status, @"should report successful begin listening");
     STAssertTrue(receiver.isListening, @"should report as listening");
 
@@ -109,12 +113,15 @@
     STAssertFalse(receiver.isListening, @"should report as not listening");
 
     // disconnect first
-    [receiver stopListening];
+    [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError *error) {
+        STAssertTrue(success, @"should report successful stop listening");
+        STAssertFalse(receiver.isListening, @"should report as not listening");
 
-    // connect second
-    status = [otherReceiver beginListening];
-    STAssertTrue(status, @"should report successful begin listening");
-    STAssertTrue(otherReceiver.isListening, @"should report as listening");
+        // connect second
+        status = [otherReceiver beginListening];
+        STAssertTrue(status, @"should report successful begin listening");
+        STAssertTrue(otherReceiver.isListening, @"should report as listening");
+    }];
 }
 
 @end

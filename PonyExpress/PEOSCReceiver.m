@@ -16,13 +16,14 @@
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
 @property (nonatomic, readwrite, getter = isListening) BOOL listening;
+@property (nonatomic, strong) PEOSCReceiverStopListeningCompletionHandler stopListeningCompletionHandler;
 - (void)_setupSocket;
 - (void)_tearDownSocket;
 @end
 
 @implementation PEOSCReceiver
 
-@synthesize port = _port, socket = _socket, listening = _listening, delegate = _delegate;
+@synthesize port = _port, socket = _socket, listening = _listening, delegate = _delegate, stopListeningCompletionHandler = _stopListeningCompletionHandler;
 
 + (id)receiverWithPort:(UInt16)port {
     PEOSCReceiver* receiver = [[PEOSCReceiver alloc] initWithPort:port];
@@ -52,8 +53,9 @@
 #pragma mark -
 
 - (BOOL)beginListening {
-    if (self.isListening)
+    if (self.isListening) {
         return NO;
+    }
 
     NSError* error;
     BOOL status = [self.socket bindToPort:self.port error:&error];
@@ -68,21 +70,19 @@
     }
 
     self.listening = YES;
-    return self.isListening;
+    return YES;
 }
 
-- (BOOL)stopListening {
-    if (!self.isListening)
-        return NO;
+- (void)stopListeningWithCompletionHandler:(PEOSCReceiverStopListeningCompletionHandler)handler {
+    if (!self.isListening) {
+        // TODO - add error
+        handler(NO, nil);
+        return;
+    }
 
-    // receiver is probably going to be dumped, perhaps if AsyncUdpSocket had a weak reference to its delegate…
-    self.socket.delegate = nil;
+    self.stopListeningCompletionHandler = handler;
 
     [self.socket close];
-
-    // FIXME - not actually disconnected until messaged with -udpSocketDidClose:withError:
-    self.listening = NO;
-    return !self.isListening;
 }
 
 #pragma mark - SOCKET DELEGATE
@@ -98,7 +98,7 @@
     CCDebugLogSelector();
 
     self.listening = NO;
-    // TODO - notify delegate
+    self.stopListeningCompletionHandler(YES, error);
 }
 
 #pragma mark - PRIVATE
@@ -109,9 +109,10 @@
 }
 
 - (void)_tearDownSocket {
-    [self stopListening];
-
-    self.socket = nil;
+    [self stopListeningWithCompletionHandler:^(BOOL success, NSError *error) {
+        self.socket.delegate = nil;
+        self.socket = nil;
+    }];
 }
 
 @end

@@ -2,6 +2,7 @@
 GENERAL
 [X] rename classes with OSC in name
 [X] offer separate LOGGING define from DEBUG
+[ ] rename sender and receiver to denote UDP
 
 MESSAGE
 [ ] add initializers with vararg
@@ -26,7 +27,6 @@ SENDER
 [X] migrate to GCD socket
 [X] -connect and -disconnect should take a completion handler
 [X] add a tag to the sender
-[ ] rename to denote as UDP
 [ ] document 9k UDP limit and Blob use
 [~] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways?
 
@@ -36,19 +36,18 @@ RECEIVER
 [X] implement receiver delegation protocol
 [X] migrate to GCD socket
 [~] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways?
-[ ] -stopListening should take a completion handler
-[ ] rename to denote as UDP
+[X] -stopListening should take a completion handler
 
 UNIT TESTS
 [X] look into OCMock for more testing
+[ ] get tests working again with async connect/disconnect/stopListening
 [ ] test message argument serialization
 [ ] test message argument deserialization
 [~] test sender with bad host
 [ ] remove port in use / privileged port tests as they 
 
 FUNCTIONAL TESTS
-[ ] use omgosc for functional tests
-[X] functional check receipt of message
+[ ] functional check receipt of message
 [ ] functional check delivery of message
 [ ] functional check handling of send bad message data
 [ ] functional check handling of receive bad message data

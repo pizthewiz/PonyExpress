@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^PEOSCReceiverStopListeningCompletionHandler)(BOOL success, NSError* error);
+
 @class PEOSCMessage;
 
 @protocol PEOSCReceiverDelegate
@@ -23,5 +25,5 @@
 @property (nonatomic, readonly, getter = isListening) BOOL listening;
 
 - (BOOL)beginListening;
-- (BOOL)stopListening;
+- (void)stopListeningWithCompletionHandler:(PEOSCReceiverStopListeningCompletionHandler)handler;
 @end
