@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^PEOSCSenderConnectCompletionHandler)(BOOL success, NSError *error);
+typedef void(^PEOSCSenderDisconnectCompletionHandler)(BOOL success, NSError *error);
+
 @class PEOSCMessage;
 
 @protocol PEOSCSenderDelegate
@@ -24,8 +27,8 @@
 @property (nonatomic, readonly, getter = isConnected) BOOL connected;
 @property (nonatomic, weak) id <PEOSCSenderDelegate> delegate;
 
-- (BOOL)connect;
-- (BOOL)disconnect;
+- (void)connectWithCompletionHandler:(PEOSCSenderConnectCompletionHandler)handler;
+- (void)disconnectWithCompletionHandler:(PEOSCSenderDisconnectCompletionHandler)handler;
 
 - (void)sendMessage:(PEOSCMessage*)message;
 @end

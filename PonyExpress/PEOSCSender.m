@@ -19,13 +19,15 @@
 @property (nonatomic, readwrite, getter = isConnected) BOOL connected;
 @property (nonatomic) NSMutableDictionary* messageCache;
 @property (nonatomic) long messageTag;
+@property (nonatomic, strong) PEOSCSenderConnectCompletionHandler connectCompletionHandler;
+@property (nonatomic, strong) PEOSCSenderDisconnectCompletionHandler disconnectCompletionHandler;
 - (void)_setupSocket;
 - (void)_tearDownSocket;
 @end
 
 @implementation PEOSCSender
 
-@synthesize host = _host, port = _port, socket = _socket, connected = _connected, delegate = _delegate, messageCache = _messageCache, messageTag = _message;
+@synthesize host = _host, port = _port, socket = _socket, connected = _connected, delegate = _delegate, messageCache = _messageCache, messageTag = _message, connectCompletionHandler = _connectCompletionHandler, disconnectCompletionHandler = _disconnectCompletionHandler;
 
 + (id)senderWithHost:(NSString*)host port:(UInt16)port {
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
@@ -57,33 +59,30 @@
 
 #pragma mark -
 
-- (BOOL)connect {
+- (void)connectWithCompletionHandler:(PEOSCSenderConnectCompletionHandler)handler {
     if (self.isConnected)
-        return NO;
+        return;
+
+    self.connectCompletionHandler = handler;
 
     NSError* error;
     BOOL status = [self.socket connectToHost:self.host onPort:self.port error:&error];
     if (!status) {
         CCErrorLog(@"ERROR - failed to connect to host: %@:%d - %@", self.host, self.port, [error localizedDescription]);
+        self.connectCompletionHandler(NO, error);
     }
-
-    // FIXME - not actually connected until messaged with -udpSocket:didConnectToAddress:
-    self.connected = YES;//self.socket.isConnected;
-    return self.isConnected;
 }
 
-- (BOOL)disconnect {
+- (void)disconnectWithCompletionHandler:(PEOSCSenderDisconnectCompletionHandler)handler {
     if (!self.isConnected)
-        return NO;
+        return;
+
+    self.disconnectCompletionHandler = handler;
 
     // sender is probably going to be dumped, perhaps if AsyncUdpSocket had a weak reference to its delegate…
     self.socket.delegate = nil;
 
     [self.socket close];
-
-    // FIXME - not actually disconnected until messaged with -udpSocketDidClose:withError:
-    self.connected = NO;//self.socket.isConnected;
-    return !self.isConnected;
 }
 
 - (void)sendMessage:(PEOSCMessage*)message {
@@ -111,13 +110,13 @@
     CCDebugLogSelector();
 
     self.connected = YES;
-    // TODO - notify delegate
+    self.connectCompletionHandler(YES, NULL);
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didNotConnect:(NSError*)error {
     CCDebugLogSelector();
     CCErrorLog(@"ERROR - failed to connect to host %@:%d due to %@", self.host, self.port, [error localizedDescription]);
-    // TODO - notify delegate
+    self.connectCompletionHandler(NO, error);
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didSendDataWithTag:(long)tag {
@@ -143,7 +142,7 @@
     CCDebugLogSelector();
 
     self.connected = NO;
-    // TODO - notify delegate
+    self.disconnectCompletionHandler(YES, error);
 }
 
 #pragma mark - PRIVATE
@@ -154,9 +153,9 @@
 }
 
 - (void)_tearDownSocket {
-    [self disconnect];
-
-    self.socket = nil;
+    [self disconnectWithCompletionHandler:^(BOOL success, NSError *error) {
+        self.socket = nil;
+    }];
 }
 
 @end

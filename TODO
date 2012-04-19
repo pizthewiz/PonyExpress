@@ -24,18 +24,19 @@ SENDER
   sockets cannot be reconnected
 [X] add sender delegate protocol
 [X] migrate to GCD socket
-[ ] sort out potential connect/send timing issue
+[X] -connect and -disconnect should take a completion handler
 [X] add a tag to the sender
 [ ] rename to denote as UDP
 [ ] document 9k UDP limit and Blob use
-[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways?
+[~] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways?
 
 RECEIVER
 [X] create UDP connection
 [X] generate message from received data
 [X] implement receiver delegation protocol
 [X] migrate to GCD socket
-[ ] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways?
+[~] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways?
+[ ] -stopListening should take a completion handler
 [ ] rename to denote as UDP
 
 UNIT TESTS

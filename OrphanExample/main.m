@@ -45,8 +45,9 @@ int main (int argc, const char * argv[]) {
         SenderDelegate* dell = [[SenderDelegate alloc] init];
         sender.delegate = dell;
         NSLog(@"sender: %@", sender);
-        [sender connect];
-        [sender sendMessage:message];
+        [sender connectWithCompletionHandler:^(BOOL success, NSError *error) {
+            [sender sendMessage:message];
+        }];
 
         dispatch_main();
     }
