@@ -60,8 +60,11 @@
 #pragma mark -
 
 - (void)connectWithCompletionHandler:(PEOSCSenderConnectCompletionHandler)handler {
-    if (self.isConnected)
+    if (self.isConnected) {
+        // TODO - add error
+        handler(NO, nil);
         return;
+    }
 
     self.connectCompletionHandler = handler;
 
@@ -74,14 +77,13 @@
 }
 
 - (void)disconnectWithCompletionHandler:(PEOSCSenderDisconnectCompletionHandler)handler {
-    if (!self.isConnected)
+    if (!self.isConnected) {
+        // TODO - add error
+        handler(NO, nil);
         return;
+    }
 
     self.disconnectCompletionHandler = handler;
-
-    // sender is probably going to be dumped, perhaps if AsyncUdpSocket had a weak reference to its delegate…
-    self.socket.delegate = nil;
-
     [self.socket close];
 }
 
@@ -110,7 +112,7 @@
     CCDebugLogSelector();
 
     self.connected = YES;
-    self.connectCompletionHandler(YES, NULL);
+    self.connectCompletionHandler(YES, nil);
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didNotConnect:(NSError*)error {
@@ -154,6 +156,7 @@
 
 - (void)_tearDownSocket {
     [self disconnectWithCompletionHandler:^(BOOL success, NSError *error) {
+        self.socket.delegate = nil;
         self.socket = nil;
     }];
 }

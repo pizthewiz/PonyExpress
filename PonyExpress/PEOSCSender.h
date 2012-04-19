@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^PEOSCSenderConnectCompletionHandler)(BOOL success, NSError *error);
-typedef void(^PEOSCSenderDisconnectCompletionHandler)(BOOL success, NSError *error);
+typedef void(^PEOSCSenderConnectCompletionHandler)(BOOL success, NSError* error);
+typedef void(^PEOSCSenderDisconnectCompletionHandler)(BOOL success, NSError* error);
 
 @class PEOSCMessage;
 
