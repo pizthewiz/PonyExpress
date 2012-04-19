@@ -1,6 +1,3 @@
 [submodule "vendor/CocoaAsyncSocket"]
 	path = vendor/CocoaAsyncSocket
 	url = git://github.com/pizthewiz/CocoaAsyncSocket.git
-[submodule "node_modules/omgosc"]
-	path = node_modules/omgosc
-	url = git://github.com/deanm/omgosc.git

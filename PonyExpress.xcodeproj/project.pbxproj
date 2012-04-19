@@ -104,7 +104,6 @@
 		D8C53D361436795700C8CF3E /* PEOSCReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCReceiver.m; sourceTree = "<group>"; };
 		D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonyEpressReceiverTests.h; sourceTree = "<group>"; };
 		D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonyEpressReceiverTests.m; sourceTree = "<group>"; };
-		D8F8C55914B596F600AAE590 /* receiver.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = receiver.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,7 +211,6 @@
 				D83E1B821411528100CB1258 /* PonyExpressSenderTests.m */,
 				D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */,
 				D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */,
-				D8F8C55814B596F600AAE590 /* Functional Tests */,
 				D83E1B7C1411528100CB1258 /* Supporting Files */,
 			);
 			path = PonyExpressTests;
@@ -254,15 +252,6 @@
 			name = AsyncSocket;
 			sourceTree = "<group>";
 		};
-		D8F8C55814B596F600AAE590 /* Functional Tests */ = {
-			isa = PBXGroup;
-			children = (
-				D8F8C55914B596F600AAE590 /* receiver.js */,
-			);
-			name = "Functional Tests";
-			path = test;
-			sourceTree = SOURCE_ROOT;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -290,7 +279,6 @@
 				D83E1B571411528100CB1258 /* Sources */,
 				D83E1B581411528100CB1258 /* Frameworks */,
 				D83E1B591411528100CB1258 /* Headers */,
-				D8DFE1E8149B144700AB2F75 /* Generate BridgeSupport File */,
 				D899B5921443EE6E0059A19F /* Update Info.plist With git Info */,
 				D83E1B5A1411528100CB1258 /* Resources */,
 			);
@@ -311,7 +299,6 @@
 				D83E1B701411528100CB1258 /* Frameworks */,
 				D83E1B711411528100CB1258 /* Resources */,
 				D83E1B721411528100CB1258 /* Unit Tests */,
-				D82670E5149C3E8F008043AE /* Functional Tests */,
 			);
 			buildRules = (
 			);
@@ -389,20 +376,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D82670E5149C3E8F008043AE /* Functional Tests */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Functional Tests";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ -f /usr/local/bin/node ]; then\n  PATH=/usr/local/bin:$PATH PONYEXPRESS_FRAMEWORK=$TARGET_BUILD_DIR/$PROJECT_NAME.framework ./node_modules/mocha/bin/mocha --reporter list\nelse\n  echo \"WARNING - could not find node, functional tests not run\"\nfi\n";
-		};
 		D83E1B721411528100CB1258 /* Unit Tests */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -430,20 +403,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ -f /usr/local/bin/macrake ]; then\n  /usr/local/bin/macrake update_bundle_version\nelse\n  echo \"WARNING - could not find macrake, bundle versions left unset\"\nfi\n";
-		};
-		D8DFE1E8149B144700AB2F75 /* Generate BridgeSupport File */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Generate BridgeSupport File";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "mkdir -p $TARGET_BUILD_DIR/$PROJECT_NAME.framework/Resources/BridgeSupport/\ngen_bridge_metadata --64-bit -f $TARGET_BUILD_DIR/$PROJECT_NAME.framework/ -o $TARGET_BUILD_DIR/$PROJECT_NAME.framework/Resources/BridgeSupport/$PROJECT_NAME.bridgesupport\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
