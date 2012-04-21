@@ -11,6 +11,15 @@
 #import "PEOSCMessage-Private.h"
 #import "PEOSCSender.h"
 
+// via http://mikeash.com/pyblog/friday-qa-2011-07-22-writing-unit-tests.html
+BOOL WaitFor(BOOL (^block)(void));
+BOOL WaitFor(BOOL (^block)(void)) {
+    NSTimeInterval start = [[NSProcessInfo processInfo] systemUptime];
+    while(!block() && [[NSProcessInfo processInfo] systemUptime] - start <= 10)
+        [[NSRunLoop currentRunLoop] runMode: NSDefaultRunLoopMode beforeDate: [NSDate date]];
+    return block();
+}
+
 @interface PonyExpressSenderTests()
 @property (nonatomic, strong) NSString* loopbackHost;
 @property (nonatomic) UInt16 unprivledgedPort;
@@ -61,76 +70,137 @@
 
 #pragma mark - CONNECTION
 
+- (void)testConnectionToGoodHost {
+    __block BOOL done = NO;
+
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+    [sender connectWithCompletionHandler:^(BOOL success, NSError* error) {
+        STAssertTrue(success, @"should report successful connection");
+        STAssertTrue(sender.isConnected, @"should report as connected");
+        STAssertNil(error, @"should not provide error");
+
+        done = YES;
+    }];
+
+    STAssertTrue(WaitFor(^BOOL { return done; }), @"async connect failed");
+}
+
 - (void)testConnectionToBadHost {
+    __block BOOL done = NO;
+
+    // NB - a bad host usually does not error out until after
     PEOSCSender* sender = [PEOSCSender senderWithHost:@"log lady" port:self.unprivledgedPort];
-    [sender connectWithCompletionHandler:^(BOOL success, NSError *error) {
+    [sender connectWithCompletionHandler:^(BOOL success, NSError* error) {
         STAssertFalse(success, @"should report unsuccessful connection");
         STAssertFalse(sender.isConnected, @"should report as disconnected");
+        STAssertNotNil(error, @"should provide error");
+
+        done = YES;
     }];
+
+    STAssertTrue(WaitFor(^BOOL { return done; }), @"async connect failed");
 }
 
-- (void)testConnectionFlow {
-    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
-    [sender connectWithCompletionHandler:^(BOOL success, NSError *error) {
+- (void)testConnectionFlowOnAPrivledgedPort {
+    __block BOOL done = NO;
+
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.privledgedPort];
+    [sender connectWithCompletionHandler:^(BOOL success, NSError* error) {
         STAssertTrue(success, @"should report successful connection");
         STAssertTrue(sender.isConnected, @"should report as connected");
-        // double connection
-        [sender connectWithCompletionHandler:^(BOOL success, NSError *error) {
+        STAssertNil(error, @"should not have an error");
+
+        [sender disconnectWithCompletionHandler:^(BOOL success, NSError* error) {
+            STAssertTrue(success, @"should report successful disconnection");
+            STAssertFalse(sender.isConnected, @"should report as disconnected");
+            STAssertNil(error, @"should not have an error");
+
+            done = YES;
+        }];
+    }];
+
+    STAssertTrue(WaitFor(^BOOL { return done; }), @"async connect / disconnect failed");
+}
+
+- (void)testConnectionFlowOnAnUnprivledgedPort {
+    __block BOOL done = NO;
+
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+    [sender connectWithCompletionHandler:^(BOOL success, NSError* error) {
+        STAssertTrue(success, @"should report successful connection");
+        STAssertTrue(sender.isConnected, @"should report as connected");
+        STAssertNil(error, @"should not have an error");
+
+        [sender disconnectWithCompletionHandler:^(BOOL success, NSError* error) {
+            STAssertTrue(success, @"should report successful disconnection");
+            STAssertFalse(sender.isConnected, @"should report as disconnected");
+            STAssertNil(error, @"should not have an error");
+
+            done = YES;
+        }];
+    }];
+
+    STAssertTrue(WaitFor(^BOOL { return done; }), @"async connect / disconnect failed");
+}
+
+- (void)testConnectionToAConnectedPort {
+    __block BOOL done = NO;
+
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+    [sender connectWithCompletionHandler:^(BOOL success, NSError* error) {
+        STAssertTrue(success, @"should report successful connection");
+        STAssertTrue(sender.isConnected, @"should report as connected");
+        STAssertNil(error, @"should not have an error");
+
+        // NB - multiple connections to host:port is allowed
+        PEOSCSender* otherSender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+        [otherSender connectWithCompletionHandler:^(BOOL success, NSError* error) {
+            STAssertTrue(success, @"should report successful connection");
+            STAssertTrue(otherSender.isConnected, @"should report as connected");
+            STAssertNil(error, @"should not have an error");
+
+            done = YES;
+        }];
+    }];
+
+    STAssertTrue(WaitFor(^BOOL { return done; }), @"async connect / connect failed");
+}
+
+- (void)testConnectWhileConnected {
+    __block BOOL done = NO;
+
+    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
+    [sender connectWithCompletionHandler:^(BOOL success, NSError* error) {
+        STAssertTrue(success, @"should report successful connection");
+        STAssertTrue(sender.isConnected, @"should report as connected");
+        STAssertNil(error, @"should not have an error");
+
+        // double connect attempt
+        [sender connectWithCompletionHandler:^(BOOL success, NSError* error) {
             STAssertFalse(success, @"should report unsuccessful connection");
             STAssertTrue(sender.isConnected, @"should report as connected");
-            // disconnect
-            [sender disconnectWithCompletionHandler:^(BOOL success, NSError *error) {
-                STAssertTrue(success, @"should report successful disconnection");
-                STAssertFalse(sender.isConnected, @"should report as disconnected");
-                // double disconnect
-                [sender disconnectWithCompletionHandler:^(BOOL success, NSError *error) {
-                    STAssertFalse(success, @"should report unsuccessful disconnection");
-                    STAssertFalse(sender.isConnected, @"should report as disconnected");
-                }];
-            }];
+            STAssertNotNil(error, @"should have an error");
+
+            done = YES;
         }];
     }];
+
+    STAssertTrue(WaitFor(^BOOL { return done; }), @"async connect failed");
 }
 
-- (void)testConnectionOnAPrivledgedPort {
-    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.privledgedPort];
-    [sender connectWithCompletionHandler:^(BOOL success, NSError *error) {
-        STAssertTrue(success, @"should report successful connection");
-        STAssertTrue(sender.isConnected, @"should report as connected");
+- (void)testDisconnectWhileDisconnected {
+    __block BOOL done = NO;
 
-        [sender disconnectWithCompletionHandler:^(BOOL success, NSError *error) {
-            STAssertTrue(success, @"should report successful disconnection");
-            STAssertFalse(sender.isConnected, @"should report as disconnected");
-        }];
-    }];
-}
-
-- (void)testConnectionOnAnUnprivledgedPort {
     PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
-    [sender connectWithCompletionHandler:^(BOOL success, NSError *error) {
-        STAssertTrue(success, @"should report successful connection");
-        STAssertTrue(sender.isConnected, @"should report as connected");
+    [sender disconnectWithCompletionHandler:^(BOOL success, NSError* error) {
+        STAssertFalse(success, @"should report unsuccessful disconnection");
+        STAssertFalse(sender.isConnected, @"should report as disconnected");
+        STAssertNotNil(error, @"should not have an error");
 
-        [sender disconnectWithCompletionHandler:^(BOOL success, NSError *error) {
-            STAssertTrue(success, @"should report successful disconnection");
-            STAssertFalse(sender.isConnected, @"should report as disconnected");
-        }];
+        done = YES;
     }];
-}
 
-- (void)testConnectionOnAPortInUse {
-    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
-    [sender connectWithCompletionHandler:^(BOOL success, NSError *error) {
-        STAssertTrue(success, @"should report successful connection");
-        STAssertTrue(sender.isConnected, @"should report as connected");
-
-        PEOSCSender* otherSender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
-        [otherSender connectWithCompletionHandler:^(BOOL success, NSError *error) {
-            STAssertFalse(success, @"should report unsuccessful connection");
-            STAssertFalse(sender.isConnected, @"should report as disconnected");
-            STAssertNotNil(error, @"should prove error");
-        }];
-    }];
+    STAssertTrue(WaitFor(^BOOL { return done; }), @"async disconnect failed");
 }
 
 @end
