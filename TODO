@@ -40,7 +40,7 @@ RECEIVER
 
 UNIT TESTS
 [X] look into OCMock for more testing
-[ ] get tests working again with async connect/disconnect/stopListening
+[X] get tests working again with async connect/disconnect/stopListening
 [ ] test message argument serialization
 [ ] test message argument deserialization
 [~] test sender with bad host

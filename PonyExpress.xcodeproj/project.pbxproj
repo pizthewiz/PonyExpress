@@ -98,6 +98,7 @@
 		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
 		D88A20D6143D6BCB005C2E76 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = ../../../../../../Library/Frameworks/OCMock.framework; sourceTree = "<group>"; };
 		D899B5901443EE2D0059A19F /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = SOURCE_ROOT; };
+		D89B67EB1543727A00462DDD /* PonyExpressTestHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressTestHelper.h; sourceTree = "<group>"; };
 		D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
 		D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
 		D8C53D351436795700C8CF3E /* PEOSCReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCReceiver.h; sourceTree = "<group>"; };
@@ -205,6 +206,7 @@
 		D83E1B7B1411528100CB1258 /* PonyExpressTests */ = {
 			isa = PBXGroup;
 			children = (
+				D89B67EB1543727A00462DDD /* PonyExpressTestHelper.h */,
 				D84ED0711417FC9C00AD4737 /* PonyExpressMessageTests.h */,
 				D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */,
 				D83E1B811411528100CB1258 /* PonyExpressSenderTests.h */,
