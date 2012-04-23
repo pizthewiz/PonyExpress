@@ -1,46 +1,23 @@
 
 GENERAL
-[X] rename classes with OSC in name
-[X] offer separate LOGGING define from DEBUG
 [ ] rename sender and receiver to denote UDP
+[ ] sort out bundles
 
 MESSAGE
 [ ] add initializers with vararg
-[X] add param/arg enumerator that takes a block
-[X] add more complete valadity checking for address via NSRegularExpression
-[X] add cool debug method to dump bytes and ascii
 [ ] make debug buffer dump multi-line and byte-gap configurable
-[X] test Blob serialization
 [ ] implement Timetag
 [ ] do a better job with NSData allocation and writing in -_data
-[ ] sort out bundles
-[X] take a stance on unrecognized type tags
-  considered an error, i'm not sure how we'd parse the arguments
+[ ] ignore unknown types (is that even possible?)
 
 SENDER
-[X] create UDP connection
-[X] tear down UDP connection on dealloc
-[X] consider adding a means to connect/disconnect
-[X] allow host and port changes when disconnected
-  sockets cannot be reconnected
-[X] add sender delegate protocol
-[X] migrate to GCD socket
-[X] -connect and -disconnect should take a completion handler
-[X] add a tag to the sender
+[ ] add custom error on -connect and -disconnect
 [ ] document 9k UDP limit and Blob use
-[~] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways?
 
 RECEIVER
-[X] create UDP connection
-[X] generate message from received data
-[X] implement receiver delegation protocol
-[X] migrate to GCD socket
-[~] consider connect on create, little use in offering separete connect/disconnect when one cannot reconnect anyways?
-[X] -stopListening should take a completion handler
+[ ] add custom error on -stopListening
 
 UNIT TESTS
-[X] look into OCMock for more testing
-[X] get tests working again with async connect/disconnect/stopListening
 [ ] test message argument serialization
 [ ] test message argument deserialization
 [~] test sender with bad host
@@ -60,7 +37,6 @@ FUNCTIONAL TESTS
 MISC
 [ ] sample router? ?*[!-]{,}//
 [ ] example message snooper
-[X] conditionalize macruby and node use in Run Script build phases to not blow up if missing
 
 LATER
 [ ] mDNS receiver announcement
