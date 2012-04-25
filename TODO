@@ -11,11 +11,11 @@ MESSAGE
 [ ] ignore unknown types (is that even possible?)
 
 SENDER
-[ ] add custom error on -connect and -disconnect
+[X] add custom error on -connect and -disconnect
 [ ] document 9k UDP limit and Blob use
 
 RECEIVER
-[ ] add custom error on -stopListening
+[X] add custom error on -stopListening
 
 UNIT TESTS
 [ ] test message argument serialization

@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* const PEOSCSenderErrorDomain;
+
+enum PEOSCSenderError {
+    PEOSCSenderNoError = 0,
+    PEOSCSenderAlreadyConnectedError,
+    PEOSCSenderNotConnectedError,
+    PEOSCSenderOtherError,
+};
+typedef enum PEOSCSenderError PEOSCSenderError;
+
 typedef void(^PEOSCSenderConnectCompletionHandler)(BOOL success, NSError* error);
 typedef void(^PEOSCSenderDisconnectCompletionHandler)(BOOL success, NSError* error);
 

@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* const PEOSCReceiverErrorDomain;
+
+enum PEOSCReceiverError {
+    PEOSCReceiverNoError = 0,
+    PEOSCReceiverNotListeningError,
+    PEOSCReceiverOtherError,
+};
+typedef enum PEOSCReceiverError PEOSCReceiverError;
+
 typedef void(^PEOSCReceiverStopListeningCompletionHandler)(BOOL success, NSError* error);
 
 @class PEOSCMessage;

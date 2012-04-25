@@ -12,6 +12,8 @@
 #import "PEOSCMessage-Private.h"
 #import "GCDAsyncUdpSocket.h"
 
+NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
+
 @interface PEOSCSender()
 @property (nonatomic, readwrite, strong) NSString* host;
 @property (nonatomic, readwrite) UInt16 port;
@@ -61,8 +63,8 @@
 
 - (void)connectWithCompletionHandler:(PEOSCSenderConnectCompletionHandler)handler {
     if (self.isConnected) {
-        // TODO - add error
-        handler(NO, nil);
+        NSError* error = [NSError errorWithDomain:PEOSCSenderErrorDomain code:PEOSCSenderAlreadyConnectedError userInfo:nil];
+        handler(NO, error);
         return;
     }
 
@@ -78,8 +80,8 @@
 
 - (void)disconnectWithCompletionHandler:(PEOSCSenderDisconnectCompletionHandler)handler {
     if (!self.isConnected) {
-        // TODO - add error
-        handler(NO, nil);
+        NSError* error = [NSError errorWithDomain:PEOSCSenderErrorDomain code:PEOSCSenderNotConnectedError userInfo:nil];
+        handler(NO, error);
         return;
     }
 

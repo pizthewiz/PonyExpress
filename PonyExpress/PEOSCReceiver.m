@@ -12,6 +12,8 @@
 #import "PEOSCMessage-Private.h"
 #import "GCDAsyncUdpSocket.h"
 
+NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
+
 @interface PEOSCReceiver()
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
@@ -75,8 +77,8 @@
 
 - (void)stopListeningWithCompletionHandler:(PEOSCReceiverStopListeningCompletionHandler)handler {
     if (!self.isListening) {
-        // TODO - add error
-        handler(NO, nil);
+        NSError* error = [NSError errorWithDomain:PEOSCReceiverErrorDomain code:PEOSCReceiverNotListeningError userInfo:nil];
+        handler(NO, error);
         return;
     }
 
