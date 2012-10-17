@@ -10,12 +10,11 @@
 
 extern NSString* const PEOSCReceiverErrorDomain;
 
-enum PEOSCReceiverError {
-    PEOSCReceiverNoError = 0,
+typedef enum PEOSCReceiverError : NSUInteger {
+    PEOSCReceiverNoError,
     PEOSCReceiverNotListeningError,
     PEOSCReceiverOtherError,
-};
-typedef enum PEOSCReceiverError PEOSCReceiverError;
+} PEOSCReceiverError;
 
 typedef void(^PEOSCReceiverStopListeningCompletionHandler)(BOOL success, NSError* error);
 

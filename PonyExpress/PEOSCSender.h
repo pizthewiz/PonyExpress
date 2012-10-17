@@ -10,13 +10,12 @@
 
 extern NSString* const PEOSCSenderErrorDomain;
 
-enum PEOSCSenderError {
-    PEOSCSenderNoError = 0,
+typedef enum PEOSCSenderError : NSUInteger {
+    PEOSCSenderNoError,
     PEOSCSenderAlreadyConnectedError,
     PEOSCSenderNotConnectedError,
     PEOSCSenderOtherError,
-};
-typedef enum PEOSCSenderError PEOSCSenderError;
+} PEOSCSenderError;
 
 typedef void(^PEOSCSenderConnectCompletionHandler)(BOOL success, NSError* error);
 typedef void(^PEOSCSenderDisconnectCompletionHandler)(BOOL success, NSError* error);
