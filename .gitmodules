@@ -1,3 +1,6 @@
 [submodule "vendor/CocoaAsyncSocket"]
 	path = vendor/CocoaAsyncSocket
 	url = git://github.com/pizthewiz/CocoaAsyncSocket.git
+[submodule "vendor/ocmock"]
+	path = vendor/ocmock
+	url = git://github.com/erikdoe/ocmock.git

@@ -28,13 +28,13 @@
 		D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
 		D84ED0731417FC9C00AD4737 /* PonyExpressMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */; };
 		D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */; };
-		D88A20DD143D8F48005C2E76 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88A20D6143D6BCB005C2E76 /* OCMock.framework */; };
 		D8AF167B14B78C060002A885 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */; };
 		D8AF167C14B78C060002A885 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */; };
 		D8C53D371436795700C8CF3E /* PEOSCReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C53D351436795700C8CF3E /* PEOSCReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8C53D381436795700C8CF3E /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
 		D8C53D391436795700C8CF3E /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
 		D8C53D4114367AEC00C8CF3E /* PonyEpressReceiverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */; };
+		D8FC4D3E162E899400408517 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FC4D37162E898200408517 /* OCMock.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +51,34 @@
 			proxyType = 1;
 			remoteGlobalIDString = D83E1B5B1411528100CB1258;
 			remoteInfo = PonyExpress;
+		};
+		D8FC4D36162E898200408517 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8FC4D2D162E898200408517 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 030EF0A814632FD000B04273;
+			remoteInfo = OCMock;
+		};
+		D8FC4D38162E898200408517 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8FC4D2D162E898200408517 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 030EF0C014632FD000B04273;
+			remoteInfo = OCMockTests;
+		};
+		D8FC4D3A162E898200408517 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8FC4D2D162E898200408517 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 030EF0DC14632FF700B04273;
+			remoteInfo = OCMockLib;
+		};
+		D8FC4D3C162E898D00408517 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8FC4D2D162E898200408517 /* OCMock.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 030EF0A714632FD000B04273;
+			remoteInfo = OCMock;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -93,7 +121,6 @@
 		D84ED0711417FC9C00AD4737 /* PonyExpressMessageTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonyExpressMessageTests.h; sourceTree = "<group>"; };
 		D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonyExpressMessageTests.m; sourceTree = "<group>"; };
 		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
-		D88A20D6143D6BCB005C2E76 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = ../../../../../../Library/Frameworks/OCMock.framework; sourceTree = "<group>"; };
 		D89B67EB1543727A00462DDD /* PonyExpressTestHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressTestHelper.h; sourceTree = "<group>"; };
 		D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
 		D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
@@ -105,6 +132,7 @@
 		D8FC4D1A162E570100408517 /* NOTES.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES.markdown; sourceTree = SOURCE_ROOT; };
 		D8FC4D1B162E570100408517 /* TODO.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.markdown; sourceTree = SOURCE_ROOT; };
 		D8FC4D1D162E5BDB00408517 /* Jakefile.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Jakefile.js; sourceTree = SOURCE_ROOT; };
+		D8FC4D2D162E898200408517 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = vendor/ocmock/Source/OCMock.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +150,7 @@
 			files = (
 				D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */,
 				D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */,
-				D88A20DD143D8F48005C2E76 /* OCMock.framework in Frameworks */,
+				D8FC4D3E162E899400408517 /* OCMock.framework in Frameworks */,
 				D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,7 +193,6 @@
 			children = (
 				D83E1B641411528100CB1258 /* Foundation.framework */,
 				D83E1B751411528100CB1258 /* SenTestingKit.framework */,
-				D88A20D6143D6BCB005C2E76 /* OCMock.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -206,6 +233,7 @@
 		D83E1B7B1411528100CB1258 /* PonyExpressTests */ = {
 			isa = PBXGroup;
 			children = (
+				D8FC4D2D162E898200408517 /* OCMock.xcodeproj */,
 				D89B67EB1543727A00462DDD /* PonyExpressTestHelper.h */,
 				D84ED0711417FC9C00AD4737 /* PonyExpressMessageTests.h */,
 				D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */,
@@ -252,6 +280,16 @@
 				D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */,
 			);
 			name = AsyncSocket;
+			sourceTree = "<group>";
+		};
+		D8FC4D2E162E898200408517 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D8FC4D37162E898200408517 /* OCMock.framework */,
+				D8FC4D39162E898200408517 /* OCMockTests.octest */,
+				D8FC4D3B162E898200408517 /* libOCMock.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +343,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D8FC4D3D162E898D00408517 /* PBXTargetDependency */,
 				D83E1B791411528100CB1258 /* PBXTargetDependency */,
 			);
 			name = PonyExpressTests;
@@ -349,6 +388,12 @@
 			mainGroup = D83E1B501411528000CB1258;
 			productRefGroup = D83E1B5D1411528100CB1258 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D8FC4D2E162E898200408517 /* Products */;
+					ProjectRef = D8FC4D2D162E898200408517 /* OCMock.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D83E1B5B1411528100CB1258 /* PonyExpress */,
@@ -357,6 +402,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D8FC4D37162E898200408517 /* OCMock.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCMock.framework;
+			remoteRef = D8FC4D36162E898200408517 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D8FC4D39162E898200408517 /* OCMockTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OCMockTests.octest;
+			remoteRef = D8FC4D38162E898200408517 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D8FC4D3B162E898200408517 /* libOCMock.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOCMock.a;
+			remoteRef = D8FC4D3A162E898200408517 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D83E1B5A1411528100CB1258 /* Resources */ = {
@@ -453,6 +522,11 @@
 			isa = PBXTargetDependency;
 			target = D83E1B5B1411528100CB1258 /* PonyExpress */;
 			targetProxy = D83E1BE51412F98F00CB1258 /* PBXContainerItemProxy */;
+		};
+		D8FC4D3D162E898D00408517 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OCMock;
+			targetProxy = D8FC4D3C162E898D00408517 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -566,11 +640,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = /Library/Frameworks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -580,11 +654,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = /Library/Frameworks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};

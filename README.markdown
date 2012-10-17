@@ -6,7 +6,7 @@ a small foundation framework to facilitate OSC communication on Mac OS X 10.7
 - clone the repository and submodules `git clone --recursive git://github.com/pizthewiz/PonyExpress.git`
 - load up the project in Xcode, select the PonyExpress or OrphanExample application scheme and build
 
-### SOFT BUILD REQUIREMENT
+#### SOFT REQUIREMENT
 the bundle version is optionally set from the repository state using [Node.js](http://nodejs.org/) and a few node modules. if Node is not installed, the bundle version will remain unset. 
 
 - install Node.js 0.8.12 or later from [binary package](http://nodejs.org/dist/v0.8.12/node-v0.8.12.pkg) or build and install from [source](http://nodejs.org/dist/v0.8.12/node-v0.8.12.tar.gz)
@@ -20,7 +20,7 @@ the bundle version is optionally set from the repository state using [Node.js](h
 - many tasks remain to be implemented such as OSC bundle, timetag, querying and OSC-over-TCP support, please see the [TODO](https://github.com/pizthewiz/PonyExpress/blob/master/TODO.markdown) for more info
 
 ### TESTING
-- unit tests: OCUnit / [OCMock](http://ocmock.org/)
+- unit tests: OCUnit / [OCMock](http://ocmock.org/) (included as git submodule)
 
 ### THANKS
 - Dean McNamee for his great OSC implementation for node.js [omgosc](https://github.com/deanm/omgosc)
