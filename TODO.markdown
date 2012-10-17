@@ -12,9 +12,10 @@
 
 ### SENDER
 - document 9k UDP limit and Blob use
+- replace sender delegate with a block, which could simulate a delate pattern anyways
 
 ### RECEIVER
--…
+- consider some sort of simple router
 
 ### UNIT TESTS
 - test message argument serialization
