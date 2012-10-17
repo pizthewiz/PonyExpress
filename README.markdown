@@ -1,17 +1,17 @@
 
 # Pony Express
-a small foundation framework to facilitate OSC communication on Mac OS X 10.7
+a small Foundation framework to facilitate OSC communication on Mac OS X 10.7
 
 ### HOW TO BUILD
 - clone the repository and submodules `git clone --recursive git://github.com/pizthewiz/PonyExpress.git`
 - load up the project in Xcode, select the PonyExpress or OrphanExample application scheme and build
 
 #### SOFT REQUIREMENT
-the bundle version is optionally set from the repository state using [Node.js](http://nodejs.org/) and a few node modules. if Node is not installed, the bundle version will remain unset. 
+the bundle version is optionally set from the repository state using [Node.js](http://nodejs.org/) and a few node modules; if Node.js is not installed, the bundle version will remain unset.
 
-- install Node.js 0.8.12 or later from [binary package](http://nodejs.org/dist/v0.8.12/node-v0.8.12.pkg) or build and install from [source](http://nodejs.org/dist/v0.8.12/node-v0.8.12.tar.gz)
-- install node submodules globally `npm install -g jake async NodObjC`
-- link global submodules to local repository `npm link jake async NodObjC`
+- install Node.js 0.8.12 (or later) from [binary package](http://nodejs.org/dist/v0.8.12/node-v0.8.12.pkg) or build and install from [source](http://nodejs.org/dist/v0.8.12/node-v0.8.12.tar.gz)
+- install node modules globally `npm install -g jake async NodObjC`
+- link global modules to local repository `npm link jake async NodObjC`
 
 ### GENERAL
 - OSC 1.1 over UDP with support for most 1.1 data types: Integer, Float, String, Blob, True, False, Null and Impulse
