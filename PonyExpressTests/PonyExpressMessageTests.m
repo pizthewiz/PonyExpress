@@ -21,19 +21,17 @@
 
 @implementation PonyExpressMessageTests
 
-@synthesize allTypes, allArgs, workingTypes, workingArgs, goodAddress, badAddress;
-
 - (void)setUp {
     [super setUp];
 
     NSData* stringData = [@"One-Eyed Jacks" dataUsingEncoding:NSASCIIStringEncoding];
 
-    self.allTypes = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, PEOSCMessageTypeTagTimetag, nil];
+    self.allTypes = @[PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, PEOSCMessageTypeTagTimetag];
     // TODO - set proper NTP TIME when available
-    self.allArgs = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], [NSNumber numberWithFloat:(100./3.)], @"STRING", stringData, [NSDate date], nil];
+    self.allArgs = @[@(13), [NSNumber numberWithFloat:100./3.], @"STRING", stringData, [NSDate date]];
 
-    self.workingTypes = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, nil];
-    self.workingArgs = [NSArray arrayWithObjects:[NSNumber numberWithInt:13], [NSNumber numberWithFloat:(100./3.)], @"STRING", stringData, nil];
+    self.workingTypes = @[PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse];
+    self.workingArgs = @[@(13), [NSNumber numberWithFloat:100./3.], @"STRING", stringData];
 
     self.goodAddress = @"/oscillator/3/frequency";
     self.badAddress = @"bad/address";
@@ -58,8 +56,8 @@
 }
 
 - (void)testCreationArguments {
-    NSArray* typeTags = [NSArray arrayWithObjects:PEOSCMessageTypeTagInteger, nil];
-    NSArray* arguments = [NSArray arrayWithObjects:[NSNumber numberWithInt:440], nil];
+    NSArray* typeTags = @[PEOSCMessageTypeTagInteger];
+    NSArray* arguments = @[@(440)];
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:self.goodAddress typeTags:typeTags arguments:arguments];
     STAssertEqualObjects(self.goodAddress, message.address, @"should store proper address");
     STAssertEqualObjects(typeTags, message.typeTags, @"should store proper type tags");
@@ -155,7 +153,7 @@
     STAssertEqualObjects(@",ifsbTFNIt", [message _typeTagString], @"should generate proper type tag string");
     STAssertTrue([message _areTypeTagsValid], @"should report string from legit type tag list as valid");
 
-    message.typeTags = [NSArray array];
+    message.typeTags = @[];
     STAssertNil([message _typeTagString], @"should catch empty type tag list");
     STAssertFalse([message _areTypeTagsValid], @"should report string from empty type tag list as invalid");
 
@@ -163,7 +161,7 @@
     STAssertNil([message _typeTagString], @"should catch nil type tag list");
     STAssertFalse([message _areTypeTagsValid], @"should report string from nil type tag list as invalid");
 
-    message.typeTags = [NSArray arrayWithObjects:PEOSCMessageTypeTagImpulse, [NSNumber numberWithInt:13], nil];
+    message.typeTags = @[PEOSCMessageTypeTagImpulse, @(13)];
     STAssertNil([message _typeTagString], @"should not generate a type tag string when the list contains a bad element");
     STAssertFalse([message _areTypeTagsValid], @"should report string from bad type tag list as invalid");
 }
@@ -189,10 +187,10 @@
     message.arguments = nil;
     STAssertFalse([message _areArgumentsValidGivenTypeTags], @"should treat identify nil arguments as invalid for valid types");
 
-    message.arguments = [NSArray array];
+    message.arguments = @[];
     STAssertFalse([message _areArgumentsValidGivenTypeTags], @"should treat identify enmpty arguments as invalid for valid types");
 
-    message.typeTags = [NSArray arrayWithObjects:PEOSCMessageTypeTagImpulse, nil];
+    message.typeTags = @[PEOSCMessageTypeTagImpulse];
     message.arguments = self.allArgs;
     STAssertFalse([message _areArgumentsValidGivenTypeTags], @"should treat identify mismatching arguments to type tags as invalid");
 }
@@ -228,10 +226,10 @@
     PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:self.badAddress typeTags:self.workingTypes arguments:self.workingArgs];
     STAssertNil([message _data], @"should not generate data for message with bad address");
 
-    message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:[NSArray arrayWithObject:@"Nonsensical"] arguments:self.workingArgs];
+    message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:@[@"Nonsensical"] arguments:self.workingArgs];
     STAssertNil([message _data], @"should not generate data for message with bad types");
 
-    message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:self.workingTypes arguments:[NSArray arrayWithObject:@"Nonsensical"]];
+    message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:self.workingTypes arguments:@[@"Nonsensical"]];
     STAssertNil([message _data], @"should not generate data for message with bad arguments");
 }
 

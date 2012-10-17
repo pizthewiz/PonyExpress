@@ -17,8 +17,6 @@
 
 @implementation PonyEpressReceiverTests
 
-@synthesize unprivledgedPort, privledgedPort;
-
 - (void)setUp {
     [super setUp];
 

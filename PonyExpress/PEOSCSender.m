@@ -22,13 +22,9 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 @property (nonatomic) long messageTag;
 @property (nonatomic, strong) PEOSCSenderConnectCompletionHandler connectCompletionHandler;
 @property (nonatomic, strong) PEOSCSenderDisconnectCompletionHandler disconnectCompletionHandler;
-- (void)_setupSocket;
-- (void)_tearDownSocket;
 @end
 
 @implementation PEOSCSender
-
-@synthesize host = _host, port = _port, socket = _socket, connected = _connected, delegate = _delegate, messageCache = _messageCache, messageTag = _message, connectCompletionHandler = _connectCompletionHandler, disconnectCompletionHandler = _disconnectCompletionHandler;
 
 + (id)senderWithHost:(NSString*)host port:(UInt16)port {
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];

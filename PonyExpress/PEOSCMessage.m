@@ -104,8 +104,6 @@ static Float32 readFloat(NSData* data, NSUInteger start) {
 
 @implementation PEOSCMessage
 
-@synthesize address = _address, typeTags = _typeTags, arguments = _arguments;
-
 + (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments {
     id message = [[PEOSCMessage alloc] initWithAddress:address typeTags:typeTags arguments:arguments];
     return message;

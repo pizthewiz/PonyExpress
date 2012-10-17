@@ -18,13 +18,9 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
 @property (nonatomic, readwrite, getter = isListening) BOOL listening;
 @property (nonatomic, strong) PEOSCReceiverStopListeningCompletionHandler stopListeningCompletionHandler;
-- (void)_setupSocket;
-- (void)_tearDownSocket;
 @end
 
 @implementation PEOSCReceiver
-
-@synthesize port = _port, socket = _socket, listening = _listening, delegate = _delegate, stopListeningCompletionHandler = _stopListeningCompletionHandler;
 
 + (id)receiverWithPort:(UInt16)port {
     PEOSCReceiver* receiver = [[PEOSCReceiver alloc] initWithPort:port];

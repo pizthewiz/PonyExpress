@@ -20,8 +20,6 @@
 
 @implementation PonyExpressSenderTests
 
-@synthesize loopbackHost, unprivledgedPort, privledgedPort;
-
 - (void)setUp {
     [super setUp];
 
