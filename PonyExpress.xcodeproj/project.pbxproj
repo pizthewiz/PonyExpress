@@ -94,7 +94,6 @@
 		D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonyExpressMessageTests.m; sourceTree = "<group>"; };
 		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
 		D88A20D6143D6BCB005C2E76 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = ../../../../../../Library/Frameworks/OCMock.framework; sourceTree = "<group>"; };
-		D899B5901443EE2D0059A19F /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = SOURCE_ROOT; };
 		D89B67EB1543727A00462DDD /* PonyExpressTestHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressTestHelper.h; sourceTree = "<group>"; };
 		D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
 		D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
@@ -105,6 +104,7 @@
 		D8FC4D19162E570100408517 /* CHANGELOG.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG.markdown; sourceTree = SOURCE_ROOT; };
 		D8FC4D1A162E570100408517 /* NOTES.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES.markdown; sourceTree = SOURCE_ROOT; };
 		D8FC4D1B162E570100408517 /* TODO.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.markdown; sourceTree = SOURCE_ROOT; };
+		D8FC4D1D162E5BDB00408517 /* Jakefile.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Jakefile.js; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +188,7 @@
 				D8FC4D19162E570100408517 /* CHANGELOG.markdown */,
 				D8FC4D1A162E570100408517 /* NOTES.markdown */,
 				D8FC4D1B162E570100408517 /* TODO.markdown */,
-				D899B5901443EE2D0059A19F /* Rakefile */,
+				D8FC4D1D162E5BDB00408517 /* Jakefile.js */,
 			);
 			path = PonyExpress;
 			sourceTree = "<group>";
@@ -281,7 +281,7 @@
 				D83E1B571411528100CB1258 /* Sources */,
 				D83E1B581411528100CB1258 /* Frameworks */,
 				D83E1B591411528100CB1258 /* Headers */,
-				D899B5921443EE6E0059A19F /* Update Info.plist With git Info */,
+				D899B5921443EE6E0059A19F /* Set Bundle Version */,
 				D83E1B5A1411528100CB1258 /* Resources */,
 			);
 			buildRules = (
@@ -336,7 +336,7 @@
 		D83E1B521411528000CB1258 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Chorded Constructions";
 			};
 			buildConfigurationList = D83E1B551411528000CB1258 /* Build configuration list for PBXProject "PonyExpress" */;
@@ -392,19 +392,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
-		D899B5921443EE6E0059A19F /* Update Info.plist With git Info */ = {
+		D899B5921443EE6E0059A19F /* Set Bundle Version */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Update Info.plist With git Info";
+			name = "Set Bundle Version";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f /usr/local/bin/macrake ]; then\n  /usr/local/bin/macrake update_bundle_version\nelse\n  echo \"WARNING - could not find macrake, bundle versions left unset\"\nfi\n";
+			shellScript = "if [ -f /usr/local/bin/jake ]; then\n    PATH=$PATH:/usr/local/bin jake update\nelse\n    echo \"WARNING - could not find jake, bundle versions left unset\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -533,6 +533,7 @@
 		D83E1B871411528100CB1258 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -548,6 +549,7 @@
 		D83E1B881411528100CB1258 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -563,6 +565,7 @@
 		D83E1B8A1411528100CB1258 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
@@ -576,6 +579,7 @@
 		D83E1B8B1411528100CB1258 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
