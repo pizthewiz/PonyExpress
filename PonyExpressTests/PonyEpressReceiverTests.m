@@ -64,8 +64,8 @@
     [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError* error) {
         STAssertFalse(success, @"should report unsuccessful stop listening");
         STAssertFalse(receiver.isListening, @"should report as not listening");
-        STAssertNil(error, @"should not provide error");
-        
+        STAssertNotNil(error, @"should provide error");
+
         done = YES;
     }];
 
