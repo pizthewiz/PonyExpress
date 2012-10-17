@@ -36,7 +36,8 @@ int main (int argc, const char* argv[]) {
         NSLog(@"message to send: %@", message);
 
         PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:7777];
-        receiver.delegate = [[ReceiverDelegate alloc] init];
+        ReceiverDelegate* rd = [[ReceiverDelegate alloc] init];;
+        receiver.delegate = rd;
         NSLog(@"receiver: %@", receiver);
         BOOL status = [receiver beginListening];
         if (!status) {
@@ -45,7 +46,8 @@ int main (int argc, const char* argv[]) {
         }
 
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"0.0.0.0" port:7777];
-        sender.delegate = [[SenderDelegate alloc] init];
+        SenderDelegate* sd = [[SenderDelegate alloc] init];
+        sender.delegate = sd;
         NSLog(@"sender: %@", sender);
         [sender connectWithCompletionHandler:^(BOOL success, NSError* error) {
             [sender sendMessage:message];
