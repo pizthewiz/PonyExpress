@@ -80,10 +80,7 @@
 		D83E1B7F1411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D83E1B811411528100CB1258 /* PonyExpressSenderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressSenderTests.h; sourceTree = "<group>"; };
 		D83E1B821411528100CB1258 /* PonyExpressSenderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PonyExpressSenderTests.m; sourceTree = "<group>"; };
-		D83E1B8C1411737B00CB1258 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
-		D83E1B8D1411737B00CB1258 /* NOTES */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES; sourceTree = SOURCE_ROOT; };
 		D83E1B8E1411737B00CB1258 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
-		D83E1B8F1411737B00CB1258 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = SOURCE_ROOT; };
 		D83E1B96141190B000CB1258 /* PEOSCSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCSender.h; sourceTree = "<group>"; };
 		D83E1B97141190B000CB1258 /* PEOSCSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCSender.m; sourceTree = "<group>"; };
 		D83E1B9F14119A2C00CB1258 /* PEOSCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCMessage.h; sourceTree = "<group>"; };
@@ -105,6 +102,9 @@
 		D8C53D361436795700C8CF3E /* PEOSCReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCReceiver.m; sourceTree = "<group>"; };
 		D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonyEpressReceiverTests.h; sourceTree = "<group>"; };
 		D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonyEpressReceiverTests.m; sourceTree = "<group>"; };
+		D8FC4D19162E570100408517 /* CHANGELOG.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG.markdown; sourceTree = SOURCE_ROOT; };
+		D8FC4D1A162E570100408517 /* NOTES.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES.markdown; sourceTree = SOURCE_ROOT; };
+		D8FC4D1B162E570100408517 /* TODO.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.markdown; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,9 +185,9 @@
 				D87C17F81413F3CF005A08F3 /* AsyncSocket */,
 				D83E1B661411528100CB1258 /* Supporting Files */,
 				D83E1B8E1411737B00CB1258 /* README.markdown */,
-				D83E1B8C1411737B00CB1258 /* CHANGELOG */,
-				D83E1B8D1411737B00CB1258 /* NOTES */,
-				D83E1B8F1411737B00CB1258 /* TODO */,
+				D8FC4D19162E570100408517 /* CHANGELOG.markdown */,
+				D8FC4D1A162E570100408517 /* NOTES.markdown */,
+				D8FC4D1B162E570100408517 /* TODO.markdown */,
 				D899B5901443EE2D0059A19F /* Rakefile */,
 			);
 			path = PonyExpress;
