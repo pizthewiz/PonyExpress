@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PEOSCMessage.h"
 
 extern NSString* const PEOSCReceiverErrorDomain;
 
@@ -17,8 +18,6 @@ typedef enum PEOSCReceiverError : NSUInteger {
 } PEOSCReceiverError;
 
 typedef void(^PEOSCReceiverStopListeningCompletionHandler)(BOOL success, NSError* error);
-
-@class PEOSCMessage;
 
 @protocol PEOSCReceiverDelegate
 - (void)didReceiveMessage:(PEOSCMessage*)message;

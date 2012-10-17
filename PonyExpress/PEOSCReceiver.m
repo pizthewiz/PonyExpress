@@ -8,7 +8,6 @@
 
 #import "PEOSCReceiver.h"
 #import "PonyExpress-Internal.h"
-#import "PEOSCMessage.h"
 #import "PEOSCMessage-Private.h"
 #import "GCDAsyncUdpSocket.h"
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PEOSCMessage.h"
 
 extern NSString* const PEOSCSenderErrorDomain;
 
@@ -19,8 +20,6 @@ typedef enum PEOSCSenderError : NSUInteger {
 
 typedef void(^PEOSCSenderConnectCompletionHandler)(BOOL success, NSError* error);
 typedef void(^PEOSCSenderDisconnectCompletionHandler)(BOOL success, NSError* error);
-
-@class PEOSCMessage;
 
 @protocol PEOSCSenderDelegate
 - (void)didSendMessage:(PEOSCMessage*)message;
