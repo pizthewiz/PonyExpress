@@ -36,7 +36,7 @@ int main (int argc, const char* argv[]) {
         NSLog(@"message to send: %@", message);
 
         PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:7777];
-        ReceiverDelegate* rd = [[ReceiverDelegate alloc] init];;
+        ReceiverDelegate* rd = [[ReceiverDelegate alloc] init];
         receiver.delegate = rd;
         NSLog(@"receiver: %@", receiver);
 
