@@ -18,7 +18,7 @@ typedef enum PEOSCReceiverError : NSInteger {
     PEOSCReceiverOtherError,
 } PEOSCReceiverError;
 
-typedef void(^PEOSCReceiverStopListeningCompletionHandler)(BOOL success, NSError* error);
+typedef void(^PEOSCReceiverCompletionHandler)(BOOL success, NSError* error);
 
 @protocol PEOSCReceiverDelegate
 - (void)didReceiveMessage:(PEOSCMessage*)message;
@@ -33,5 +33,5 @@ typedef void(^PEOSCReceiverStopListeningCompletionHandler)(BOOL success, NSError
 @property (nonatomic, readonly, getter = isListening) BOOL listening;
 
 - (BOOL)beginListening:(NSError**)error;
-- (void)stopListeningWithCompletionHandler:(PEOSCReceiverStopListeningCompletionHandler)handler;
+- (void)stopListeningWithCompletionHandler:(PEOSCReceiverCompletionHandler)handler;
 @end

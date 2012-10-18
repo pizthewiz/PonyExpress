@@ -17,7 +17,7 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
 @property (nonatomic, readwrite, getter = isListening) BOOL listening;
-@property (nonatomic, strong) PEOSCReceiverStopListeningCompletionHandler stopListeningCompletionHandler;
+@property (nonatomic, strong) PEOSCReceiverCompletionHandler stopListeningCompletionHandler;
 @end
 
 @implementation PEOSCReceiver
@@ -72,7 +72,7 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
     return YES;
 }
 
-- (void)stopListeningWithCompletionHandler:(PEOSCReceiverStopListeningCompletionHandler)handler {
+- (void)stopListeningWithCompletionHandler:(PEOSCReceiverCompletionHandler)handler {
     if (!self.isListening) {
         NSError* error = [NSError errorWithDomain:PEOSCReceiverErrorDomain code:PEOSCReceiverNotListeningError userInfo:nil];
         handler(NO, error);

@@ -18,8 +18,7 @@ typedef enum PEOSCSenderError : NSInteger {
     PEOSCSenderOtherError,
 } PEOSCSenderError;
 
-typedef void(^PEOSCSenderConnectCompletionHandler)(BOOL success, NSError* error);
-typedef void(^PEOSCSenderDisconnectCompletionHandler)(BOOL success, NSError* error);
+typedef void(^PEOSCSenderCompletionHandler)(BOOL success, NSError* error);
 
 @protocol PEOSCSenderDelegate
 - (void)didSendMessage:(PEOSCMessage*)message;
@@ -35,8 +34,8 @@ typedef void(^PEOSCSenderDisconnectCompletionHandler)(BOOL success, NSError* err
 @property (nonatomic, readonly, getter = isConnected) BOOL connected;
 @property (nonatomic, weak) id <PEOSCSenderDelegate> delegate;
 
-- (void)connectWithCompletionHandler:(PEOSCSenderConnectCompletionHandler)handler;
-- (void)disconnectWithCompletionHandler:(PEOSCSenderDisconnectCompletionHandler)handler;
+- (void)connectWithCompletionHandler:(PEOSCSenderCompletionHandler)handler;
+- (void)disconnectWithCompletionHandler:(PEOSCSenderCompletionHandler)handler;
 
 - (void)sendMessage:(PEOSCMessage*)message;
 @end

@@ -20,8 +20,8 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 @property (nonatomic, readwrite, getter = isConnected) BOOL connected;
 @property (nonatomic) NSMutableDictionary* messageCache;
 @property (nonatomic) long messageTag;
-@property (nonatomic, strong) PEOSCSenderConnectCompletionHandler connectCompletionHandler;
-@property (nonatomic, strong) PEOSCSenderDisconnectCompletionHandler disconnectCompletionHandler;
+@property (nonatomic, strong) PEOSCSenderCompletionHandler connectCompletionHandler;
+@property (nonatomic, strong) PEOSCSenderCompletionHandler disconnectCompletionHandler;
 @end
 
 @implementation PEOSCSender
@@ -56,7 +56,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
 #pragma mark -
 
-- (void)connectWithCompletionHandler:(PEOSCSenderConnectCompletionHandler)handler {
+- (void)connectWithCompletionHandler:(PEOSCSenderCompletionHandler)handler {
     if (self.isConnected) {
         NSError* error = [NSError errorWithDomain:PEOSCSenderErrorDomain code:PEOSCSenderAlreadyConnectedError userInfo:nil];
         handler(NO, error);
@@ -73,7 +73,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
     }
 }
 
-- (void)disconnectWithCompletionHandler:(PEOSCSenderDisconnectCompletionHandler)handler {
+- (void)disconnectWithCompletionHandler:(PEOSCSenderCompletionHandler)handler {
     if (!self.isConnected) {
         NSError* error = [NSError errorWithDomain:PEOSCSenderErrorDomain code:PEOSCSenderNotConnectedError userInfo:nil];
         handler(NO, error);
