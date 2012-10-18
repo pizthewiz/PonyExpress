@@ -147,8 +147,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 #pragma mark - PRIVATE
  
  - (void)_setupSocket {
-     GCDAsyncUdpSocket* sock = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-     self.socket = sock;
+     self.socket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
 }
 
 - (void)_tearDownSocket {
