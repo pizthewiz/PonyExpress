@@ -11,8 +11,8 @@
 
 extern NSString* const PEOSCReceiverErrorDomain;
 
-typedef enum PEOSCReceiverError : NSUInteger {
-    PEOSCReceiverNoError,
+typedef enum PEOSCReceiverError : NSInteger {
+    PEOSCReceiverNoError = 0,
     PEOSCReceiverAlreadyListeningError,
     PEOSCReceiverNotListeningError,
     PEOSCReceiverOtherError,

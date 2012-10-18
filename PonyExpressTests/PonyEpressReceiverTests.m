@@ -65,8 +65,8 @@
     __block BOOL done = NO;
     [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError* error) {
         STAssertFalse(success, @"should report unsuccessful stop listening");
-        STAssertFalse(receiver.isListening, @"should report as not listening");
         STAssertNotNil(error, @"should provide error");
+        STAssertFalse(receiver.isListening, @"should report as not listening");
 
         done = YES;
     }];
@@ -85,8 +85,8 @@
     __block BOOL done = NO;
     [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError* error) {
         STAssertTrue(success, @"should report successful stop listening");
-        STAssertFalse(receiver.isListening, @"should report as not listening");
         STAssertNil(error, @"should not provide error");
+        STAssertFalse(receiver.isListening, @"should report as not listening");
 
         done = YES;
     }];
@@ -114,8 +114,8 @@
     __block BOOL done = NO;
     [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError* stopError) {
         STAssertTrue(success, @"should report successful stop listening");
-        STAssertFalse(receiver.isListening, @"should report as not listening");
         STAssertNil(stopError, @"should not provide error");
+        STAssertFalse(receiver.isListening, @"should report as not listening");
 
         // re-attempt to connect second
         status = [otherReceiver beginListening:&error];
@@ -140,6 +140,7 @@
     status = [receiver beginListening:&error];
     STAssertFalse(status, @"should report unsuccessful begin listening");
     STAssertNotNil(error, @"should provide an error");
+    STAssertEquals(error.code, PEOSCReceiverAlreadyListeningError, @"should provide already listening error");
     STAssertTrue(receiver.isListening, @"should report as listening");
 }
 
@@ -148,8 +149,9 @@
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
     [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError* error) {
         STAssertFalse(success, @"should report unsuccessful stop listening");
-        STAssertFalse(receiver.isListening, @"should report as not listening");
         STAssertNotNil(error, @"should provide error");
+        STAssertEquals(error.code, PEOSCReceiverNotListeningError, @"should provide not listening error");
+        STAssertFalse(receiver.isListening, @"should report as not listening");
 
         done = YES;
     }];

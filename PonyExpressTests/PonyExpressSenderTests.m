@@ -168,8 +168,9 @@
         // double connect attempt
         [sender connectWithCompletionHandler:^(BOOL success, NSError* error) {
             STAssertFalse(success, @"should report unsuccessful connection");
-            STAssertTrue(sender.isConnected, @"should report as connected");
             STAssertNotNil(error, @"should have an error");
+            STAssertEquals(error.code, PEOSCSenderAlreadyConnectedError, @"should provide already connected error");
+            STAssertTrue(sender.isConnected, @"should report as connected");
 
             done = YES;
         }];
@@ -184,8 +185,9 @@
     PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
     [sender disconnectWithCompletionHandler:^(BOOL success, NSError* error) {
         STAssertFalse(success, @"should report unsuccessful disconnection");
+        STAssertNotNil(error, @"should have an error");
+        STAssertEquals(error.code, PEOSCSenderNotConnectedError, @"should provide not connected error");
         STAssertFalse(sender.isConnected, @"should report as disconnected");
-        STAssertNotNil(error, @"should not have an error");
 
         done = YES;
     }];

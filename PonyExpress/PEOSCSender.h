@@ -11,8 +11,8 @@
 
 extern NSString* const PEOSCSenderErrorDomain;
 
-typedef enum PEOSCSenderError : NSUInteger {
-    PEOSCSenderNoError,
+typedef enum PEOSCSenderError : NSInteger {
+    PEOSCSenderNoError = 0,
     PEOSCSenderAlreadyConnectedError,
     PEOSCSenderNotConnectedError,
     PEOSCSenderOtherError,
