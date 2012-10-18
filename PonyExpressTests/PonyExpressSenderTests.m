@@ -75,10 +75,10 @@
     STAssertTrue(WaitFor(^BOOL { return done; }), @"async connect failed");
 }
 
+// BAD TEST - a bad host usually does not error out until later on, this will NOT fail
 - (void)testConnectionToBadHost {
     __block BOOL done = NO;
 
-    // NB - a bad host usually does not error out until after
     PEOSCSender* sender = [PEOSCSender senderWithHost:@"log lady" port:self.unprivledgedPort];
     [sender connectWithCompletionHandler:^(BOOL success, NSError* error) {
         STAssertFalse(success, @"should report unsuccessful connection");
