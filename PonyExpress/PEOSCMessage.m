@@ -303,7 +303,7 @@ static Float32 readFloat(NSData* data, NSUInteger start) {
 
 - (NSString*)description {
     NSMutableString* argDescription = [NSMutableString string];
-    [self.arguments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [self.arguments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
         BOOL isFirstOrLastArg = idx == 0 || idx+1 > self.arguments.count;
         NSString* description = nil;
         if ([obj isKindOfClass:[NSData class]] && [(NSData*)obj length] > 4 * 1024) {
@@ -422,7 +422,7 @@ bail:
         return NO;
 
     __block BOOL status = YES;
-    [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
+    [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL* stop) {
         if ([PEOSCMessage argumentRequiredByType:type]) {
             if (([type isEqualToString:PEOSCMessageTypeTagInteger] || [type isEqualToString:PEOSCMessageTypeTagFloat]) && ![argument isKindOfClass:[NSNumber class]]) {
                 CCDebugLog(@"Integer and Float arguments should be represented via NSNumber");
@@ -514,7 +514,7 @@ bail:
 
     // TODO - it would be nice to have a value class that can serialize then create a message from address and values
     __block NSMutableData* argumentData = [NSMutableData data];
-    [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
+    [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL* stop) {
         if (![[self class] argumentRequiredByType:type])
             return;
         if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {

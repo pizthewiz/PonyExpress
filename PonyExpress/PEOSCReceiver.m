@@ -106,7 +106,7 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 }
 
 - (void)_tearDownSocket {
-    [self stopListeningWithCompletionHandler:^(BOOL success, NSError *error) {
+    [self stopListeningWithCompletionHandler:^(BOOL success, NSError* error) {
         self.socket.delegate = nil;
         self.socket = nil;
     }];

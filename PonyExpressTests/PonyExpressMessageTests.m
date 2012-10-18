@@ -197,7 +197,7 @@
 
 - (void)testDataEnumerator {
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:self.goodAddress typeTags:self.allTypes arguments:self.allArgs];
-    [message enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
+    [message enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL* stop) {
         if ([PEOSCMessage argumentRequiredByType:type])
             STAssertNotNil(argument, @"should provide argument for type %@", type);
         else
@@ -205,7 +205,7 @@
     }];
 
     __block NSUInteger iterations = 0;
-    [message enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL *stop) {
+    [message enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL* stop) {
         if ([type isEqualToString:PEOSCMessageTypeTagTrue])
             *stop = YES;
         iterations++;
