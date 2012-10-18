@@ -2,6 +2,7 @@
 ### GENERAL
 - rename sender and receiver to denote UDP
 - sort out bundles
+- take stance on port reuse, either reuse and demo multicast or don't and don't
 
 ### MESSAGE
 - add initializers with vararg
