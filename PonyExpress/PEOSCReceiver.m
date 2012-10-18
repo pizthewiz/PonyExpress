@@ -49,20 +49,22 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 
 #pragma mark -
 
-- (BOOL)beginListening {
+- (BOOL)beginListening:(NSError**)error {
     if (self.isListening) {
+        if (error) {
+            *error = [NSError errorWithDomain:PEOSCReceiverErrorDomain code:PEOSCReceiverAlreadyListeningError userInfo:nil];
+        }
         return NO;
     }
 
-    NSError* error;
-    BOOL status = [self.socket bindToPort:self.port error:&error];
+    BOOL status = [self.socket bindToPort:self.port error:error];
     if (!status) {
-        CCErrorLog(@"ERROR - failed to bind to port %d with error %@", self.port, [error localizedDescription]);
+        CCErrorLog(@"ERROR - failed to bind to port %d with error %@", self.port, [*error localizedDescription]);
         return NO;
     }
-    status = [self.socket beginReceiving:&error];
+    status = [self.socket beginReceiving:error];
     if (!status) {
-        CCErrorLog(@"ERROR - failed to begin receiving on socket with error %@", [error localizedDescription]);
+        CCErrorLog(@"ERROR - failed to begin receiving on socket with error %@", [*error localizedDescription]);
         return NO;
     }
 

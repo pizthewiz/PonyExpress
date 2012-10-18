@@ -39,9 +39,11 @@ int main (int argc, const char* argv[]) {
         ReceiverDelegate* rd = [[ReceiverDelegate alloc] init];;
         receiver.delegate = rd;
         NSLog(@"receiver: %@", receiver);
-        BOOL status = [receiver beginListening];
+
+        NSError* error;
+        BOOL status = [receiver beginListening:&error];
         if (!status) {
-            NSLog(@"ERROR - receiver failed to begin listneing: %@", receiver);
+            NSLog(@"ERROR - receiver failed to begin listneing: %@ due to - %@", receiver, [error localizedDescription]);
             return 1;
         }
 

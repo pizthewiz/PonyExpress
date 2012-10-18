@@ -13,6 +13,7 @@ extern NSString* const PEOSCReceiverErrorDomain;
 
 typedef enum PEOSCReceiverError : NSUInteger {
     PEOSCReceiverNoError,
+    PEOSCReceiverAlreadyListeningError,
     PEOSCReceiverNotListeningError,
     PEOSCReceiverOtherError,
 } PEOSCReceiverError;
@@ -31,6 +32,6 @@ typedef void(^PEOSCReceiverStopListeningCompletionHandler)(BOOL success, NSError
 @property (nonatomic, weak) id <PEOSCReceiverDelegate> delegate;
 @property (nonatomic, readonly, getter = isListening) BOOL listening;
 
-- (BOOL)beginListening;
+- (BOOL)beginListening:(NSError**)error;
 - (void)stopListeningWithCompletionHandler:(PEOSCReceiverStopListeningCompletionHandler)handler;
 @end

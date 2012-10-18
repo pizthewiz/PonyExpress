@@ -25,7 +25,7 @@
 }
 
 - (void)tearDown {
-    // Tear-down code here.
+    // TODO - tear down receiver?
 
     [super tearDown];
 }
@@ -56,8 +56,10 @@
 
 - (void)testListeningFlowOnAPrivledgedPort {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.privledgedPort];
-    BOOL status = [receiver beginListening];
+    NSError* error;
+    BOOL status = [receiver beginListening:&error];
     STAssertFalse(status, @"should report unsuccessful begin listening");
+    STAssertNotNil(error, @"should provide error");
     STAssertFalse(receiver.isListening, @"should report as not listening");
 
     __block BOOL done = NO;
@@ -74,8 +76,10 @@
 
 - (void)testListeningFlowOnAnUnprivledgedPort {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
-    BOOL status = [receiver beginListening];
+    NSError* error;
+    BOOL status = [receiver beginListening:&error];
     STAssertTrue(status, @"should report successful begin listening");
+    STAssertNil(error, @"should not provide error");
     STAssertTrue(receiver.isListening, @"should report as listening");
 
     __block BOOL done = NO;
@@ -90,28 +94,33 @@
     STAssertTrue(WaitFor(^BOOL { return done; }), @"async stop listening failed");
 }
 
-// TODO - multicast vs unicast makes a difference here
+// NB - test doesn't make sense, socket option SO_REUSEPORT enabled, this will NOT fail
 - (void)testListenFlowOnAPortInUse {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
-    __block BOOL status = [receiver beginListening];
+    __block NSError* error;
+    __block BOOL status = [receiver beginListening:&error];
     STAssertTrue(status, @"should report successful begin listening");
+    STAssertNil(error, @"should not provide error");
     STAssertTrue(receiver.isListening, @"should report as listening");
 
+    // attempt to connect second
     PEOSCReceiver* otherReceiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
-    status = [otherReceiver beginListening];
+    status = [otherReceiver beginListening:&error];
     STAssertFalse(status, @"should report unsuccessful begin listening");
-    STAssertFalse(receiver.isListening, @"should report as not listening");
+    STAssertNotNil(error, @"should provide error");
+    STAssertFalse(otherReceiver.isListening, @"should report as not listening");
 
     // disconnect first
     __block BOOL done = NO;
-    [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError* error) {
+    [receiver stopListeningWithCompletionHandler:^(BOOL success, NSError* stopError) {
         STAssertTrue(success, @"should report successful stop listening");
         STAssertFalse(receiver.isListening, @"should report as not listening");
-        STAssertNil(error, @"should not provide error");
+        STAssertNil(stopError, @"should not provide error");
 
-        // connect second
-        status = [otherReceiver beginListening];
+        // re-attempt to connect second
+        status = [otherReceiver beginListening:&error];
         STAssertTrue(status, @"should report successful begin listening");
+        STAssertNil(error, @"should not provide error");
         STAssertTrue(otherReceiver.isListening, @"should report as listening");
 
         done = YES;
@@ -122,12 +131,15 @@
 
 - (void)testListeningWhileListening {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
-    BOOL status = [receiver beginListening];
+    NSError* error;
+    BOOL status = [receiver beginListening:&error];
     STAssertTrue(status, @"should report successful begin listening");
+    STAssertNil(error, @"should not provide error");
     STAssertTrue(receiver.isListening, @"should report as listening");
 
-    status = [receiver beginListening];
+    status = [receiver beginListening:&error];
     STAssertFalse(status, @"should report unsuccessful begin listening");
+    STAssertNotNil(error, @"should provide an error");
     STAssertTrue(receiver.isListening, @"should report as listening");
 }
 
