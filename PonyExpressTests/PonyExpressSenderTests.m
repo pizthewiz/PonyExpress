@@ -30,7 +30,7 @@
 }
 
 - (void)tearDown {
-    // Tear-down code here.
+    // TODO - senders should disconnect?
 
     [super tearDown];
 }

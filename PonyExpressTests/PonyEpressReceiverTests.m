@@ -25,7 +25,7 @@
 }
 
 - (void)tearDown {
-    // TODO - tear down receiver?
+    // TODO - receivers should stop listening?
 
     [super tearDown];
 }
