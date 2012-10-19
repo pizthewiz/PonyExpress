@@ -28,10 +28,10 @@
 
     self.allTypes = @[PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, PEOSCMessageTypeTagTimetag];
     // TODO - set proper NTP TIME when available
-    self.allArgs = @[@(13), [NSNumber numberWithFloat:100./3.], @"STRING", stringData, [NSDate date]];
+    self.allArgs = @[@13, @33.3F, @"STRING", stringData, [NSDate date]];
 
     self.workingTypes = @[PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse];
-    self.workingArgs = @[@(13), [NSNumber numberWithFloat:100./3.], @"STRING", stringData];
+    self.workingArgs = @[@13, @33.3F, @"STRING", stringData];
 
     self.goodAddress = @"/oscillator/3/frequency";
     self.badAddress = @"bad/address";
@@ -57,7 +57,7 @@
 
 - (void)testCreationArguments {
     NSArray* typeTags = @[PEOSCMessageTypeTagInteger];
-    NSArray* arguments = @[@(440)];
+    NSArray* arguments = @[@440];
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:self.goodAddress typeTags:typeTags arguments:arguments];
     STAssertEqualObjects(self.goodAddress, message.address, @"should store proper address");
     STAssertEqualObjects(typeTags, message.typeTags, @"should store proper type tags");
@@ -161,7 +161,7 @@
     STAssertNil([message _typeTagString], @"should catch nil type tag list");
     STAssertFalse([message _areTypeTagsValid], @"should report string from nil type tag list as invalid");
 
-    message.typeTags = @[PEOSCMessageTypeTagImpulse, @(13)];
+    message.typeTags = @[PEOSCMessageTypeTagImpulse, @13];
     STAssertNil([message _typeTagString], @"should not generate a type tag string when the list contains a bad element");
     STAssertFalse([message _areTypeTagsValid], @"should report string from bad type tag list as invalid");
 }

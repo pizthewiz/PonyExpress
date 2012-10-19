@@ -31,7 +31,7 @@
 int main (int argc, const char* argv[]) {
     @autoreleasepool {
         NSArray* typeTags = @[PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse];
-        NSArray* arguments = @[@(13), [NSNumber numberWithFloat:100./3.], @"STRING", [@"One Eyed Jacks" dataUsingEncoding:NSASCIIStringEncoding]];
+        NSArray* arguments = @[@13, @33.3F, @"STRING", [@"One Eyed Jacks" dataUsingEncoding:NSASCIIStringEncoding]];
         PEOSCMessage* message = [PEOSCMessage messageWithAddress:@"/oscillator/4/frequency" typeTags:typeTags arguments:arguments];
         NSLog(@"message to send: %@", message);
 
