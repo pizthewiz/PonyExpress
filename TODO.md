@@ -1,29 +1,27 @@
 
 ### GENERAL
-- rename sender and receiver to denote UDP
-- sort out bundles
 - take stance on port reuse, either reuse and demo multicast or don't and don't
+- investigate static library option for iOS (may not be necessary)
+- sort out bundles
 
 ### MESSAGE
-- add initializers with vararg
-- make debug buffer dump multi-line and byte-gap configurable
 - implement Timetag
-- do a better job with NSData allocation and writing in -_data
+- do a better job with NSData allocation and writing in -_data?
 - ignore unknown types (is that even possible?)
+- make debug buffer dump multi-line and byte-gap configurable
 
 ### SENDER
 - document 9k UDP limit and Blob use
 - replace sender delegate with a block, which could simulate a delate pattern anyways
-- migrate message cache to an NSCache
 
 ### RECEIVER
 - consider some sort of simple router
 
 ### UNIT TESTS
+- may need to consider disconnect / stop listening in -tearDown
 - test message argument serialization
 - test message argument deserialization
 - test sender with bad host
-- remove port in use / privileged port tests as they 
 
 ### FUNCTIONAL TESTS
 - functional check receipt of message
@@ -43,7 +41,6 @@
 ### LATER
 - mDNS receiver announcement
 - consider a PEOSCValue class to wrap boxing
-- add socket management layer to allow sharing
-- static library option for iOS
-- add TCP and Serial sender/receiver classes
+- add socket management layer to allow sharing (only relevant if port reuse is disabled)
+- add TCP and Serial sender/receiver classes via [SLIP](http://en.wikipedia.org/wiki/Serial_Line_Internet_Protocol)
 - allow end points to be discovered through query proposal
