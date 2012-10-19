@@ -321,11 +321,11 @@ static Float32 readFloat(NSData* data, NSUInteger start) {
     BOOL stop = NO;
     NSUInteger argIndex = 0;
     for (NSString* type in self.typeTags) {
-        id argument = [PEOSCMessage argumentRequiredByType:type] ? [self.arguments objectAtIndex:argIndex++] : nil;
+        id argument = [PEOSCMessage argumentRequiredByType:type] ? self.arguments[argIndex++] : nil;
         block(type, argument, &stop);
-        if (!stop)
-            continue;
-        break;
+        if (stop) {
+            break;
+        }
     }
 }
 

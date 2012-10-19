@@ -122,7 +122,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
     CCDebugLogSelector();
 
     NSString* key = [NSString stringWithFormat:@"%lu", tag];
-    PEOSCMessage* message = [self.messageCache objectForKey:key];
+    PEOSCMessage* message = self.messageCache[key];
     [self.delegate didSendMessage:message];
     [self.messageCache removeObjectForKey:key];
 }
@@ -132,7 +132,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
     CCErrorLog(@"ERROR - failed to send data with tag %lu to host %@:%d due to %@", tag, self.host, self.port, [error localizedDescription]);
 
     NSString* key = [NSString stringWithFormat:@"%lu", tag];
-    PEOSCMessage* message = [self.messageCache objectForKey:key];
+    PEOSCMessage* message = self.messageCache[key];
     [self.delegate didNotSendMessage:message dueToError:error];
     [self.messageCache removeObjectForKey:key];
 }
