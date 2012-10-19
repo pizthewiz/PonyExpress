@@ -89,6 +89,8 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didReceiveData:(NSData*)data fromAddress:(NSData*)address withFilterContext:(id)filterContext {
     CCDebugLogSelector();
 
+    // TODO - in a multicast situation, it is possible to receive the same data twice, once via IPv4 and again via IPv6
+
     PEOSCMessage* message = [PEOSCMessage messageWithData:data];
     [self.delegate didReceiveMessage:message];
 }
