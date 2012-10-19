@@ -13,7 +13,7 @@
 
 NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 
-@interface PEOSCReceiver()
+@interface PEOSCReceiver ()
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
 @property (nonatomic, readwrite, getter = isListening) BOOL listening;

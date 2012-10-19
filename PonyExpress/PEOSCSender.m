@@ -13,7 +13,7 @@
 
 NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
-@interface PEOSCSender()
+@interface PEOSCSender ()
 @property (nonatomic, readwrite, strong) NSString* host;
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;

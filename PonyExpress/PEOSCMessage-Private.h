@@ -3,12 +3,12 @@
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 2 Sept 2011.
-//  Copyright (c) 2011 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2011-2012 Chorded Constructions. All rights reserved.
 //
 
 #import "PEOSCMessage.h"
 
-@interface PEOSCMessage()
+@interface PEOSCMessage ()
 + (id)messageWithData:(NSData*)data;
 - (id)initWithData:(NSData*)data;
 
