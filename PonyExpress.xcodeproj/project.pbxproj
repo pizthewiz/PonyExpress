@@ -108,7 +108,6 @@
 		D83E1B7F1411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D83E1B811411528100CB1258 /* PonyExpressSenderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressSenderTests.h; sourceTree = "<group>"; };
 		D83E1B821411528100CB1258 /* PonyExpressSenderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PonyExpressSenderTests.m; sourceTree = "<group>"; };
-		D83E1B8E1411737B00CB1258 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
 		D83E1B96141190B000CB1258 /* PEOSCSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCSender.h; sourceTree = "<group>"; };
 		D83E1B97141190B000CB1258 /* PEOSCSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCSender.m; sourceTree = "<group>"; };
 		D83E1B9F14119A2C00CB1258 /* PEOSCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCMessage.h; sourceTree = "<group>"; };
@@ -120,6 +119,10 @@
 		D83E1BDF1412F87A00CB1258 /* OrphanExample.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = OrphanExample.1; sourceTree = "<group>"; };
 		D84ED0711417FC9C00AD4737 /* PonyExpressMessageTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonyExpressMessageTests.h; sourceTree = "<group>"; };
 		D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonyExpressMessageTests.m; sourceTree = "<group>"; };
+		D8509D0E1631BE0B00CF2F14 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
+		D8509D0F1631BE0B00CF2F14 /* NOTES.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES.md; sourceTree = SOURCE_ROOT; };
+		D8509D101631BE0B00CF2F14 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
+		D8509D111631BE0B00CF2F14 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.md; sourceTree = SOURCE_ROOT; };
 		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
 		D89B67EB1543727A00462DDD /* PonyExpressTestHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressTestHelper.h; sourceTree = "<group>"; };
 		D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
@@ -128,9 +131,6 @@
 		D8C53D361436795700C8CF3E /* PEOSCReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCReceiver.m; sourceTree = "<group>"; };
 		D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonyEpressReceiverTests.h; sourceTree = "<group>"; };
 		D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonyEpressReceiverTests.m; sourceTree = "<group>"; };
-		D8FC4D19162E570100408517 /* CHANGELOG.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG.markdown; sourceTree = SOURCE_ROOT; };
-		D8FC4D1A162E570100408517 /* NOTES.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES.markdown; sourceTree = SOURCE_ROOT; };
-		D8FC4D1B162E570100408517 /* TODO.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.markdown; sourceTree = SOURCE_ROOT; };
 		D8FC4D1D162E5BDB00408517 /* Jakefile.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Jakefile.js; sourceTree = SOURCE_ROOT; };
 		D8FC4D2D162E898200408517 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = vendor/ocmock/Source/OCMock.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -211,10 +211,6 @@
 				D8C53D361436795700C8CF3E /* PEOSCReceiver.m */,
 				D87C17F81413F3CF005A08F3 /* AsyncSocket */,
 				D83E1B661411528100CB1258 /* Supporting Files */,
-				D83E1B8E1411737B00CB1258 /* README.markdown */,
-				D8FC4D19162E570100408517 /* CHANGELOG.markdown */,
-				D8FC4D1A162E570100408517 /* NOTES.markdown */,
-				D8FC4D1B162E570100408517 /* TODO.markdown */,
 				D8FC4D1D162E5BDB00408517 /* Jakefile.js */,
 			);
 			path = PonyExpress;
@@ -226,6 +222,10 @@
 				D83E1B671411528100CB1258 /* PonyExpress-Info.plist */,
 				D83E1B681411528100CB1258 /* InfoPlist.strings */,
 				D83E1B6B1411528100CB1258 /* PonyExpress-Prefix.pch */,
+				D8509D101631BE0B00CF2F14 /* README.md */,
+				D8509D0E1631BE0B00CF2F14 /* CHANGELOG.md */,
+				D8509D0F1631BE0B00CF2F14 /* NOTES.md */,
+				D8509D111631BE0B00CF2F14 /* TODO.md */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
