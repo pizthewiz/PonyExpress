@@ -149,9 +149,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */,
+				D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */,
 				D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */,
 				D8FC4D3E162E899400408517 /* OCMock.framework in Frameworks */,
-				D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
