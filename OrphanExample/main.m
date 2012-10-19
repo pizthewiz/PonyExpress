@@ -47,7 +47,10 @@ int main (int argc, const char* argv[]) {
             return 1;
         }
 
-        PEOSCSender* sender = [PEOSCSender senderWithHost:@"0.0.0.0" port:7777];
+        // 0.0.0.0 all local interfaces
+        // 127.0.0.1 loopback interface
+        // 224.0.0.1 multicast to all registered parties
+        PEOSCSender* sender = [PEOSCSender senderWithHost:@"127.0.0.1" port:7777];
         SenderDelegate* sd = [[SenderDelegate alloc] init];
         sender.delegate = sd;
         NSLog(@"sender: %@", sender);
