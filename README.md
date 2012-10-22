@@ -36,7 +36,7 @@ the bundle version is optionally set from the repository state using [Node.js](h
 - link global modules to local PonyExpress clone `npm link jake async NodObjC`
 
 ## THANKS
-- Dean McNamee for his great OSC implementation for node.js [omgosc](https://github.com/deanm/omgosc)
+- Dean McNamee for his great Node.js OSC implementation [omgosc](https://github.com/deanm/omgosc)
 - Ray Cutler for his conical OSC implementation in [VVOpenSource](http://code.google.com/p/vvopensource/)
 - Mirek Rusin for inspiration and reference with his svelte [CoreOSC](https://github.com/mirek/CoreOSC/) offering
 - Robbie Hanson [AsyncSocket](https://github.com/robbiehanson/CocoaAsyncSocket) and contributors for a convenient UDP socket wrapper
