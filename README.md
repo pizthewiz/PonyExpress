@@ -33,7 +33,7 @@ the bundle version is optionally set from the repository state using [Node.js](h
 
 - install Node.js 0.8.12 (or later) from [binary package](http://nodejs.org/dist/v0.8.12/node-v0.8.12.pkg) or build and install from [source](http://nodejs.org/dist/v0.8.12/node-v0.8.12.tar.gz)
 - install node modules globally `npm install -g jake async NodObjC`
-- link global modules to local PonyExpress clone `npm link jake async NodObjC`
+- link global modules to local PonyExpress clone `npm link async NodObjC`
 
 ## THANKS
 - Dean McNamee for his great Node.js OSC implementation [omgosc](https://github.com/deanm/omgosc)
