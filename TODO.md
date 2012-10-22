@@ -13,6 +13,7 @@
 ### SENDER
 - document 9k UDP limit and Blob use
 - replace sender delegate with a block, which could simulate a delate pattern anyways
+- offer connected variant in addition to connectionless
 
 ### RECEIVER
 - consider some sort of simple router

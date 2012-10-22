@@ -17,11 +17,8 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 @property (nonatomic, readwrite, strong) NSString* host;
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
-@property (nonatomic, readwrite, getter = isConnected) BOOL connected;
 @property (nonatomic) NSMutableDictionary* messageCache;
 @property (nonatomic) long messageTag;
-@property (nonatomic, strong) PEOSCSenderCompletionHandler connectCompletionHandler;
-@property (nonatomic, strong) PEOSCSenderCompletionHandler disconnectCompletionHandler;
 @end
 
 @implementation PEOSCSender
@@ -56,40 +53,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
 #pragma mark -
 
-- (void)connectWithCompletionHandler:(PEOSCSenderCompletionHandler)handler {
-    if (self.isConnected) {
-        NSError* error = [NSError errorWithDomain:PEOSCSenderErrorDomain code:PEOSCSenderAlreadyConnectedError userInfo:nil];
-        handler(NO, error);
-        return;
-    }
-
-    self.connectCompletionHandler = handler;
-
-    NSError* error;
-    BOOL status = [self.socket connectToHost:self.host onPort:self.port error:&error];
-    if (!status) {
-        CCErrorLog(@"ERROR - failed to connect to host: %@:%d - %@", self.host, self.port, [error localizedDescription]);
-        self.connectCompletionHandler(NO, error);
-    }
-}
-
-- (void)disconnectWithCompletionHandler:(PEOSCSenderCompletionHandler)handler {
-    if (!self.isConnected) {
-        NSError* error = [NSError errorWithDomain:PEOSCSenderErrorDomain code:PEOSCSenderNotConnectedError userInfo:nil];
-        handler(NO, error);
-        return;
-    }
-
-    self.disconnectCompletionHandler = handler;
-    [self.socket close];
-}
-
 - (void)sendMessage:(PEOSCMessage*)message {
-    if (!self.isConnected) {
-        CCErrorLog(@"ERROR - cannot send message when disconnected");
-        return;
-    }
-
     NSData* messageData = [message _data];
     if (!messageData) {
         CCErrorLog(@"ERROR - failed to send message: %@", message);
@@ -99,7 +63,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
     // hold onto the message for a spell
     [self.messageCache setObject:message forKey:[NSString stringWithFormat:@"%lu", self.messageTag]];
 
-    [self.socket sendData:messageData withTimeout:-1.0 tag:self.messageTag];
+    [self.socket sendData:messageData toHost:self.host port:self.port withTimeout:-1.0 tag:self.messageTag];
     self.messageTag = self.messageTag+1;
 }
 
@@ -107,15 +71,11 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didConnectToAddress:(NSData*)address {
     CCDebugLogSelector();
-
-    self.connected = YES;
-    self.connectCompletionHandler(YES, nil);
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didNotConnect:(NSError*)error {
     CCDebugLogSelector();
     CCErrorLog(@"ERROR - failed to connect to host %@:%d due to %@", self.host, self.port, [error localizedDescription]);
-    self.connectCompletionHandler(NO, error);
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didSendDataWithTag:(long)tag {
@@ -139,9 +99,6 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket*)sock withError:(NSError*)error {
     CCDebugLogSelector();
-
-    self.connected = NO;
-    self.disconnectCompletionHandler(YES, error);
 }
 
 #pragma mark - PRIVATE
@@ -151,10 +108,8 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 }
 
 - (void)_tearDownSocket {
-    [self disconnectWithCompletionHandler:^(BOOL success, NSError* error) {
-        self.socket.delegate = nil;
-        self.socket = nil;
-    }];
+    self.socket.delegate = nil;
+    self.socket = nil;
 }
 
 @end

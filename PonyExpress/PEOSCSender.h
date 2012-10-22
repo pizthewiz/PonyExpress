@@ -13,12 +13,8 @@ extern NSString* const PEOSCSenderErrorDomain;
 
 typedef enum PEOSCSenderError : NSInteger {
     PEOSCSenderNoError = 0,
-    PEOSCSenderAlreadyConnectedError,
-    PEOSCSenderNotConnectedError,
     PEOSCSenderOtherError,
 } PEOSCSenderError;
-
-typedef void(^PEOSCSenderCompletionHandler)(BOOL success, NSError* error);
 
 @protocol PEOSCSenderDelegate
 - (void)didSendMessage:(PEOSCMessage*)message;
@@ -31,11 +27,7 @@ typedef void(^PEOSCSenderCompletionHandler)(BOOL success, NSError* error);
 
 @property (nonatomic, readonly, strong) NSString* host;
 @property (nonatomic, readonly) UInt16 port;
-@property (nonatomic, readonly, getter = isConnected) BOOL connected;
 @property (nonatomic, weak) id <PEOSCSenderDelegate> delegate;
-
-- (void)connectWithCompletionHandler:(PEOSCSenderCompletionHandler)handler;
-- (void)disconnectWithCompletionHandler:(PEOSCSenderCompletionHandler)handler;
 
 - (void)sendMessage:(PEOSCMessage*)message;
 @end
