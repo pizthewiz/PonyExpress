@@ -22,10 +22,10 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
 #pragma mark OSC VALUE CATEGORIES
 
-@interface NSString(PEAdditions)
+@interface NSString (PEAdditions)
 - (NSString*)oscString;
 @end
-@implementation NSString(PEAdditions)
+@implementation NSString (PEAdditions)
 - (NSString*)oscString {
     // string + 1 null in termination + 0-3 nulls in padding for 4-byte alignment
     NSUInteger numberOfNulls = 4 - (self.length & 3);
@@ -33,12 +33,12 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 @end
 
-@interface NSNumber(PEAdditions)
+@interface NSNumber (PEAdditions)
 - (SInt32)oscInt;
 - (CFSwappedFloat32)oscFloat;
 @end
 // OSC uses big-endian numerical values
-@implementation NSNumber(PEAdditions)
+@implementation NSNumber (PEAdditions)
 - (SInt32)oscInt {
     SInt32 value = 0;
     CFNumberGetValue((__bridge CFNumberRef)self, kCFNumberSInt32Type, &value);
@@ -53,10 +53,10 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 @end
 
-@interface NSData(PEAdditions)
+@interface NSData (PEAdditions)
 - (NSData*)oscBlob;
 @end
-@implementation NSData(PEAdditions)
+@implementation NSData (PEAdditions)
 - (NSData*)oscBlob {
     // int32 length + 8bit bytes + 0-3 nulls in padding for 4-byte alignment
     SInt32 swappedLength = [[NSNumber numberWithUnsignedInteger:self.length] oscInt];
