@@ -7,7 +7,6 @@
 //
 
 #import "PonyExpressSenderTests.h"
-//#import "PonyExpressTestHelper.h"
 #import "PEOSCMessage.h"
 #import "PEOSCMessage-Private.h"
 #import "PEOSCSender.h"
@@ -49,13 +48,6 @@
     PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
     STAssertEqualObjects(self.loopbackHost, sender.host, @"should store proper host");
     STAssertEquals(self.unprivledgedPort, sender.port, @"should store port");
-}
-
-- (void)testDelegateAssignment {
-    PEOSCSender* sender = [PEOSCSender senderWithHost:self.loopbackHost port:self.unprivledgedPort];
-    id mockDelegate = [OCMockObject mockForProtocol:@protocol(PEOSCSenderDelegate)];
-    sender.delegate = mockDelegate;
-    STAssertEqualObjects(mockDelegate, sender.delegate, @"should assign proper delegate");
 }
 
 // TODO - sending

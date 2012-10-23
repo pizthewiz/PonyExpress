@@ -12,7 +12,6 @@
 
 ### SENDER
 - document 9k UDP limit and Blob use
-- replace sender delegate with a block, which could simulate a delate pattern anyways
 - offer connected variant in addition to connectionless
 
 ### RECEIVER
@@ -30,10 +29,8 @@
 - functional check handling of send bad message data
 - functional check handling of receive bad message data
 - send data on privileged port, < 1024
-- try to connect/send data to port in use
-- send data to bad host
 - receive data on privileged port, < 1024
-- try to connect/receive data to port in use
+- receive data on a port in use
 
 ### MISC
 - sample router? ?*[!-]{,}//

@@ -17,22 +17,11 @@
 }
 @end
 
-@interface SenderDelegate : NSObject <PEOSCSenderDelegate>
-@end
-@implementation SenderDelegate
-- (void)didSendMessage:(PEOSCMessage*)message {
-    NSLog(@"delegate sent: %@", message);
-}
-- (void)didNotSendMessage:(PEOSCMessage*)message dueToError:(NSError*)error {
-    NSLog(@"delegate FAILED to send: %@ due to - %@", message, [error localizedDescription]);
-}
-@end
-
 int main (int argc, const char* argv[]) {
     @autoreleasepool {
         NSArray* typeTags = @[PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse];
         NSArray* arguments = @[@13, @33.3F, @"STRING", [@"One Eyed Jacks" dataUsingEncoding:NSASCIIStringEncoding]];
-        PEOSCMessage* message = [PEOSCMessage messageWithAddress:@"/oscillator/4/frequency" typeTags:typeTags arguments:arguments];
+        __block PEOSCMessage* message = [PEOSCMessage messageWithAddress:@"/oscillator/4/frequency" typeTags:typeTags arguments:arguments];
         NSLog(@"message to send: %@", message);
 
         PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:7777];
@@ -51,10 +40,12 @@ int main (int argc, const char* argv[]) {
         // 127.0.0.1 loopback interface
         // 224.0.0.1 multicast to all registered parties
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"127.0.0.1" port:7777];
-        SenderDelegate* sd = [[SenderDelegate alloc] init];
-        sender.delegate = sd;
         NSLog(@"sender: %@", sender);
-        [sender sendMessage:message];
+        [sender sendMessage:message handler:^(BOOL success, NSError* error) {
+            if (!success) {
+                NSLog(@"ERROR - failed to send message %@", message);
+            }
+        }];
 
         dispatch_main();
     }

@@ -16,10 +16,7 @@ typedef enum PEOSCSenderError : NSInteger {
     PEOSCSenderOtherError,
 } PEOSCSenderError;
 
-@protocol PEOSCSenderDelegate
-- (void)didSendMessage:(PEOSCMessage*)message;
-- (void)didNotSendMessage:(PEOSCMessage*)message dueToError:(NSError*)error;
-@end
+typedef void(^PEOSCSenderCompletionHandler)(BOOL success, NSError* error);
 
 @interface PEOSCSender : NSObject
 + (id)senderWithHost:(NSString*)host port:(UInt16)port;
@@ -27,7 +24,6 @@ typedef enum PEOSCSenderError : NSInteger {
 
 @property (nonatomic, readonly, strong) NSString* host;
 @property (nonatomic, readonly) UInt16 port;
-@property (nonatomic, weak) id <PEOSCSenderDelegate> delegate;
 
-- (void)sendMessage:(PEOSCMessage*)message;
+- (void)sendMessage:(PEOSCMessage*)message handler:(PEOSCSenderCompletionHandler)handler;
 @end

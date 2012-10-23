@@ -17,7 +17,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 @property (nonatomic, readwrite, strong) NSString* host;
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
-@property (nonatomic) NSMutableDictionary* messageCache;
+@property (nonatomic, strong) NSMutableDictionary* callbackMap;
 @property (nonatomic) long messageTag;
 @end
 
@@ -34,7 +34,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
         self.host = host;
         self.port = port;
 
-        self.messageCache = [NSMutableDictionary dictionaryWithCapacity:10];
+        self.callbackMap = [NSMutableDictionary dictionaryWithCapacity:13];
 
         [self _setupSocket];
     }
@@ -53,15 +53,19 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
 #pragma mark -
 
-- (void)sendMessage:(PEOSCMessage*)message {
+- (void)sendMessage:(PEOSCMessage*)message handler:(PEOSCSenderCompletionHandler)handler {
     NSData* messageData = [message _data];
     if (!messageData) {
-        CCErrorLog(@"ERROR - failed to send message: %@", message);
+        CCErrorLog(@"ERROR - failed to generate message data: %@", message);
+        NSError* error = [NSError errorWithDomain:PEOSCSenderErrorDomain code:PEOSCSenderOtherError userInfo:nil];
+        handler(NO, error);
         return;
     }
 
-    // hold onto the message for a spell
-    [self.messageCache setObject:message forKey:[NSString stringWithFormat:@"%lu", self.messageTag]];
+    // hold onto callback
+    if (handler) {
+        [self.callbackMap setObject:handler forKey:[NSString stringWithFormat:@"%lu", self.messageTag]];
+    }
 
     [self.socket sendData:messageData toHost:self.host port:self.port withTimeout:-1.0 tag:self.messageTag];
     self.messageTag = self.messageTag+1;
@@ -69,32 +73,29 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
 #pragma mark - SOCKET DELEGATE
 
-- (void)udpSocket:(GCDAsyncUdpSocket*)sock didConnectToAddress:(NSData*)address {
-    CCDebugLogSelector();
-}
-
-- (void)udpSocket:(GCDAsyncUdpSocket*)sock didNotConnect:(NSError*)error {
-    CCDebugLogSelector();
-    CCErrorLog(@"ERROR - failed to connect to host %@:%d due to %@", self.host, self.port, [error localizedDescription]);
-}
-
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didSendDataWithTag:(long)tag {
     CCDebugLogSelector();
 
     NSString* key = [NSString stringWithFormat:@"%lu", tag];
-    PEOSCMessage* message = self.messageCache[key];
-    [self.delegate didSendMessage:message];
-    [self.messageCache removeObjectForKey:key];
+    void(^handler)(BOOL success, NSError* error) = [self.callbackMap objectForKey:key];
+    if (handler) {
+        handler(YES, nil);
+    }
+
+    [self.callbackMap removeObjectForKey:key];
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didNotSendDataWithTag:(long)tag dueToError:(NSError*)error {
     CCDebugLogSelector();
-    CCErrorLog(@"ERROR - failed to send data with tag %lu to host %@:%d due to %@", tag, self.host, self.port, [error localizedDescription]);
+    CCErrorLog(@"ERROR - failed to send data with tag %lu to %@:%d due to %@", tag, self.host, self.port, [error localizedDescription]);
 
     NSString* key = [NSString stringWithFormat:@"%lu", tag];
-    PEOSCMessage* message = self.messageCache[key];
-    [self.delegate didNotSendMessage:message dueToError:error];
-    [self.messageCache removeObjectForKey:key];
+    void(^handler)(BOOL success, NSError* error) = [self.callbackMap objectForKey:key];
+    if (handler) {
+        handler(NO, error);
+    }
+
+    [self.callbackMap removeObjectForKey:key];
 }
 
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket*)sock withError:(NSError*)error {
