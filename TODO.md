@@ -11,6 +11,7 @@
 - make debug buffer dump multi-line and byte-gap configurable
 
 ### SENDER
+- host and port could be readwrite with collectionless
 - document 9k UDP limit and Blob use
 - offer connected variant in addition to connectionless
 
