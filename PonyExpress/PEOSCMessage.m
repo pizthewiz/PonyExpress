@@ -74,6 +74,56 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 @end
 
+
+// yoinked and recrafted from Gavin Eadie's ios-ntp http://code.google.com/p/ios-ntp/
+// NB - not perfectly symmetrical, this evaluates to NO:
+//  NSDate* now = [NSDate date]; [now isEqualToDate:[NSDate dateWithNTPTimestamp:[now NTPTimestamp]];
+struct NTPTimestamp {
+    uint32_t seconds;
+    uint32_t fractionalSeconds;
+};
+typedef struct NTPTimestamp NTPTimestamp;
+
+static inline NTPTimestamp NTPTimestampMake(uint32_t seconds, uint32_t fractionalSeconds) {
+    return (NTPTimestamp){seconds, fractionalSeconds};
+}
+
+static NSTimeInterval NTPTimestampDifference(NTPTimestamp start, NTPTimestamp end) {
+    int a;
+    unsigned int b;
+    a = end.seconds - start.seconds;
+    if (end.fractionalSeconds >= start.fractionalSeconds) {
+        b = end.fractionalSeconds - start.fractionalSeconds;
+    } else {
+        b = start.fractionalSeconds - end.fractionalSeconds;
+        b = ~b;
+        a -= 1;
+    }
+
+    return a + b / 4294967296.0; // 2^32
+}
+
+// 1970 - 1900 in seconds 2,208,988,800 | First day UNIX
+// 1 Jan 1972 : 2,272,060,800 | First day UTC
+#define JAN_1970 0x83aa7e80
+static NTPTimestamp NTPTimestamp1970 = {JAN_1970, 0};    // network time for 1 January 1970, GMT
+
+@interface NSDate (PEAdditions)
++ (id)dateWithNTPTimestamp:(NTPTimestamp)timestamp;
+- (NTPTimestamp)NTPTimestamp;
+@end
+@implementation NSDate (PEAdditions)
++ (id)dateWithNTPTimestamp:(NTPTimestamp)timestamp {
+    return [NSDate dateWithTimeIntervalSince1970:NTPTimestampDifference(NTPTimestamp1970, timestamp)];
+}
+- (NTPTimestamp)NTPTimestamp {
+    double integerValue;
+    double fractionalValue = modf([self timeIntervalSince1970], &integerValue);
+    fractionalValue *= 4294967296.0;
+    return NTPTimestampMake(JAN_1970 + integerValue, fractionalValue);
+}
+@end
+
 static NSString* readString(NSData* data, NSUInteger start, NSUInteger length) {
     const char* buffer = [data bytes];
     NSUInteger end = start;
