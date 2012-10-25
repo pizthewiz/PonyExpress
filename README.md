@@ -15,9 +15,9 @@ A simple message with a single float argument is sent to a receiver (setup not s
 ``` objective-c
 PEOSCMessage* message = [PEOSCMessage messageWithAddress:@"/oscillator/3/frequency" typeTags:@[PEOSCMessageTypeTagFloat] arguments:@[@440.0F];
 PEOSCSender* sender = [PEOSCSender senderWithHost:@"cray.local." port:31337];
-[sender connectWithCompletionHandler:^(BOOL success, NSError* error) {
+[sender sendMessage:message handler:^(BOOL success, NSError* error) {
     if (success) {
-        [sender sendMessage:message];
+        NSLog(@"message sent!");
     }
 }];
 ```
