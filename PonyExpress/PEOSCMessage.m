@@ -163,7 +163,7 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 @implementation PEOSCMessage
 
 + (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments {
-    id message = [[PEOSCMessage alloc] initWithAddress:address typeTags:typeTags arguments:arguments];
+    id message = [[[self class] alloc] initWithAddress:address typeTags:typeTags arguments:arguments];
     return message;
 }
 
@@ -178,7 +178,7 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 }
 
 + (id)messageWithData:(NSData*)data {
-    id message = [[PEOSCMessage alloc] initWithData:data];
+    id message = [[[self class] alloc] initWithData:data];
     return message;
 }
 
