@@ -13,8 +13,6 @@
 @interface PonyExpressMessageTests()
 @property (nonatomic, strong) NSArray* allTypes;
 @property (nonatomic, strong) NSArray* allArgs;
-@property (nonatomic, strong) NSArray* workingTypes;
-@property (nonatomic, strong) NSArray* workingArgs;
 @property (nonatomic, strong) NSString* goodAddress;
 @property (nonatomic, strong) NSString* badAddress;
 @end
@@ -25,13 +23,10 @@
     [super setUp];
 
     NSData* stringData = [@"One-Eyed Jacks" dataUsingEncoding:NSASCIIStringEncoding];
+    NSDate* now = [NSDate date];
 
     self.allTypes = @[PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, PEOSCMessageTypeTagTimetag];
-    // TODO - set proper NTP TIME when available
-    self.allArgs = @[@13, @33.3F, @"STRING", stringData, [NSDate date]];
-
-    self.workingTypes = @[PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse];
-    self.workingArgs = @[@13, @33.3F, @"STRING", stringData];
+    self.allArgs = @[@13, @33.3F, @"STRING", stringData, now];
 
     self.goodAddress = @"/oscillator/3/frequency";
     self.badAddress = @"bad/address";
@@ -64,8 +59,9 @@
     STAssertEqualObjects(arguments, message.arguments, @"should store proper arguments");
 }
 
+// KNOWN FAILURE - the NSDate/Timetag serialziation isn't perfectly symmetrical
 - (void)testCreationFromData {
-    PEOSCMessage* m = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:self.workingTypes arguments:self.workingArgs];
+    PEOSCMessage* m = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:self.allTypes arguments:self.allArgs];
     // NB - this presumes good data serialization
     NSData* data = [m _data];
 
@@ -216,20 +212,20 @@
 #pragma mark - DATA
 
 - (void)testGoodMessageGeneration {
-    PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:self.workingTypes arguments:self.workingArgs];
+    PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:self.allTypes arguments:self.allArgs];
     NSData* data = [message _data];
     STAssertNotNil(data, @"should generate valid data");
     // TODO - compare to expected length?
 }
 
 - (void)testBadMessageGeneration {
-    PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:self.badAddress typeTags:self.workingTypes arguments:self.workingArgs];
+    PEOSCMessage* message = [[PEOSCMessage alloc] initWithAddress:self.badAddress typeTags:self.allTypes arguments:self.allArgs];
     STAssertNil([message _data], @"should not generate data for message with bad address");
 
-    message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:@[@"Nonsensical"] arguments:self.workingArgs];
+    message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:@[@"Nonsensical"] arguments:self.allArgs];
     STAssertNil([message _data], @"should not generate data for message with bad types");
 
-    message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:self.workingTypes arguments:@[@"Nonsensical"]];
+    message = [[PEOSCMessage alloc] initWithAddress:self.goodAddress typeTags:self.allTypes arguments:@[@"Nonsensical"]];
     STAssertNil([message _data], @"should not generate data for message with bad arguments");
 }
 

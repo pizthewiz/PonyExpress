@@ -27,7 +27,7 @@ extern NSString* const PEOSCMessageTypeTagTrue; // ARG-LESS
 extern NSString* const PEOSCMessageTypeTagFalse; // ARG-LESS
 extern NSString* const PEOSCMessageTypeTagNull; // ARG-LESS
 extern NSString* const PEOSCMessageTypeTagImpulse; // ARG-LESS
-extern NSString* const PEOSCMessageTypeTagTimetag; // {uint32_t, uint32_t} - UNSUPPORTED
+extern NSString* const PEOSCMessageTypeTagTimetag; // NSDate
 
 @interface PEOSCMessage : NSObject
 // arg-less types should not be represented with a value in the arguments array

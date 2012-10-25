@@ -150,6 +150,14 @@ static Float32 readFloat(NSData* data, NSUInteger start) {
     return value;
 }
 
+static NSDate* readDate(NSData* data, NSUInteger start) {
+    SInt32 seconds = readInteger(data, start);
+    SInt32 fractionalSeconds = readInteger(data, start+4);
+
+    NTPTimestamp timestamp = NTPTimestampMake(seconds, fractionalSeconds);
+    return [NSDate dateWithNTPTimestamp:timestamp];
+}
+
 #pragma mark - PEOSCMESSAGE
 
 @implementation PEOSCMessage
@@ -191,7 +199,7 @@ static Float32 readFloat(NSData* data, NSUInteger start) {
         NSString* typeTagString = readString(data, start, length);
 
         // NB - this is probably too aggressive
-        NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^,([ifsbTFNI]+)$" options:0 error:NULL];
+        NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^,([ifsbTFNIt]+)$" options:0 error:NULL];
         NSUInteger matches = [reg numberOfMatchesInString:typeTagString options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, typeTagString.length)];
         if (matches == 0) {
             // BAIL
@@ -252,10 +260,11 @@ static Float32 readFloat(NSData* data, NSUInteger start) {
                 }
                 [list addObject:d];
                 start += d.length + 4 - (d.length & 3);
-            }
-//            else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
-//            }
-            else {
+            } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
+                NSDate* date = readDate(data, start);
+                [list addObject:date];
+                start += 8;
+            } else {
                 CCDebugLog(@"unrecognized type '%@', bailing", type);
                 // BAIL
                 return nil;
@@ -486,11 +495,11 @@ bail:
                 CCDebugLog(@"Blob arguments should be represented via NSData");
                 status = NO;
                 *stop = YES;
+            } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag] && ![argument isKindOfClass:[NSDate class]]) {
+                CCDebugLog(@"Timetag arguments should be represented via NSDate");
+                status = NO;
+                *stop = YES;
             }
-//            else if ([type isEqualToString:PEOSCMessageTypeTagTimetag] && ???) {
-//                status = NO;
-//                *stop = YES;
-//            }
         }
     }];
     return status;
@@ -553,11 +562,6 @@ bail:
         CCErrorLog(@"ERROR - invalid arguments: %@", self.arguments);
         return nil;
     }
-    // fail on timetag
-    if ([self.typeTags indexOfObject:PEOSCMessageTypeTagTimetag] != NSNotFound) {
-        CCErrorLog(@"ERROR - cannot generate data for message with Timetag type, not yet supported");
-        return nil;
-    }
 
     NSData* addressData = [[self.address oscString] dataUsingEncoding:NSASCIIStringEncoding];
     NSData* typeTagData = [[[self _typeTagString] oscString] dataUsingEncoding:NSASCIIStringEncoding];
@@ -565,8 +569,10 @@ bail:
     // TODO - it would be nice to have a value class that can serialize then create a message from address and values
     __block NSMutableData* argumentData = [NSMutableData data];
     [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL* stop) {
-        if (![[self class] argumentRequiredByType:type])
+        if (![[self class] argumentRequiredByType:type]) {
             return;
+        }
+
         if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
             SInt32 swappedValue = [argument oscInt];
             [argumentData appendBytes:&swappedValue length:4];
@@ -578,8 +584,11 @@ bail:
         } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
             [argumentData appendData:[argument oscBlob]];
         } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
-//            uint64_t swappedValue = CFSwapInt64HostToBig();
-            CCWarningLog(@"WARNING - cannot serialize Timetag type, not yet supported");
+            NTPTimestamp timestamp = [argument NTPTimestamp];
+            SInt32 swappedValue = [[NSNumber numberWithInt:timestamp.seconds] oscInt];
+            [argumentData appendBytes:&swappedValue length:4];
+            swappedValue = [[NSNumber numberWithInt:timestamp.fractionalSeconds] oscInt];
+            [argumentData appendBytes:&swappedValue length:4];
         }
     }];
 

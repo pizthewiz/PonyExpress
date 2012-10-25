@@ -5,7 +5,6 @@
 - sort out bundles
 
 ### MESSAGE
-- implement Timetag
 - do a better job with NSData allocation and writing in -_data?
 - ignore unknown types (is that even possible?)
 - make debug buffer dump multi-line and byte-gap configurable
@@ -22,13 +21,14 @@
 - may need to consider disconnect / stop listening in -tearDown
 - test message argument serialization
 - test message argument deserialization
-- test sender with bad host
+- test sender with bad host (if connection-based again)
 
 ### FUNCTIONAL TESTS
-- functional check receipt of message
-- functional check delivery of message
-- functional check handling of send bad message data
-- functional check handling of receive bad message data
+- send message
+- receive message
+- send bad message data
+- receive bad message data
+- receive message with unknown type in type string
 - send data on privileged port, < 1024
 - receive data on privileged port, < 1024
 - receive data on a port in use

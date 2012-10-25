@@ -3,11 +3,11 @@
 Pony Express is a small Foundation framework to simplify communication via the [Open Sound Control](http://opensoundcontrol.org/introduction-osc) (OSC) protocol for Mac OS X 10.7 and later.
 
 ## General
-- OSC 1.1 over UDP with support for most 1.1 data types: Integer, Float, String, Blob, True, False, Null and Impulse
+- OSC 1.1 over UDP with support for most 1.1 data types: Integer, Float, String, Blob, True, False, Null, Impulse and Timetag
 - OSC messages can be sent to an IPv4 or IPv6 IP address, a symbolic hostname like _localhost_, ZeroConf hostname like _one-eyed-jacks.local._ or a hostname like _audrey.horne.dk_
 - Integer and Float arguments are defined in NSNumbers, String as an NSString and Blob as NSData
 - Pony Express makes use of [Automatic Reference Counting](http://clang.llvm.org/docs/AutomaticReferenceCounting.html) (ARC)
-- many items remain to be implemented inlcuding but not limited to OSC bundles, timetags, ZeroConf advertising, and querying. please see the [TODO](https://github.com/pizthewiz/PonyExpress/blob/master/TODO.md) for more info
+- many items remain to be implemented inlcuding but not limited to OSC bundles, ZeroConf advertising, and querying. please see the [TODO](https://github.com/pizthewiz/PonyExpress/blob/master/TODO.md) for more info
 
 ## Example
 A simple message with a single float argument is sent to a receiver (setup not shown here).
