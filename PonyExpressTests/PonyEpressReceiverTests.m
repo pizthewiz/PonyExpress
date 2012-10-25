@@ -94,7 +94,7 @@
     STAssertTrue(WaitFor(^BOOL { return done; }), @"async stop listening failed");
 }
 
-// BAD TEST - test doesn't make sense, socket option SO_REUSEPORT enabled, this will NOT fail
+// KNOWN FAILURE - test doesn't make sense, socket option SO_REUSEPORT enabled, this will NOT fail
 - (void)testListenFlowOnAPortInUse {
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:self.unprivledgedPort];
     __block NSError* error;
