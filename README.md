@@ -31,7 +31,7 @@ NSArray, NSDictionary and NSNumber [literals](http://clang.llvm.org/docs/Objecti
 
 the bundle version is optionally set from the repository state using [Node.js](http://nodejs.org/) and a few modules; if Node.js is not installed, the bundle version will remain unset.
 
-- install Node.js 0.8.12 (or later) from [binary package](http://nodejs.org/dist/v0.8.12/node-v0.8.12.pkg) or build and install from [source](http://nodejs.org/dist/v0.8.12/node-v0.8.12.tar.gz)
+- install Node.js 0.8.14 (or later) from [binary package](http://nodejs.org/dist/v0.8.14/node-v0.8.14.pkg) or build and install from [source](http://nodejs.org/dist/v0.8.14/node-v0.8.14.tar.gz)
 - install node modules globally `npm install -g jake async NodObjC`
 - link global modules to local PonyExpress clone `npm link async NodObjC`
 
