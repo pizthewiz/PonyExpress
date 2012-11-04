@@ -3,6 +3,7 @@
 - take stance on port reuse, either reuse and demo multicast or don't and don't
 - investigate static library option for iOS (may not be necessary)
 - sort out bundles
+- look into simple MIDI tunneling example
 
 ### MESSAGE
 - do a better job with NSData allocation and writing in -_data?
