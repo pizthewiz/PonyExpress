@@ -107,6 +107,7 @@ static NSTimeInterval NTPTimestampDifference(NTPTimestamp start, NTPTimestamp en
 // 1 Jan 1972 : 2,272,060,800 | First day UTC
 #define JAN_1970 0x83aa7e80
 static NTPTimestamp NTPTimestamp1970 = {JAN_1970, 0};    // network time for 1 January 1970, GMT
+// static NTPTimestamp NTPTimestampImmediate = {0, 1};
 
 @interface NSDate (PEAdditions)
 + (id)dateWithNTPTimestamp:(NTPTimestamp)timestamp;

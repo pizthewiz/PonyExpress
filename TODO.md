@@ -1,5 +1,6 @@
 
 ### GENERAL
+- figure out how to expose 'immediate' NTPTimetag (NSDate category? only relevant for bundles invocation?)
 - take stance on port reuse, either reuse and demo multicast or don't and don't
 - investigate static library option for iOS (may not be necessary)
 - sort out bundles
