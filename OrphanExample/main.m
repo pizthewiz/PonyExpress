@@ -44,6 +44,7 @@ int main (int argc, const char* argv[]) {
         [sender sendMessage:message handler:^(BOOL success, NSError* error) {
             if (!success) {
                 NSLog(@"ERROR - failed to send message %@", message);
+                return 1;
             }
         }];
 
