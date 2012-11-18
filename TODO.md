@@ -1,9 +1,10 @@
 
 ### GENERAL
-- figure out how to expose 'immediate' NTPTimetag (NSDate category? only relevant for bundles invocation?)
+- test interoperability against Lemur, TouchOSC, Max 6
 - take stance on port reuse, either reuse and demo multicast or don't and don't
 - investigate static library option for iOS (may not be necessary)
-- sort out bundles
+- sort out OSC bundle support
+- figure out how to expose a constant for the 'immediate' NTPTimetag (NSDate category? only relevant for bundles invocation?)
 - look into simple MIDI tunneling example
 
 ### MESSAGE
