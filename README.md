@@ -1,6 +1,6 @@
 
 # Pony Express
-Pony Express is a small Foundation framework to simplify communication via the [Open Sound Control](http://opensoundcontrol.org/introduction-osc) (OSC) protocol for Mac OS X 10.7 and later.
+Pony Express makes it easy to communicate via the [Open Sound Control](http://opensoundcontrol.org/introduction-osc) (OSC) protocol on Mac OS X 10.7+ and iOS 5.0+.
 
 ## General
 - OSC 1.1 over UDP with support for most 1.1 data types: Integer, Float, String, Blob, True, False, Null, Impulse and Timetag
