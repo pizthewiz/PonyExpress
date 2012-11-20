@@ -226,7 +226,7 @@
 			children = (
 				D83E1B6C1411528100CB1258 /* PonyExpress.h */,
 				D89B6F17165B0AE500446361 /* Classes */,
-				D87C17F81413F3CF005A08F3 /* AsyncSocket */,
+				D89B6F18165B0D1900446361 /* Vendor */,
 				D83E1B661411528100CB1258 /* Supporting Files */,
 				D8509D101631BE0B00CF2F14 /* README.md */,
 				D8509D0E1631BE0B00CF2F14 /* CHANGELOG.md */,
@@ -312,6 +312,14 @@
 				D8C53D361436795700C8CF3E /* PEOSCReceiver.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		D89B6F18165B0D1900446361 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				D87C17F81413F3CF005A08F3 /* AsyncSocket */,
+			);
+			name = Vendor;
 			sourceTree = "<group>";
 		};
 		D8FC4D2E162E898200408517 /* Products */ = {
@@ -621,6 +629,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -659,6 +668,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
@@ -767,7 +777,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_WARN_EMPTY_BODY = YES;
 				DSTROOT = /tmp/PonyExpress.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
@@ -788,7 +797,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_WARN_EMPTY_BODY = YES;
 				DSTROOT = /tmp/PonyExpress.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
