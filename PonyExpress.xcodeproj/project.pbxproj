@@ -28,6 +28,11 @@
 		D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
 		D84ED0731417FC9C00AD4737 /* PonyExpressMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */; };
 		D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */; };
+		D89B6F02165AFBB400446361 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
+		D89B6F11165AFE5200446361 /* PEOSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BA014119A2C00CB1258 /* PEOSCMessage.m */; };
+		D89B6F13165AFE5200446361 /* PEOSCSender.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B97141190B000CB1258 /* PEOSCSender.m */; };
+		D89B6F15165AFE5200446361 /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
+		D89B6F16165AFE5200446361 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */; };
 		D8AF167B14B78C060002A885 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */; };
 		D8AF167C14B78C060002A885 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */; };
 		D8C53D371436795700C8CF3E /* PEOSCReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C53D351436795700C8CF3E /* PEOSCReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -93,6 +98,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		D89B6EFF165AFBB400446361 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +139,7 @@
 		D8509D111631BE0B00CF2F14 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.md; sourceTree = SOURCE_ROOT; };
 		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
 		D89B67EB1543727A00462DDD /* PonyExpressTestHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressTestHelper.h; sourceTree = "<group>"; };
+		D89B6F01165AFBB400446361 /* libPonyExpress.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPonyExpress.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
 		D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
 		D8C53D351436795700C8CF3E /* PEOSCReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCReceiver.h; sourceTree = "<group>"; };
@@ -164,6 +179,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D89B6EFE165AFBB400446361 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D89B6F02165AFBB400446361 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -184,6 +207,7 @@
 				D83E1B5C1411528100CB1258 /* PonyExpress.framework */,
 				D83E1B741411528100CB1258 /* PonyExpressTests.octest */,
 				D83E1BD71412F87A00CB1258 /* OrphanExample */,
+				D89B6F01165AFBB400446361 /* libPonyExpress.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,14 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				D83E1B6C1411528100CB1258 /* PonyExpress.h */,
-				D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */,
-				D83E1B9F14119A2C00CB1258 /* PEOSCMessage.h */,
-				D83E1BAE1411A41400CB1258 /* PEOSCMessage-Private.h */,
-				D83E1BA014119A2C00CB1258 /* PEOSCMessage.m */,
-				D83E1B96141190B000CB1258 /* PEOSCSender.h */,
-				D83E1B97141190B000CB1258 /* PEOSCSender.m */,
-				D8C53D351436795700C8CF3E /* PEOSCReceiver.h */,
-				D8C53D361436795700C8CF3E /* PEOSCReceiver.m */,
+				D89B6F17165B0AE500446361 /* Classes */,
 				D87C17F81413F3CF005A08F3 /* AsyncSocket */,
 				D83E1B661411528100CB1258 /* Supporting Files */,
 				D8509D101631BE0B00CF2F14 /* README.md */,
@@ -282,6 +299,21 @@
 			name = AsyncSocket;
 			sourceTree = "<group>";
 		};
+		D89B6F17165B0AE500446361 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */,
+				D83E1B9F14119A2C00CB1258 /* PEOSCMessage.h */,
+				D83E1BAE1411A41400CB1258 /* PEOSCMessage-Private.h */,
+				D83E1BA014119A2C00CB1258 /* PEOSCMessage.m */,
+				D83E1B96141190B000CB1258 /* PEOSCSender.h */,
+				D83E1B97141190B000CB1258 /* PEOSCSender.m */,
+				D8C53D351436795700C8CF3E /* PEOSCReceiver.h */,
+				D8C53D361436795700C8CF3E /* PEOSCReceiver.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		D8FC4D2E162E898200408517 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,9 +344,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D83E1B5B1411528100CB1258 /* PonyExpress */ = {
+		D83E1B5B1411528100CB1258 /* PonyExpress Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D83E1B861411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress" */;
+			buildConfigurationList = D83E1B861411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress Mac" */;
 			buildPhases = (
 				D83E1B571411528100CB1258 /* Sources */,
 				D83E1B581411528100CB1258 /* Frameworks */,
@@ -326,14 +358,14 @@
 			);
 			dependencies = (
 			);
-			name = PonyExpress;
+			name = "PonyExpress Mac";
 			productName = PonyExpress;
 			productReference = D83E1B5C1411528100CB1258 /* PonyExpress.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D83E1B731411528100CB1258 /* PonyExpressTests */ = {
+		D83E1B731411528100CB1258 /* PonyExpress Mac Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D83E1B891411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpressTests" */;
+			buildConfigurationList = D83E1B891411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress Mac Tests" */;
 			buildPhases = (
 				D83E1B6F1411528100CB1258 /* Sources */,
 				D83E1B701411528100CB1258 /* Frameworks */,
@@ -346,7 +378,7 @@
 				D8FC4D3D162E898D00408517 /* PBXTargetDependency */,
 				D83E1B791411528100CB1258 /* PBXTargetDependency */,
 			);
-			name = PonyExpressTests;
+			name = "PonyExpress Mac Tests";
 			productName = PonyExpressTests;
 			productReference = D83E1B741411528100CB1258 /* PonyExpressTests.octest */;
 			productType = "com.apple.product-type.bundle";
@@ -368,6 +400,23 @@
 			productName = OrphanExample;
 			productReference = D83E1BD71412F87A00CB1258 /* OrphanExample */;
 			productType = "com.apple.product-type.tool";
+		};
+		D89B6F00165AFBB400446361 /* PonyExpress iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D89B6F0A165AFBB400446361 /* Build configuration list for PBXNativeTarget "PonyExpress iOS" */;
+			buildPhases = (
+				D89B6EFD165AFBB400446361 /* Sources */,
+				D89B6EFE165AFBB400446361 /* Frameworks */,
+				D89B6EFF165AFBB400446361 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PonyExpress iOS";
+			productName = PonyExpress;
+			productReference = D89B6F01165AFBB400446361 /* libPonyExpress.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -396,9 +445,10 @@
 			);
 			projectRoot = "";
 			targets = (
-				D83E1B5B1411528100CB1258 /* PonyExpress */,
-				D83E1B731411528100CB1258 /* PonyExpressTests */,
+				D83E1B5B1411528100CB1258 /* PonyExpress Mac */,
+				D83E1B731411528100CB1258 /* PonyExpress Mac Tests */,
 				D83E1BD61412F87A00CB1258 /* OrphanExample */,
+				D89B6F00165AFBB400446361 /* PonyExpress iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -510,17 +560,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D89B6EFD165AFBB400446361 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D89B6F11165AFE5200446361 /* PEOSCMessage.m in Sources */,
+				D89B6F13165AFE5200446361 /* PEOSCSender.m in Sources */,
+				D89B6F15165AFE5200446361 /* PEOSCReceiver.m in Sources */,
+				D89B6F16165AFE5200446361 /* GCDAsyncUdpSocket.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		D83E1B791411528100CB1258 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D83E1B5B1411528100CB1258 /* PonyExpress */;
+			target = D83E1B5B1411528100CB1258 /* PonyExpress Mac */;
 			targetProxy = D83E1B781411528100CB1258 /* PBXContainerItemProxy */;
 		};
 		D83E1BE61412F98F00CB1258 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D83E1B5B1411528100CB1258 /* PonyExpress */;
+			target = D83E1B5B1411528100CB1258 /* PonyExpress Mac */;
 			targetProxy = D83E1BE51412F98F00CB1258 /* PBXContainerItemProxy */;
 		};
 		D8FC4D3D162E898D00408517 /* PBXTargetDependency */ = {
@@ -555,6 +616,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
@@ -578,10 +641,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = macosx;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -591,6 +654,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
@@ -607,9 +672,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = macosx;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -625,7 +690,8 @@
 				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
 				INFOPLIST_FILE = "PonyExpress/PonyExpress-Info.plist";
 				INSTALL_PATH = "@rpath";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PonyExpress;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -641,7 +707,8 @@
 				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
 				INFOPLIST_FILE = "PonyExpress/PonyExpress-Info.plist";
 				INSTALL_PATH = "@rpath";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PonyExpress;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -696,6 +763,45 @@
 			};
 			name = Release;
 		};
+		D89B6F0B165AFBB400446361 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_EMPTY_BODY = YES;
+				DSTROOT = /tmp/PonyExpress.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = PonyExpress;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv6 armv7 armv7s i386";
+			};
+			name = Debug;
+		};
+		D89B6F0C165AFBB400446361 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_EMPTY_BODY = YES;
+				DSTROOT = /tmp/PonyExpress.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = PonyExpress;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv6 armv7 armv7s i386";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -708,7 +814,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D83E1B861411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress" */ = {
+		D83E1B861411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D83E1B871411528100CB1258 /* Debug */,
@@ -717,7 +823,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D83E1B891411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpressTests" */ = {
+		D83E1B891411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress Mac Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D83E1B8A1411528100CB1258 /* Debug */,
@@ -734,6 +840,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		D89B6F0A165AFBB400446361 /* Build configuration list for PBXNativeTarget "PonyExpress iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D89B6F0B165AFBB400446361 /* Debug */,
+				D89B6F0C165AFBB400446361 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
