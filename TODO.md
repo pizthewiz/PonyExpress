@@ -2,10 +2,11 @@
 ### GENERAL
 - test interoperability against Lemur, TouchOSC, Max 6
 - take stance on port reuse, either reuse and demo multicast or don't and don't
-- investigate static library option for iOS (may not be necessary)
 - sort out OSC bundle support
 - figure out how to expose a constant for the 'immediate' NTPTimetag (NSDate category? only relevant for bundles invocation?)
 - look into simple MIDI tunneling example
+- pull example project out of PonyExpress into Examples/
+- add more in-depth usage info for Mac OS X and iOS applications
 
 ### MESSAGE
 - do a better job with NSData allocation and writing in -_data?
