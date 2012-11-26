@@ -191,7 +191,17 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 
         // address
         NSString* addressString = readString(data, start, length);
+
         // TODO - validate
+        if (!addressString || [addressString isEqualToString:@""]) {
+            CCErrorLog(@"ERROR - invalid empty address, message dropped");
+            return nil;
+        }
+        if ([addressString isEqualToString:@"#bundle"]) {
+            CCErrorLog(@"ERROR - OSC bundles not available, message dropped");
+            return nil;
+        }
+
         self.address = addressString;
 
 
@@ -204,6 +214,7 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
         NSUInteger matches = [reg numberOfMatchesInString:typeTagString options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, typeTagString.length)];
         if (matches == 0) {
             // BAIL
+            CCErrorLog(@"ERROR - invalid type tags, message dropped");
             return nil;
         }
         NSMutableArray* list = [NSMutableArray array];
