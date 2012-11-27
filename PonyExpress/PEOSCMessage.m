@@ -191,8 +191,7 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 
         // address
         NSString* addressString = readString(data, start, length);
-
-        // TODO - validate
+        // naïve validation
         if (!addressString || [addressString isEqualToString:@""]) {
             CCErrorLog(@"ERROR - invalid empty address, message dropped");
             return nil;
@@ -201,7 +200,6 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
             CCErrorLog(@"ERROR - OSC bundles not available, message dropped");
             return nil;
         }
-
         self.address = addressString;
 
 
