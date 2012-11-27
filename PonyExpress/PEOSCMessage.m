@@ -208,29 +208,37 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
         NSString* typeTagString = readString(data, start, length);
 
         // NB - this is probably too aggressive
-        NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^,([ifsbTFNIt]+)$" options:0 error:NULL];
-        NSUInteger matches = [reg numberOfMatchesInString:typeTagString options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, typeTagString.length)];
-        if (matches == 0) {
+        NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^,[ifsbTFNIt]*$" options:0 error:NULL];
+        NSTextCheckingResult* result = [reg firstMatchInString:typeTagString options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, typeTagString.length)];
+        if (!result) {
             // BAIL
-            CCErrorLog(@"ERROR - invalid type tags, message dropped");
+            CCErrorLog(@"ERROR - invalid type tag string, message dropped");
             return nil;
         }
-        NSMutableArray* list = [NSMutableArray array];
-        for (NSUInteger idx = 1; idx < typeTagString.length; idx++) {
+
+        typeTagString = [typeTagString substringFromIndex:1];
+        if ([typeTagString isEqualToString:@""]) {
+            // address-only messsage
+            return self;
+        }
+
+        NSMutableArray* list = [NSMutableArray arrayWithCapacity:typeTagString.length];
+        for (NSUInteger idx = 0; idx < typeTagString.length; idx++) {
             NSString* code = [typeTagString substringWithRange:NSMakeRange(idx, 1)];
-            if (!code)
+            if (!code) {
                 continue;
+            }
             [list addObject:[[self class] _typeForCode:code]];
         }
         self.typeTags = list;
-
 
         // arguments
         start += typeTagString.length + 4 - (typeTagString.length & 3);
         list = [NSMutableArray array];
         for (NSString* type in self.typeTags) {
-            if (![[self class] argumentRequiredByType:type])
+            if (![[self class] argumentRequiredByType:type]) {
                 continue;
+            }
 
             if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
                 if (start+4 > length) {
@@ -289,8 +297,9 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 
 + (BOOL)argumentRequiredByType:(NSString*)type {
     BOOL status = YES;
-    if ([type isEqualToString:PEOSCMessageTypeTagTrue] || [type isEqualToString:PEOSCMessageTypeTagFalse] || [type isEqualToString:PEOSCMessageTypeTagNull] || [type isEqualToString:PEOSCMessageTypeTagImpulse])
+    if ([type isEqualToString:PEOSCMessageTypeTagTrue] || [type isEqualToString:PEOSCMessageTypeTagFalse] || [type isEqualToString:PEOSCMessageTypeTagNull] || [type isEqualToString:PEOSCMessageTypeTagImpulse]) {
         status = NO;
+    }
     return status;
 }
 
@@ -383,7 +392,8 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 
         [argDescription appendString:[NSString stringWithFormat:@"%@%@", (isFirstOrLastArg ? @"" : @", "), description]];
     }];
-    return [NSString stringWithFormat:@"<%@: %@ %@ [%@]>", NSStringFromClass([self class]), self.address, [self _typeTagString], argDescription];
+    NSString* typeTagString = [self _typeTagString] ? [self _typeTagString] : @"(–)";
+    return [NSString stringWithFormat:@"<%@: %@ %@ [%@]>", NSStringFromClass([self class]), self.address, typeTagString, argDescription];
 }
 
 - (void)enumerateTypesAndArgumentsUsingBlock:(void (^)(id type, id argument, BOOL* stop))block {
