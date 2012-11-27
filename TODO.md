@@ -25,7 +25,7 @@
 ### UNIT TESTS
 - may need to consider disconnect / stop listening in -tearDown
 - test message creation from data, bad tagTypeString, empty types
-- test send of type-less message
+- test send of type-less message, nil and @[]
 - test message argument serialization
 - test message argument deserialization
 - test sender with bad host (if connection-based again)

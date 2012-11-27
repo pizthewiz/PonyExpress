@@ -392,7 +392,7 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 
         [argDescription appendString:[NSString stringWithFormat:@"%@%@", (isFirstOrLastArg ? @"" : @", "), description]];
     }];
-    NSString* typeTagString = [self _typeTagString] ? [self _typeTagString] : @"(–)";
+    NSString* typeTagString = self.typeTags.count ? [self _typeTagString] : @"(–)";
     return [NSString stringWithFormat:@"<%@: %@ %@ [%@]>", NSStringFromClass([self class]), self.address, typeTagString, argDescription];
 }
 
@@ -486,7 +486,8 @@ bail:
 }
 
 - (BOOL)_areTypeTagsValid {
-    return [self _typeTagString] != nil;
+    // TODO - not sure what to do here, test if each self.typeTags is of a known type?
+    return YES;
 }
 
 - (BOOL)_areArgumentsValidGivenTypeTags {
@@ -526,9 +527,6 @@ bail:
 }
 
 - (NSString*)_typeTagString {
-    if (!self.typeTags.count)
-        return nil;
-
     __block NSMutableString* string = [NSMutableString stringWithString:@","];
     [self.typeTags enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
         // catch interlopers
