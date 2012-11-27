@@ -1,6 +1,7 @@
 
 ### GENERAL
 - test interoperability against Lemur, TouchOSC and Max 6
+- support type-less messages, only address
 - take stance on port reuse, either reuse and demo multicast or don't and don't
 - sort out OSC bundle support
 - figure out how to expose a constant for the 'immediate' NTPTimetag (NSDate category? only relevant for bundles invocation?)
