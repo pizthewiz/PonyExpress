@@ -116,7 +116,7 @@
 		D83E1B691411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D83E1B6B1411528100CB1258 /* PonyExpress-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Prefix.pch"; sourceTree = "<group>"; };
 		D83E1B6C1411528100CB1258 /* PonyExpress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpress.h; sourceTree = "<group>"; };
-		D83E1B741411528100CB1258 /* PonyExpressTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PonyExpressTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D83E1B741411528100CB1258 /* PonyExpressTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PonyExpressTests.octest; path = "PonyExpress Mac Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D83E1B751411528100CB1258 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		D83E1B7D1411528100CB1258 /* PonyExpressTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpressTests-Info.plist"; sourceTree = "<group>"; };
 		D83E1B7F1411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -856,6 +856,7 @@
 				D89B6F0C165AFBB400446361 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
