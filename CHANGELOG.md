@@ -1,6 +1,8 @@
 
 ### v0.2.1 (XX YYY 2012)
 * ADD support Timetag type in messages
+* ADD static library project target for iOS support
+* FIX allow delivery and receipt of address-only messages
 * CHANGE sender should be connectionless
 * CHANGE migrate sender to callback block instead of delegate
 
