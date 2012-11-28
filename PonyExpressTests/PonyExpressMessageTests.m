@@ -150,12 +150,12 @@
     STAssertTrue([message _areTypeTagsValid], @"should report string from legit type tag list as valid");
 
     message.typeTags = @[];
-    STAssertNil([message _typeTagString], @"should catch empty type tag list");
-    STAssertFalse([message _areTypeTagsValid], @"should report string from empty type tag list as invalid");
+    STAssertEqualObjects([message _typeTagString], @",", @"should generate tag-less type tag string");
+    STAssertTrue([message _areTypeTagsValid], @"should report string from empty type tag list as valid");
 
     message = [PEOSCMessage messageWithAddress:self.goodAddress typeTags:nil arguments:nil];
-    STAssertNil([message _typeTagString], @"should catch nil type tag list");
-    STAssertFalse([message _areTypeTagsValid], @"should report string from nil type tag list as invalid");
+    STAssertEqualObjects([message _typeTagString], @",", @"should generate tag-less type tag string");
+    STAssertTrue([message _areTypeTagsValid], @"should report string from empty type tag list as valid");
 
     message.typeTags = @[PEOSCMessageTypeTagImpulse, @13];
     STAssertNil([message _typeTagString], @"should not generate a type tag string when the list contains a bad element");
