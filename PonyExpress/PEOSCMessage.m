@@ -486,8 +486,14 @@ bail:
 }
 
 - (BOOL)_areTypeTagsValid {
-    // TODO - not sure what to do here, test if each self.typeTags is of a known type?
-    return YES;
+    __block BOOL status = YES;
+    [self.typeTags enumerateObjectsUsingBlock:^(id type, NSUInteger idx, BOOL* stop) {
+        if (![type isKindOfClass:[NSString class]] || ! [[self class] _codeForType:type]) {
+            status = NO;
+            *stop = YES;
+        }
+    }];
+    return status;
 }
 
 - (BOOL)_areArgumentsValidGivenTypeTags {
