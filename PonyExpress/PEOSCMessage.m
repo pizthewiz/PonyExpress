@@ -209,7 +209,7 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 
         // NB - this is probably too aggressive
         NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^,[ifsbTFNIt]*$" options:0 error:NULL];
-        NSTextCheckingResult* result = [reg firstMatchInString:typeTagString options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, typeTagString.length)];
+        NSTextCheckingResult* result = [reg firstMatchInString:typeTagString options:0 range:NSMakeRange(0, typeTagString.length)];
         if (!result) {
             // BAIL
             CCErrorLog(@"ERROR - invalid type tag string, message dropped");
@@ -415,7 +415,7 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 
     // check for leading / and lack of spaces
     NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^/(\\S*)$" options:NSRegularExpressionCaseInsensitive error:NULL];
-    NSUInteger matches = [reg numberOfMatchesInString:self.address options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, self.address.length)];
+    NSUInteger matches = [reg numberOfMatchesInString:self.address options:0 range:NSMakeRange(0, self.address.length)];
     status = matches == 1;
 
     // check more involved stuff
