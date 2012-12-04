@@ -24,7 +24,7 @@ PEOSCSender* sender = [PEOSCSender senderWithHost:@"cray.local." port:31337];
 
 ## How To Build
 - clone the repository and submodules `git clone --recursive git://github.com/pizthewiz/PonyExpress.git`
-- load up the project in Xcode, select the PonyExpress or OrphanExample scheme and build
+- open the project in Xcode, select the PonyExpress Mac or PonyExpress iOS scheme and build.
 
 #### Soft Requirements
 NSArray, NSDictionary and NSNumber [literals](http://clang.llvm.org/docs/ObjectiveCLiterals.html) and object subscripting are used throughout the Pony Express classes, and is available in Apple LLVM Compiler 4.0+, shipped as part of Xcode 4.4 or later. 
