@@ -1,5 +1,5 @@
 
-### v0.2.1 (XX YYY 2012)
+### v0.3.0 (XX YYY 201Z)
 * ADD support Timetag type in messages
 * ADD static library project target for iOS support
 * CHANGE sender should be connectionless
