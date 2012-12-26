@@ -1,0 +1,12 @@
+//
+// Prefix header for all source files of the 'PonyExpressTests' target in the 'PonyExpressTests' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+
+    #import "Specta.h"
+
+    #define EXP_SHORTHAND
+    #import "Expecta.h"
+#endif
