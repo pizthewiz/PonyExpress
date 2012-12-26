@@ -8,25 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		D83E1B6A1411528100CB1258 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D83E1B681411528100CB1258 /* InfoPlist.strings */; };
-		D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B751411528100CB1258 /* SenTestingKit.framework */; };
-		D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5C1411528100CB1258 /* PonyExpress.framework */; };
-		D83E1B801411528100CB1258 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D83E1B7E1411528100CB1258 /* InfoPlist.strings */; };
-		D83E1B831411528100CB1258 /* PonyExpressSenderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B821411528100CB1258 /* PonyExpressSenderTests.m */; };
 		D83E1B98141190B000CB1258 /* PEOSCSender.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B96141190B000CB1258 /* PEOSCSender.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D83E1B99141190B000CB1258 /* PEOSCSender.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B97141190B000CB1258 /* PEOSCSender.m */; };
-		D83E1B9A141190B000CB1258 /* PEOSCSender.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B97141190B000CB1258 /* PEOSCSender.m */; };
 		D83E1B9C141190E200CB1258 /* PonyExpress.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B6C1411528100CB1258 /* PonyExpress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D83E1BA114119A2C00CB1258 /* PEOSCMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B9F14119A2C00CB1258 /* PEOSCMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D83E1BA214119A2C00CB1258 /* PEOSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BA014119A2C00CB1258 /* PEOSCMessage.m */; };
-		D83E1BA314119A2C00CB1258 /* PEOSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BA014119A2C00CB1258 /* PEOSCMessage.m */; };
 		D83E1BAD1411A36600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
 		D83E1BAF1411A41400CB1258 /* PEOSCMessage-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1BAE1411A41400CB1258 /* PEOSCMessage-Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D83E1BD91412F87A00CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
 		D83E1BDC1412F87A00CB1258 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BDB1412F87A00CB1258 /* main.m */; };
 		D83E1BE01412F87A00CB1258 /* OrphanExample.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D83E1BDF1412F87A00CB1258 /* OrphanExample.1 */; };
 		D83E1BE41412F98800CB1258 /* PonyExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5C1411528100CB1258 /* PonyExpress.framework */; };
-		D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
-		D84ED0731417FC9C00AD4737 /* PonyExpressMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */; };
 		D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */; };
 		D89B6F02165AFBB400446361 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
 		D89B6F11165AFE5200446361 /* PEOSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BA014119A2C00CB1258 /* PEOSCMessage.m */; };
@@ -37,53 +29,15 @@
 		D8AF167C14B78C060002A885 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */; };
 		D8C53D371436795700C8CF3E /* PEOSCReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C53D351436795700C8CF3E /* PEOSCReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8C53D381436795700C8CF3E /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
-		D8C53D391436795700C8CF3E /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
-		D8C53D4114367AEC00C8CF3E /* PonyEpressReceiverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */; };
-		D8FC4D3E162E899400408517 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FC4D37162E898200408517 /* OCMock.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D83E1B781411528100CB1258 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D83E1B521411528000CB1258 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D83E1B5B1411528100CB1258;
-			remoteInfo = PonyExpress;
-		};
 		D83E1BE51412F98F00CB1258 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D83E1B521411528000CB1258 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D83E1B5B1411528100CB1258;
 			remoteInfo = PonyExpress;
-		};
-		D8FC4D36162E898200408517 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D8FC4D2D162E898200408517 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 030EF0A814632FD000B04273;
-			remoteInfo = OCMock;
-		};
-		D8FC4D38162E898200408517 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D8FC4D2D162E898200408517 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 030EF0C014632FD000B04273;
-			remoteInfo = OCMockTests;
-		};
-		D8FC4D3A162E898200408517 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D8FC4D2D162E898200408517 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 030EF0DC14632FF700B04273;
-			remoteInfo = OCMockLib;
-		};
-		D8FC4D3C162E898D00408517 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D8FC4D2D162E898200408517 /* OCMock.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 030EF0A714632FD000B04273;
-			remoteInfo = OCMock;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -116,12 +70,7 @@
 		D83E1B691411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D83E1B6B1411528100CB1258 /* PonyExpress-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Prefix.pch"; sourceTree = "<group>"; };
 		D83E1B6C1411528100CB1258 /* PonyExpress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpress.h; sourceTree = "<group>"; };
-		D83E1B741411528100CB1258 /* PonyExpressTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PonyExpressTests.octest; path = "PonyExpress Mac Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D83E1B751411528100CB1258 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		D83E1B7D1411528100CB1258 /* PonyExpressTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpressTests-Info.plist"; sourceTree = "<group>"; };
-		D83E1B7F1411528100CB1258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D83E1B811411528100CB1258 /* PonyExpressSenderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressSenderTests.h; sourceTree = "<group>"; };
-		D83E1B821411528100CB1258 /* PonyExpressSenderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PonyExpressSenderTests.m; sourceTree = "<group>"; };
 		D83E1B96141190B000CB1258 /* PEOSCSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCSender.h; sourceTree = "<group>"; };
 		D83E1B97141190B000CB1258 /* PEOSCSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCSender.m; sourceTree = "<group>"; };
 		D83E1B9F14119A2C00CB1258 /* PEOSCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCMessage.h; sourceTree = "<group>"; };
@@ -131,23 +80,17 @@
 		D83E1BDB1412F87A00CB1258 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D83E1BDE1412F87A00CB1258 /* OrphanExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OrphanExample-Prefix.pch"; sourceTree = "<group>"; };
 		D83E1BDF1412F87A00CB1258 /* OrphanExample.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = OrphanExample.1; sourceTree = "<group>"; };
-		D84ED0711417FC9C00AD4737 /* PonyExpressMessageTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonyExpressMessageTests.h; sourceTree = "<group>"; };
-		D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonyExpressMessageTests.m; sourceTree = "<group>"; };
 		D8509D0E1631BE0B00CF2F14 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
 		D8509D0F1631BE0B00CF2F14 /* NOTES.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES.md; sourceTree = SOURCE_ROOT; };
 		D8509D101631BE0B00CF2F14 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		D8509D111631BE0B00CF2F14 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.md; sourceTree = SOURCE_ROOT; };
 		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
-		D89B67EB1543727A00462DDD /* PonyExpressTestHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyExpressTestHelper.h; sourceTree = "<group>"; };
 		D89B6F01165AFBB400446361 /* libPonyExpress.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPonyExpress.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
 		D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
 		D8C53D351436795700C8CF3E /* PEOSCReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCReceiver.h; sourceTree = "<group>"; };
 		D8C53D361436795700C8CF3E /* PEOSCReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCReceiver.m; sourceTree = "<group>"; };
-		D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonyEpressReceiverTests.h; sourceTree = "<group>"; };
-		D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonyEpressReceiverTests.m; sourceTree = "<group>"; };
 		D8FC4D1D162E5BDB00408517 /* Jakefile.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Jakefile.js; sourceTree = SOURCE_ROOT; };
-		D8FC4D2D162E898200408517 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = vendor/ocmock/Source/OCMock.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,17 +99,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D83E1BAD1411A36600CB1258 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D83E1B701411528100CB1258 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D83E1BE7141349A600CB1258 /* Foundation.framework in Frameworks */,
-				D83E1B7A1411528100CB1258 /* PonyExpress.framework in Frameworks */,
-				D83E1B761411528100CB1258 /* SenTestingKit.framework in Frameworks */,
-				D8FC4D3E162E899400408517 /* OCMock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				D83E1B651411528100CB1258 /* PonyExpress */,
-				D83E1B7B1411528100CB1258 /* PonyExpressTests */,
 				D83E1BDA1412F87A00CB1258 /* OrphanExample */,
 				D83E1B5E1411528100CB1258 /* Frameworks */,
 				D83E1B5D1411528100CB1258 /* Products */,
@@ -205,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				D83E1B5C1411528100CB1258 /* PonyExpress.framework */,
-				D83E1B741411528100CB1258 /* PonyExpressTests.octest */,
 				D83E1BD71412F87A00CB1258 /* OrphanExample */,
 				D89B6F01165AFBB400446361 /* libPonyExpress.a */,
 			);
@@ -243,31 +173,6 @@
 				D83E1B671411528100CB1258 /* PonyExpress-Info.plist */,
 				D83E1B681411528100CB1258 /* InfoPlist.strings */,
 				D83E1B6B1411528100CB1258 /* PonyExpress-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D83E1B7B1411528100CB1258 /* PonyExpressTests */ = {
-			isa = PBXGroup;
-			children = (
-				D8FC4D2D162E898200408517 /* OCMock.xcodeproj */,
-				D89B67EB1543727A00462DDD /* PonyExpressTestHelper.h */,
-				D84ED0711417FC9C00AD4737 /* PonyExpressMessageTests.h */,
-				D84ED0721417FC9C00AD4737 /* PonyExpressMessageTests.m */,
-				D83E1B811411528100CB1258 /* PonyExpressSenderTests.h */,
-				D83E1B821411528100CB1258 /* PonyExpressSenderTests.m */,
-				D8C53D3F14367AEC00C8CF3E /* PonyEpressReceiverTests.h */,
-				D8C53D4014367AEC00C8CF3E /* PonyEpressReceiverTests.m */,
-				D83E1B7C1411528100CB1258 /* Supporting Files */,
-			);
-			path = PonyExpressTests;
-			sourceTree = "<group>";
-		};
-		D83E1B7C1411528100CB1258 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D83E1B7D1411528100CB1258 /* PonyExpressTests-Info.plist */,
-				D83E1B7E1411528100CB1258 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -322,16 +227,6 @@
 			name = Vendor;
 			sourceTree = "<group>";
 		};
-		D8FC4D2E162E898200408517 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D8FC4D37162E898200408517 /* OCMock.framework */,
-				D8FC4D39162E898200408517 /* OCMockTests.octest */,
-				D8FC4D3B162E898200408517 /* libOCMock.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -370,26 +265,6 @@
 			productName = PonyExpress;
 			productReference = D83E1B5C1411528100CB1258 /* PonyExpress.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		D83E1B731411528100CB1258 /* PonyExpress Mac Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D83E1B891411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress Mac Tests" */;
-			buildPhases = (
-				D83E1B6F1411528100CB1258 /* Sources */,
-				D83E1B701411528100CB1258 /* Frameworks */,
-				D83E1B711411528100CB1258 /* Resources */,
-				D83E1B721411528100CB1258 /* Unit Tests */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D8FC4D3D162E898D00408517 /* PBXTargetDependency */,
-				D83E1B791411528100CB1258 /* PBXTargetDependency */,
-			);
-			name = "PonyExpress Mac Tests";
-			productName = PonyExpressTests;
-			productReference = D83E1B741411528100CB1258 /* PonyExpressTests.octest */;
-			productType = "com.apple.product-type.bundle";
 		};
 		D83E1BD61412F87A00CB1258 /* OrphanExample */ = {
 			isa = PBXNativeTarget;
@@ -445,45 +320,14 @@
 			mainGroup = D83E1B501411528000CB1258;
 			productRefGroup = D83E1B5D1411528100CB1258 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = D8FC4D2E162E898200408517 /* Products */;
-					ProjectRef = D8FC4D2D162E898200408517 /* OCMock.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				D83E1B5B1411528100CB1258 /* PonyExpress Mac */,
-				D83E1B731411528100CB1258 /* PonyExpress Mac Tests */,
 				D83E1BD61412F87A00CB1258 /* OrphanExample */,
 				D89B6F00165AFBB400446361 /* PonyExpress iOS */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		D8FC4D37162E898200408517 /* OCMock.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OCMock.framework;
-			remoteRef = D8FC4D36162E898200408517 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D8FC4D39162E898200408517 /* OCMockTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OCMockTests.octest;
-			remoteRef = D8FC4D38162E898200408517 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D8FC4D3B162E898200408517 /* libOCMock.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libOCMock.a;
-			remoteRef = D8FC4D3A162E898200408517 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D83E1B5A1411528100CB1258 /* Resources */ = {
@@ -494,31 +338,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D83E1B711411528100CB1258 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D83E1B801411528100CB1258 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D83E1B721411528100CB1258 /* Unit Tests */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Unit Tests";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
 		D899B5921443EE6E0059A19F /* Set Bundle Version */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -547,19 +369,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D83E1B6F1411528100CB1258 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D83E1BA314119A2C00CB1258 /* PEOSCMessage.m in Sources */,
-				D83E1B9A141190B000CB1258 /* PEOSCSender.m in Sources */,
-				D8C53D391436795700C8CF3E /* PEOSCReceiver.m in Sources */,
-				D84ED0731417FC9C00AD4737 /* PonyExpressMessageTests.m in Sources */,
-				D83E1B831411528100CB1258 /* PonyExpressSenderTests.m in Sources */,
-				D8C53D4114367AEC00C8CF3E /* PonyEpressReceiverTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D83E1BD31412F87A00CB1258 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -582,20 +391,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D83E1B791411528100CB1258 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D83E1B5B1411528100CB1258 /* PonyExpress Mac */;
-			targetProxy = D83E1B781411528100CB1258 /* PBXContainerItemProxy */;
-		};
 		D83E1BE61412F98F00CB1258 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D83E1B5B1411528100CB1258 /* PonyExpress Mac */;
 			targetProxy = D83E1BE51412F98F00CB1258 /* PBXContainerItemProxy */;
-		};
-		D8FC4D3D162E898D00408517 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OCMock;
-			targetProxy = D8FC4D3C162E898D00408517 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -604,14 +403,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				D83E1B691411528100CB1258 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D83E1B7E1411528100CB1258 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D83E1B7F1411528100CB1258 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -725,34 +516,6 @@
 			};
 			name = Release;
 		};
-		D83E1B8A1411528100CB1258 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		D83E1B8B1411528100CB1258 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
 		D83E1BE21412F87A00CB1258 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -829,15 +592,6 @@
 			buildConfigurations = (
 				D83E1B871411528100CB1258 /* Debug */,
 				D83E1B881411528100CB1258 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D83E1B891411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress Mac Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D83E1B8A1411528100CB1258 /* Debug */,
-				D83E1B8B1411528100CB1258 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
