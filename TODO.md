@@ -1,8 +1,8 @@
 
 ### GENERAL
 - check out Specta and Expecta, migrate testing
-- test interoperability against Lemur, TouchOSC and Max 6
-- take stance on port reuse, either reuse and demo multicast or don't and don't
+- test interoperability against Lemur, TouchOSC, Max 6 and oF
+- go unicast and later add multicast support
 - sort out OSC bundle support
 - figure out how to expose a constant for the 'immediate' NTPTimetag (NSDate category? only relevant for bundles invocation?)
 - pull example project out of PonyExpress into Examples/
