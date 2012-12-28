@@ -20,6 +20,9 @@
 		D83E1BE01412F87A00CB1258 /* OrphanExample.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D83E1BDF1412F87A00CB1258 /* OrphanExample.1 */; };
 		D83E1BE41412F98800CB1258 /* PonyExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5C1411528100CB1258 /* PonyExpress.framework */; };
 		D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */; };
+		D88F18E2168D3D42002B99CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88F18E0168D3D01002B99CD /* UIKit.framework */; };
+		D88F18E4168DEE2C002B99CD /* PEOSCMessageSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D88F18E3168DEE2C002B99CD /* PEOSCMessageSpec.m */; };
+		D88F18E5168DEE2C002B99CD /* PEOSCMessageSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D88F18E3168DEE2C002B99CD /* PEOSCMessageSpec.m */; };
 		D8975A4C168B59D00090FEB6 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B751411528100CB1258 /* SenTestingKit.framework */; };
 		D8975A58168B59D00090FEB6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8975A56168B59D00090FEB6 /* InfoPlist.strings */; };
 		D8975A82168B5B080090FEB6 /* libExpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8975A77168B5AEB0090FEB6 /* libExpecta.a */; };
@@ -192,6 +195,8 @@
 		D8509D101631BE0B00CF2F14 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		D8509D111631BE0B00CF2F14 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.md; sourceTree = SOURCE_ROOT; };
 		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
+		D88F18E0168D3D01002B99CD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		D88F18E3168DEE2C002B99CD /* PEOSCMessageSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCMessageSpec.m; sourceTree = "<group>"; };
 		D8975A4B168B59D00090FEB6 /* PonyExpress Mac Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PonyExpress Mac Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8975A55168B59D00090FEB6 /* PonyExpressTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpressTests-Info.plist"; sourceTree = "<group>"; };
 		D8975A57168B59D00090FEB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -240,6 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D88F18E2168D3D42002B99CD /* UIKit.framework in Frameworks */,
 				D8975AA4168B5E750090FEB6 /* libPonyExpress.a in Frameworks */,
 				D8975A8D168B5D0C0090FEB6 /* SenTestingKit.framework in Frameworks */,
 				D8975AA6168B5E750090FEB6 /* libSpecta-iOS.a in Frameworks */,
@@ -285,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				D83E1B641411528100CB1258 /* Foundation.framework */,
+				D88F18E0168D3D01002B99CD /* UIKit.framework */,
 				D8975A60168B5AE60090FEB6 /* Specta.xcodeproj */,
 				D8975A6F168B5AEA0090FEB6 /* Expecta.xcodeproj */,
 				D83E1B751411528100CB1258 /* SenTestingKit.framework */,
@@ -345,9 +352,18 @@
 			name = AsyncSocket;
 			sourceTree = "<group>";
 		};
+		D88F18DC168BFDD5002B99CD /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+				D88F18E3168DEE2C002B99CD /* PEOSCMessageSpec.m */,
+			);
+			name = Specs;
+			sourceTree = "<group>";
+		};
 		D8975A53168B59D00090FEB6 /* PonyExpressTests */ = {
 			isa = PBXGroup;
 			children = (
+				D88F18DC168BFDD5002B99CD /* Specs */,
 				D8975A54168B59D00090FEB6 /* Supporting Files */,
 			);
 			path = PonyExpressTests;
@@ -716,6 +732,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D88F18E4168DEE2C002B99CD /* PEOSCMessageSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,6 +740,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D88F18E5168DEE2C002B99CD /* PEOSCMessageSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -941,6 +959,7 @@
 					"vendor/expecta/src/**",
 				);
 				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = octest;
@@ -959,6 +978,7 @@
 					"vendor/expecta/src/**",
 				);
 				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = octest;
@@ -984,7 +1004,7 @@
 					"vendor/expecta/src/**",
 				);
 				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = octest;
@@ -1006,7 +1026,7 @@
 					"vendor/expecta/src/**",
 				);
 				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1088,6 +1108,7 @@
 				D8975A5F168B59D00090FEB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D8975A9B168B5D0C0090FEB6 /* Build configuration list for PBXNativeTarget "PonyExpress iOS Tests" */ = {
 			isa = XCConfigurationList;
@@ -1096,6 +1117,7 @@
 				D8975A9D168B5D0C0090FEB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D89B6F0A165AFBB400446361 /* Build configuration list for PBXNativeTarget "PonyExpress iOS" */ = {
 			isa = XCConfigurationList;
