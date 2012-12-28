@@ -4,6 +4,7 @@
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
+    #import <PonyExpress/PonyExpress.h>
 
     #import "Specta.h"
 
