@@ -292,8 +292,6 @@
 			children = (
 				D83E1B641411528100CB1258 /* Foundation.framework */,
 				D88F18E0168D3D01002B99CD /* UIKit.framework */,
-				D8975A60168B5AE60090FEB6 /* Specta.xcodeproj */,
-				D8975A6F168B5AEA0090FEB6 /* Expecta.xcodeproj */,
 				D83E1B751411528100CB1258 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
@@ -364,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				D88F18DC168BFDD5002B99CD /* Specs */,
+				D8A1725D16902147002CFCC8 /* Vendor */,
 				D8975A54168B59D00090FEB6 /* Supporting Files */,
 			);
 			path = PonyExpressTests;
@@ -420,6 +419,15 @@
 			isa = PBXGroup;
 			children = (
 				D87C17F81413F3CF005A08F3 /* AsyncSocket */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		D8A1725D16902147002CFCC8 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				D8975A60168B5AE60090FEB6 /* Specta.xcodeproj */,
+				D8975A6F168B5AEA0090FEB6 /* Expecta.xcodeproj */,
 			);
 			name = Vendor;
 			sourceTree = "<group>";
