@@ -163,12 +163,12 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 
 @implementation PEOSCMessage
 
-+ (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments {
++ (instancetype)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments {
     id message = [[[self class] alloc] initWithAddress:address typeTags:typeTags arguments:arguments];
     return message;
 }
 
-- (id)initWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments {
+- (instancetype)initWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments {
     self = [super init];
     if (self) {
         self.address = address;
@@ -178,12 +178,12 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
     return self;
 }
 
-+ (id)messageWithData:(NSData*)data {
++ (instancetype)messageWithData:(NSData*)data {
     id message = [[[self class] alloc] initWithData:data];
     return message;
 }
 
-- (id)initWithData:(NSData*)data {
+- (instancetype)initWithData:(NSData*)data {
     self = [super init];
     if (self) {
         NSUInteger length = [data length];

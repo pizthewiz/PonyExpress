@@ -27,7 +27,7 @@ PEOSCSender* sender = [PEOSCSender senderWithHost:@"cray.local." port:31337];
 - open the project in Xcode, select the PonyExpress Mac or PonyExpress iOS scheme and build.
 
 #### Soft Requirements
-NSArray, NSDictionary and NSNumber [literals](http://clang.llvm.org/docs/ObjectiveCLiterals.html) and object subscripting are used throughout the Pony Express classes, and is available in Apple LLVM Compiler 4.0+, shipped as part of Xcode 4.4 or later. 
+NSArray, NSDictionary and NSNumber [literals](http://clang.llvm.org/docs/ObjectiveCLiterals.html), object subscripting and [instancetype](http://clang.llvm.org/docs/LanguageExtensions.html#objc_instancetype) are used throughout the Pony Express, and is available in Apple LLVM Compiler 4.0+, shipped as part of Xcode 4.4 or later.
 
 the bundle version is optionally set from the repository state using [Node.js](http://nodejs.org/) and a few modules; if Node.js is not installed, the bundle version will remain unset.
 
