@@ -10,6 +10,7 @@
 - add more in-depth usage info to [README](README.md) for Mac OS X and iOS applications
 
 ### MESSAGE
+- store host message originated from?
 - do a better job with NSData allocation and writing in -_data?
 - ignore unknown types (is that even possible?)
 - make debug buffer dump multi-line and byte-gap configurable
