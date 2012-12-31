@@ -28,7 +28,7 @@
 
     // send a ping
     __block PEOSCMessage* message = [PEOSCMessage messageWithAddress:@"/ping" typeTags:@[PEOSCMessageTypeTagTimetag] arguments:@[[NSDate date]]];
-    PEOSCSender* sender = [PEOSCSender senderWithHost:@"10.0.1.32" port:PORT_OUT];
+    PEOSCSender* sender = [PEOSCSender senderWithHost:@"127.0.0.1" port:PORT_OUT];
     [sender sendMessage:message handler:^(BOOL success, NSError* error) {
         if (error) {
             NSLog(@"ERROR - failed to send message '%@' - %@", message, [error localizedDescription]);
@@ -50,14 +50,14 @@
 
     // send a pong
     if ([message.address isEqualToString:@"/ping"]) {
-        __block PEOSCMessage* message = [PEOSCMessage messageWithAddress:@"/pong" typeTags:@[PEOSCMessageTypeTagTimetag] arguments:@[[NSDate date]]];
+        __block PEOSCMessage* responseMessage = [PEOSCMessage messageWithAddress:@"/pong" typeTags:@[PEOSCMessageTypeTagTimetag] arguments:@[[NSDate date]]];
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"127.0.0.1" port:PORT_OUT];
-        [sender sendMessage:message handler:^(BOOL success, NSError* error) {
+        [sender sendMessage:responseMessage handler:^(BOOL success, NSError* error) {
             if (error) {
-                NSLog(@"ERROR - failed to send message '%@' - %@", message, [error localizedDescription]);
+                NSLog(@"ERROR - failed to send message '%@' - %@", responseMessage, [error localizedDescription]);
                 return;
             }
-            NSLog(@"sent: %@", message);
+            NSLog(@"sent: %@", responseMessage);
         }];
     }
 }
