@@ -22,12 +22,12 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 
 @implementation PEOSCReceiver
 
-+ (id)receiverWithPort:(UInt16)port {
++ (instancetype)receiverWithPort:(UInt16)port {
     PEOSCReceiver* receiver = [[PEOSCReceiver alloc] initWithPort:port];
     return receiver;
 }
 
-- (id)initWithPort:(UInt16)port {
+- (instancetype)initWithPort:(UInt16)port {
     self = [super init];
     if (self) {
         self.port = port;

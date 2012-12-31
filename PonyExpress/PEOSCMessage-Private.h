@@ -9,8 +9,8 @@
 #import "PEOSCMessage.h"
 
 @interface PEOSCMessage ()
-+ (id)messageWithData:(NSData*)data;
-- (id)initWithData:(NSData*)data;
++ (instancetype)messageWithData:(NSData*)data;
+- (instancetype)initWithData:(NSData*)data;
 
 + (NSString*)_codeForType:(NSString*)type;
 + (NSString*)_typeForCode:(NSString*)type;

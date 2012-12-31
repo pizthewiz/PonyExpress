@@ -23,12 +23,12 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
 @implementation PEOSCSender
 
-+ (id)senderWithHost:(NSString*)host port:(UInt16)port {
++ (instancetype)senderWithHost:(NSString*)host port:(UInt16)port {
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
     return sender;
 }
 
-- (id)initWithHost:(NSString*)host port:(UInt16)port {
+- (instancetype)initWithHost:(NSString*)host port:(UInt16)port {
     self = [super init];
     if (self) {
         self.host = host;

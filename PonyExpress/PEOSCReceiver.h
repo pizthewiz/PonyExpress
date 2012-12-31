@@ -25,8 +25,8 @@ typedef void(^PEOSCReceiverCompletionHandler)(BOOL success, NSError* error);
 @end
 
 @interface PEOSCReceiver : NSObject
-+ (id)receiverWithPort:(UInt16)port;
-- (id)initWithPort:(UInt16)port;
++ (instancetype)receiverWithPort:(UInt16)port;
+- (instancetype)initWithPort:(UInt16)port;
 
 @property (nonatomic, readonly) UInt16 port;
 @property (nonatomic, weak) id <PEOSCReceiverDelegate> delegate;

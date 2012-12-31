@@ -31,8 +31,8 @@ extern NSString* const PEOSCMessageTypeTagTimetag; // NSDate
 
 @interface PEOSCMessage : NSObject
 // arg-less types should not be represented with a value in the arguments array
-+ (id)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
-- (id)initWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
++ (instancetype)messageWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
+- (instancetype)initWithAddress:(NSString*)address typeTags:(NSArray*)typeTags arguments:(NSArray*)arguments;
 
 @property (nonatomic, strong) NSString* address;
 @property (nonatomic, strong) NSArray* typeTags;

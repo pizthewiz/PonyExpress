@@ -24,14 +24,14 @@ PEOSCSender* sender = [PEOSCSender senderWithHost:@"cray.local." port:31337];
 
 ## How To Build
 - clone the repository and submodules `git clone --recursive git://github.com/pizthewiz/PonyExpress.git`
-- open the project in Xcode, select the PonyExpress Mac or PonyExpress iOS scheme and build.
+- open the project in Xcode, select the appropriate PonyExpress scheme and build; example applications are avaialble in the `Examples` directory.
 
 #### Soft Requirements
-NSArray, NSDictionary and NSNumber [literals](http://clang.llvm.org/docs/ObjectiveCLiterals.html) and object subscripting are used throughout the Pony Express classes, and is available in Apple LLVM Compiler 4.0+, shipped as part of Xcode 4.4 or later. 
+NSArray, NSDictionary and NSNumber [literals](http://clang.llvm.org/docs/ObjectiveCLiterals.html), object subscripting and [instancetype](http://clang.llvm.org/docs/LanguageExtensions.html#objc_instancetype) are used throughout the Pony Express, and is available in Apple LLVM Compiler 4.0+, shipped as part of Xcode 4.4 or later.
 
 the bundle version is optionally set from the repository state using [Node.js](http://nodejs.org/) and a few modules; if Node.js is not installed, the bundle version will remain unset.
 
-- install Node.js 0.8.14 (or later) from [binary package](http://nodejs.org/dist/v0.8.14/node-v0.8.14.pkg) or build and install from [source](http://nodejs.org/dist/v0.8.14/node-v0.8.14.tar.gz)
+- install Node.js 0.8.16 (or later) from [binary package](http://nodejs.org/dist/v0.8.16/node-v0.8.16.pkg) or build and install from [source](http://nodejs.org/dist/v0.8.16/node-v0.8.16.tar.gz)
 - install node modules globally `npm install -g jake async NodObjC`
 - link global modules to local PonyExpress clone `npm link async NodObjC`
 

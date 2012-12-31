@@ -19,8 +19,8 @@ typedef enum PEOSCSenderError : NSInteger {
 typedef void(^PEOSCSenderCompletionHandler)(BOOL success, NSError* error);
 
 @interface PEOSCSender : NSObject
-+ (id)senderWithHost:(NSString*)host port:(UInt16)port;
-- (id)initWithHost:(NSString*)host port:(UInt16)port;
++ (instancetype)senderWithHost:(NSString*)host port:(UInt16)port;
+- (instancetype)initWithHost:(NSString*)host port:(UInt16)port;
 
 @property (nonatomic, readonly, strong) NSString* host;
 @property (nonatomic, readonly) UInt16 port;
