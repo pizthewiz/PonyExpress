@@ -5,7 +5,6 @@
 - go unicast and later add multicast support
 - sort out OSC bundle support
 - figure out how to expose a constant for the 'immediate' NTPTimetag (NSDate category? only relevant for bundles invocation?)
-- pull example project out of PonyExpress into Examples/
 - look into simple MIDI tunneling example
 - add more in-depth usage info to [README](README.md) for Mac OS X and iOS applications
 
