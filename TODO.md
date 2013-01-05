@@ -1,5 +1,6 @@
 
 ### GENERAL
+- redo static library for iOS in the mannor [descirbed by jamie](http://www.blog.montgomerie.net/easy-xcode-static-library-subprojects-and-submodules)
 - check out Specta and Expecta, migrate testing
 - test interoperability against Lemur, TouchOSC, Max 6 and oF
 - go unicast and later add multicast support
