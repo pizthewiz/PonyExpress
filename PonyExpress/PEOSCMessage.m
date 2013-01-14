@@ -3,7 +3,7 @@
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 2 Sept 2011.
-//  Copyright (c) 2011-2012 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2011-2013 Chorded Constructions. All rights reserved.
 //
 
 #import "PEOSCMessage.h"
@@ -110,11 +110,11 @@ static NTPTimestamp NTPTimestamp1970 = {JAN_1970, 0};    // network time for 1 J
 // static NTPTimestamp NTPTimestampImmediate = {0, 1};
 
 @interface NSDate (PEAdditions)
-+ (id)dateWithNTPTimestamp:(NTPTimestamp)timestamp;
++ (instancetype)dateWithNTPTimestamp:(NTPTimestamp)timestamp;
 - (NTPTimestamp)NTPTimestamp;
 @end
 @implementation NSDate (PEAdditions)
-+ (id)dateWithNTPTimestamp:(NTPTimestamp)timestamp {
++ (instancetype)dateWithNTPTimestamp:(NTPTimestamp)timestamp {
     return [NSDate dateWithTimeIntervalSince1970:NTPTimestampDifference(NTPTimestamp1970, timestamp)];
 }
 - (NTPTimestamp)NTPTimestamp {
