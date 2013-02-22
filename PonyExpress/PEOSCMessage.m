@@ -307,74 +307,77 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 + (NSString*)displayNameForType:(NSString*)type {
     NSString* name = nil;
     // TODO - move to strings file
-    if ([type isEqualToString:PEOSCMessageTypeTagInteger])
+    if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
         name = @"Integer";
-    else if ([type isEqualToString:PEOSCMessageTypeTagFloat])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagFloat]) {
         name = @"Float";
-    else if ([type isEqualToString:PEOSCMessageTypeTagString])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagString]) {
         name = @"String";
-    else if ([type isEqualToString:PEOSCMessageTypeTagBlob])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
         name = @"Blob";
-    else if ([type isEqualToString:PEOSCMessageTypeTagTrue])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagTrue]) {
         name = @"True";
-    else if ([type isEqualToString:PEOSCMessageTypeTagFalse])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagFalse]) {
         name = @"False";
-    else if ([type isEqualToString:PEOSCMessageTypeTagNull])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagNull]) {
         name = @"Null";
-    else if ([type isEqualToString:PEOSCMessageTypeTagImpulse])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagImpulse]) {
         name = @"Impulse";
-    else if ([type isEqualToString:PEOSCMessageTypeTagTimetag])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
         name = @"Timetag";
+    }
     return name;
 }
 
 + (NSString*)_codeForType:(NSString*)type {
     NSString* code = nil;
-    if ([type isEqualToString:PEOSCMessageTypeTagInteger])
+    if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
         code = @"i";
-    else if ([type isEqualToString:PEOSCMessageTypeTagFloat])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagFloat]) {
         code = @"f";
-    else if ([type isEqualToString:PEOSCMessageTypeTagString])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagString]) {
         code = @"s";
-    else if ([type isEqualToString:PEOSCMessageTypeTagBlob])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
         code = @"b";
-    else if ([type isEqualToString:PEOSCMessageTypeTagTrue])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagTrue]) {
         code = @"T";
-    else if ([type isEqualToString:PEOSCMessageTypeTagFalse])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagFalse]) {
         code = @"F";
-    else if ([type isEqualToString:PEOSCMessageTypeTagNull])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagNull]) {
         code = @"N";
-    else if ([type isEqualToString:PEOSCMessageTypeTagImpulse])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagImpulse]) {
         code = @"I";
-    else if ([type isEqualToString:PEOSCMessageTypeTagTimetag])
+    } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
         code = @"t";
-    else
+    } else {
         CCDebugLog(@"unrecognized type %@", type);
+    }
     return code;
 }
 
 + (NSString*)_typeForCode:(NSString*)code {
     NSString* type = nil;
-    if ([code isEqualToString:@"i"])
+    if ([code isEqualToString:@"i"]) {
         type = PEOSCMessageTypeTagInteger;
-    else if ([code isEqualToString:@"f"])
+    } else if ([code isEqualToString:@"f"]) {
         type = PEOSCMessageTypeTagFloat;
-    else if ([code isEqualToString:@"s"])
+    } else if ([code isEqualToString:@"s"]) {
         type = PEOSCMessageTypeTagString;
-    else if ([code isEqualToString:@"b"])
+    } else if ([code isEqualToString:@"b"]) {
         type = PEOSCMessageTypeTagBlob;
-    else if ([code isEqualToString:@"T"])
+    } else if ([code isEqualToString:@"T"]) {
         type = PEOSCMessageTypeTagTrue;
-    else if ([code isEqualToString:@"F"])
+    } else if ([code isEqualToString:@"F"]) {
         type = PEOSCMessageTypeTagFalse;
-    else if ([code isEqualToString:@"N"])
+    } else if ([code isEqualToString:@"N"]) {
         type = PEOSCMessageTypeTagNull;
-    else if ([code isEqualToString:@"I"])
+    } else if ([code isEqualToString:@"I"]) {
         type = PEOSCMessageTypeTagImpulse;
-    else if ([code isEqualToString:@"t"])
+    } else if ([code isEqualToString:@"t"]) {
         type = PEOSCMessageTypeTagTimetag;
-    else
+    } else {
         CCDebugLog(@"unrecognized code %@", code);
+    }
     return type;
 }
 
@@ -508,8 +511,9 @@ bail:
             continue;
         numberOfArguments++;
     }
-    if (self.arguments.count != numberOfArguments)
+    if (self.arguments.count != numberOfArguments) {
         return NO;
+    }
 
     __block BOOL status = YES;
     [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL* stop) {
@@ -560,18 +564,21 @@ bail:
     //  https://github.com/mirek/CoreOSC/blob/master/CoreOSC/CoreOSC.c
     const char* buffer = [data bytes];
     for (NSUInteger idx = 0; idx < data.length; idx++) {
-        if (idx > 0 && !(idx % 4))
+        if (idx > 0 && !(idx % 4)) {
             printf(" ");
-        if (buffer[idx] > 0x1f)
+        }
+        if (buffer[idx] > 0x1f) {
             printf("  %c", buffer[idx]);
-        else
+        } else {
             printf(" __");
+        }
     }
     printf("\n");
     for (NSUInteger idx = 0; idx < data.length; idx++) {
-        if (idx > 0 && !(idx % 4))
+        if (idx > 0 && !(idx % 4)) {
             printf(" ");
-        printf(" %02x", (unsigned char)buffer[idx]);        
+        }
+        printf(" %02x", (unsigned char)buffer[idx]);
     }
     printf("\n");
 }
@@ -627,8 +634,9 @@ bail:
 
 #ifdef LOGGING
     // only dump the buffer when less than 4k
-    if (data.length < 4 * 1024)
+    if (data.length < 4 * 1024) {
         [self _printDataBuffer:data];
+    }
 #endif
 
     return data;
