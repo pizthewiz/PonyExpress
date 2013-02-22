@@ -63,27 +63,27 @@ it(@"should report type tags as valid when nil", ^{
 #pragma mark - ARGUMENTS
 
 it(@"should report unknown argument type as invalid", ^{
-    PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagString] arguments:@[@440.0]];
+    PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagString] arguments:@[@[]]];
     expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
 });
-it(@"should report arg without type as invalid", ^{
+it(@"should report argument without type as invalid", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:nil arguments:@[@440.0]];
     expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
 });
-it(@"should report arg and type mismatch as invalid", ^{
+it(@"should report mismatched argument for type as invalid", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagString] arguments:@[@440.0]];
     expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
 });
-it(@"should report arg <-> type mismatch as invalid", ^{
-    PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagString] arguments:@[@440.0]];
-    expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
-});
-it(@"should report argument for type not accepting argument as invalid", ^{
+it(@"should report argument for argless-type as invalid", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagImpulse] arguments:@[@440.0]];
     expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
 });
-it(@"should report missing argument for types as invalid", ^{
+it(@"should report missing argument for given types as invalid", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagFloat] arguments:@[@440.0]];
+    expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
+});
+it(@"should report extra argument for given types as invalid", ^{
+    PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagFloat] arguments:@[@440.0, @880.0]];
     expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
 });
 it(@"should report good arguments for types as valid", ^{
