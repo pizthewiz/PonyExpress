@@ -411,6 +411,10 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 #pragma mark - PRIVATE
 
 - (BOOL)_isAddressValid {
+    if (!self.address) {
+        return NO;
+    }
+
     BOOL status = YES;
 
     // check for leading / and lack of spaces
