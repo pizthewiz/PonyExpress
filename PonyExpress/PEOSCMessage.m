@@ -191,7 +191,7 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 
         // address
         NSString* addressString = readString(data, start, length);
-        // naïve validation
+        // TODO - replace naïve validation with +[PEOSCMessage addressIsValid:]
         if (!addressString || [addressString isEqualToString:@""]) {
             CCErrorLog(@"ERROR - invalid empty address, message dropped");
             return nil;
@@ -208,7 +208,8 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
         NSString* typeTagString = readString(data, start, length);
 
         // NB - this is probably too aggressive
-        NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^,[ifsbTFNIt]*$" options:0 error:NULL];
+        static NSString* const PEOSCTypeTagRegExPattern = @"^,[ifsbTFNIt]*$";
+        NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:PEOSCTypeTagRegExPattern options:0 error:NULL];
         NSTextCheckingResult* result = [reg firstMatchInString:typeTagString options:0 range:NSMakeRange(0, typeTagString.length)];
         if (!result) {
             // BAIL
@@ -418,7 +419,8 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
     BOOL status = YES;
 
     // check for leading / and lack of spaces
-    NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:@"^/(\\S*)$" options:NSRegularExpressionCaseInsensitive error:NULL];
+    static NSString* const PEOSCAddressRegExPattern = @"^/(\\S*)$";
+    NSRegularExpression* reg = [NSRegularExpression regularExpressionWithPattern:PEOSCAddressRegExPattern options:NSRegularExpressionCaseInsensitive error:NULL];
     NSUInteger matches = [reg numberOfMatchesInString:self.address options:0 range:NSMakeRange(0, self.address.length)];
     status = matches == 1;
 
@@ -453,9 +455,7 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
                         status = NO;
                         goto bail;
                     }
-                }
-
-                else if (c == '[') {
+                } else if (c == '[') {
                     // disallow nested lists or ranges
                     if (curleyBraceStack != 0 || bracketStack != 0) {
                         status = NO;
