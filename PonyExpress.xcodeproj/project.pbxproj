@@ -15,10 +15,6 @@
 		D83E1BA214119A2C00CB1258 /* PEOSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BA014119A2C00CB1258 /* PEOSCMessage.m */; };
 		D83E1BAD1411A36600CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
 		D83E1BAF1411A41400CB1258 /* PEOSCMessage-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1BAE1411A41400CB1258 /* PEOSCMessage-Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		D83E1BD91412F87A00CB1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B641411528100CB1258 /* Foundation.framework */; };
-		D83E1BDC1412F87A00CB1258 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1BDB1412F87A00CB1258 /* main.m */; };
-		D83E1BE01412F87A00CB1258 /* OrphanExample.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D83E1BDF1412F87A00CB1258 /* OrphanExample.1 */; };
-		D83E1BE41412F98800CB1258 /* PonyExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E1B5C1411528100CB1258 /* PonyExpress.framework */; };
 		D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */; };
 		D88F18E2168D3D42002B99CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88F18E0168D3D01002B99CD /* UIKit.framework */; };
 		D88F18E4168DEE2C002B99CD /* PEOSCMessageSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D88F18E3168DEE2C002B99CD /* PEOSCMessageSpec.m */; };
@@ -44,13 +40,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D83E1BE51412F98F00CB1258 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D83E1B521411528000CB1258 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D83E1B5B1411528100CB1258;
-			remoteInfo = PonyExpress;
-		};
 		D8975A67168B5AE60090FEB6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D8975A60168B5AE60090FEB6 /* Specta.xcodeproj */;
@@ -152,16 +141,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D83E1BD51412F87A00CB1258 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-				D83E1BE01412F87A00CB1258 /* OrphanExample.1 in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 		D89B6EFF165AFBB400446361 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -186,10 +165,6 @@
 		D83E1B9F14119A2C00CB1258 /* PEOSCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCMessage.h; sourceTree = "<group>"; };
 		D83E1BA014119A2C00CB1258 /* PEOSCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCMessage.m; sourceTree = "<group>"; };
 		D83E1BAE1411A41400CB1258 /* PEOSCMessage-Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PEOSCMessage-Private.h"; sourceTree = "<group>"; };
-		D83E1BD71412F87A00CB1258 /* OrphanExample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OrphanExample; sourceTree = BUILT_PRODUCTS_DIR; };
-		D83E1BDB1412F87A00CB1258 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D83E1BDE1412F87A00CB1258 /* OrphanExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OrphanExample-Prefix.pch"; sourceTree = "<group>"; };
-		D83E1BDF1412F87A00CB1258 /* OrphanExample.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = OrphanExample.1; sourceTree = "<group>"; };
 		D8509D0E1631BE0B00CF2F14 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
 		D8509D0F1631BE0B00CF2F14 /* NOTES.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES.md; sourceTree = SOURCE_ROOT; };
 		D8509D101631BE0B00CF2F14 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -218,15 +193,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D83E1BAD1411A36600CB1258 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D83E1BD41412F87A00CB1258 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D83E1BD91412F87A00CB1258 /* Foundation.framework in Frameworks */,
-				D83E1BE41412F98800CB1258 /* PonyExpress.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +235,6 @@
 			children = (
 				D83E1B651411528100CB1258 /* PonyExpress */,
 				D8975A53168B59D00090FEB6 /* PonyExpressTests */,
-				D83E1BDA1412F87A00CB1258 /* OrphanExample */,
 				D83E1B5E1411528100CB1258 /* Frameworks */,
 				D83E1B5D1411528100CB1258 /* Products */,
 			);
@@ -279,7 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				D83E1B5C1411528100CB1258 /* PonyExpress.framework */,
-				D83E1BD71412F87A00CB1258 /* OrphanExample */,
 				D89B6F01165AFBB400446361 /* libPonyExpress.a */,
 				D8975A4B168B59D00090FEB6 /* PonyExpress Mac Tests.octest */,
 				D8975A8C168B5D0C0090FEB6 /* PonyExpress iOS Tests.octest */,
@@ -319,24 +283,6 @@
 				D83E1B671411528100CB1258 /* PonyExpress-Info.plist */,
 				D83E1B681411528100CB1258 /* InfoPlist.strings */,
 				D83E1B6B1411528100CB1258 /* PonyExpress-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D83E1BDA1412F87A00CB1258 /* OrphanExample */ = {
-			isa = PBXGroup;
-			children = (
-				D83E1BDB1412F87A00CB1258 /* main.m */,
-				D83E1BDF1412F87A00CB1258 /* OrphanExample.1 */,
-				D83E1BDD1412F87A00CB1258 /* Supporting Files */,
-			);
-			path = OrphanExample;
-			sourceTree = "<group>";
-		};
-		D83E1BDD1412F87A00CB1258 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D83E1BDE1412F87A00CB1258 /* OrphanExample-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -471,24 +417,6 @@
 			productReference = D83E1B5C1411528100CB1258 /* PonyExpress.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D83E1BD61412F87A00CB1258 /* OrphanExample */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D83E1BE11412F87A00CB1258 /* Build configuration list for PBXNativeTarget "OrphanExample" */;
-			buildPhases = (
-				D83E1BD31412F87A00CB1258 /* Sources */,
-				D83E1BD41412F87A00CB1258 /* Frameworks */,
-				D83E1BD51412F87A00CB1258 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D83E1BE61412F98F00CB1258 /* PBXTargetDependency */,
-			);
-			name = OrphanExample;
-			productName = OrphanExample;
-			productReference = D83E1BD71412F87A00CB1258 /* OrphanExample */;
-			productType = "com.apple.product-type.tool";
-		};
 		D8975A4A168B59D00090FEB6 /* PonyExpress Mac Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8975A5D168B59D00090FEB6 /* Build configuration list for PBXNativeTarget "PonyExpress Mac Tests" */;
@@ -581,7 +509,6 @@
 			targets = (
 				D83E1B5B1411528100CB1258 /* PonyExpress Mac */,
 				D8975A4A168B59D00090FEB6 /* PonyExpress Mac Tests */,
-				D83E1BD61412F87A00CB1258 /* OrphanExample */,
 				D89B6F00165AFBB400446361 /* PonyExpress iOS */,
 				D8975A8B168B5D0C0090FEB6 /* PonyExpress iOS Tests */,
 			);
@@ -728,14 +655,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D83E1BD31412F87A00CB1258 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D83E1BDC1412F87A00CB1258 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D8975A46168B59D00090FEB6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -766,11 +685,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D83E1BE61412F98F00CB1258 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D83E1B5B1411528100CB1258 /* PonyExpress Mac */;
-			targetProxy = D83E1BE51412F98F00CB1258 /* PBXContainerItemProxy */;
-		};
 		D8975A7F168B5AF80090FEB6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Specta;
@@ -929,28 +843,6 @@
 			};
 			name = Release;
 		};
-		D83E1BE21412F87A00CB1258 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OrphanExample/OrphanExample-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		D83E1BE31412F87A00CB1258 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OrphanExample/OrphanExample-Prefix.pch";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		D8975A5E168B59D00090FEB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1092,15 +984,6 @@
 			buildConfigurations = (
 				D83E1B871411528100CB1258 /* Debug */,
 				D83E1B881411528100CB1258 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D83E1BE11412F87A00CB1258 /* Build configuration list for PBXNativeTarget "OrphanExample" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D83E1BE21412F87A00CB1258 /* Debug */,
-				D83E1BE31412F87A00CB1258 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
