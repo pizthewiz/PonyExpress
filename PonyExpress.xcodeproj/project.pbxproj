@@ -33,6 +33,10 @@
 		D89B6F13165AFE5200446361 /* PEOSCSender.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B97141190B000CB1258 /* PEOSCSender.m */; };
 		D89B6F15165AFE5200446361 /* PEOSCReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C53D361436795700C8CF3E /* PEOSCReceiver.m */; };
 		D89B6F16165AFE5200446361 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */; };
+		D89FA2B716D74E68005C8187 /* PEOSCSenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D89FA2B616D74E68005C8187 /* PEOSCSenderSpec.m */; };
+		D89FA2B816D74E68005C8187 /* PEOSCSenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D89FA2B616D74E68005C8187 /* PEOSCSenderSpec.m */; };
+		D89FA2BA16D74EC7005C8187 /* PEOSCReceiverSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D89FA2B916D74EC7005C8187 /* PEOSCReceiverSpec.m */; };
+		D89FA2BB16D74EC7005C8187 /* PEOSCReceiverSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D89FA2B916D74EC7005C8187 /* PEOSCReceiverSpec.m */; };
 		D8AF167B14B78C060002A885 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */; };
 		D8AF167C14B78C060002A885 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */; };
 		D8C53D371436795700C8CF3E /* PEOSCReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C53D351436795700C8CF3E /* PEOSCReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -180,6 +184,8 @@
 		D8975A6F168B5AEA0090FEB6 /* Expecta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Expecta.xcodeproj; path = vendor/expecta/Expecta.xcodeproj; sourceTree = SOURCE_ROOT; };
 		D8975A8C168B5D0C0090FEB6 /* PonyExpress iOS Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PonyExpress iOS Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89B6F01165AFBB400446361 /* libPonyExpress.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPonyExpress.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D89FA2B616D74E68005C8187 /* PEOSCSenderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCSenderSpec.m; sourceTree = "<group>"; };
+		D89FA2B916D74EC7005C8187 /* PEOSCReceiverSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCReceiverSpec.m; sourceTree = "<group>"; };
 		D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
 		D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
 		D8C53D351436795700C8CF3E /* PEOSCReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCReceiver.h; sourceTree = "<group>"; };
@@ -300,6 +306,8 @@
 			isa = PBXGroup;
 			children = (
 				D88F18E3168DEE2C002B99CD /* PEOSCMessageSpec.m */,
+				D89FA2B616D74E68005C8187 /* PEOSCSenderSpec.m */,
+				D89FA2B916D74EC7005C8187 /* PEOSCReceiverSpec.m */,
 			);
 			name = Specs;
 			sourceTree = "<group>";
@@ -405,8 +413,8 @@
 				D83E1B571411528100CB1258 /* Sources */,
 				D83E1B581411528100CB1258 /* Frameworks */,
 				D83E1B591411528100CB1258 /* Headers */,
-				D899B5921443EE6E0059A19F /* Set Bundle Version */,
 				D83E1B5A1411528100CB1258 /* Resources */,
+				D899B5921443EE6E0059A19F /* Set Bundle Version */,
 			);
 			buildRules = (
 			);
@@ -660,6 +668,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D88F18E4168DEE2C002B99CD /* PEOSCMessageSpec.m in Sources */,
+				D89FA2B716D74E68005C8187 /* PEOSCSenderSpec.m in Sources */,
+				D89FA2BA16D74EC7005C8187 /* PEOSCReceiverSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +678,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D88F18E5168DEE2C002B99CD /* PEOSCMessageSpec.m in Sources */,
+				D89FA2B816D74E68005C8187 /* PEOSCSenderSpec.m in Sources */,
+				D89FA2BB16D74EC7005C8187 /* PEOSCReceiverSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
