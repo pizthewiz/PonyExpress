@@ -1,6 +1,6 @@
 
 ### GENERAL
-- override -[PEOSCMessage hash] for support of -[PEOSCMessage isEqual]?
+- override -[PEOSCMessage hash] for support of -[PEOSCMessage isEqual], see [mike ash's friday qa article](http://www.mikeash.com/pyblog/friday-qa-2010-06-18-implementing-equality-and-hashing.html)
 - pull address validation code out to a class method and use within -[PEOSCMessage initWithData:]
 - redo static library for iOS in the mannor [descirbed by jamie](http://www.blog.montgomerie.net/easy-xcode-static-library-subprojects-and-submodules) and migrate Example/Tests to it
 - add CONTRIBUTING.md
