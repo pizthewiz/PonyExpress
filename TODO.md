@@ -1,9 +1,10 @@
 
 ### GENERAL
+- override -[PEOSCMessage hash] for support of -[PEOSCMessage isEqual]?
+- pull address validation code out to a class method and use within -[PEOSCMessage initWithData:]
 - redo static library for iOS in the mannor [descirbed by jamie](http://www.blog.montgomerie.net/easy-xcode-static-library-subprojects-and-submodules) and migrate Example/Tests to it
-- check out Specta and Expecta, migrate testing
 - add CONTRIBUTING.md
-- test interoperability against Lemur, TouchOSC, Max 6 and oF
+- test interoperability against Lemur, TouchOSC, Max 6, oF and Cinder
 - go unicast and later add multicast support
 - sort out OSC bundle support
 - figure out how to expose a constant for the 'immediate' NTPTimetag (NSDate category? only relevant for bundles invocation?)
