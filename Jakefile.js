@@ -15,7 +15,7 @@ $.import('Foundation');
 
 BUNDLE_VERSION_NUMBER_KEY = 'CFBundleVersion';
 BUNDLE_VERSION_STRING_KEY = 'CFBundleShortVersionString';
-HEAD_REVISION_KEY = 'com.chordedconstructions.ProjectHEADRevision';
+HEAD_REVISION_KEY = 'com.chordedconstructions.fleshworld.ProjectHEADRevision';
 
 // helpers
 function buildNumber(callback) {
