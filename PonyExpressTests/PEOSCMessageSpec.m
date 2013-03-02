@@ -146,7 +146,6 @@ describe(@"with valid simple source message", ^{
         expect(message.address).to.equal(sourceMessage.address);
         expect(message.typeTags).to.equal(sourceMessage.typeTags);
         expect(message.arguments).to.equal(sourceMessage.arguments);
-        // failure due to -[PEOSCMessage hash] not being overridden (through -[PEOSCMessage isEqual:])
         expect(message).to.equal(sourceMessage);
     });
 });
@@ -166,7 +165,6 @@ describe(@"with valid complex source message", ^{
         expect(message.typeTags).to.equal(sourceMessage.typeTags);
         // failure due to NSData/TimeTag not being perfectly symmetrical
         expect(message.arguments).to.equal(sourceMessage.arguments);
-        // failure due to -[PEOSCMessage hash] not being overridden (through -[PEOSCMessage isEqual:])
         expect(message).to.equal(sourceMessage);
     });
 });

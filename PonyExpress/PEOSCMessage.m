@@ -383,6 +383,21 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
 
 #pragma mark -
 
+// via http://www.mikeash.com/pyblog/friday-qa-2010-06-18-implementing-equality-and-hashing.html
+#define NSUINT_BIT (CHAR_BIT * sizeof(NSUInteger))
+#define NSUINTROTATE(val, howmuch) ((((NSUInteger)val) << howmuch) | (((NSUInteger)val) >> (NSUINT_BIT - howmuch)))
+
+- (BOOL)isEqual:(id)object {
+    if (![object isKindOfClass:[PEOSCMessage class]]) {
+        return NO;
+    }
+    return [object hash] == [self hash];
+}
+
+- (NSUInteger)hash {
+    return NSUINTROTATE(NSUINTROTATE([self.address hash], NSUINT_BIT / 2) ^ [self.typeTags hash], NSUINT_BIT / 2) ^ [self.arguments hash];
+}
+
 - (NSString*)description {
     NSMutableString* argDescription = [NSMutableString string];
     [self.arguments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
@@ -399,6 +414,8 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
     NSString* typeTagString = self.typeTags.count ? [self _typeTagString] : @"(–)";
     return [NSString stringWithFormat:@"<%@: %@ %@ [%@]>", NSStringFromClass([self class]), self.address, typeTagString, argDescription];
 }
+
+#pragma mark -
 
 - (void)enumerateTypesAndArgumentsUsingBlock:(void (^)(id type, id argument, BOOL* stop))block {
     BOOL stop = NO;
