@@ -16,11 +16,20 @@ NSArray* args = @[@440.0];
 NSArray* allTags = @[PEOSCMessageTypeTagInteger, PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagString, PEOSCMessageTypeTagBlob, PEOSCMessageTypeTagTrue, PEOSCMessageTypeTagFalse, PEOSCMessageTypeTagNull, PEOSCMessageTypeTagImpulse, PEOSCMessageTypeTagTimetag];
 NSArray* allArgs = @[@13, @33.3F, @"STRING", [@"One-Eyed Jacks" dataUsingEncoding:NSASCIIStringEncoding], [NSDate date]];
 
-#pragma mark - INITIALIZATION
+#pragma mark INITIALIZATION
 
 it(@"should create non-nil instance from nil args", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:nil typeTags:nil arguments:nil];
     expect(message).notTo.beNil();
+});
+
+#pragma mark - PROPERTIES
+
+it(@"should return init args from properties", ^{
+    PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:allTags arguments:allArgs];
+    expect(message.address).to.equal(address);
+    expect(message.typeTags).to.equal(allTags);
+    expect(message.arguments).to.equal(allArgs);
 });
 
 #pragma mark - ADDRESS
