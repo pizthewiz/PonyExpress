@@ -29,6 +29,10 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 }
 
 - (instancetype)initWithHost:(NSString*)host port:(UInt16)port {
+    if (!host || port == 0) {
+        return nil;
+    }
+
     self = [super init];
     if (self) {
         self.host = host;
@@ -68,7 +72,8 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
     }
 
     [self.socket sendData:messageData toHost:self.host port:self.port withTimeout:-1.0 tag:self.messageTag];
-    self.messageTag = self.messageTag+1;
+    // TODO - catch overflow
+    self.messageTag++;
 }
 
 #pragma mark - SOCKET DELEGATE
