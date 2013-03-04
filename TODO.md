@@ -7,7 +7,7 @@
 - test interoperability against Lemur, TouchOSC, Max 6, oF and Cinder
 - figure out how to expose a constant for the 'immediate' NTPTimetag (NSDate category? only relevant for bundles invocation?)
 - look into simple MIDI tunneling example
-- add more in-depth usage info to [README](README.md) for Mac OS X and iOS applications
+- add more in-depth usage info to [README](README.md) for Mac OS X and iOS applications (@rpath!)
 - remove +[PEOSCMessage displayNameForType:]
 - add CONTRIBUTING.md
 
@@ -28,7 +28,6 @@
 ### UNIT TESTS
 - may need to consider disconnect / stop listening in -tearDown
 - test message creation from data, bad tagTypeString, empty types
-- test send of type-less message, nil and @[]
 - test message argument serialization
 - test message argument deserialization
 - test sender with bad host (if connection-based again)
