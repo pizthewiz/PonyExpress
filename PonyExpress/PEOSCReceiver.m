@@ -28,6 +28,10 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 }
 
 - (instancetype)initWithPort:(UInt16)port {
+    if (port == 0) {
+        return nil;
+    }
+
     self = [super init];
     if (self) {
         self.port = port;
@@ -89,7 +93,7 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didReceiveData:(NSData*)data fromAddress:(NSData*)address withFilterContext:(id)filterContext {
     CCDebugLogSelector();
 
-    // TODO - in a multicast situation, it is possible to receive the same data twice, once via IPv4 and again via IPv6
+    // TODO - messages sent to 0.0.0.0 could be receied n times for n IP addreses on the local machine
 
     PEOSCMessage* message = [PEOSCMessage messageWithData:data];
     if (message) {
