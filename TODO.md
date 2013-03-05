@@ -26,11 +26,9 @@
 - consider some sort of simple router
 
 ### UNIT TESTS
-- may need to consider disconnect / stop listening in -tearDown
-- test message creation from data, bad tagTypeString, empty types
-- test message argument serialization
-- test message argument deserialization
-- test sender with bad host (if connection-based again)
+- message creation from data, bad tagTypeString, empty types
+- message argument serialization
+- message argument deserialization
 
 ### FUNCTIONAL TESTS
 - send message
