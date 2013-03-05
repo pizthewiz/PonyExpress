@@ -27,9 +27,9 @@ it(@"should create non-nil instance from nil args", ^{
 
 it(@"should return init args from properties", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:allTags arguments:allArgs];
-    expect(message.address).to.equal(address);
-    expect(message.typeTags).to.equal(allTags);
-    expect(message.arguments).to.equal(allArgs);
+    expect(message.address).to.beIdenticalTo(address);
+    expect(message.typeTags).to.beIdenticalTo(allTags);
+    expect(message.arguments).to.beIdenticalTo(allArgs);
 });
 
 #pragma mark - ADDRESS

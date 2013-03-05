@@ -38,7 +38,7 @@ it(@"should create non-nil instance from non-nil args", ^{
 
 it(@"should return init args from properties", ^{
     PEOSCSender* sender = [PEOSCSender senderWithHost:loopbackHost port:unpriviledgedPort];
-    expect(sender.host).to.equal(loopbackHost);
+    expect(sender.host).to.beIdenticalTo(loopbackHost);
     expect(sender.port).to.equal(unpriviledgedPort);
 });
 
