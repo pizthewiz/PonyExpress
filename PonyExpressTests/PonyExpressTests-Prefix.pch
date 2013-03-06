@@ -5,11 +5,7 @@
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
 
-    #if TARGET_OS_IPHONE
-        #import "PonyExpress.h"
-    #else
-        #import <PonyExpress/PonyExpress.h>
-    #endif
+    #import <PonyExpress/PonyExpress.h>
 
     #import "Specta.h"
 

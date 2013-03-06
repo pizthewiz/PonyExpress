@@ -37,6 +37,12 @@
 		D89FA2B816D74E68005C8187 /* PEOSCSenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D89FA2B616D74E68005C8187 /* PEOSCSenderSpec.m */; };
 		D89FA2BA16D74EC7005C8187 /* PEOSCReceiverSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D89FA2B916D74EC7005C8187 /* PEOSCReceiverSpec.m */; };
 		D89FA2BB16D74EC7005C8187 /* PEOSCReceiverSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D89FA2B916D74EC7005C8187 /* PEOSCReceiverSpec.m */; };
+		D8A2995916E6BFD20067C19C /* PonyExpress.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B6C1411528100CB1258 /* PonyExpress.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8A2995A16E6BFD20067C19C /* PEOSCMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B9F14119A2C00CB1258 /* PEOSCMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8A2995B16E6BFD20067C19C /* PEOSCSender.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B96141190B000CB1258 /* PEOSCSender.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8A2995C16E6BFD20067C19C /* PEOSCReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C53D351436795700C8CF3E /* PEOSCReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8A2995D16E6BFD70067C19C /* PEOSCMessage-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1BAE1411A41400CB1258 /* PEOSCMessage-Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D8A2995E16E6BFDC0067C19C /* PonyExpress-Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */; };
 		D8AF167B14B78C060002A885 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D8AF167914B78C060002A885 /* GCDAsyncUdpSocket.h */; };
 		D8AF167C14B78C060002A885 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AF167A14B78C060002A885 /* GCDAsyncUdpSocket.m */; };
 		D8C53D371436795700C8CF3E /* PEOSCReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C53D351436795700C8CF3E /* PEOSCReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -143,18 +149,6 @@
 			remoteInfo = "Expecta-iOS";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		D89B6EFF165AFBB400446361 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/${PRODUCT_NAME}";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D83E1B5C1411528100CB1258 /* PonyExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PonyExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -403,6 +397,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D8A2995816E6BFC60067C19C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8A2995916E6BFD20067C19C /* PonyExpress.h in Headers */,
+				D8A2995A16E6BFD20067C19C /* PEOSCMessage.h in Headers */,
+				D8A2995B16E6BFD20067C19C /* PEOSCSender.h in Headers */,
+				D8A2995C16E6BFD20067C19C /* PEOSCReceiver.h in Headers */,
+				D8A2995D16E6BFD70067C19C /* PEOSCMessage-Private.h in Headers */,
+				D8A2995E16E6BFDC0067C19C /* PonyExpress-Internal.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -473,7 +480,7 @@
 			buildPhases = (
 				D89B6EFD165AFBB400446361 /* Sources */,
 				D89B6EFE165AFBB400446361 /* Frameworks */,
-				D89B6EFF165AFBB400446361 /* CopyFiles */,
+				D8A2995816E6BFC60067C19C /* Headers */,
 			);
 			buildRules = (
 			);
@@ -954,6 +961,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PonyExpress;
+				PUBLIC_HEADERS_FOLDER_PATH = include/PonyExpress;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -970,6 +978,7 @@
 				GCC_PREFIX_HEADER = "PonyExpress/PonyExpress-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PonyExpress;
+				PUBLIC_HEADERS_FOLDER_PATH = include/PonyExpress;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

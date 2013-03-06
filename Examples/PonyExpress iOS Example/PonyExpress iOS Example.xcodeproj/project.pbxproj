@@ -37,13 +37,6 @@
 			remoteGlobalIDString = D83E1B741411528100CB1258;
 			remoteInfo = "PonyExpress Mac Tests";
 		};
-		D8A1724B16901D28002CFCC8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D8A1724016901D28002CFCC8 /* PonyExpress.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D83E1BD71412F87A00CB1258;
-			remoteInfo = OrphanExample;
-		};
 		D8A1724D16901D28002CFCC8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D8A1724016901D28002CFCC8 /* PonyExpress.xcodeproj */;
@@ -57,6 +50,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D89B6F00165AFBB400446361;
 			remoteInfo = "PonyExpress iOS";
+		};
+		D8A2992D16E6B6F00067C19C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8A1724016901D28002CFCC8 /* PonyExpress.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8975A8C168B5D0C0090FEB6;
+			remoteInfo = "PonyExpress iOS Tests";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -164,9 +164,9 @@
 			isa = PBXGroup;
 			children = (
 				D8A1724816901D28002CFCC8 /* PonyExpress.framework */,
-				D8A1724A16901D28002CFCC8 /* PonyExpressTests.octest */,
-				D8A1724C16901D28002CFCC8 /* OrphanExample */,
+				D8A1724A16901D28002CFCC8 /* PonyExpress Mac Tests.octest */,
 				D8A1724E16901D28002CFCC8 /* libPonyExpress.a */,
+				D8A2992E16E6B6F00067C19C /* PonyExpress iOS Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,19 +232,11 @@
 			remoteRef = D8A1724716901D28002CFCC8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D8A1724A16901D28002CFCC8 /* PonyExpressTests.octest */ = {
+		D8A1724A16901D28002CFCC8 /* PonyExpress Mac Tests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			name = PonyExpressTests.octest;
 			path = "PonyExpress Mac Tests.octest";
 			remoteRef = D8A1724916901D28002CFCC8 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D8A1724C16901D28002CFCC8 /* OrphanExample */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = OrphanExample;
-			remoteRef = D8A1724B16901D28002CFCC8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D8A1724E16901D28002CFCC8 /* libPonyExpress.a */ = {
@@ -252,6 +244,13 @@
 			fileType = archive.ar;
 			path = libPonyExpress.a;
 			remoteRef = D8A1724D16901D28002CFCC8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D8A2992E16E6B6F00067C19C /* PonyExpress iOS Tests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "PonyExpress iOS Tests.octest";
+			remoteRef = D8A2992D16E6B6F00067C19C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -390,7 +389,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PonyExpress iOS Example/PonyExpress iOS Example-Prefix.pch";
-				HEADER_SEARCH_PATHS = ../../PonyExpress;
+				HEADER_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/usr/local/lib/include";
 				INFOPLIST_FILE = "PonyExpress iOS Example/PonyExpress iOS Example-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "arm6 armv7 armv7s";
@@ -403,7 +402,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PonyExpress iOS Example/PonyExpress iOS Example-Prefix.pch";
-				HEADER_SEARCH_PATHS = ../../PonyExpress;
+				HEADER_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/usr/local/lib/include";
 				INFOPLIST_FILE = "PonyExpress iOS Example/PonyExpress iOS Example-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "arm6 armv7 armv7s";
