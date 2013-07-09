@@ -19,6 +19,7 @@
 - (instancetype)initWithMessages:(NSArray*)messages {
     self = [super init];
     if (self) {
+        // TODO - validate messages first?
         self.messages = messages;
     }
     return self;
@@ -44,8 +45,8 @@
 
 #pragma mark - PRIVATE
 
-//- (NSData*)_data {
-//    return nil;
-//}
+- (NSData*)_data {
+    return nil;
+}
 
 @end

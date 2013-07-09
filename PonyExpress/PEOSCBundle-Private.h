@@ -12,5 +12,5 @@
 + (instancetype)bundleWithData:(NSData*)data;
 - (instancetype)initWithData:(NSData*)data;
 
-//- (NSData*)_data;
+- (NSData*)_data;
 @end
