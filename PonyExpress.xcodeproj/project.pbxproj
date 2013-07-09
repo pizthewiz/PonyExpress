@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D8105953178C9CF200501AF0 /* PEOSCBundleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D8105952178C9CF200501AF0 /* PEOSCBundleSpec.m */; };
+		D8105954178C9CF200501AF0 /* PEOSCBundleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D8105952178C9CF200501AF0 /* PEOSCBundleSpec.m */; };
+		D815C9CA1700001A00B5C4DC /* PEOSCBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = D815C9C81700001A00B5C4DC /* PEOSCBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D815C9CB1700001A00B5C4DC /* PEOSCBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = D815C9C81700001A00B5C4DC /* PEOSCBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D815C9CC1700001A00B5C4DC /* PEOSCBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = D815C9C91700001A00B5C4DC /* PEOSCBundle.m */; };
+		D815C9CD1700001A00B5C4DC /* PEOSCBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = D815C9C91700001A00B5C4DC /* PEOSCBundle.m */; };
+		D815C9D3170000E400B5C4DC /* PEOSCBundle-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D815C9D2170000E400B5C4DC /* PEOSCBundle-Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D815C9D4170000E400B5C4DC /* PEOSCBundle-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D815C9D2170000E400B5C4DC /* PEOSCBundle-Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D83E1B6A1411528100CB1258 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D83E1B681411528100CB1258 /* InfoPlist.strings */; };
 		D83E1B98141190B000CB1258 /* PEOSCSender.h in Headers */ = {isa = PBXBuildFile; fileRef = D83E1B96141190B000CB1258 /* PEOSCSender.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D83E1B99141190B000CB1258 /* PEOSCSender.m in Sources */ = {isa = PBXBuildFile; fileRef = D83E1B97141190B000CB1258 /* PEOSCSender.m */; };
@@ -151,6 +159,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D8105952178C9CF200501AF0 /* PEOSCBundleSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCBundleSpec.m; sourceTree = "<group>"; };
+		D815C9C81700001A00B5C4DC /* PEOSCBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCBundle.h; sourceTree = "<group>"; };
+		D815C9C91700001A00B5C4DC /* PEOSCBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCBundle.m; sourceTree = "<group>"; };
+		D815C9D2170000E400B5C4DC /* PEOSCBundle-Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PEOSCBundle-Private.h"; sourceTree = "<group>"; };
 		D83E1B5C1411528100CB1258 /* PonyExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PonyExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D83E1B641411528100CB1258 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D83E1B671411528100CB1258 /* PonyExpress-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpress-Info.plist"; sourceTree = "<group>"; };
@@ -300,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				D88F18E3168DEE2C002B99CD /* PEOSCMessageSpec.m */,
+				D8105952178C9CF200501AF0 /* PEOSCBundleSpec.m */,
 				D89FA2B616D74E68005C8187 /* PEOSCSenderSpec.m */,
 				D89FA2B916D74EC7005C8187 /* PEOSCReceiverSpec.m */,
 			);
@@ -355,6 +368,9 @@
 				D83E1B9F14119A2C00CB1258 /* PEOSCMessage.h */,
 				D83E1BAE1411A41400CB1258 /* PEOSCMessage-Private.h */,
 				D83E1BA014119A2C00CB1258 /* PEOSCMessage.m */,
+				D815C9C81700001A00B5C4DC /* PEOSCBundle.h */,
+				D815C9D2170000E400B5C4DC /* PEOSCBundle-Private.h */,
+				D815C9C91700001A00B5C4DC /* PEOSCBundle.m */,
 				D83E1B96141190B000CB1258 /* PEOSCSender.h */,
 				D83E1B97141190B000CB1258 /* PEOSCSender.m */,
 				D8C53D351436795700C8CF3E /* PEOSCReceiver.h */,
@@ -394,6 +410,8 @@
 				D83E1BAF1411A41400CB1258 /* PEOSCMessage-Private.h in Headers */,
 				D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */,
 				D8AF167B14B78C060002A885 /* GCDAsyncUdpSocket.h in Headers */,
+				D815C9CA1700001A00B5C4DC /* PEOSCBundle.h in Headers */,
+				D815C9D3170000E400B5C4DC /* PEOSCBundle-Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +425,8 @@
 				D8A2995C16E6BFD20067C19C /* PEOSCReceiver.h in Headers */,
 				D8A2995D16E6BFD70067C19C /* PEOSCMessage-Private.h in Headers */,
 				D8A2995E16E6BFDC0067C19C /* PonyExpress-Internal.h in Headers */,
+				D815C9CB1700001A00B5C4DC /* PEOSCBundle.h in Headers */,
+				D815C9D4170000E400B5C4DC /* PEOSCBundle-Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +687,7 @@
 				D83E1B99141190B000CB1258 /* PEOSCSender.m in Sources */,
 				D8C53D381436795700C8CF3E /* PEOSCReceiver.m in Sources */,
 				D8AF167C14B78C060002A885 /* GCDAsyncUdpSocket.m in Sources */,
+				D815C9CC1700001A00B5C4DC /* PEOSCBundle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,6 +698,7 @@
 				D88F18E4168DEE2C002B99CD /* PEOSCMessageSpec.m in Sources */,
 				D89FA2B716D74E68005C8187 /* PEOSCSenderSpec.m in Sources */,
 				D89FA2BA16D74EC7005C8187 /* PEOSCReceiverSpec.m in Sources */,
+				D8105953178C9CF200501AF0 /* PEOSCBundleSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,6 +709,7 @@
 				D88F18E5168DEE2C002B99CD /* PEOSCMessageSpec.m in Sources */,
 				D89FA2B816D74E68005C8187 /* PEOSCSenderSpec.m in Sources */,
 				D89FA2BB16D74EC7005C8187 /* PEOSCReceiverSpec.m in Sources */,
+				D8105954178C9CF200501AF0 /* PEOSCBundleSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +721,7 @@
 				D89B6F13165AFE5200446361 /* PEOSCSender.m in Sources */,
 				D89B6F15165AFE5200446361 /* PEOSCReceiver.m in Sources */,
 				D89B6F16165AFE5200446361 /* GCDAsyncUdpSocket.m in Sources */,
+				D815C9CD1700001A00B5C4DC /* PEOSCBundle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
