@@ -3,8 +3,8 @@
 - pull address validation code out to a class method and use within -[PEOSCMessage initWithData:]
 - go unicast and later add multicast support
 - sort out OSC bundle support
+- centralize data walking increments from Messages and Bundles
 - test interoperability against Lemur, TouchOSC, Max 6, oF and Cinder
-- figure out how to expose a constant for the 'immediate' NTPTimetag (NSDate category? only relevant for bundles invocation?)
 - look into simple MIDI tunneling example
 - add more in-depth usage info to [README](README.md) for Mac OS X and iOS applications (@rpath and [iOS usage](http://www.blog.montgomerie.net/easy-xcode-static-library-subprojects-and-submodules))
 - remove +[PEOSCMessage displayNameForType:]
