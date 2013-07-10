@@ -90,6 +90,9 @@
 #pragma mark - PRIVATE
 
 + (BOOL)_dataIsLikelyBundle:(NSData*)data {
+    if ([data length] < 8) {
+        return NO;
+    }
     // check first 8 bytes for #bundle
     NSString* string = [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 8)] encoding:NSASCIIStringEncoding];
     return [string isEqualToString:@"#bundle"];
