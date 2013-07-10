@@ -8,19 +8,22 @@
 
 #import "PEOSCBundle.h"
 #import "PEOSCBundle-Private.h"
+#import "PEOSCUtilities.h"
+#import "PEOSCMessage-Private.h"
+#import "PonyExpress-Internal.h"
 
 @implementation PEOSCBundle
 
-+ (instancetype)bundleWithMessages:(NSArray*)messages {
-    id bundle = [[[self class] alloc] initWithMessages:messages];
++ (instancetype)bundleWithElements:(NSArray*)elements timeTag:(NSDate*)timeTag {
+    id bundle = [[[self class] alloc] initWithElements:elements timeTag:timeTag];
     return bundle;
 }
 
-- (instancetype)initWithMessages:(NSArray*)messages {
+- (instancetype)initWithElements:(NSArray*)elements timeTag:(NSDate*)timeTag {
     self = [super init];
     if (self) {
-        // TODO - validate messages first?
-        self.messages = messages;
+        self.elements = elements;
+        self.timeTag = timeTag;
     }
     return self;
 }
@@ -33,17 +36,64 @@
 - (instancetype)initWithData:(NSData*)data {
     self = [super init];
     if (self) {
-        // check first 8 bytes for #bundle
-        // readDate of message timetag
+        NSUInteger length = [data length];
+        NSUInteger start = 0;
 
-        // readInteger of message length
-        // read message
-        // (repeat)
+        // check first 8 bytes for #bundle
+        if (![PEOSCBundle _dataIsLikelyBundle:data]) {
+            CCErrorLog(@"ERROR - missing starting marker, bundle dropped");
+            return nil;
+        }
+        start += 8;
+
+        // read timetag
+        NSDate* timeTag = readDate(data, start);
+        if (!timeTag) {
+            CCErrorLog(@"ERROR - missing timetag, bundle dropped");
+            return nil;
+        }
+        self.timeTag = timeTag;
+        start += 8;
+
+        // make messages
+        NSMutableArray* elements = [NSMutableArray array];
+        while (start != length) {
+            // read element length
+            SInt32 value = readInteger(data, start);
+            if (start+value > length) {
+                CCErrorLog(@"ERROR - element length out of bundle data range, bundle dropped");
+                return nil;
+            }
+            start += 4;
+
+            // divine element type
+            NSData* subdata = [data subdataWithRange:NSMakeRange(start, value)];
+            if ([PEOSCBundle _dataIsLikelyBundle:subdata]) {
+                PEOSCBundle* bundle = [PEOSCBundle bundleWithData:subdata];
+                if (bundle) {
+                    [elements addObject:bundle];
+                }
+            } else {
+                PEOSCMessage* message = [PEOSCMessage messageWithData:subdata];
+                if (message) {
+                    [elements addObject:message];
+                }
+            }
+
+            start += value;
+        }
+        self.elements = elements;
     }
     return self;
 }
 
 #pragma mark - PRIVATE
+
++ (BOOL)_dataIsLikelyBundle:(NSData*)data {
+    // check first 8 bytes for #bundle
+    NSString* string = [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 8)] encoding:NSASCIIStringEncoding];
+    return [string isEqualToString:@"#bundle"];
+}
 
 - (NSData*)_data {
     return nil;

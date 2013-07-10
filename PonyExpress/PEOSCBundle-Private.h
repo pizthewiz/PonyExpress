@@ -12,5 +12,6 @@
 + (instancetype)bundleWithData:(NSData*)data;
 - (instancetype)initWithData:(NSData*)data;
 
++ (BOOL)_dataIsLikelyBundle:(NSData*)data;
 - (NSData*)_data;
 @end

@@ -7,10 +7,12 @@
 //
 
 #import "PEOSCBundle-Private.h"
+#import "PEOSCUtilities.h"
 
 SpecBegin(PEOSCBundle)
 
 __block NSArray* messages = nil;
+NSDate* timeTag = [NSDate date];
 
 beforeAll(^{
     NSMutableArray* list = [NSMutableArray array];
@@ -24,25 +26,26 @@ beforeAll(^{
 #pragma mark INITIALIZATION
 
 it(@"should create non-nil instance from nil args", ^{
-    PEOSCBundle* bundle = [PEOSCBundle bundleWithMessages:nil];
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:nil timeTag:nil];
     expect(bundle).notTo.beNil();
 });
 
 #pragma mark - PROPERTIES
 
 it(@"should return init args from properties", ^{
-    PEOSCBundle* bundle = [PEOSCBundle bundleWithMessages:messages];
-    expect(bundle.messages).to.beIdenticalTo(messages);
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:messages timeTag:timeTag];
+    expect(bundle.elements).to.beIdenticalTo(messages);
+    expect(bundle.timeTag).to.beIdenticalTo(timeTag);
 });
 
 #pragma mark - DATA
 
-it(@"should produce nil data when messages contain an invalid message", ^{
+it(@"should produce nil data when elements contain an invalid message", ^{
     expect(NO).to.beTruthy();
 });
 
-it(@"should produce data when message-less", ^{
-    PEOSCBundle* bundle = [PEOSCBundle bundleWithMessages:nil];
+it(@"should produce data when without elements and time tag", ^{
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:nil timeTag:nil];
     NSData* data = [bundle _data];
     expect(data).notTo.beNil();
 });
@@ -51,11 +54,16 @@ it(@"should not create a bundle instance from bad data", ^{
     NSData* data = [@"XYZZY" dataUsingEncoding:NSASCIIStringEncoding];
     PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
     expect(bundle).to.beNil();
+
+    // TODO - more complex examples
+    //  #bundle 100000000
+    //  #bundle LEGIT# BADMESSAGE
+    //  #bundle LEGIT# BADBUNDLE
 });
 
-describe(@"with valid source messages", ^{
+describe(@"with valid source elements and timeTag", ^{
     __block PEOSCBundle* sourceBundle;
-    beforeAll(^{ sourceBundle = [PEOSCBundle bundleWithMessages:messages]; });
+    beforeAll(^{ sourceBundle = [PEOSCBundle bundleWithElements:messages timeTag:timeTag]; });
 
     it(@"should create non-nil data", ^{
         NSData* data = [sourceBundle _data];
@@ -66,8 +74,28 @@ describe(@"with valid source messages", ^{
         NSData* data = [sourceBundle _data];
         PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
         expect(bundle).toNot.beNil();
-        expect(bundle.messages).to.equal(sourceBundle.messages);
+        expect(bundle.elements).to.equal(sourceBundle.elements);
+        expect(bundle.timeTag).to.equal(sourceBundle.timeTag);
         expect(bundle).to.equal(sourceBundle);
+    });
+});
+
+describe(@"bundle with a nil time tag", ^{
+    __block PEOSCBundle* sourceBundle;
+    beforeAll(^{ sourceBundle = [PEOSCBundle bundleWithElements:nil timeTag:nil]; });
+
+    it(@"should create non-nil data", ^{
+        NSData* data = [sourceBundle _data];
+        expect(data).toNot.beNil();
+    });
+
+    it(@"should create bundle with the immediate time tag", ^{
+        NSData* data = [sourceBundle _data];
+        PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
+        expect(bundle).toNot.beNil();
+        expect(bundle.elements).toNot.beNil();
+        expect(bundle.timeTag).toNot.beNil();
+        expect([bundle.timeTag NTPTimestamp]).to.equal(NTPTimestampImmediate);
     });
 });
 

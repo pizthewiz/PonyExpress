@@ -10,8 +10,9 @@
 #import "PEOSCMessage.h"
 
 @interface PEOSCBundle : NSObject
-+ (instancetype)bundleWithMessages:(NSArray*)messages;
-- (instancetype)initWithMessages:(NSArray*)messages;
++ (instancetype)bundleWithElements:(NSArray*)elements timeTag:(NSDate*)timeTag;
+- (instancetype)initWithElements:(NSArray*)elements timeTag:(NSDate*)timeTag;
 
-@property (nonatomic, strong) NSArray* messages;
+@property (nonatomic, strong) NSArray* elements; // could be a mix of messages and bundles
+@property (nonatomic, strong) NSDate* timeTag;
 @end
