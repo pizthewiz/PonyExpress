@@ -15,6 +15,7 @@
 + (NSString*)_codeForType:(NSString*)type;
 + (NSString*)_typeForCode:(NSString*)type;
 
+- (BOOL)_isValid;
 - (BOOL)_isAddressValid;
 - (BOOL)_areTypeTagsValid;
 - (BOOL)_areArgumentsValidGivenTypeTags;

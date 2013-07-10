@@ -58,7 +58,6 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
         }
         if ([addressString isEqualToString:@"#bundle"]) {
             CCErrorLog(@"ERROR - OSC bundles not available, message dropped");
-            // TODO - try to make a bundle of it
             return nil;
         }
         self.address = addressString;
@@ -291,6 +290,10 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 
 #pragma mark - PRIVATE
+
+- (BOOL)_isValid {
+    return [self _isAddressValid] && [self _areTypeTagsValid] && [self _areArgumentsValidGivenTypeTags];
+}
 
 - (BOOL)_isAddressValid {
     if (!self.address) {

@@ -40,6 +40,7 @@ it(@"should report bad addresses as invalid", ^{
     for (NSString* badAddress in addresses) {
         PEOSCMessage* message = [PEOSCMessage messageWithAddress:badAddress typeTags:nil arguments:nil];
         expect([message _isAddressValid]).to.beFalsy();
+        expect([message _isValid]).to.beFalsy();
     }
 });
 it(@"should report legit addresses as valid", ^{
@@ -48,6 +49,7 @@ it(@"should report legit addresses as valid", ^{
     for (NSString* goodAddress in addresses) {
         PEOSCMessage* message = [PEOSCMessage messageWithAddress:goodAddress typeTags:nil arguments:nil];
         expect([message _isAddressValid]).to.beTruthy();
+        expect([message _isValid]).to.beTruthy();
     }
 });
 
@@ -57,16 +59,19 @@ it(@"should report type tags as invalid when containing unknown type tags", ^{
     NSArray* tags = @[PEOSCMessageTypeTagBlob, @"BANANAS", PEOSCMessageTypeTagInteger];
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:nil typeTags:tags arguments:nil];
     expect([message _areTypeTagsValid]).to.beFalsy();
+    expect([message _isValid]).to.beFalsy();
 });
 it(@"should report type tags as valid when containing all known type tags", ^{
-    PEOSCMessage* message = [PEOSCMessage messageWithAddress:nil typeTags:allTags arguments:nil];
+    PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:allTags arguments:allArgs];
     expect([message _areTypeTagsValid]).to.beTruthy();
     expect([message _typeTagString]).to.equal(@",ifsbTFNIt");
+    expect([message _isValid]).to.beTruthy();
 });
 it(@"should report type tags as valid when nil", ^{
-    PEOSCMessage* message = [PEOSCMessage messageWithAddress:nil typeTags:nil arguments:nil];
+    PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:nil arguments:nil];
     expect([message _areTypeTagsValid]).to.beTruthy();
     expect([message _typeTagString]).to.equal(@",");
+    expect([message _isValid]).to.beTruthy();
 });
 
 #pragma mark - ARGUMENTS
@@ -74,30 +79,37 @@ it(@"should report type tags as valid when nil", ^{
 it(@"should report unknown argument type as invalid", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagString] arguments:@[@[]]];
     expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
+    expect([message _isValid]).to.beFalsy();
 });
 it(@"should report argument without type as invalid", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:nil arguments:@[@440.0]];
     expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
+    expect([message _isValid]).to.beFalsy();
 });
 it(@"should report mismatched argument for type as invalid", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagString] arguments:@[@440.0]];
     expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
+    expect([message _isValid]).to.beFalsy();
 });
 it(@"should report argument for argless-type as invalid", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagImpulse] arguments:@[@440.0]];
     expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
+    expect([message _isValid]).to.beFalsy();
 });
 it(@"should report missing argument for given types as invalid", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagFloat, PEOSCMessageTypeTagFloat] arguments:@[@440.0]];
     expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
+    expect([message _isValid]).to.beFalsy();
 });
 it(@"should report extra argument for given types as invalid", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagFloat] arguments:@[@440.0, @880.0]];
     expect([message _areArgumentsValidGivenTypeTags]).to.beFalsy();
+    expect([message _isValid]).to.beFalsy();
 });
 it(@"should report good arguments for types as valid", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:allTags arguments:allArgs];
     expect([message _areArgumentsValidGivenTypeTags]).to.beTruthy();
+    expect([message _isValid]).to.beTruthy();
 });
 
 #pragma mark - ENUMERATOR
@@ -118,19 +130,23 @@ it(@"should provide arguments only for required types via data enumerator", ^{
 it(@"should produce nil data for invalid message", ^{
     // bad address
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:nil typeTags:nil arguments:nil];
+    expect([message _isValid]).to.beFalsy();
     expect([message _data]).to.beNil();
 
     // bad typeTags
     message = [PEOSCMessage messageWithAddress:address typeTags:@[@"BANANAS"] arguments:nil];
+    expect([message _isValid]).to.beFalsy();
     expect([message _data]).to.beNil();
 
     // bad arguments given typeTags
     message = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagFloat] arguments:nil];
+    expect([message _isValid]).to.beFalsy();
     expect([message _data]).to.beNil();
 });
 
 it(@"should produce non-nil data for valid message", ^{
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:address typeTags:tags arguments:args];
+    expect([message _isValid]).to.beTruthy();
     expect([message _data]).toNot.beNil();
 });
 
