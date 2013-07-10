@@ -38,6 +38,27 @@ it(@"should return init args from properties", ^{
     expect(bundle.timeTag).to.beIdenticalTo(timeTag);
 });
 
+#pragma mark - ELEMENTS
+
+it(@"should report elements as invalid when containing bad element", ^{
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[@"XYZZY", @31337] timeTag:nil];
+    expect([bundle _areElementsValid]).to.beFalsy();
+
+    // TODO - more complex nested one
+});
+
+it(@"should report empty elements as valid", ^{
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:nil timeTag:nil];
+    expect([bundle _areElementsValid]).to.beTruthy();
+});
+
+it(@"should report legit elements as valid", ^{
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:messages timeTag:nil];
+    expect([bundle _areElementsValid]).to.beTruthy();
+
+    // TODO - more complex nested one
+});
+
 #pragma mark - DATA
 
 it(@"should produce nil data when elements contain an invalid message", ^{

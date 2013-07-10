@@ -13,5 +13,7 @@
 - (instancetype)initWithData:(NSData*)data;
 
 + (BOOL)_dataIsLikelyBundle:(NSData*)data;
+- (BOOL)_isValid;
+- (BOOL)_areElementsValid;
 - (NSData*)_data;
 @end

@@ -98,6 +98,24 @@
     return [string isEqualToString:@"#bundle"];
 }
 
+- (BOOL)_isValid {
+    return [self _areElementsValid];
+}
+
+- (BOOL)_areElementsValid {
+    __block BOOL status = YES;
+    [self.elements enumerateObjectsUsingBlock:^(id element, NSUInteger idx, BOOL* stop) {
+        if (!([element isKindOfClass:[PEOSCMessage class]] || [element isKindOfClass:[PEOSCBundle class]])) {
+            status = NO;
+            *stop = YES;
+        } else if (!([element respondsToSelector:@selector(_isValid)] || [element performSelector:@selector(_isValid)])) {
+            status = NO;
+            *stop = YES;
+        }
+    }];
+    return status;
+}
+
 - (NSData*)_data {
     return nil;
 }
