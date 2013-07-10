@@ -8,6 +8,7 @@
 
 #import "PEOSCMessage.h"
 #import "PEOSCMessage-Private.h"
+#import "PEOSCUtilities.h"
 #import "PonyExpress-Internal.h"
 
 NSString* const PEOSCMessageTypeTagInteger = @"PEOSCMessageTypeTagInteger";
@@ -19,147 +20,6 @@ NSString* const PEOSCMessageTypeTagFalse = @"PEOSCMessageTypeTagFalse";
 NSString* const PEOSCMessageTypeTagNull = @"PEOSCMessageTypeTagNull";
 NSString* const PEOSCMessageTypeTagImpulse = @"PEOSCMessageTypeTagImpulse";
 NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
-
-#pragma mark OSC VALUE CATEGORIES
-
-@interface NSString (PEAdditions)
-- (NSString*)oscString;
-@end
-@implementation NSString (PEAdditions)
-- (NSString*)oscString {
-    // string + 1 null in termination + 0-3 nulls in padding for 4-byte alignment
-    NSUInteger numberOfNulls = 4 - (self.length & 3);
-    return [self stringByPaddingToLength:self.length+numberOfNulls withString:@"\0" startingAtIndex:0];
-}
-@end
-
-@interface NSNumber (PEAdditions)
-- (SInt32)oscInt;
-- (CFSwappedFloat32)oscFloat;
-@end
-// OSC uses big-endian numerical values
-@implementation NSNumber (PEAdditions)
-- (SInt32)oscInt {
-    SInt32 value = 0;
-    CFNumberGetValue((__bridge CFNumberRef)self, kCFNumberSInt32Type, &value);
-    SInt32 swappedValue = CFSwapInt32HostToBig(value);
-    return swappedValue;
-}
-- (CFSwappedFloat32)oscFloat {
-    Float32 value = 0;
-    CFNumberGetValue((__bridge CFNumberRef)self, kCFNumberFloat32Type, &value);
-    CFSwappedFloat32 swappedValue = CFConvertFloat32HostToSwapped(value);
-    return swappedValue;
-}
-@end
-
-@interface NSData (PEAdditions)
-- (NSData*)oscBlob;
-@end
-@implementation NSData (PEAdditions)
-- (NSData*)oscBlob {
-    // int32 length + 8bit bytes + 0-3 nulls in padding for 4-byte alignment
-    SInt32 swappedLength = [[NSNumber numberWithUnsignedInteger:self.length] oscInt];
-
-    NSMutableData* data = [NSMutableData data];
-    [data appendBytes:&swappedLength length:4];
-    [data appendData:self];
-
-    NSUInteger numberOfPaddingNulls = (4 - (self.length & 3)) & 3;
-    char nullBytes[numberOfPaddingNulls];
-    memset(nullBytes, 0, numberOfPaddingNulls);
-    [data appendBytes:nullBytes length:numberOfPaddingNulls];
-
-    return data;
-}
-@end
-
-
-// yoinked and recrafted from Gavin Eadie's ios-ntp http://code.google.com/p/ios-ntp/
-// NB - not perfectly symmetrical, this evaluates to NO:
-//  NSDate* now = [NSDate date]; [now isEqualToDate:[NSDate dateWithNTPTimestamp:[now NTPTimestamp]];
-struct NTPTimestamp {
-    uint32_t seconds;
-    uint32_t fractionalSeconds;
-};
-typedef struct NTPTimestamp NTPTimestamp;
-
-static inline NTPTimestamp NTPTimestampMake(uint32_t seconds, uint32_t fractionalSeconds) {
-    return (NTPTimestamp){seconds, fractionalSeconds};
-}
-
-static NSTimeInterval NTPTimestampDifference(NTPTimestamp start, NTPTimestamp end) {
-    int a;
-    unsigned int b;
-    a = end.seconds - start.seconds;
-    if (end.fractionalSeconds >= start.fractionalSeconds) {
-        b = end.fractionalSeconds - start.fractionalSeconds;
-    } else {
-        b = start.fractionalSeconds - end.fractionalSeconds;
-        b = ~b;
-        a -= 1;
-    }
-
-    return a + b / 4294967296.0; // 2^32
-}
-
-// 1970 - 1900 in seconds 2,208,988,800 | First day UNIX
-// 1 Jan 1972 : 2,272,060,800 | First day UTC
-#define JAN_1970 0x83aa7e80
-static NTPTimestamp NTPTimestamp1970 = {JAN_1970, 0};    // network time for 1 January 1970, GMT
-// static NTPTimestamp NTPTimestampImmediate = {0, 1};
-
-@interface NSDate (PEAdditions)
-+ (instancetype)dateWithNTPTimestamp:(NTPTimestamp)timestamp;
-- (NTPTimestamp)NTPTimestamp;
-@end
-@implementation NSDate (PEAdditions)
-+ (instancetype)dateWithNTPTimestamp:(NTPTimestamp)timestamp {
-    return [NSDate dateWithTimeIntervalSince1970:NTPTimestampDifference(NTPTimestamp1970, timestamp)];
-}
-- (NTPTimestamp)NTPTimestamp {
-    double integerValue;
-    double fractionalValue = modf([self timeIntervalSince1970], &integerValue);
-    fractionalValue *= 4294967296.0;
-    return NTPTimestampMake(JAN_1970 + integerValue, fractionalValue);
-}
-@end
-
-static NSString* readString(NSData* data, NSUInteger start, NSUInteger length) {
-    const char* buffer = [data bytes];
-    NSUInteger end = start;
-    while (end < length && buffer[end] != 0x00) {
-        end++;
-    }
-
-    NSRange range = NSMakeRange(start, end-start);
-    NSString* string = [[NSString alloc] initWithData:[data subdataWithRange:range] encoding:NSASCIIStringEncoding];
-    return string;
-}
-
-static SInt32 readInteger(NSData* data, NSUInteger start) {
-    void* b[4];
-    [data getBytes:&b range:NSMakeRange(start, 4)];
-    SInt32 value = CFSwapInt32BigToHost(*(uint32_t*)b);
-    return value;
-}
-
-static Float32 readFloat(NSData* data, NSUInteger start) {
-    void* b[4];
-    [data getBytes:&b range:NSMakeRange(start, 4)];
-    Float32 value = CFConvertFloat32SwappedToHost(*(CFSwappedFloat32*)b);
-    return value;
-}
-
-static NSDate* readDate(NSData* data, NSUInteger start) {
-    SInt32 seconds = readInteger(data, start);
-    SInt32 fractionalSeconds = readInteger(data, start+4);
-
-    NTPTimestamp timestamp = NTPTimestampMake(seconds, fractionalSeconds);
-    return [NSDate dateWithNTPTimestamp:timestamp];
-}
-
-#pragma mark - PEOSCMESSAGE
 
 @implementation PEOSCMessage
 
@@ -198,6 +58,7 @@ static NSDate* readDate(NSData* data, NSUInteger start) {
         }
         if ([addressString isEqualToString:@"#bundle"]) {
             CCErrorLog(@"ERROR - OSC bundles not available, message dropped");
+            // TODO - try to make a bundle of it
             return nil;
         }
         self.address = addressString;
