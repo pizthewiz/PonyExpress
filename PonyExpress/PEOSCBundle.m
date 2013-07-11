@@ -39,9 +39,9 @@
         NSUInteger length = [data length];
         NSUInteger start = 0;
 
-        // check first 8 bytes for #bundle
+        // check for bundle marker
         if (![PEOSCBundle _dataIsLikelyBundle:data]) {
-            CCErrorLog(@"ERROR - missing starting marker, bundle dropped");
+            CCErrorLog(@"ERROR - missing bundle marker, bundle dropped");
             return nil;
         }
         start += 8;
@@ -93,8 +93,8 @@
     if ([data length] < 8) {
         return NO;
     }
-    // check first 8 bytes for #bundle
-    NSString* string = [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 8)] encoding:NSASCIIStringEncoding];
+    // check first 8 bytes for #bundle marker
+    NSString* string = readString(data, 0, 8);
     return [string isEqualToString:@"#bundle"];
 }
 
