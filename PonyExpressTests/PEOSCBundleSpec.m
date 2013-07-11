@@ -47,8 +47,13 @@ it(@"should report elements as invalid when containing bad element", ^{
     // TODO - more complex nested one
 });
 
-it(@"should report empty elements as valid", ^{
+it(@"should report nil elements as valid", ^{
     PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:nil timeTag:nil];
+    expect([bundle _areElementsValid]).to.beTruthy();
+});
+
+it(@"should report empty elements as valid", ^{
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[] timeTag:nil];
     expect([bundle _areElementsValid]).to.beTruthy();
 });
 
@@ -97,12 +102,13 @@ describe(@"with valid source elements and timeTag", ^{
         PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
         expect(bundle).toNot.beNil();
         expect(bundle.elements).to.equal(sourceBundle.elements);
+        // NB - potential failure due to NSDate/TimeTag not being perfectly symmetrical
         expect(bundle.timeTag).to.equal(sourceBundle.timeTag);
         expect(bundle).to.equal(sourceBundle);
     });
 });
 
-describe(@"bundle with a nil time tag", ^{
+describe(@"bundle with a nil elements and time tag", ^{
     __block PEOSCBundle* sourceBundle;
     beforeAll(^{ sourceBundle = [PEOSCBundle bundleWithElements:nil timeTag:nil]; });
 
@@ -116,9 +122,19 @@ describe(@"bundle with a nil time tag", ^{
         PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
         expect(bundle).toNot.beNil();
         expect(bundle.elements).toNot.beNil();
+        expect(bundle.elements).to.beEmpty();
         expect(bundle.timeTag).toNot.beNil();
-        expect([bundle.timeTag NTPTimestamp]).to.equal(NTPTimestampImmediate);
+        expect(bundle.timeTag).to.beIdenticalTo([NSDate OSCImmediate]);
     });
+});
+
+it(@"should create bundle with immediate time tag from bundle with immediate time tag data", ^{
+    PEOSCBundle* sourceBundle = [PEOSCBundle bundleWithElements:nil timeTag:[NSDate OSCImmediate]];
+    NSData* data = [sourceBundle _data];
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
+    expect(bundle).toNot.beNil();
+    expect(bundle.timeTag).toNot.beNil();
+    expect(bundle.timeTag).to.beIdenticalTo([NSDate OSCImmediate]);
 });
 
 SpecEnd

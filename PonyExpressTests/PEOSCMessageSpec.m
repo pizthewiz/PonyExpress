@@ -7,6 +7,7 @@
 //
 
 #import "PEOSCMessage-Private.h"
+#import "PEOSCUtilities.h"
 
 SpecBegin(PEOSCMessage)
 
@@ -188,10 +189,20 @@ describe(@"with valid complex source message", ^{
         expect(message).toNot.beNil();
         expect(message.address).to.equal(sourceMessage.address);
         expect(message.typeTags).to.equal(sourceMessage.typeTags);
-        // failure due to NSData/TimeTag not being perfectly symmetrical
+        // NB - potential failure due to NSDate/TimeTag not being perfectly symmetrical
         expect(message.arguments).to.equal(sourceMessage.arguments);
         expect(message).to.equal(sourceMessage);
     });
+});
+
+it(@"should create message instance from message with immediate time tag data", ^{
+    PEOSCMessage* sourceMessage = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagTimetag] arguments:@[[NSDate OSCImmediate]]];
+    NSData* data = [sourceMessage _data];
+    PEOSCMessage* message = [PEOSCMessage messageWithData:data];
+    expect(message).toNot.beNil();
+    expect(message.typeTags).to.equal(sourceMessage.typeTags);
+    expect(message.arguments).to.equal(sourceMessage.arguments);
+    expect(message.arguments[0]).to.beIdenticalTo([NSDate OSCImmediate]);
 });
 
 SpecEnd

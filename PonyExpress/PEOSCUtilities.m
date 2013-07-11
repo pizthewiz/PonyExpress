@@ -67,7 +67,31 @@ const NTPTimestamp NTPTimestamp1970 = {JAN_1970, 0};
 // OSC's right now
 const NTPTimestamp NTPTimestampImmediate = {0, 1};
 
+static inline NSTimeInterval NTPTimestampDifference(NTPTimestamp start, NTPTimestamp end) {
+    int a;
+    unsigned int b;
+    a = end.seconds - start.seconds;
+    if (end.fractionalSeconds >= start.fractionalSeconds) {
+        b = end.fractionalSeconds - start.fractionalSeconds;
+    } else {
+        b = start.fractionalSeconds - end.fractionalSeconds;
+        b = ~b;
+        a -= 1;
+    }
+
+    return a + b / 4294967296.0; // 2^32
+}
+
 @implementation NSDate (PEAdditions)
++ (instancetype)OSCImmediate {
+    static NSDate* sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self class] dateWithNTPTimestamp:NTPTimestampImmediate];
+        // NB - could swizzle a pure accessor in place
+    });
+    return sharedInstance;
+}
 + (instancetype)dateWithNTPTimestamp:(NTPTimestamp)timestamp {
     return [NSDate dateWithTimeIntervalSince1970:NTPTimestampDifference(NTPTimestamp1970, timestamp)];
 }

@@ -10,9 +10,11 @@
 #import "PEOSCMessage.h"
 
 @interface PEOSCBundle : NSObject
+// NB - for bundles to send, when the timeTag is nil, it will default to immediate
+//  for bundles received, the timeTag is ignored and treated as immediate
 + (instancetype)bundleWithElements:(NSArray*)elements timeTag:(NSDate*)timeTag;
 - (instancetype)initWithElements:(NSArray*)elements timeTag:(NSDate*)timeTag;
 
 @property (nonatomic, strong) NSArray* elements; // could be a mix of messages and bundles
-@property (nonatomic, strong) NSDate* timeTag; // NB - dispatch time currently ignored, always treated as immediate
+@property (nonatomic, strong) NSDate* timeTag;
 @end

@@ -47,15 +47,11 @@
         start += 8;
 
         // read timetag
-        NSDate* timeTag = readDate(data, start);
-        if (!timeTag) {
-            CCErrorLog(@"ERROR - missing timetag, bundle dropped");
-            return nil;
-        }
-        self.timeTag = timeTag;
+        NTPTimestamp timeTag = readNTPTimestamp(data, start);
+        self.timeTag = NTPTimestampIsImmediate(timeTag) ? [NSDate OSCImmediate] : [NSDate dateWithNTPTimestamp:timeTag];
         start += 8;
 
-        // make messages
+        // grab elements
         NSMutableArray* elements = [NSMutableArray array];
         while (start != length) {
             // read element length
@@ -79,7 +75,6 @@
                     [elements addObject:message];
                 }
             }
-
             start += value;
         }
         self.elements = elements;
@@ -142,7 +137,7 @@
     [data appendData:[[@"#bundle" oscString] dataUsingEncoding:NSASCIIStringEncoding]];
 
     // timeTag
-    NTPTimestamp timestamp = self.timeTag ? [self.timeTag NTPTimestamp] : NTPTimestampImmediate;
+    NTPTimestamp timestamp = !self.timeTag || [self.timeTag isEqualTo:[NSDate OSCImmediate]] ? NTPTimestampImmediate : [self.timeTag NTPTimestamp];
     SInt32 swappedValue = [[NSNumber numberWithInt:timestamp.seconds] oscInt];
     [data appendBytes:&swappedValue length:4];
     swappedValue = [[NSNumber numberWithInt:timestamp.fractionalSeconds] oscInt];

@@ -140,7 +140,8 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
                 [list addObject:d];
                 start += d.length + 4 - (d.length & 3);
             } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
-                NSDate* date = readDate(data, start);
+                NTPTimestamp timeTag = readNTPTimestamp(data, start);
+                NSDate* date = NTPTimestampIsImmediate(timeTag) ? [NSDate OSCImmediate] : [NSDate dateWithNTPTimestamp:timeTag];
                 [list addObject:date];
                 start += 8;
             } else {
@@ -497,7 +498,7 @@ bail:
         } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
             [argumentData appendData:[argument oscBlob]];
         } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
-            NTPTimestamp timestamp = [argument NTPTimestamp];
+            NTPTimestamp timestamp = [argument isEqualTo:[NSDate OSCImmediate]] ? NTPTimestampImmediate : [argument NTPTimestamp];
             SInt32 swappedValue = [[NSNumber numberWithInt:timestamp.seconds] oscInt];
             [argumentData appendBytes:&swappedValue length:4];
             swappedValue = [[NSNumber numberWithInt:timestamp.fractionalSeconds] oscInt];

@@ -33,30 +33,22 @@ struct NTPTimestamp {
 };
 typedef struct NTPTimestamp NTPTimestamp;
 
+extern const NTPTimestamp NTPTimestampImmediate;
+
 static inline NTPTimestamp NTPTimestampMake(uint32_t seconds, uint32_t fractionalSeconds) {
     return (NTPTimestamp){seconds, fractionalSeconds};
 }
 
-// TODO - move to PEOSCUtilities.m?
-static inline NSTimeInterval NTPTimestampDifference(NTPTimestamp start, NTPTimestamp end) {
-    int a;
-    unsigned int b;
-    a = end.seconds - start.seconds;
-    if (end.fractionalSeconds >= start.fractionalSeconds) {
-        b = end.fractionalSeconds - start.fractionalSeconds;
-    } else {
-        b = start.fractionalSeconds - end.fractionalSeconds;
-        b = ~b;
-        a -= 1;
-    }
-
-    return a + b / 4294967296.0; // 2^32
+static inline BOOL NTPTimestampEqualToTimestamp(NTPTimestamp timestamp1, NTPTimestamp timestamp2) {
+    return timestamp1.seconds == timestamp2.seconds && timestamp1.fractionalSeconds == timestamp2.fractionalSeconds;
 }
 
-extern const NTPTimestamp NTPTimestamp1970;
-extern const NTPTimestamp NTPTimestampImmediate;
+static inline BOOL NTPTimestampIsImmediate(NTPTimestamp timestamp) {
+    return NTPTimestampEqualToTimestamp(timestamp, NTPTimestampImmediate);
+}
 
 @interface NSDate (PEAdditions)
++ (instancetype)OSCImmediate; // TODO - needs to be in public header
 + (instancetype)dateWithNTPTimestamp:(NTPTimestamp)timestamp;
 - (NTPTimestamp)NTPTimestamp;
 @end
@@ -89,11 +81,15 @@ static inline Float32 readFloat(NSData* data, NSUInteger start) {
     return value;
 }
 
-static inline NSDate* readDate(NSData* data, NSUInteger start) {
+static inline NTPTimestamp readNTPTimestamp(NSData* data, NSUInteger start) {
     SInt32 seconds = readInteger(data, start);
     SInt32 fractionalSeconds = readInteger(data, start+4);
 
-    NTPTimestamp timestamp = NTPTimestampMake(seconds, fractionalSeconds);
+    return NTPTimestampMake(seconds, fractionalSeconds);
+}
+
+static inline NSDate* readDate(NSData* data, NSUInteger start) {
+    NTPTimestamp timestamp = readNTPTimestamp(data, start);
     return [NSDate dateWithNTPTimestamp:timestamp];
 }
 
