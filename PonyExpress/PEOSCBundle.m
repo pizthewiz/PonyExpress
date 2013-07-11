@@ -117,7 +117,38 @@
 }
 
 - (NSData*)_data {
-    return nil;
+    // validate
+    if (![self _areElementsValid]) {
+        CCErrorLog(@"ERROR - invalid elements: %@", self.elements);
+        return nil;
+    }
+
+    __block NSMutableData* data = [NSMutableData data];
+
+    // #bundle
+    [data appendData:[[@"#bundle" oscString] dataUsingEncoding:NSASCIIStringEncoding]];
+
+    // timeTag
+    NTPTimestamp timestamp = self.timeTag ? [self.timeTag NTPTimestamp] : NTPTimestampImmediate;
+    SInt32 swappedValue = [[NSNumber numberWithInt:timestamp.seconds] oscInt];
+    [data appendBytes:&swappedValue length:4];
+    swappedValue = [[NSNumber numberWithInt:timestamp.fractionalSeconds] oscInt];
+    [data appendBytes:&swappedValue length:4];
+
+    // elements
+    [self.elements enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
+        if ([obj respondsToSelector:@selector(_data)]) {
+            NSData* elementData = [obj performSelector:@selector(_data)];
+            // length
+            SInt32 swappedValue = [@([elementData length]) oscInt];
+            [data appendBytes:&swappedValue length:4];
+
+            // data
+            [data appendData:elementData];
+        }
+    }];
+
+    return data;
 }
 
 @end

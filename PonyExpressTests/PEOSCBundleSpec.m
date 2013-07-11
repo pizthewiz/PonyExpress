@@ -61,8 +61,9 @@ it(@"should report legit elements as valid", ^{
 
 #pragma mark - DATA
 
-it(@"should produce nil data when elements contain an invalid message", ^{
-    expect(NO).to.beTruthy();
+it(@"should produce nil data when containing a bad element", ^{
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[@"XYZZY", @31337] timeTag:nil];
+    expect([bundle _data]).to.beNil();
 });
 
 it(@"should produce data when without elements and time tag", ^{

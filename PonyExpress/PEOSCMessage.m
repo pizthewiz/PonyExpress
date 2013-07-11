@@ -440,6 +440,7 @@ bail:
     return string;
 }
 
+// TODO - move this out to PEOSCUtilities
 - (void)_printDataBuffer:(NSData*)data {
     // yokined from CoreOSC:
     //  https://github.com/mirek/CoreOSC/blob/master/CoreOSC/CoreOSC.c

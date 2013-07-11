@@ -96,3 +96,7 @@ static inline NSDate* readDate(NSData* data, NSUInteger start) {
     NTPTimestamp timestamp = NTPTimestampMake(seconds, fractionalSeconds);
     return [NSDate dateWithNTPTimestamp:timestamp];
 }
+
+#pragma mark - DATA WRITERS
+
+// TODO - for message and bundle to use
