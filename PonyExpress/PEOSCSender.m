@@ -18,7 +18,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 @property (nonatomic, readwrite) UInt16 port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
 @property (nonatomic, strong) NSMutableDictionary* callbackMap;
-@property (nonatomic) long messageTag;
+@property (nonatomic) long tag;
 @end
 
 @implementation PEOSCSender
@@ -68,12 +68,12 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
     // hold onto callback
     if (handler) {
-        [self.callbackMap setObject:handler forKey:[NSString stringWithFormat:@"%lu", self.messageTag]];
+        [self.callbackMap setObject:handler forKey:[NSString stringWithFormat:@"%lu", self.tag]];
     }
 
-    [self.socket sendData:messageData toHost:self.host port:self.port withTimeout:-1.0 tag:self.messageTag];
+    [self.socket sendData:messageData toHost:self.host port:self.port withTimeout:-1.0 tag:self.tag];
     // TODO - catch overflow
-    self.messageTag++;
+    self.tag++;
 }
 
 #pragma mark - SOCKET DELEGATE
