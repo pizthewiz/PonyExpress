@@ -14,5 +14,5 @@
 - (instancetype)initWithElements:(NSArray*)elements timeTag:(NSDate*)timeTag;
 
 @property (nonatomic, strong) NSArray* elements; // could be a mix of messages and bundles
-@property (nonatomic, strong) NSDate* timeTag;
+@property (nonatomic, strong) NSDate* timeTag; // NB - dispatch time currently ignored, always treated as immediate
 @end
