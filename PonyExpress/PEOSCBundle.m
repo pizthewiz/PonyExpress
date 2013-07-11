@@ -87,6 +87,19 @@
     return self;
 }
 
+#pragma mark -
+
+- (BOOL)isEqual:(id)object {
+    if (![object isKindOfClass:[PEOSCBundle class]]) {
+        return NO;
+    }
+    return [object hash] == [self hash];
+}
+
+- (NSUInteger)hash {
+    return NSUINTROTATE([self.elements hash], NSUINT_BIT / 2) ^ [self.timeTag hash];
+}
+
 #pragma mark - PRIVATE
 
 + (BOOL)_dataIsLikelyBundle:(NSData*)data {
