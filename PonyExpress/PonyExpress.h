@@ -8,10 +8,12 @@
 
 #if TARGET_OS_IPHONE
     #import "PEOSCMessage.h"
+    #import "PEOSCBundle.h"
     #import "PEOSCSender.h"
     #import "PEOSCReceiver.h"
 #else
     #import <PonyExpress/PEOSCMessage.h>
+    #import <PonyExpress/PEOSCBundle.h>
     #import <PonyExpress/PEOSCSender.h>
     #import <PonyExpress/PEOSCReceiver.h>
 #endif
