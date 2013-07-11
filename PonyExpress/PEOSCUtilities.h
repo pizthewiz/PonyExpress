@@ -63,7 +63,8 @@ static inline NSString* readString(NSData* data, NSUInteger start, NSUInteger le
     }
 
     NSRange range = NSMakeRange(start, end-start);
-    NSString* string = [[NSString alloc] initWithData:[data subdataWithRange:range] encoding:NSASCIIStringEncoding];
+    NSData* subdata = [data subdataWithRange:range];
+    NSString* string = [[NSString alloc] initWithData:subdata encoding:NSASCIIStringEncoding];
     return string;
 }
 
@@ -84,13 +85,14 @@ static inline Float32 readFloat(NSData* data, NSUInteger start) {
 static inline NTPTimestamp readNTPTimestamp(NSData* data, NSUInteger start) {
     SInt32 seconds = readInteger(data, start);
     SInt32 fractionalSeconds = readInteger(data, start+4);
-
-    return NTPTimestampMake(seconds, fractionalSeconds);
+    NTPTimestamp timestamp = NTPTimestampMake(seconds, fractionalSeconds);
+    return timestamp;
 }
 
 static inline NSDate* readDate(NSData* data, NSUInteger start) {
     NTPTimestamp timestamp = readNTPTimestamp(data, start);
-    return [NSDate dateWithNTPTimestamp:timestamp];
+    NSDate* date = [NSDate dateWithNTPTimestamp:timestamp];
+    return date;
 }
 
 #pragma mark - DATA WRITERS
