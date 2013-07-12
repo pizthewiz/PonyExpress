@@ -9,6 +9,7 @@
 #import "PEOSCReceiver.h"
 #import "PonyExpress-Internal.h"
 #import "PEOSCMessage-Private.h"
+#import "PEOSCBundle-Private.h"
 #import "GCDAsyncUdpSocket.h"
 
 NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
@@ -93,11 +94,18 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 - (void)udpSocket:(GCDAsyncUdpSocket*)sock didReceiveData:(NSData*)data fromAddress:(NSData*)address withFilterContext:(id)filterContext {
     CCDebugLogSelector();
 
-    // TODO - messages sent to 0.0.0.0 could be receied n times for n IP addreses on the local machine
+    // NB - messages sent to 0.0.0.0 could be receied n times for n IP addreses on the local machine
 
-    PEOSCMessage* message = [PEOSCMessage messageWithData:data];
-    if (message) {
-        [self.delegate didReceiveMessage:message];
+    if ([PEOSCBundle _dataIsLikelyBundle:data]) {
+        PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
+        if (bundle) {
+            [self.delegate didReceiveBundle:bundle];
+        }
+    } else {
+        PEOSCMessage* message = [PEOSCMessage messageWithData:data];
+        if (message) {
+            [self.delegate didReceiveMessage:message];
+        }
     }
 }
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PEOSCMessage.h"
+#import "PEOSCBundle.h"
 
 extern NSString* const PEOSCSenderErrorDomain;
 
@@ -26,4 +27,5 @@ typedef void(^PEOSCSenderCompletionHandler)(BOOL success, NSError* error);
 @property (nonatomic, readonly) UInt16 port;
 
 - (void)sendMessage:(PEOSCMessage*)message handler:(PEOSCSenderCompletionHandler)handler;
+- (void)sendBundle:(PEOSCBundle*)bundle handler:(PEOSCSenderCompletionHandler)handler;
 @end

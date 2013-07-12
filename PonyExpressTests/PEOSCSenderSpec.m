@@ -42,7 +42,7 @@ it(@"should return init args from properties", ^{
     expect(sender.port).to.equal(unpriviledgedPort);
 });
 
-#pragma mark - SENDING
+#pragma mark - SEND MESSAGES
 
 it(@"should fail to send bad message", ^AsyncBlock {
     PEOSCMessage* message = [PEOSCMessage messageWithAddress:nil typeTags:nil arguments:nil];
@@ -86,5 +86,9 @@ it(@"should send type-less message", ^AsyncBlock {
         done();
     }];
 });
+
+#pragma mark - SEND BUNDLES
+
+// TODO
 
 SpecEnd

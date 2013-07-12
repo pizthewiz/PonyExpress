@@ -10,6 +10,7 @@
 @end
 @implementation ReceiverDelegate
 - (void)didReceiveMessage:(PEOSCMessage*)message {}
+- (void)didReceiveBundle:(PEOSCBundle*)bundle {}
 @end
 
 SpecBegin(PEOSCReceiverSpec)

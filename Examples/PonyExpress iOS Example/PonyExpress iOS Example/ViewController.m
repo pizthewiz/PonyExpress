@@ -48,18 +48,23 @@
 - (void)didReceiveMessage:(PEOSCMessage*)message {
     NSLog(@"received: %@", message);
 
-    // send a pong
+    // send pong in a bundle bundle
     if ([message.address isEqualToString:@"/ping"]) {
-        __block PEOSCMessage* responseMessage = [PEOSCMessage messageWithAddress:@"/pong" typeTags:@[PEOSCMessageTypeTagTimetag] arguments:@[[NSDate date]]];
+        PEOSCMessage* responseMessage = [PEOSCMessage messageWithAddress:@"/pong" typeTags:@[PEOSCMessageTypeTagTimetag] arguments:@[[NSDate date]]];
+        __block PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[responseMessage] timeTag:nil];
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"127.0.0.1" port:PORT_OUT];
-        [sender sendMessage:responseMessage handler:^(BOOL success, NSError* error) {
+        [sender sendBundle:bundle handler:^(BOOL success, NSError* error) {
             if (error) {
-                NSLog(@"ERROR - failed to send message '%@' - %@", responseMessage, [error localizedDescription]);
+                NSLog(@"ERROR - failed to send bundle '%@' - %@", bundle, [error localizedDescription]);
                 return;
             }
-            NSLog(@"sent: %@", responseMessage);
+            NSLog(@"sent: %@", bundle);
         }];
     }
+}
+
+- (void)didReceiveBundle:(PEOSCBundle*)bundle {
+    NSLog(@"received: %@", bundle);
 }
 
 @end

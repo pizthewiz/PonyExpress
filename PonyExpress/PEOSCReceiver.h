@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PEOSCMessage.h"
+#import "PEOSCBundle.h"
 
 extern NSString* const PEOSCReceiverErrorDomain;
 
@@ -22,6 +23,7 @@ typedef void(^PEOSCReceiverCompletionHandler)(BOOL success, NSError* error);
 
 @protocol PEOSCReceiverDelegate
 - (void)didReceiveMessage:(PEOSCMessage*)message;
+- (void)didReceiveBundle:(PEOSCBundle*)bundle;
 @end
 
 @interface PEOSCReceiver : NSObject

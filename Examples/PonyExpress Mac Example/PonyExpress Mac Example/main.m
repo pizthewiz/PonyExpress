@@ -3,7 +3,7 @@
 //  PonyExpress Mac Example
 //
 //  Created by Jean-Pierre Mouilleseaux on 30 Dec 2012.
-//  Copyright (c) 2012 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2012-2013 Chorded Constructions. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -18,24 +18,27 @@
 - (void)didReceiveMessage:(PEOSCMessage*)message {
     NSLog(@"received: %@", message);
 
-    // send a pong
+    // send pong in a bundle bundle
     if ([message.address isEqualToString:@"/ping"]) {
-        __block PEOSCMessage* responseMessage = [PEOSCMessage messageWithAddress:@"/pong" typeTags:@[PEOSCMessageTypeTagTimetag] arguments:@[[NSDate date]]];
+        PEOSCMessage* responseMessage = [PEOSCMessage messageWithAddress:@"/pong" typeTags:@[PEOSCMessageTypeTagTimetag] arguments:@[[NSDate date]]];
+        __block PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[responseMessage] timeTag:nil];
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"127.0.0.1" port:PORT_OUT];
-        [sender sendMessage:responseMessage handler:^(BOOL success, NSError* error) {
+        [sender sendBundle:bundle handler:^(BOOL success, NSError* error) {
             if (error) {
-                NSLog(@"ERROR - failed to send message '%@' - %@", responseMessage, [error localizedDescription]);
+                NSLog(@"ERROR - failed to send bundle '%@' - %@", bundle, [error localizedDescription]);
                 return;
             }
-            NSLog(@"sent: %@", responseMessage);
+            NSLog(@"sent: %@", bundle);
         }];
     }
+}
+- (void)didReceiveBundle:(PEOSCBundle*)bundle {
+    NSLog(@"received: %@", bundle);
 }
 @end
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-
         // setup receiver
         PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:PORT_IN];
         ReceiverDelegate* delegate = [[ReceiverDelegate alloc] init];
@@ -45,9 +48,10 @@ int main(int argc, const char * argv[]) {
         [receiver beginListening:&error];
         if (error) {
             NSLog(@"ERROR - failed to listen on port %u - %@", PORT_IN, [error localizedDescription]);
+            return 1;
         }
 
-        // send a ping
+        // send ping message
         __block PEOSCMessage* message = [PEOSCMessage messageWithAddress:@"/ping" typeTags:@[PEOSCMessageTypeTagTimetag] arguments:@[[NSDate date]]];
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"127.0.0.1" port:PORT_OUT];
         [sender sendMessage:message handler:^(BOOL success, NSError* error) {
@@ -62,4 +66,3 @@ int main(int argc, const char * argv[]) {
     }
     return 0;
 }
-

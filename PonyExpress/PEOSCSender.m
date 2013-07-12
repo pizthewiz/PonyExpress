@@ -9,6 +9,7 @@
 #import "PEOSCSender.h"
 #import "PonyExpress-Internal.h"
 #import "PEOSCMessage-Private.h"
+#import "PEOSCBundle-Private.h"
 #import "GCDAsyncUdpSocket.h"
 
 NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
@@ -58,8 +59,8 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 #pragma mark -
 
 - (void)sendMessage:(PEOSCMessage*)message handler:(PEOSCSenderCompletionHandler)handler {
-    NSData* messageData = [message _data];
-    if (!messageData) {
+    NSData* data = [message _data];
+    if (!data) {
         CCErrorLog(@"ERROR - failed to generate message data: %@", message);
         NSError* error = [NSError errorWithDomain:PEOSCSenderErrorDomain code:PEOSCSenderOtherError userInfo:nil];
         handler(NO, error);
@@ -71,7 +72,26 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
         [self.callbackMap setObject:handler forKey:[NSString stringWithFormat:@"%lu", self.tag]];
     }
 
-    [self.socket sendData:messageData toHost:self.host port:self.port withTimeout:-1.0 tag:self.tag];
+    [self.socket sendData:data toHost:self.host port:self.port withTimeout:-1.0 tag:self.tag];
+    // TODO - catch overflow
+    self.tag++;
+}
+
+- (void)sendBundle:(PEOSCBundle*)bundle handler:(PEOSCSenderCompletionHandler)handler {
+    NSData* data = [bundle _data];
+    if (!data) {
+        CCErrorLog(@"ERROR - failed to generate bundle data: %@", bundle);
+        NSError* error = [NSError errorWithDomain:PEOSCSenderErrorDomain code:PEOSCSenderOtherError userInfo:nil];
+        handler(NO, error);
+        return;
+    }
+
+    // hold onto callback
+    if (handler) {
+        [self.callbackMap setObject:handler forKey:[NSString stringWithFormat:@"%lu", self.tag]];
+    }
+
+    [self.socket sendData:data toHost:self.host port:self.port withTimeout:-1.0 tag:self.tag];
     // TODO - catch overflow
     self.tag++;
 }
