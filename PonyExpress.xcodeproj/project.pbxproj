@@ -413,13 +413,13 @@
 			files = (
 				D83E1B9C141190E200CB1258 /* PonyExpress.h in Headers */,
 				D83E1BA114119A2C00CB1258 /* PEOSCMessage.h in Headers */,
+				D815C9CA1700001A00B5C4DC /* PEOSCBundle.h in Headers */,
 				D83E1B98141190B000CB1258 /* PEOSCSender.h in Headers */,
 				D8C53D371436795700C8CF3E /* PEOSCReceiver.h in Headers */,
 				D83E1BAF1411A41400CB1258 /* PEOSCMessage-Private.h in Headers */,
 				D87C18001413FCA7005A08F3 /* PonyExpress-Internal.h in Headers */,
 				D810595D178CD5A800501AF0 /* PEOSCUtilities.h in Headers */,
 				D8AF167B14B78C060002A885 /* GCDAsyncUdpSocket.h in Headers */,
-				D815C9CA1700001A00B5C4DC /* PEOSCBundle.h in Headers */,
 				D815C9D3170000E400B5C4DC /* PEOSCBundle-Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,13 +429,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8A2995916E6BFD20067C19C /* PonyExpress.h in Headers */,
-				D810595E178CD5A800501AF0 /* PEOSCUtilities.h in Headers */,
 				D8A2995A16E6BFD20067C19C /* PEOSCMessage.h in Headers */,
+				D810595E178CD5A800501AF0 /* PEOSCUtilities.h in Headers */,
+				D815C9CB1700001A00B5C4DC /* PEOSCBundle.h in Headers */,
 				D8A2995B16E6BFD20067C19C /* PEOSCSender.h in Headers */,
 				D8A2995C16E6BFD20067C19C /* PEOSCReceiver.h in Headers */,
 				D8A2995D16E6BFD70067C19C /* PEOSCMessage-Private.h in Headers */,
 				D8A2995E16E6BFDC0067C19C /* PonyExpress-Internal.h in Headers */,
-				D815C9CB1700001A00B5C4DC /* PEOSCBundle.h in Headers */,
 				D815C9D4170000E400B5C4DC /* PEOSCBundle-Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
