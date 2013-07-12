@@ -498,7 +498,7 @@ bail:
         } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
             [argumentData appendData:[argument oscBlob]];
         } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
-            NTPTimestamp timestamp = [argument isEqualTo:[NSDate OSCImmediate]] ? NTPTimestampImmediate : [argument NTPTimestamp];
+            NTPTimestamp timestamp = [argument isEqual:[NSDate OSCImmediate]] ? NTPTimestampImmediate : [argument NTPTimestamp];
             SInt32 swappedValue = [[NSNumber numberWithInt:timestamp.seconds] oscInt];
             [argumentData appendBytes:&swappedValue length:4];
             swappedValue = [[NSNumber numberWithInt:timestamp.fractionalSeconds] oscInt];

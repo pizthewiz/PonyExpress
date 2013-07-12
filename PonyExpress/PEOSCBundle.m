@@ -137,7 +137,7 @@
     [data appendData:[[@"#bundle" oscString] dataUsingEncoding:NSASCIIStringEncoding]];
 
     // timeTag
-    NTPTimestamp timestamp = !self.timeTag || [self.timeTag isEqualTo:[NSDate OSCImmediate]] ? NTPTimestampImmediate : [self.timeTag NTPTimestamp];
+    NTPTimestamp timestamp = !self.timeTag || [self.timeTag isEqual:[NSDate OSCImmediate]] ? NTPTimestampImmediate : [self.timeTag NTPTimestamp];
     SInt32 swappedValue = [[NSNumber numberWithInt:timestamp.seconds] oscInt];
     [data appendBytes:&swappedValue length:4];
     swappedValue = [[NSNumber numberWithInt:timestamp.fractionalSeconds] oscInt];
