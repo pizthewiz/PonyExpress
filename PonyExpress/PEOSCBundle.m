@@ -151,6 +151,13 @@
         }
     }];
 
+#ifdef LOGGING
+    // only dump the buffer when less than 4k
+    if (data.length < 4 * 1024) {
+        [data prettyPrint];
+    }
+#endif
+
     return data;
 }
 

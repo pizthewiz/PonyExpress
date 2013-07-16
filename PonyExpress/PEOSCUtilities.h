@@ -45,6 +45,7 @@ static inline BOOL NTPTimestampIsImmediate(NTPTimestamp timestamp) {
 - (NSString*)readStringAtOffset:(NSUInteger)offset;
 - (NSData*)readBlobAtOffset:(NSUInteger)offset length:(NSUInteger)length;
 - (NSDate*)readTimeTagAtOffset:(NSUInteger)offset;
+- (void)prettyPrint;
 @end
 
 #pragma mark - DATA WRITERS

@@ -437,31 +437,6 @@ bail:
     return string;
 }
 
-// TODO - move this out to PEOSCUtilities
-- (void)_printDataBuffer:(NSData*)data {
-    // yokined from CoreOSC:
-    //  https://github.com/mirek/CoreOSC/blob/master/CoreOSC/CoreOSC.c
-    const char* buffer = [data bytes];
-    for (NSUInteger idx = 0; idx < data.length; idx++) {
-        if (idx > 0 && !(idx % 4)) {
-            printf(" ");
-        }
-        if (buffer[idx] > 0x1f) {
-            printf("  %c", buffer[idx]);
-        } else {
-            printf(" __");
-        }
-    }
-    printf("\n");
-    for (NSUInteger idx = 0; idx < data.length; idx++) {
-        if (idx > 0 && !(idx % 4)) {
-            printf(" ");
-        }
-        printf(" %02x", (unsigned char)buffer[idx]);
-    }
-    printf("\n");
-}
-
 - (NSData*)_data {
     // validate
     if (![self _isAddressValid]) {
@@ -506,7 +481,7 @@ bail:
 #ifdef LOGGING
     // only dump the buffer when less than 4k
     if (data.length < 4 * 1024) {
-        [self _printDataBuffer:data];
+        [data prettyPrint];
     }
 #endif
 

@@ -132,6 +132,32 @@ static inline NSTimeInterval NTPTimestampDifference(NTPTimestamp start, NTPTimes
     return timeTag;
 }
 
+// TODO - make multi-line and byte-gap configurable
+- (void)prettyPrint {
+    // yokined from CoreOSC:
+    //  https://github.com/mirek/CoreOSC/blob/master/CoreOSC/CoreOSC.c
+    const char* buffer = [self bytes];
+    for (NSUInteger idx = 0; idx < [self length]; idx++) {
+        if (idx > 0 && !(idx % 4)) {
+            printf(" ");
+        }
+        if (buffer[idx] > 0x1f) {
+            printf("  %c", buffer[idx]);
+        } else {
+            printf(" __");
+        }
+    }
+    printf("\n");
+    for (NSUInteger idx = 0; idx < [self length]; idx++) {
+        if (idx > 0 && !(idx % 4)) {
+            printf(" ");
+        }
+        printf(" %02x", (unsigned char)buffer[idx]);
+    }
+    printf("\n");
+}
+
+
 @end
 
 #pragma mark - DATA WRITERS
