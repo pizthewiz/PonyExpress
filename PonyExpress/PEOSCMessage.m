@@ -9,6 +9,7 @@
 #import "PEOSCMessage.h"
 #import "PEOSCMessage-Private.h"
 #import "PEOSCUtilities.h"
+#import "PEOSCUtilities-Internal.h"
 #import "PonyExpress-Internal.h"
 
 NSString* const PEOSCMessageTypeTagInteger = @"PEOSCMessageTypeTagInteger";
@@ -50,7 +51,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
         NSUInteger start = 0;
 
         // address
-        NSString* addressString = readString(data, start, length);
+        NSString* addressString = [data readStringAtOffset:start];
         // TODO - replace naïve validation with +[PEOSCMessage addressIsValid:]
         if (!addressString || [addressString isEqualToString:@""]) {
             CCErrorLog(@"ERROR - invalid empty address, message dropped");
@@ -65,7 +66,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 
         // type tags
         start += addressString.length + 4 - (addressString.length & 3);
-        NSString* typeTagString = readString(data, start, length);
+        NSString* typeTagString = [data readStringAtOffset:start];
 
         // NB - this is probably too aggressive
         static NSString* const PEOSCTypeTagRegExPattern = @"^,[ifsbTFNIt]*$";
@@ -106,19 +107,19 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
                     CCErrorLog(@"ERROR - cannot read int from data, out of range");
                     return nil;
                 }
-                SInt32 value = readInteger(data, start);
-                [list addObject:[NSNumber numberWithInt:value]];
+                NSNumber* value = [data readIntegerAtOffset:start];
+                [list addObject:value];
                 start += 4;
             } else if ([type isEqualToString:PEOSCMessageTypeTagFloat]) {
                 if (start+4 > length) {
                     CCErrorLog(@"ERROR - cannot read float from data, out of range");
                     return nil;
                 }
-                Float32 value = readFloat(data, start);
-                [list addObject:[NSNumber numberWithFloat:value]];
+                NSNumber* value = [data readFloatAtOffset:start];
+                [list addObject:value];
                 start += 4;
             } else if ([type isEqualToString:PEOSCMessageTypeTagString]) {
-                NSString* string = readString(data, start, length);
+                NSString* string = [data readStringAtOffset:start];
                 if (!string) {
                     CCErrorLog(@"ERROR - failed to read string");
                     return nil;
@@ -132,7 +133,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
                     return nil;
                 }
                 start += 4;
-                NSData* d = [data subdataWithRange:NSMakeRange(start, blobLength)];
+                NSData* d = [data readBlobAtOffset:start length:blobLength];
                 if (!d) {
                     CCErrorLog(@"ERROR - failed to read data blob");
                     return nil;
@@ -140,8 +141,7 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
                 [list addObject:d];
                 start += d.length + 4 - (d.length & 3);
             } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
-                NTPTimestamp timeTag = readNTPTimestamp(data, start);
-                NSDate* date = NTPTimestampIsImmediate(timeTag) ? [NSDate OSCImmediate] : [NSDate dateWithNTPTimestamp:timeTag];
+                NSDate* date = [data readTimeTagAtOffset:start];
                 [list addObject:date];
                 start += 8;
             } else {
@@ -477,39 +477,31 @@ bail:
         return nil;
     }
 
-    NSData* addressData = [[self.address oscString] dataUsingEncoding:NSASCIIStringEncoding];
-    NSData* typeTagData = [[[self _typeTagString] oscString] dataUsingEncoding:NSASCIIStringEncoding];
+    __block NSMutableData* data = [NSMutableData data];
 
-    // TODO - it would be nice to have a value class that can serialize then create a message from address and values
-    __block NSMutableData* argumentData = [NSMutableData data];
+    // address
+    [data appendString:self.address];
+
+    // type tag string
+    [data appendString:[self _typeTagString]];
+
     [self enumerateTypesAndArgumentsUsingBlock:^(id type, id argument, BOOL* stop) {
         if (![[self class] argumentRequiredByType:type]) {
             return;
         }
 
         if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
-            SInt32 swappedValue = [argument oscInt];
-            [argumentData appendBytes:&swappedValue length:4];
+            [data appendInteger:argument];
         } else if ([type isEqualToString:PEOSCMessageTypeTagFloat]) {
-            CFSwappedFloat32 swappedValue = [argument oscFloat];
-            [argumentData appendBytes:&swappedValue length:4];
+            [data appendFloat:argument];
         } else if ([type isEqualToString:PEOSCMessageTypeTagString]) {
-            [argumentData appendData:[[argument oscString] dataUsingEncoding:NSASCIIStringEncoding]];
+            [data appendString:argument];
         } else if ([type isEqualToString:PEOSCMessageTypeTagBlob]) {
-            [argumentData appendData:[argument oscBlob]];
+            [data appendBlob:argument];
         } else if ([type isEqualToString:PEOSCMessageTypeTagTimetag]) {
-            NTPTimestamp timestamp = [argument isEqual:[NSDate OSCImmediate]] ? NTPTimestampImmediate : [argument NTPTimestamp];
-            SInt32 swappedValue = [[NSNumber numberWithInt:timestamp.seconds] oscInt];
-            [argumentData appendBytes:&swappedValue length:4];
-            swappedValue = [[NSNumber numberWithInt:timestamp.fractionalSeconds] oscInt];
-            [argumentData appendBytes:&swappedValue length:4];
+            [data appendTimeTag:argument];
         }
     }];
-
-    NSMutableData* data = [NSMutableData data];
-    [data appendData:addressData];
-    [data appendData:typeTagData];
-    [data appendData:argumentData];
 
 #ifdef LOGGING
     // only dump the buffer when less than 4k

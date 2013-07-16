@@ -9,6 +9,7 @@
 #import "PEOSCBundle.h"
 #import "PEOSCBundle-Private.h"
 #import "PEOSCUtilities.h"
+#import "PEOSCUtilities-Internal.h"
 #import "PEOSCMessage-Private.h"
 #import "PonyExpress-Internal.h"
 
@@ -47,8 +48,7 @@
         start += 8;
 
         // read timetag
-        NTPTimestamp timeTag = readNTPTimestamp(data, start);
-        self.timeTag = NTPTimestampIsImmediate(timeTag) ? [NSDate OSCImmediate] : [NSDate dateWithNTPTimestamp:timeTag];
+        self.timeTag = [data readTimeTagAtOffset:start];
         start += 8;
 
         // grab elements
@@ -134,22 +134,17 @@
     __block NSMutableData* data = [NSMutableData data];
 
     // #bundle
-    [data appendData:[[@"#bundle" oscString] dataUsingEncoding:NSASCIIStringEncoding]];
+    [data appendString:@"#bundle"];
 
     // timeTag
-    NTPTimestamp timestamp = !self.timeTag || [self.timeTag isEqual:[NSDate OSCImmediate]] ? NTPTimestampImmediate : [self.timeTag NTPTimestamp];
-    SInt32 swappedValue = [[NSNumber numberWithInt:timestamp.seconds] oscInt];
-    [data appendBytes:&swappedValue length:4];
-    swappedValue = [[NSNumber numberWithInt:timestamp.fractionalSeconds] oscInt];
-    [data appendBytes:&swappedValue length:4];
+    [data appendTimeTag:(!self.timeTag ? [NSDate OSCImmediate] : self.timeTag)];
 
     // elements
     [self.elements enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
         if ([obj respondsToSelector:@selector(_data)]) {
             NSData* elementData = [obj performSelector:@selector(_data)];
             // length
-            SInt32 swappedValue = [@([elementData length]) oscInt];
-            [data appendBytes:&swappedValue length:4];
+            [data appendInteger:@([elementData length])];
 
             // data
             [data appendData:elementData];

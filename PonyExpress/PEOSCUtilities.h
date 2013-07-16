@@ -8,22 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#pragma mark OSC VALUE CATEGORIES
-
-// NB - OSC uses big-endian numerical values
-@interface NSNumber (PEAdditions)
-- (SInt32)oscInt;
-- (CFSwappedFloat32)oscFloat;
-@end
-
-@interface NSString (PEAdditions)
-- (NSString*)oscString;
-@end
-
-@interface NSData (PEAdditions)
-- (NSData*)oscBlob;
-@end
-
 // yoinked and recrafted from Gavin Eadie's ios-ntp http://code.google.com/p/ios-ntp/
 // NB - not perfectly symmetrical, this evaluates to NO:
 //  NSDate* now = [NSDate date]; [now isEqualToDate:[NSDate dateWithNTPTimestamp:[now NTPTimestamp]];
@@ -55,49 +39,23 @@ static inline BOOL NTPTimestampIsImmediate(NTPTimestamp timestamp) {
 
 #pragma mark - DATA READERS
 
-static inline NSString* readString(NSData* data, NSUInteger start, NSUInteger length) {
-    const char* buffer = [data bytes];
-    NSUInteger end = start;
-    while (end < length && buffer[end] != 0x00) {
-        end++;
-    }
-
-    NSRange range = NSMakeRange(start, end-start);
-    NSData* subdata = [data subdataWithRange:range];
-    NSString* string = [[NSString alloc] initWithData:subdata encoding:NSASCIIStringEncoding];
-    return string;
-}
-
-static inline SInt32 readInteger(NSData* data, NSUInteger start) {
-    void* b[4];
-    [data getBytes:&b range:NSMakeRange(start, 4)];
-    SInt32 value = CFSwapInt32BigToHost(*(uint32_t*)b);
-    return value;
-}
-
-static inline Float32 readFloat(NSData* data, NSUInteger start) {
-    void* b[4];
-    [data getBytes:&b range:NSMakeRange(start, 4)];
-    Float32 value = CFConvertFloat32SwappedToHost(*(CFSwappedFloat32*)b);
-    return value;
-}
-
-static inline NTPTimestamp readNTPTimestamp(NSData* data, NSUInteger start) {
-    SInt32 seconds = readInteger(data, start);
-    SInt32 fractionalSeconds = readInteger(data, start+4);
-    NTPTimestamp timestamp = NTPTimestampMake(seconds, fractionalSeconds);
-    return timestamp;
-}
-
-static inline NSDate* readDate(NSData* data, NSUInteger start) {
-    NTPTimestamp timestamp = readNTPTimestamp(data, start);
-    NSDate* date = [NSDate dateWithNTPTimestamp:timestamp];
-    return date;
-}
+@interface NSData (PEDataReadingExtensions)
+- (NSNumber*)readIntegerAtOffset:(NSUInteger)offset;
+- (NSNumber*)readFloatAtOffset:(NSUInteger)offset;
+- (NSString*)readStringAtOffset:(NSUInteger)offset;
+- (NSData*)readBlobAtOffset:(NSUInteger)offset length:(NSUInteger)length;
+- (NSDate*)readTimeTagAtOffset:(NSUInteger)offset;
+@end
 
 #pragma mark - DATA WRITERS
 
-// TODO - for message and bundle to use
+@interface NSMutableData (PEDataWritingExtensions)
+- (void)appendInteger:(NSNumber*)number;
+- (void)appendFloat:(NSNumber*)number;
+- (void)appendString:(NSString*)string;
+- (void)appendBlob:(NSData*)blob;
+- (void)appendTimeTag:(NSDate*)date;
+@end
 
 #pragma mark -
 

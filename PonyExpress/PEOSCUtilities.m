@@ -7,6 +7,7 @@
 //
 
 #import "PEOSCUtilities.h"
+#import "PEOSCUtilities-Internal.h"
 
 #pragma mark INTEGER & FLOAT
 
@@ -41,10 +42,8 @@
 @implementation NSData (PEAdditions)
 - (NSData*)oscBlob {
     // int32 length + 8bit bytes + 0-3 nulls in padding for 4-byte alignment
-    SInt32 swappedLength = [[NSNumber numberWithUnsignedInteger:self.length] oscInt];
-
     NSMutableData* data = [NSMutableData data];
-    [data appendBytes:&swappedLength length:4];
+    [data appendInteger:@(self.length)];
     [data appendData:self];
 
     NSUInteger numberOfPaddingNulls = (4 - (self.length & 3)) & 3;
@@ -101,4 +100,69 @@ static inline NSTimeInterval NTPTimestampDifference(NTPTimestamp start, NTPTimes
     fractionalValue *= 4294967296.0;
     return NTPTimestampMake(JAN_1970 + integerValue, fractionalValue);
 }
+@end
+
+#pragma mark - DATA READERS
+
+@implementation NSData (PEDataReadingExtensions)
+
+- (NSNumber*)readIntegerAtOffset:(NSUInteger)offset {
+    SInt32 value = readInteger(self, offset);
+    return [NSNumber numberWithInt:value];
+}
+
+- (NSNumber*)readFloatAtOffset:(NSUInteger)offset {
+    Float32 value = readFloat(self, offset);
+    return [NSNumber numberWithFloat:value];
+}
+
+- (NSString*)readStringAtOffset:(NSUInteger)offset {
+    NSString* string = readString(self, offset, [self length]);
+    return string;
+}
+
+- (NSData*)readBlobAtOffset:(NSUInteger)offset length:(NSUInteger)length {
+    NSData* data = [self subdataWithRange:NSMakeRange(offset, length)];
+    return data;
+}
+
+- (NSDate*)readTimeTagAtOffset:(NSUInteger)offset {
+    NTPTimestamp timestamp = readNTPTimestamp(self, offset);
+    NSDate* timeTag = NTPTimestampIsImmediate(timestamp) ? [NSDate OSCImmediate] : [NSDate dateWithNTPTimestamp:timestamp];
+    return timeTag;
+}
+
+@end
+
+#pragma mark - DATA WRITERS
+
+@implementation NSMutableData (PEDataWritingExtensions)
+
+- (void)appendInteger:(NSNumber*)number {
+    SInt32 swappedValue = [number oscInt];
+    [self appendBytes:&swappedValue length:4];
+}
+
+- (void)appendFloat:(NSNumber*)number {
+    CFSwappedFloat32 swappedValue = [number oscFloat];
+    [self appendBytes:&swappedValue length:4];
+}
+
+- (void)appendString:(NSString*)string {
+    NSString* value = [string oscString];
+    [self appendData:[value dataUsingEncoding:NSASCIIStringEncoding]];
+}
+
+- (void)appendBlob:(NSData*)blob {
+    [self appendData:[blob oscBlob]];
+}
+
+- (void)appendTimeTag:(NSDate*)date {
+    NTPTimestamp timestamp = [date isEqual:[NSDate OSCImmediate]] ? NTPTimestampImmediate : [date NTPTimestamp];
+    SInt32 swappedValue = [[NSNumber numberWithInt:timestamp.seconds] oscInt];
+    [self appendBytes:&swappedValue length:4];
+    swappedValue = [[NSNumber numberWithInt:timestamp.fractionalSeconds] oscInt];
+    [self appendBytes:&swappedValue length:4];
+}
+
 @end
