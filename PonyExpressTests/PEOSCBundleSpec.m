@@ -100,7 +100,6 @@ describe(@"with valid source elements", ^{
         PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
         expect(bundle).toNot.beNil();
         expect(bundle.elements).to.equal(sourceBundle.elements);
-        // NB - potential failure due to NSDate/TimeTag not being perfectly symmetrical
         expect(bundle).to.equal(sourceBundle);
     });
 });
