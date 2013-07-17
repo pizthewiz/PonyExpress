@@ -31,13 +31,13 @@ NSArray, NSDictionary and NSNumber [literals](http://clang.llvm.org/docs/Objecti
 
 the bundle version is optionally set from the repository state using [Node.js](http://nodejs.org/) and a few modules; if Node.js is not installed, the bundle version will remain unset.
 
-- install Node.js 0.8.16 (or later) from [binary package](http://nodejs.org/dist/v0.8.16/node-v0.8.16.pkg) or build and install from [source](http://nodejs.org/dist/v0.8.16/node-v0.8.16.tar.gz)
+- install Node.js 0.10.13 (or later) from [binary package](http://nodejs.org/dist/v0.10.13/node-v0.10.13.pkg) or build and install from [source](http://nodejs.org/dist/v0.10.13/node-v0.10.13.tar.gz)
 - install node modules globally `npm install -g jake async NodObjC`
 - link global modules to local PonyExpress clone `npm link async NodObjC`
 
 ## THANKS
 - Dean McNamee for his great Node.js OSC implementation [omgosc](https://github.com/deanm/omgosc)
-- Ray Cutler for his conical OSC implementation in [VVOpenSource](http://code.google.com/p/vvopensource/)
+- Ray Cutler for his conical OSC implementation in [VVOpenSource](https://github.com/mrRay/vvopensource)
 - Mirek Rusin for inspiration and reference with his svelte [CoreOSC](https://github.com/mirek/CoreOSC/) offering
 - Robbie Hanson [AsyncSocket](https://github.com/robbiehanson/CocoaAsyncSocket) and contributors for a convenient UDP socket wrapper
 - Nathan Rajlich for [NodObjC](https://github.com/TooTallNate/NodObjC)
