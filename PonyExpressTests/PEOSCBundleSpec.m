@@ -11,7 +11,8 @@
 
 SpecBegin(PEOSCBundle)
 
-__block NSArray* messages = nil;
+__block NSArray* messages;
+__block PEOSCMessage* message;
 
 beforeAll(^{
     NSMutableArray* list = [NSMutableArray array];
@@ -20,6 +21,8 @@ beforeAll(^{
     [list addObject:[PEOSCMessage messageWithAddress:@"/osc/2/freq" typeTags:@[PEOSCMessageTypeTagFloat] arguments:@[@110.0]]];
     [list addObject:[PEOSCMessage messageWithAddress:@"/osc/3/freq" typeTags:@[PEOSCMessageTypeTagFloat] arguments:@[@146.83]]];
     messages = list;
+
+    message = [PEOSCMessage messageWithAddress:@"/osc/1/amp" typeTags:@[PEOSCMessageTypeTagFloat] arguments:@[@33.33]];
 });
 
 #pragma mark INITIALIZATION
@@ -39,27 +42,47 @@ it(@"should return init args from properties", ^{
 #pragma mark - ELEMENTS
 
 it(@"should report elements as invalid when containing bad element", ^{
-    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[@"XYZZY", @31337]];
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[message, @"XYZZY", @31337]];
     expect([bundle _areElementsValid]).to.beFalsy();
 
-    // TODO - more complex nested one
+    // TODO - check other forms of "bad"
 });
 
-it(@"should report nil elements as valid", ^{
+it(@"should report elements as invalid when subbundle contains bad element", ^{
+    PEOSCBundle* innerBundle = [PEOSCBundle bundleWithElements:@[message, @"XYZZY", @31337]];
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[innerBundle]];
+    expect([bundle _areElementsValid]).to.beTruthy();
+
+    // TODO - check other forms of "bad"
+});
+
+it(@"should report as valid when elements nil", ^{
     PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:nil];
     expect([bundle _areElementsValid]).to.beTruthy();
 });
 
-it(@"should report empty elements as valid", ^{
+it(@"should report as valid when elements empty", ^{
     PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[]];
     expect([bundle _areElementsValid]).to.beTruthy();
 });
 
-it(@"should report legit elements as valid", ^{
+it(@"should report as valid when elements contains messages", ^{
     PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:messages];
     expect([bundle _areElementsValid]).to.beTruthy();
+});
 
-    // TODO - more complex nested one
+it(@"should report as valid when elements contains bundle", ^{
+    PEOSCBundle* innerBundle = [PEOSCBundle bundleWithElements:nil];
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[innerBundle]];
+    expect([bundle _areElementsValid]).to.beTruthy();
+});
+
+it(@"should report as valid when elements contains bundle and messages", ^{
+    NSMutableArray* elements = [NSMutableArray arrayWithArray:messages];
+    PEOSCBundle* innerBundle = [PEOSCBundle bundleWithElements:@[message]];
+    [elements addObject:innerBundle];
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:elements];
+    expect([bundle _areElementsValid]).to.beTruthy();
 });
 
 #pragma mark - DATA
