@@ -7,7 +7,7 @@ Pony Express makes it easy to communicate via the [Open Sound Control](http://op
 - OSC messages can be sent to an IPv4 or IPv6 IP address, a symbolic hostname like _localhost_, ZeroConf hostname like _one-eyed-jacks.local._ or a hostname like _audrey.horne.dk_
 - Integer and Float arguments are defined in NSNumbers, String as an NSString, Blob as NSData and Timetag as NSDate
 - Pony Express makes use of [Automatic Reference Counting](http://clang.llvm.org/docs/AutomaticReferenceCounting.html) (ARC)
-- many items remain to be implemented inlcuding but not limited to OSC bundles, ZeroConf advertising, and querying. please see the [TODO](https://github.com/pizthewiz/PonyExpress/blob/master/TODO.md) for more info
+- many items remain to be implemented inlcuding but not limited to ZeroConf advertisement, and querying. please see the [TODO](https://github.com/pizthewiz/PonyExpress/blob/master/TODO.md) for more info
 
 ## Example
 A simple message with a single float argument is sent to a receiver (setup not shown here).

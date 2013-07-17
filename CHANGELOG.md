@@ -1,7 +1,8 @@
 
-### v0.3.0 (XX YYY 20ZZ)
-* ADD Timetag type
+### v0.3.0 (XX YYY 2013)
+* ADD bundle support (received bundles are dispatched immediately)
 * ADD static library project target for iOS support
+* ADD time tag type
 * CHANGE sender should be connectionless
 * CHANGE migrate sender to callback block instead of delegate
 * CHANGE unit testing via specta and expecta
