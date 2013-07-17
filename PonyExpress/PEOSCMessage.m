@@ -256,20 +256,16 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 }
 
 - (NSString*)description {
-    NSMutableString* argDescription = [NSMutableString string];
+    NSMutableArray* descriptions = [NSMutableArray array];
     [self.arguments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
-        BOOL isFirstOrLastArg = idx == 0 || idx+1 > self.arguments.count;
-        NSString* description = nil;
         if ([obj isKindOfClass:[NSData class]] && [(NSData*)obj length] > 4 * 1024) {
-            description = @"<BINARY DATA TOO LARGE TO PRINT>";
+            [descriptions addObject:@"<BINARY DATA TOO LARGE TO PRINT>"];
         } else {
-            description = [obj description];
+            [descriptions addObject:[obj description]];
         }
-
-        [argDescription appendString:[NSString stringWithFormat:@"%@%@", (isFirstOrLastArg ? @"" : @", "), description]];
     }];
     NSString* typeTagString = self.typeTags.count ? [self _typeTagString] : @"(–)";
-    return [NSString stringWithFormat:@"<%@: %@ %@ [%@]>", NSStringFromClass([self class]), self.address, typeTagString, argDescription];
+    return [NSString stringWithFormat:@"<%@: %@ %@ [%@]>", NSStringFromClass([self class]), self.address, typeTagString, [descriptions componentsJoinedByString:@", "]];
 }
 
 #pragma mark -

@@ -99,6 +99,12 @@
     return NSUINTROTATE([self.elements hash], NSUINT_BIT / 2) ^ [self.timeTag hash];
 }
 
+- (NSString*)description {
+    __block NSMutableArray* descriptions = [NSMutableArray array];
+    [self.elements enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) { [descriptions addObject:[obj description]]; }];
+    return [NSString stringWithFormat:@"<%@: %@ [%@]>", NSStringFromClass([self class]), ([self.timeTag isEqual:[NSDate OSCImmediate]] ? @"IMMEDIATE" : self.timeTag), [descriptions componentsJoinedByString:@", "]];
+}
+
 #pragma mark - PRIVATE
 
 + (BOOL)_dataIsLikelyBundle:(NSData*)data {
