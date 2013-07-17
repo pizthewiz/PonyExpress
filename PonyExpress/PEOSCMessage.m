@@ -461,6 +461,7 @@ bail:
             return;
         }
 
+        // TODO - check argument class?
         if ([type isEqualToString:PEOSCMessageTypeTagInteger]) {
             [data appendInteger:argument];
         } else if ([type isEqualToString:PEOSCMessageTypeTagFloat]) {
