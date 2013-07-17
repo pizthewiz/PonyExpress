@@ -13,18 +13,22 @@
 #import "PEOSCMessage-Private.h"
 #import "PonyExpress-Internal.h"
 
+@interface PEOSCBundle ()
+@property (nonatomic, strong) NSDate* timeTag;
+@end
+
 @implementation PEOSCBundle
 
-+ (instancetype)bundleWithElements:(NSArray*)elements timeTag:(NSDate*)timeTag {
-    id bundle = [[[self class] alloc] initWithElements:elements timeTag:timeTag];
++ (instancetype)bundleWithElements:(NSArray*)elements {
+    id bundle = [[[self class] alloc] initWithElements:elements];
     return bundle;
 }
 
-- (instancetype)initWithElements:(NSArray*)elements timeTag:(NSDate*)timeTag {
+- (instancetype)initWithElements:(NSArray*)elements {
     self = [super init];
     if (self) {
         self.elements = elements;
-        self.timeTag = timeTag;
+        self.timeTag = [NSDate OSCImmediate];
     }
     return self;
 }
