@@ -3,7 +3,7 @@
 	url = git://github.com/pizthewiz/CocoaAsyncSocket.git
 [submodule "vendor/specta"]
 	path = vendor/specta
-	url = git://github.com/petejkim/specta.git
+	url = git://github.com/specta/specta.git
 [submodule "vendor/expecta"]
 	path = vendor/expecta
-	url = git://github.com/petejkim/expecta.git
+	url = git://github.com/specta/expecta.git
