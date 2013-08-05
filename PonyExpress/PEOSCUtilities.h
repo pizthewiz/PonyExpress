@@ -58,7 +58,7 @@ static inline BOOL NTPTimestampIsImmediate(NTPTimestamp timestamp) {
 - (void)appendTimeTag:(NSDate*)date;
 @end
 
-#pragma mark -
+#pragma mark - HASHING
 
 // via http://www.mikeash.com/pyblog/friday-qa-2010-06-18-implementing-equality-and-hashing.html
 #define NSUINT_BIT (CHAR_BIT * sizeof(NSUInteger))

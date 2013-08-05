@@ -157,7 +157,6 @@ static inline NSTimeInterval NTPTimestampDifference(NTPTimestamp start, NTPTimes
     printf("\n");
 }
 
-
 @end
 
 #pragma mark - DATA WRITERS
