@@ -391,6 +391,7 @@
 				GCC_PREFIX_HEADER = "PonyExpress iOS Example/PonyExpress iOS Example-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/usr/local/lib/include";
 				INFOPLIST_FILE = "PonyExpress iOS Example/PonyExpress iOS Example-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -403,6 +404,7 @@
 				GCC_PREFIX_HEADER = "PonyExpress iOS Example/PonyExpress iOS Example-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/usr/local/lib/include";
 				INFOPLIST_FILE = "PonyExpress iOS Example/PonyExpress iOS Example-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

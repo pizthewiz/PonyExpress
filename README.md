@@ -35,6 +35,9 @@ the bundle version is optionally set from the repository state using [Node.js](h
 - install node modules globally `npm install -g jake async NodObjC`
 - link global modules to local PonyExpress clone `npm link async NodObjC`
 
+### NOTES
+iOS clients should ensure that the target's _Other Linker Flags_ includes `-all_load` to load custom categories.
+
 ## THANKS
 - Dean McNamee for his great Node.js OSC implementation [omgosc](https://github.com/deanm/omgosc)
 - Ray Cutler for his conical OSC implementation in [VVOpenSource](https://github.com/mrRay/vvopensource)
