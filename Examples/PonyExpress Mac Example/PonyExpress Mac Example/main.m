@@ -21,7 +21,7 @@
     // send pong in a bundle bundle
     if ([message.address isEqualToString:@"/ping"]) {
         PEOSCMessage* responseMessage = [PEOSCMessage messageWithAddress:@"/pong" typeTags:@[PEOSCMessageTypeTagTimetag] arguments:@[[NSDate date]]];
-        __block PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[responseMessage] timeTag:nil];
+        __block PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:@[responseMessage]];
         PEOSCSender* sender = [PEOSCSender senderWithHost:@"127.0.0.1" port:PORT_OUT];
         [sender sendBundle:bundle handler:^(BOOL success, NSError* error) {
             if (error) {
