@@ -1,6 +1,5 @@
 
 ### GENERAL
-- go unicast and later add multicast support
 - make debug buffer dump multi-line and byte-gap configurable
 - move +[NSDate OSCImmediate] to a public header
 - test interoperability against Lemur, TouchOSC, Max 6, oF and Cinder
@@ -10,21 +9,21 @@
 - add CONTRIBUTING.md
 
 ### MESSAGE
-- store originating host
+- store originating host and port
 - pull address validation code out to a class method and use within -[PEOSCMessage initWithData:]
 - do a better job with NSData allocation and writing in -_data?
 - ignore unknown types (is that even possible?)
 
 ### BUNDLE
-- store originating host
+- store originating host abd port
 - do a better job with NSData allocation and writing in -_data?
 - respect time tag dispatch time
 - dispatch contents atomically
 
 ### SENDER
-- host and port could be readwrite with collectionless
+- host and port should be readwrite now that collectionless
 - document 9k UDP limit and Blob use
-- offer connected variant in addition to connectionless
+- offer connected variant in addition to connectionless?
 
 ### RECEIVER
 - consider some sort of simple router
@@ -50,6 +49,6 @@
 
 ### LATER
 - mDNS receiver announcement
-- add socket management layer to allow sharing (only relevant if port reuse is disabled)
+- add socket management layer to allow sharing
 - add TCP and Serial sender/receiver classes via [SLIP](http://en.wikipedia.org/wiki/Serial_Line_Internet_Protocol)
 - allow end points to be discovered through query proposal
