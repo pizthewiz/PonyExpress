@@ -69,7 +69,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
     // hold onto callback
     if (handler) {
-        [self.callbackMap setObject:handler forKey:[NSString stringWithFormat:@"%lu", self.tag]];
+        (self.callbackMap)[[NSString stringWithFormat:@"%lu", self.tag]] = handler;
     }
 
     [self.socket sendData:data toHost:self.host port:self.port withTimeout:-1.0 tag:self.tag];
@@ -88,7 +88,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
     // hold onto callback
     if (handler) {
-        [self.callbackMap setObject:handler forKey:[NSString stringWithFormat:@"%lu", self.tag]];
+        (self.callbackMap)[[NSString stringWithFormat:@"%lu", self.tag]] = handler;
     }
 
     [self.socket sendData:data toHost:self.host port:self.port withTimeout:-1.0 tag:self.tag];
@@ -102,7 +102,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
     CCDebugLogSelector();
 
     NSString* key = [NSString stringWithFormat:@"%lu", tag];
-    void(^handler)(BOOL success, NSError* error) = [self.callbackMap objectForKey:key];
+    void(^handler)(BOOL success, NSError* error) = (self.callbackMap)[key];
     if (handler) {
         handler(YES, nil);
     }
@@ -115,7 +115,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
     CCErrorLog(@"ERROR - failed to send data with tag %lu to %@:%d due to %@", tag, self.host, self.port, [error localizedDescription]);
 
     NSString* key = [NSString stringWithFormat:@"%lu", tag];
-    void(^handler)(BOOL success, NSError* error) = [self.callbackMap objectForKey:key];
+    void(^handler)(BOOL success, NSError* error) = (self.callbackMap)[key];
     if (handler) {
         handler(NO, error);
     }

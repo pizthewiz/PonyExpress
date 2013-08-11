@@ -12,12 +12,12 @@
 
 extern NSString* const PEOSCReceiverErrorDomain;
 
-typedef enum PEOSCReceiverError : NSInteger {
+typedef NS_ENUM(NSInteger, PEOSCReceiverError) {
     PEOSCReceiverNoError = 0,
     PEOSCReceiverAlreadyListeningError,
     PEOSCReceiverNotListeningError,
     PEOSCReceiverOtherError,
-} PEOSCReceiverError;
+};
 
 typedef void(^PEOSCReceiverCompletionHandler)(BOOL success, NSError* error);
 

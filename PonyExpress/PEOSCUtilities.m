@@ -108,12 +108,12 @@ static inline NSTimeInterval NTPTimestampDifference(NTPTimestamp start, NTPTimes
 
 - (NSNumber*)readIntegerAtOffset:(NSUInteger)offset {
     SInt32 value = readInteger(self, offset);
-    return [NSNumber numberWithInt:value];
+    return @(value);
 }
 
 - (NSNumber*)readFloatAtOffset:(NSUInteger)offset {
     Float32 value = readFloat(self, offset);
-    return [NSNumber numberWithFloat:value];
+    return @(value);
 }
 
 - (NSString*)readStringAtOffset:(NSUInteger)offset {
