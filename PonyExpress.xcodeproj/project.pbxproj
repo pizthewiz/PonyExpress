@@ -190,7 +190,7 @@
 		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
 		D88F18E0168D3D01002B99CD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		D88F18E3168DEE2C002B99CD /* PEOSCMessageSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCMessageSpec.m; sourceTree = "<group>"; };
-		D8975A4B168B59D00090FEB6 /* PonyExpress Mac Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PonyExpress Mac Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8975A4B168B59D00090FEB6 /* PonyExpress Mac Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "PonyExpress Mac Tests.octest"; path = "PonyExpress OS X Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8975A55168B59D00090FEB6 /* PonyExpressTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpressTests-Info.plist"; sourceTree = "<group>"; };
 		D8975A57168B59D00090FEB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D8975A5C168B59D00090FEB6 /* PonyExpressTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PonyExpressTests-Prefix.pch"; sourceTree = "<group>"; };
@@ -449,9 +449,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D83E1B5B1411528100CB1258 /* PonyExpress Mac */ = {
+		D83E1B5B1411528100CB1258 /* PonyExpress OS X */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D83E1B861411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress Mac" */;
+			buildConfigurationList = D83E1B861411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress OS X" */;
 			buildPhases = (
 				D83E1B571411528100CB1258 /* Sources */,
 				D83E1B581411528100CB1258 /* Frameworks */,
@@ -463,14 +463,14 @@
 			);
 			dependencies = (
 			);
-			name = "PonyExpress Mac";
+			name = "PonyExpress OS X";
 			productName = PonyExpress;
 			productReference = D83E1B5C1411528100CB1258 /* PonyExpress.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D8975A4A168B59D00090FEB6 /* PonyExpress Mac Tests */ = {
+		D8975A4A168B59D00090FEB6 /* PonyExpress OS X Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8975A5D168B59D00090FEB6 /* Build configuration list for PBXNativeTarget "PonyExpress Mac Tests" */;
+			buildConfigurationList = D8975A5D168B59D00090FEB6 /* Build configuration list for PBXNativeTarget "PonyExpress OS X Tests" */;
 			buildPhases = (
 				D8975A46168B59D00090FEB6 /* Sources */,
 				D8975A47168B59D00090FEB6 /* Frameworks */,
@@ -484,7 +484,7 @@
 				D8975A7F168B5AF80090FEB6 /* PBXTargetDependency */,
 				D8975A81168B5AFC0090FEB6 /* PBXTargetDependency */,
 			);
-			name = "PonyExpress Mac Tests";
+			name = "PonyExpress OS X Tests";
 			productName = PonyExpressTests;
 			productReference = D8975A4B168B59D00090FEB6 /* PonyExpress Mac Tests.octest */;
 			productType = "com.apple.product-type.bundle";
@@ -558,8 +558,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				D83E1B5B1411528100CB1258 /* PonyExpress Mac */,
-				D8975A4A168B59D00090FEB6 /* PonyExpress Mac Tests */,
+				D83E1B5B1411528100CB1258 /* PonyExpress OS X */,
+				D8975A4A168B59D00090FEB6 /* PonyExpress OS X Tests */,
 				D89B6F00165AFBB400446361 /* PonyExpress iOS */,
 				D8975A8B168B5D0C0090FEB6 /* PonyExpress iOS Tests */,
 			);
@@ -758,7 +758,7 @@
 		};
 		D8975A86168B5BDF0090FEB6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D83E1B5B1411528100CB1258 /* PonyExpress Mac */;
+			target = D83E1B5B1411528100CB1258 /* PonyExpress OS X */;
 			targetProxy = D8975A85168B5BDF0090FEB6 /* PBXContainerItemProxy */;
 		};
 		D8975A9F168B5E620090FEB6 /* PBXTargetDependency */ = {
@@ -1039,7 +1039,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D83E1B861411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress Mac" */ = {
+		D83E1B861411528100CB1258 /* Build configuration list for PBXNativeTarget "PonyExpress OS X" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D83E1B871411528100CB1258 /* Debug */,
@@ -1048,7 +1048,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8975A5D168B59D00090FEB6 /* Build configuration list for PBXNativeTarget "PonyExpress Mac Tests" */ = {
+		D8975A5D168B59D00090FEB6 /* Build configuration list for PBXNativeTarget "PonyExpress OS X Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8975A5E168B59D00090FEB6 /* Debug */,
