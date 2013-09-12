@@ -16,7 +16,7 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
 @interface PEOSCSender ()
 @property (nonatomic, readwrite, strong) NSString* host;
-@property (nonatomic, readwrite) UInt16 port;
+@property (nonatomic, readwrite) uint16_t port;
 @property (nonatomic, strong) GCDAsyncUdpSocket* socket;
 @property (nonatomic, strong) NSMutableDictionary* callbackMap;
 @property (nonatomic) long tag;
@@ -24,12 +24,12 @@ NSString* const PEOSCSenderErrorDomain = @"PEOSCSenderErrorDomain";
 
 @implementation PEOSCSender
 
-+ (instancetype)senderWithHost:(NSString*)host port:(UInt16)port {
++ (instancetype)senderWithHost:(NSString*)host port:(uint16_t)port {
     PEOSCSender* sender = [[PEOSCSender alloc] initWithHost:host port:port];
     return sender;
 }
 
-- (instancetype)initWithHost:(NSString*)host port:(UInt16)port {
+- (instancetype)initWithHost:(NSString*)host port:(uint16_t)port {
     if (!host || port == 0) {
         return nil;
     }

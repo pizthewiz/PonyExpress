@@ -20,11 +20,11 @@ typedef NS_ENUM(NSInteger, PEOSCSenderError) {
 typedef void(^PEOSCSenderCompletionHandler)(BOOL success, NSError* error);
 
 @interface PEOSCSender : NSObject
-+ (instancetype)senderWithHost:(NSString*)host port:(UInt16)port;
-- (instancetype)initWithHost:(NSString*)host port:(UInt16)port;
++ (instancetype)senderWithHost:(NSString*)host port:(uint16_t)port;
+- (instancetype)initWithHost:(NSString*)host port:(uint16_t)port;
 
 @property (nonatomic, readonly, strong) NSString* host;
-@property (nonatomic, readonly) UInt16 port;
+@property (nonatomic, readonly) uint16_t port;
 
 - (void)sendMessage:(PEOSCMessage*)message handler:(PEOSCSenderCompletionHandler)handler;
 - (void)sendBundle:(PEOSCBundle*)bundle handler:(PEOSCSenderCompletionHandler)handler;
