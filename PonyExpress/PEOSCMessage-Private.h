@@ -12,6 +12,9 @@
 + (instancetype)messageWithData:(NSData*)data;
 - (instancetype)initWithData:(NSData*)data;
 
+@property (nonatomic, readwrite, strong) NSString* remoteHost;
+@property (nonatomic, readwrite) uint16_t remotePort;
+
 + (NSString*)_codeForType:(NSString*)type;
 + (NSString*)_typeForCode:(NSString*)type;
 

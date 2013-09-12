@@ -190,7 +190,7 @@
 		D87C17FF1413FCA7005A08F3 /* PonyExpress-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PonyExpress-Internal.h"; sourceTree = "<group>"; };
 		D88F18E0168D3D01002B99CD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		D88F18E3168DEE2C002B99CD /* PEOSCMessageSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCMessageSpec.m; sourceTree = "<group>"; };
-		D8975A4B168B59D00090FEB6 /* PonyExpress Mac Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "PonyExpress Mac Tests.octest"; path = "PonyExpress OS X Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8975A4B168B59D00090FEB6 /* PonyExpress OS X Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PonyExpress OS X Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8975A55168B59D00090FEB6 /* PonyExpressTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PonyExpressTests-Info.plist"; sourceTree = "<group>"; };
 		D8975A57168B59D00090FEB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D8975A5C168B59D00090FEB6 /* PonyExpressTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PonyExpressTests-Prefix.pch"; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 			children = (
 				D83E1B5C1411528100CB1258 /* PonyExpress.framework */,
 				D89B6F01165AFBB400446361 /* libPonyExpress.a */,
-				D8975A4B168B59D00090FEB6 /* PonyExpress Mac Tests.octest */,
+				D8975A4B168B59D00090FEB6 /* PonyExpress OS X Tests.octest */,
 				D8975A8C168B5D0C0090FEB6 /* PonyExpress iOS Tests.octest */,
 			);
 			name = Products;
@@ -486,7 +486,7 @@
 			);
 			name = "PonyExpress OS X Tests";
 			productName = PonyExpressTests;
-			productReference = D8975A4B168B59D00090FEB6 /* PonyExpress Mac Tests.octest */;
+			productReference = D8975A4B168B59D00090FEB6 /* PonyExpress OS X Tests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 		D8975A8B168B5D0C0090FEB6 /* PonyExpress iOS Tests */ = {

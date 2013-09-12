@@ -37,6 +37,8 @@ extern NSString* const PEOSCMessageTypeTagTimetag; // NSDate
 @property (nonatomic, strong) NSString* address;
 @property (nonatomic, strong) NSArray* typeTags;
 @property (nonatomic, strong) NSArray* arguments;
+@property (nonatomic, readonly, strong) NSString *remoteHost;
+@property (nonatomic, readonly) uint16_t remotePort;
 
 + (BOOL)argumentRequiredByType:(NSString*)type;
 + (NSString*)displayNameForType:(NSString*)type;

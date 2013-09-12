@@ -98,14 +98,20 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 
     if ([PEOSCBundle _dataIsLikelyBundle:data]) {
         PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
-        if (bundle) {
-            [self.delegate didReceiveBundle:bundle];
+        if (!bundle) {
+            // TODO - error?
+            return;
         }
+        [self.delegate didReceiveBundle:bundle];
     } else {
         PEOSCMessage* message = [PEOSCMessage messageWithData:data];
-        if (message) {
-            [self.delegate didReceiveMessage:message];
+        message.remoteHost = [GCDAsyncUdpSocket hostFromAddress:address];
+        message.remotePort = [GCDAsyncUdpSocket portFromAddress:address];
+        if (!message) {
+            // TODO - error?
+            return;
         }
+        [self.delegate didReceiveMessage:message];
     }
 }
 

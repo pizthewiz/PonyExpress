@@ -9,20 +9,20 @@
 - add CONTRIBUTING.md
 
 ### MESSAGE
-- store originating host and port
 - pull address validation code out to a class method and use within -[PEOSCMessage initWithData:]
+- double check that blob length doesn't overflow int32
 - do a better job with NSData allocation and writing in -_data?
 - ignore unknown types (is that even possible?)
 
 ### BUNDLE
-- store originating host abd port
+- store originating host and port
+- double check that bundle element length doesn't overflow int32
 - do a better job with NSData allocation and writing in -_data?
 - respect time tag dispatch time
 - dispatch contents atomically
 
 ### SENDER
 - host and port should be readwrite now that collectionless
-- document 9k UDP limit and Blob use
 - offer connected variant in addition to connectionless?
 
 ### RECEIVER

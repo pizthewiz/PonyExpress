@@ -33,6 +33,8 @@ it(@"should return init args from properties", ^{
     expect(message.arguments).to.beIdenticalTo(allArgs);
 });
 
+// TODO - remoteHost and remotePort?
+
 #pragma mark - ADDRESS
 
 it(@"should report bad addresses as invalid", ^{
