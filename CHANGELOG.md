@@ -3,6 +3,7 @@
 * ADD bundle support (received bundles are dispatched immediately)
 * ADD static library project target for iOS support
 * ADD time tag type
+* ADD remote host and port to message
 * CHANGE sender should be connectionless
 * CHANGE migrate sender to callback block instead of delegate
 * CHANGE unit testing via specta and expecta
