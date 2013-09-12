@@ -36,7 +36,7 @@ The bundle version is optionally set from the repository state using [Node.js](h
 - Link global modules to local PonyExpress clone `npm link async NodObjC`
 
 ### NOTES
-iOS clients should ensure that the target's _Other Linker Flags_ includes `-all_load` to load custom categories.
+iOS clients should ensure that the target's _Other Linker Flags_ includes `-ObjC` to load custom categories.
 
 ## THANKS
 - Dean McNamee for his great Node.js OSC implementation [omgosc](https://github.com/deanm/omgosc)
