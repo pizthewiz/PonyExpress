@@ -1,0 +1,9 @@
+//
+//  Release.xcconfig
+//  PonyExpress
+//
+//  Created by Jean-Pierre Mouilleseaux on 10 Nov 2013.
+//  Copyright (c) 2013 Chorded Constructions. All rights reserved.
+//
+
+#include "Common.xcconfig"

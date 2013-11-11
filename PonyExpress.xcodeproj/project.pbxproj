@@ -183,6 +183,9 @@
 		D83E1B9F14119A2C00CB1258 /* PEOSCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEOSCMessage.h; sourceTree = "<group>"; };
 		D83E1BA014119A2C00CB1258 /* PEOSCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEOSCMessage.m; sourceTree = "<group>"; };
 		D83E1BAE1411A41400CB1258 /* PEOSCMessage-Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PEOSCMessage-Private.h"; sourceTree = "<group>"; };
+		D84787491830B24F0025418A /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		D847874A1830B24F0025418A /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		D847874B1830B24F0025418A /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D8509D0E1631BE0B00CF2F14 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
 		D8509D0F1631BE0B00CF2F14 /* NOTES.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES.md; sourceTree = SOURCE_ROOT; };
 		D8509D101631BE0B00CF2F14 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -254,6 +257,7 @@
 		D83E1B501411528000CB1258 = {
 			isa = PBXGroup;
 			children = (
+				D84787471830B24F0025418A /* Configurations */,
 				D83E1B651411528100CB1258 /* PonyExpress */,
 				D8975A53168B59D00090FEB6 /* PonyExpressTests */,
 				D83E1B5E1411528100CB1258 /* Frameworks */,
@@ -306,6 +310,16 @@
 				D83E1B6B1411528100CB1258 /* PonyExpress-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D84787471830B24F0025418A /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				D84787491830B24F0025418A /* Common.xcconfig */,
+				D847874A1830B24F0025418A /* Debug.xcconfig */,
+				D847874B1830B24F0025418A /* Release.xcconfig */,
+			);
+			path = Configurations;
 			sourceTree = "<group>";
 		};
 		D87C17F81413F3CF005A08F3 /* AsyncSocket */ = {
@@ -690,7 +704,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f /usr/local/bin/jake ]; then\n    PATH=$PATH:/usr/local/bin jake update\nelse\n    echo \"WARNING - could not find jake, bundle versions left unset\"\nfi";
+			shellScript = "if [ -f /usr/local/bin/jake ]; then\n    PATH=$PATH:/usr/local/bin jake updateVersion\nelse\n    echo \"WARNING - could not find jake, bundle versions unchanged\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -875,6 +889,7 @@
 		};
 		D83E1B871411528100CB1258 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D847874A1830B24F0025418A /* Debug.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -892,6 +907,7 @@
 		};
 		D83E1B881411528100CB1258 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D847874B1830B24F0025418A /* Release.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -994,6 +1010,7 @@
 		};
 		D89B6F0B165AFBB400446361 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D847874A1830B24F0025418A /* Debug.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/PonyExpress.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1013,6 +1030,7 @@
 		};
 		D89B6F0C165AFBB400446361 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D847874B1830B24F0025418A /* Release.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/PonyExpress.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

@@ -6,3 +6,6 @@ node_modules
 xcuserdata/
 # except defaults they are created from
 !xcuserdata/default.*
+
+# ignore auto-generated build versioning config
+/Configurations/BuildVersion.xcconfig
