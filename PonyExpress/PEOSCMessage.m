@@ -245,9 +245,14 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
 #pragma mark -
 
 - (BOOL)isEqual:(id)object {
+    if (object == self) {
+        return YES;
+    }
+
     if (![object isKindOfClass:[PEOSCMessage class]]) {
         return NO;
     }
+
     return [object hash] == [self hash];
 }
 
