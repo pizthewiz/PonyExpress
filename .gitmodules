@@ -1,9 +1,9 @@
 [submodule "vendor/CocoaAsyncSocket"]
 	path = vendor/CocoaAsyncSocket
-	url = git@github.com:robbiehanson/CocoaAsyncSocket.git
+	url = https://github.com/robbiehanson/CocoaAsyncSocket.git
 [submodule "vendor/specta"]
 	path = vendor/specta
-	url = git://github.com/specta/specta.git
+	url = https://github.com/specta/specta.git
 [submodule "vendor/expecta"]
 	path = vendor/expecta
-	url = git://github.com/specta/expecta.git
+	url = https://github.com/specta/expecta.git
