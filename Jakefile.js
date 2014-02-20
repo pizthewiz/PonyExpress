@@ -14,7 +14,7 @@ var util = require('util'),
 
 const BUNDLE_VERSION_NUMBER_KEY = 'CFBundleVersion';
 const BUNDLE_VERSION_STRING_KEY = 'CFBundleShortVersionString';
-const HEAD_REVISION_KEY = 'com.chordedconstructions.ProjectHEADRevision';
+const HEAD_REVISION_KEY = 'com.chordedconstructions.fleshworld.ProjectHEADRevision';
 const BUILD_VERSION_CONFIG_PATH = 'Configurations/BuildVersion.xcconfig';
 
 // helpers
@@ -64,61 +64,4 @@ task('updateVersion', [], function () {
       }
     }); 
   });
-});
-
-desc('update Info.plist key-value pairs');
-task('updatePlist', [], function (keys, values, d, p) {
-  var buildDirectory = process.env['BUILT_PRODUCTS_DIR'] || d;
-  var infoPlistPath = process.env['INFOPLIST_PATH'] || p; // relative to buildDirectory
-  var productPlistPath = path.join(buildDirectory, infoPlistPath);
-  if (!fs.existsSync(productPlistPath)) {
-    console.log('ERROR - plist not found at path: ' + productPlistPath);
-    process.exit(code=1);
-  }
-
-  keys = Array.isArray(keys) ? keys : [keys];
-  values = Array.isArray(values) ? values : [values];
-  if (keys.length != values.length) {
-    console.log('ERROR - unbalanced keys and values');
-    process.exit(code=1);
-  }
-
-  // defer load of NodObjC and import of Foundation
-  $ = require('NodObjC');
-  $.import('Foundation');
-
-  var pool = $.NSAutoreleasePool('alloc')('init');
-  {
-    var info = $.NSMutableDictionary('dictionaryWithContentsOfFile', $(productPlistPath));
-
-    while (keys.length > 0) {
-      var key = keys.shift();
-      var value = values.shift();
-
-      if (value === 'YES' || value === 'NO') {
-        // workaround https://github.com/TooTallNate/NodObjC/issues/31
-//        var val = $.NSNumber('numberWithBool', value === 'YES');
-        var string = $.NSString('stringWithString', $(value));
-        var val = $.NSNumber('numberWithBool', string('boolValue'));
-        info('setObject', val, 'forKey', $(key));
-      } else {
-        info('setObject', $(value), 'forKey', $(key));
-      }
-
-      console.log("updated '" + key + "' to " + value);
-    }
-
-    var error = $.NSError.createPointer();
-    var data = $.NSPropertyListSerialization('dataWithPropertyList', info, 'format', $.NSPropertyListXMLFormat_v1_0, 'options', 0, 'error', error.ref());
-    if (error.code) {
-      console.log('ERROR - failed to serialize plist');
-      process.exit(code=1);
-    }
-    var status = data('writeToFile', $(productPlistPath), 'atomically', true);
-    if (!status) {
-      console.log('ERROR - failed to write updated plist to disk');
-      process.exit(code=1);
-    }
-  }
-  pool('drain');
 });
