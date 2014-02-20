@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -32,8 +32,8 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D8975A4A168B59D00090FEB6"
-               BuildableName = "PonyExpress OS X Tests.octest"
+               BlueprintIdentifier = "D82CC80218B6A7FB000A927C"
+               BuildableName = "PonyExpress OS X Tests.xctest"
                BlueprintName = "PonyExpress OS X Tests"
                ReferencedContainer = "container:PonyExpress.xcodeproj">
             </BuildableReference>
