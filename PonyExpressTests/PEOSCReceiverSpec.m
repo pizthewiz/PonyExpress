@@ -3,7 +3,7 @@
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 21 Feb 2013.
-//  Copyright (c) 2013 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2013-2014 Chorded Constructions. All rights reserved.
 //
 
 @interface ReceiverDelegate : NSObject <PEOSCReceiverDelegate>
@@ -91,8 +91,8 @@ it(@"should not be able to begin listening when already listening", ^{
     expect(receiver.isListening).to.beTruthy();
 });
 
-// NB - PEOSCReceiver uses a socket with SO_REUSEPORT
-it(@"should be able to listen on a port already in use", ^{
+// NB - PEOSCReceiver does not use a socket with SO_REUSEPORT
+it(@"should not be able to listen on a port already in use", ^{
     PEOSCReceiver* receiver = [PEOSCReceiver receiverWithPort:unpriviledgedPort];
     [receiver beginListening:nil];
     expect(receiver.isListening).to.beTruthy();
@@ -100,8 +100,8 @@ it(@"should be able to listen on a port already in use", ^{
     PEOSCReceiver* otherReceiver = [PEOSCReceiver receiverWithPort:unpriviledgedPort];
     NSError* error;
     BOOL status = [otherReceiver beginListening:&error];
-    expect(status).to.beTruthy();
-    expect(error).to.beNil();
+    expect(status).to.beFalsy();
+    expect(error).toNot.beNil();
     expect(receiver.isListening).to.beTruthy();
 });
 
