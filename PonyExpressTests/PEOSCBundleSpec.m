@@ -3,7 +3,7 @@
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 09 Jul 2013.
-//  Copyright (c) 2013 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2013-2014 Chorded Constructions. All rights reserved.
 //
 
 #import "PEOSCBundle-Private.h"
@@ -38,6 +38,8 @@ it(@"should return init args from properties", ^{
     PEOSCBundle* bundle = [PEOSCBundle bundleWithElements:messages];
     expect(bundle.elements).to.beIdenticalTo(messages);
 });
+
+// TODO - remoteHost and remotePort
 
 #pragma mark - ELEMENTS
 
@@ -100,7 +102,7 @@ it(@"should produce data when without elements", ^{
 
 it(@"should not create a bundle instance from bad data", ^{
     NSData* data = [@"XYZZY" dataUsingEncoding:NSASCIIStringEncoding];
-    PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
+    PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data remoteHost:nil remotePort:0];
     expect(bundle).to.beNil();
 
     // TODO - more complex examples
@@ -120,7 +122,7 @@ describe(@"with valid source elements", ^{
 
     it(@"should create non-nil, equal bundle", ^{
         NSData* data = [sourceBundle _data];
-        PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
+        PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data remoteHost:nil remotePort:0];
         expect(bundle).toNot.beNil();
         expect(bundle.elements).to.equal(sourceBundle.elements);
         expect(bundle).to.equal(sourceBundle);

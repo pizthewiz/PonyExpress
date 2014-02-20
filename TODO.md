@@ -13,7 +13,6 @@
 - ignore unknown types (is that even possible?)
 
 ### BUNDLE
-- store originating host and port
 - double check that bundle element length doesn't overflow int32
 - do a better job with NSData allocation and writing in -_data?
 - respect time tag dispatch time

@@ -3,7 +3,7 @@
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 24 Mar 2013.
-//  Copyright (c) 2013 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2013-2014 Chorded Constructions. All rights reserved.
 //
 
 #import "PEOSCBundle.h"
@@ -33,16 +33,19 @@
     return self;
 }
 
-+ (instancetype)bundleWithData:(NSData*)data {
-    id bundle = [[[self class] alloc] initWithData:data];
++ (instancetype)bundleWithData:(NSData*)data remoteHost:(NSString*)host remotePort:(uint16_t)port {
+    id bundle = [[[self class] alloc] initWithData:data remoteHost:host remotePort:port];
     return bundle;
 }
 
-- (instancetype)initWithData:(NSData*)data {
+- (instancetype)initWithData:(NSData*)data remoteHost:(NSString*)host remotePort:(uint16_t)port {
     self = [super init];
     if (self) {
         NSUInteger length = [data length];
         NSUInteger start = 0;
+
+        self.remoteHost = host;
+        self.remotePort = port;
 
         // check for bundle marker
         if (![PEOSCBundle _dataIsLikelyBundle:data]) {
@@ -69,12 +72,12 @@
             // divine element type
             NSData* subdata = [data subdataWithRange:NSMakeRange(start, value)];
             if ([PEOSCBundle _dataIsLikelyBundle:subdata]) {
-                PEOSCBundle* bundle = [PEOSCBundle bundleWithData:subdata];
+                PEOSCBundle* bundle = [PEOSCBundle bundleWithData:subdata remoteHost:host remotePort:port];
                 if (bundle) {
                     [elements addObject:bundle];
                 }
             } else {
-                PEOSCMessage* message = [PEOSCMessage messageWithData:subdata];
+                PEOSCMessage* message = [PEOSCMessage messageWithData:subdata remoteHost:host remotePort:port];
                 if (message) {
                     [elements addObject:message];
                 }

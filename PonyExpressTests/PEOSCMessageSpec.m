@@ -3,7 +3,7 @@
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 26 Dec 2012.
-//  Copyright (c) 2012-2013 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2012-2014 Chorded Constructions. All rights reserved.
 //
 
 #import "PEOSCMessage-Private.h"
@@ -33,7 +33,7 @@ it(@"should return init args from properties", ^{
     expect(message.arguments).to.beIdenticalTo(allArgs);
 });
 
-// TODO - remoteHost and remotePort?
+// TODO - remoteHost and remotePort
 
 #pragma mark - ADDRESS
 
@@ -155,7 +155,7 @@ it(@"should produce non-nil data for valid message", ^{
 
 it(@"should not create a message instance from bad data", ^{
     NSData* data = [@"XYZZY" dataUsingEncoding:NSASCIIStringEncoding];
-    PEOSCMessage* message = [PEOSCMessage messageWithData:data];
+    PEOSCMessage* message = [PEOSCMessage messageWithData:data remoteHost:nil remotePort:0];
     expect(message).to.beNil();
 });
 
@@ -169,7 +169,7 @@ describe(@"with valid simple source message", ^{
     });
     it(@"should create non-nil, equal message", ^{
         NSData* data = [sourceMessage _data];
-        PEOSCMessage* message = [PEOSCMessage messageWithData:data];
+        PEOSCMessage* message = [PEOSCMessage messageWithData:data remoteHost:nil remotePort:0];
         expect(message).toNot.beNil();
         expect(message.address).to.equal(sourceMessage.address);
         expect(message.typeTags).to.equal(sourceMessage.typeTags);
@@ -200,7 +200,7 @@ describe(@"with valid complex source message", ^{
 it(@"should create message instance from message with immediate time tag data", ^{
     PEOSCMessage* sourceMessage = [PEOSCMessage messageWithAddress:address typeTags:@[PEOSCMessageTypeTagTimetag] arguments:@[[NSDate OSCImmediate]]];
     NSData* data = [sourceMessage _data];
-    PEOSCMessage* message = [PEOSCMessage messageWithData:data];
+    PEOSCMessage* message = [PEOSCMessage messageWithData:data remoteHost:nil remotePort:0];
     expect(message).toNot.beNil();
     expect(message.typeTags).to.equal(sourceMessage.typeTags);
     expect(message.arguments).to.equal(sourceMessage.arguments);

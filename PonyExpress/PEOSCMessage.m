@@ -3,7 +3,7 @@
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 02 Sept 2011.
-//  Copyright (c) 2011-2013 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2011-2014 Chorded Constructions. All rights reserved.
 //
 
 #import "PEOSCMessage.h"
@@ -39,16 +39,19 @@ NSString* const PEOSCMessageTypeTagTimetag = @"PEOSCMessageTypeTagTimetag";
     return self;
 }
 
-+ (instancetype)messageWithData:(NSData*)data {
-    id message = [[[self class] alloc] initWithData:data];
++ (instancetype)messageWithData:(NSData*)data remoteHost:(NSString*)host remotePort:(u_int16_t)port {
+    id message = [[[self class] alloc] initWithData:data remoteHost:host remotePort:port];
     return message;
 }
 
-- (instancetype)initWithData:(NSData*)data {
+- (instancetype)initWithData:(NSData*)data remoteHost:(NSString*)host remotePort:(u_int16_t)port {
     self = [super init];
     if (self) {
         NSUInteger length = [data length];
         NSUInteger start = 0;
+
+        self.remoteHost = host;
+        self.remotePort = port;
 
         // address
         NSString* addressString = [data readStringAtOffset:start];

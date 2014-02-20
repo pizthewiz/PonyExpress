@@ -96,17 +96,18 @@ NSString* const PEOSCReceiverErrorDomain = @"PEOSCReceiverErrorDomain";
 
     // NB - messages sent to 0.0.0.0 could be receied n times for n IP addreses on the local machine
 
+    NSString* host = [GCDAsyncUdpSocket hostFromAddress:address];
+    u_int16_t port = [GCDAsyncUdpSocket portFromAddress:address];
+
     if ([PEOSCBundle _dataIsLikelyBundle:data]) {
-        PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data];
+        PEOSCBundle* bundle = [PEOSCBundle bundleWithData:data remoteHost:host remotePort:port];
         if (!bundle) {
             // TODO - error?
             return;
         }
         [self.delegate didReceiveBundle:bundle];
     } else {
-        PEOSCMessage* message = [PEOSCMessage messageWithData:data];
-        message.remoteHost = [GCDAsyncUdpSocket hostFromAddress:address];
-        message.remotePort = [GCDAsyncUdpSocket portFromAddress:address];
+        PEOSCMessage* message = [PEOSCMessage messageWithData:data remoteHost:host remotePort:port];
         if (!message) {
             // TODO - error?
             return;

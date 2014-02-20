@@ -3,7 +3,7 @@
 //  PonyExpress
 //
 //  Created by Jean-Pierre Mouilleseaux on 24 Mar 2013.
-//  Copyright (c) 2013 Chorded Constructions. All rights reserved.
+//  Copyright (c) 2013-2014 Chorded Constructions. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,4 +15,6 @@
 - (instancetype)initWithElements:(NSArray*)elements;
 
 @property (nonatomic, strong) NSArray* elements; // could be a mix of messages and bundles
+@property (nonatomic, readonly, strong) NSString *remoteHost;
+@property (nonatomic, readonly) uint16_t remotePort;
 @end
