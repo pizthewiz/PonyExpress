@@ -905,10 +905,7 @@
 				);
 				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = xctest;
@@ -939,10 +936,7 @@
 				);
 				INFOPLIST_FILE = "PonyExpressTests/PonyExpressTests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = xctest;
@@ -1103,6 +1097,7 @@
 				D80DF4BB18B6AF27009EFB23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D82CC81118B6A7FB000A927C /* Build configuration list for PBXNativeTarget "PonyExpress OS X Tests" */ = {
 			isa = XCConfigurationList;
